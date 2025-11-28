@@ -1,7 +1,7 @@
-// PATA Service Worker - v1.0.0
+// PATA Service Worker - v1.2.0
 // Estratégia: Cache-First para assets estáticos, Network-First para HTML, Stale-While-Revalidate para imagens
 
-const VERSION = 'pata-v1.0.0';
+const VERSION = 'pata-v1.2.0';
 const CACHE_NAME = `${VERSION}-static`;
 const CACHE_RUNTIME = `${VERSION}-runtime`;
 const CACHE_IMAGES = `${VERSION}-images`;
