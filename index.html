@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
@@ -439,7 +440,7 @@
             </div>
 
             <h2 class="problem1-title">
-            O Dilema de Todos os Tutores:<br>Quando o Impossível Se Torna Real
+            O Dilema de Todos os Tutores: o Impossível Se Torna Real
             </h2>
         </div>
 
@@ -933,7 +934,7 @@
                         </div>
 
                         <p class="joinus-disclaimer">
-                            Não exigimos o criar accounts artificial. Resolvemos os vários anos 500 lugares no beta prioritária porque queremos O seu feedback será essencial.
+                            Não estamos a criar escassez artificial. Realmente so vamos abrir 500 lugares na lista prioritária porque queremos construir isto consigo, nao apenas para si. O seu feedback será essencial.
                         </p>
                     </div>
                 </div>
@@ -1315,27 +1316,37 @@
     <script>
         // Service Worker Registration
         if ('serviceWorker' in navigator) {
+            // Limpar todas as caches antigas ao carregar
+            caches.keys().then(cacheNames => {
+                return Promise.all(
+                    cacheNames
+                        .filter(cacheName => cacheName.startsWith('pata-v1.0'))
+                        .map(cacheName => {
+                            console.log('[PATA] Deleting old cache:', cacheName);
+                            return caches.delete(cacheName);
+                        })
+                );
+            }).then(() => {
+                console.log('[PATA] Old caches cleared');
+            });
+
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
                     .then((registration) => {
-                        console.log('✓ Service Worker registered successfully:', registration.scope);
+                        console.log('[PATA] Service Worker registered successfully');
 
-                        // Verificar atualizações periodicamente
+                        // Verificar updates a cada 30 segundos
                         setInterval(() => {
                             registration.update();
-                        }, 60000); // Cada 1 minuto
+                        }, 30000);
 
-                        // Lidar com atualizações do SW
+                        // Limpar cache antiga quando novo SW ativa
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
-
                             newWorker.addEventListener('statechange', () => {
-                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // Nova versão disponível
-                                    if (confirm('Nova versão do PATA disponível! Recarregar página?')) {
-                                        newWorker.postMessage({ action: 'SKIP_WAITING' });
-                                        window.location.reload();
-                                    }
+                                if (newWorker.state === 'activated') {
+                                    console.log('[PATA] New Service Worker activated, reloading...');
+                                    window.location.reload();
                                 }
                             });
                         });
@@ -1346,7 +1357,7 @@
                         }, 7 * 24 * 60 * 60 * 1000); // 7 dias
                     })
                     .catch((error) => {
-                        console.warn('Service Worker registration failed:', error);
+                        console.error('[PATA] Service Worker registration failed:', error);
                     });
 
                 // Recarregar quando novo SW toma controle
