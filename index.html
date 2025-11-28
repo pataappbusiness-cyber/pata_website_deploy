@@ -229,14 +229,17 @@
     <!-- Deferred JavaScript - Non-blocking -->
     <!-- 1. Lottie (module script, async by default) - Kept on CDN for web component benefits -->
     <script defer src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js" type="module"></script>
-    <!-- 2. Bundled Vendor Scripts (Splitting.js + GSAP + ScrollTrigger) - Saves 2 HTTP requests -->
+    <!-- 2. Splitting.js - Text Animation Library -->
+    <script defer src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
+    <!-- 3. Bundled Vendor Scripts (GSAP + ScrollTrigger) - Saves HTTP requests -->
     <script defer src="src/js/vendors.bundle.min.js"></script>
-    <!-- 3. Smooth Scrolling Library -->
+    <!-- 4. Smooth Scrolling Library -->
     <script defer src="src/js/lenis.min.js"></script>
-    <!-- 4. Custom Select (replaces jQuery + Select2 - saves 160 KB) -->
+    <!-- 5. Custom Select (replaces jQuery + Select2 - saves 160 KB) -->
     <script defer src="src/js/custom-select.min.js"></script>
-    <!-- 5. Main function.js -->
+    <!-- 6. reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- 7. Main function.js -->
     <script defer src="src/js/function.min.js"></script>
 </head>
 <body>
