@@ -70,14 +70,14 @@
 
 html {
   font-size: 16px;
-  scroll-behavior: auto; /* NO smooth scrolling as per spec */
+  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   font-family: var(--font-family);
-  background: var(--bg-black);
+  background: #FFF8F2;
   color: var(--bg-white);
   overflow-x: hidden;
   line-height: 1.6;

@@ -1,0 +1,613 @@
+/* ============================================
+   SECTION 15: JOINUS3 - Final CTA Section
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-3057&m=dev
+   ============================================ */
+
+/* ============================================
+   JOINUS3 SECTION - BASE STYLES
+   ============================================ */
+
+.joinus3-section {
+  position: relative;
+  min-height: auto;
+  width: 100%;
+  padding: 64px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000000;
+}
+
+/* Liquid Gradient Background (same as header and joinus2) */
+.joinus3-section .liquid-gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      var(--gradient-color-1),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 20% 30%,
+      var(--gradient-color-2),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 80% 50%,
+      var(--gradient-color-3),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 70% 80% at 50% 100%,
+      var(--gradient-color-4),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 90% 70% at 10% 80%,
+      var(--gradient-color-5),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 40% 40% at 70% 20%,
+      var(--gradient-color-6),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 30% 70%,
+      var(--gradient-color-7),
+      transparent
+    ),
+    var(--gradient-color-8);
+  background-size: 200% 200%;
+  animation: liquid-gradient-animation 20s ease-in-out infinite;
+  filter: blur(80px);
+  opacity: 0.9;
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+
+.joinus3-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+/* ============================================
+   HEADER SECTION
+   ============================================ */
+
+.joinus3-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Icon Container */
+.joinus3-icon {
+  position: relative;
+  width: 106px;
+  height: 90px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.joinus3-icon-main {
+  position: absolute;
+  top: 27.03%;
+  left: -0.22%;
+  right: -0.58%;
+  bottom: 0.19%;
+  width: auto;
+  height: auto;
+}
+
+.joinus3-icon-heart {
+  position: absolute;
+  top: 5.41%;
+  left: 40.7%;
+  width: 20.35%;
+  height: 20.27%;
+}
+
+/* Title and Subtitle */
+.joinus3-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.joinus3-title {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 53px;
+  color: #FEFEFF;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.joinus3-subtitle {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #FEFEFF;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* ============================================
+   STATISTICS CARDS
+   ============================================ */
+
+.joinus3-stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 48px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Individual Stat Card */
+.joinus3-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  max-width: 340px;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+/* Icon Container for Stats */
+.joinus3-stat-icon {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Zero with % symbol */
+.joinus3-stat-icon .icon-zero {
+  position: absolute;
+  left: 10px;
+  top: 12.01px;
+  width: 25.824px;
+  height: 35.472px;
+}
+
+.joinus3-stat-icon .icon-percent {
+  position: absolute;
+  left: 36px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+}
+
+/* Zero with € symbol */
+.joinus3-stat-icon .icon-euro {
+  position: absolute;
+  left: 37px;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+}
+
+/* 100% icon */
+.joinus3-stat-icon .icon-100 {
+  position: absolute;
+  top: 0;
+  left: 1.85%;
+  right: 2.23%;
+  bottom: 0.08%;
+  width: auto;
+  height: auto;
+}
+
+/* Stat Badge */
+.joinus3-stat-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  background: #FFF4E6;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.joinus3-stat-badge-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #272727;
+  margin: 0;
+  white-space: nowrap;
+  position: relative;
+  z-index: 2;
+}
+
+/* Badge Shadow */
+.joinus3-stat-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+/* Stat Label */
+.joinus3-stat-label {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #FEFEFF;
+  margin: 0;
+  text-align: center;
+  white-space: pre-wrap;
+  width: 100%;
+  min-width: min-content;
+}
+
+/* ============================================
+   CTA BUTTON
+   ============================================ */
+
+.joinus3-cta-button {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 16px;
+  max-width: 220px;
+  width: 100%;
+  background: #F2EFF2;
+  border: 0.5px solid #A9A9A9;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px rgba(39, 39, 39, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.joinus3-cta-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 6px 12px 0px rgba(39, 39, 39, 0.15);
+}
+
+.joinus3-cta-button:active {
+  transform: scale(0.98);
+}
+
+.joinus3-cta-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #272727;
+  margin: 0;
+  text-align: center;
+  white-space: pre-wrap;
+  flex: 1;
+}
+
+/* Button Shadow */
+.joinus3-cta-button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px -2px 4px 0px rgba(39, 39, 39, 0.1),
+    inset 0px 0px 2px 2px rgba(254, 254, 255, 0.25);
+}
+
+/* ============================================
+   PS TEXT
+   ============================================ */
+
+.joinus3-ps-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #FEFEFF;
+  margin: 0;
+  text-align: center;
+  white-space: pre-wrap;
+  max-width: 700px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   PRICING CARD
+   ============================================ */
+
+.joinus3-pricing-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px;
+  background: #FFF4E6;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+  max-width: 496px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.joinus3-pricing-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #3D3D3D;
+  margin: 0;
+  text-align: center;
+  white-space: pre-wrap;
+  width: 100%;
+}
+
+.joinus3-pricing-highlight {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #FF943D;
+  margin: 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Pricing Card Shadow */
+.joinus3-pricing-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .joinus3-section {
+    padding: 56px 32px;
+  }
+
+  .joinus3-container {
+    gap: 28px;
+  }
+
+  .joinus3-title {
+    font-size: 40px;
+    line-height: 46px;
+  }
+
+  .joinus3-subtitle {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .joinus3-stats-container {
+    gap: 20px 40px;
+  }
+
+  .joinus3-stat-badge-text {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .joinus3-stat-label {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .joinus3-ps-text {
+    font-size: 18px;
+    line-height: 22px;
+    max-width: 600px;
+  }
+
+  .joinus3-pricing-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .joinus3-pricing-highlight {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .joinus3-section {
+    padding: 48px 24px;
+  }
+
+  .joinus3-container {
+    gap: 24px;
+  }
+
+  .joinus3-icon {
+    width: 80px;
+    height: 68px;
+  }
+
+  .joinus3-title {
+    font-size: 32px;
+    line-height: 38px;
+  }
+
+  .joinus3-subtitle {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .joinus3-stats-container {
+    gap: 16px 32px;
+  }
+
+  .joinus3-stat-card {
+    min-width: 120px;
+  }
+
+  .joinus3-stat-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .joinus3-stat-badge-text {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .joinus3-stat-label {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .joinus3-cta-button {
+    max-width: 200px;
+    padding: 12px 14px;
+  }
+
+  .joinus3-cta-text {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .joinus3-ps-text {
+    font-size: 16px;
+    line-height: 20px;
+    max-width: 100%;
+  }
+
+  .joinus3-pricing-card {
+    padding: 16px 12px;
+    max-width: 100%;
+  }
+
+  .joinus3-pricing-text {
+    font-size: 15px;
+    line-height: 19px;
+  }
+
+  .joinus3-pricing-highlight {
+    font-size: 17px;
+    line-height: 21px;
+  }
+}
+
+@media (max-width: 480px) {
+  .joinus3-section {
+    padding: 40px 20px;
+  }
+
+  .joinus3-container {
+    gap: 20px;
+  }
+
+  .joinus3-icon {
+    width: 70px;
+    height: 60px;
+  }
+
+  .joinus3-title {
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  .joinus3-subtitle {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .joinus3-stats-container {
+    gap: 16px 24px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .joinus3-stat-card {
+    min-width: 140px;
+    max-width: 100%;
+  }
+
+  .joinus3-stat-badge-text {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .joinus3-stat-label {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .joinus3-cta-button {
+    max-width: 100%;
+  }
+
+  .joinus3-ps-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .joinus3-pricing-text {
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  .joinus3-pricing-highlight {
+    font-size: 16px;
+    line-height: 20px;
+  }
+}

@@ -1,0 +1,606 @@
+/* ============================================
+   SECTION 10: SOLUTION4 - E se existisse uma forma diferente?
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3230&m=dev
+   ============================================ */
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+
+.solution4-section {
+    position: relative;
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background: #FEFEFF;
+    overflow: hidden;
+}
+
+/* ============================================
+   CONTAINER
+   ============================================ */
+
+.solution4-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.solution4-header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.solution4-label {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #7D7D7D;
+    margin: 0;
+}
+
+.solution4-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.solution4-subtitle {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #525252;
+    max-width: 786px;
+    margin: 0;
+}
+
+/* ============================================
+   CARDS CONTAINER
+   ============================================ */
+
+.solution4-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+/* ============================================
+   MAIN CARD - Clínica PATA + Small Cards
+   ============================================ */
+
+.solution4-main-card {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 340px;
+    padding: 24px;
+    background: linear-gradient(180deg, #FFD2AD 0%, #FFC392 100%);
+    border: 1px solid rgba(254, 254, 255, 0.5);
+    border-radius: 16px;
+    box-shadow:
+        0px 0px 20px -4px #FFDEB3,
+        0px 0px 12px 0px rgba(255, 148, 61, 0.4),
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    position: relative;
+    overflow: visible;
+}
+
+/* ============================================
+   CLÍNICA PATA - Left Side
+   ============================================ */
+
+.clinica-pata-side {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    flex: 1 0 0;
+    min-width: 200px;
+    max-width: 300px;
+    height: 340px;
+    padding: 16px 16px 0 16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.clinica-icon-bubble {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #FFF4E6;
+    border: 0.5px solid #FFE1C9;
+    border-radius: 204px;
+    box-shadow:
+        0px 4px 8px 0px rgba(255, 180, 119, 0.25),
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.clinica-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.clinica-text-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding-bottom: 8px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+.clinica-urgencias,
+.clinica-consultas {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.clinica-plus {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.clinica-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ============================================
+   SMALL CARDS GRID - Right Side
+   ============================================ */
+
+.small-cards-grid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    flex: 1 0 0;
+    min-width: 300px;
+    padding: 20px 0;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.small-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    flex: 1 0 0;
+    min-width: 140px;
+    max-width: 200px;
+    height: 270px;
+    padding: 20px 10px;
+    background: #FEFEFF;
+    border: 0.5px solid #D4D4D4;
+    border-radius: 12px;
+    box-shadow:
+        0px 0px 20px 0px #FFDEB3,
+        0px 0px 12px 0px rgba(255, 148, 61, 0.4),
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 0px rgba(255, 213, 179, 0.6);
+    text-align: center;
+}
+
+.small-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #FFF4E6;
+    border: 0.5px solid #FFE1C9;
+    border-radius: 204px;
+    box-shadow:
+        0px 4px 8px 0px rgba(255, 180, 119, 0.25),
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+.small-card-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.small-card-text {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+/* ============================================
+   BOTTOM CARDS CONTAINER
+   ============================================ */
+
+.solution4-bottom-cards {
+    display: flex;
+    gap: 24px;
+    width: 100%;
+    min-height: 400px;
+}
+
+.bottom-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+    min-width: 280px;
+    min-height: 420px;
+    padding: 16px 24px 0 24px;
+    background: linear-gradient(180deg, #FFD2AD 0%, #FFC392 100%);
+    border: 1px solid rgba(254, 254, 255, 0.5);
+    border-radius: 16px;
+    box-shadow:
+        0px 0px 20px -4px #FFDEB3,
+        0px 0px 12px 0px rgba(255, 148, 61, 0.4),
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.bottom-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    z-index: 2;
+    position: relative;
+}
+
+.bottom-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #FFF4E6;
+    border: 0.5px solid #FFE1C9;
+    border-radius: 204px;
+    box-shadow:
+        0px 4px 8px 0px rgba(255, 180, 119, 0.25),
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+.bottom-card-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.bottom-card-text {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #3D3D3D;
+    margin: 0;
+    z-index: 2;
+    position: relative;
+}
+
+.bottom-card-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-top: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+/* First bottom card - Receita Digital - Position image lower for text readability */
+.solution4-bottom-cards .bottom-card:first-child .bottom-card-image {
+    top: 60px;
+    bottom: auto;
+    height: auto;
+    max-height: calc(100% - 60px);
+}
+
+/* Second bottom card - Loja PATA */
+.solution4-bottom-cards .bottom-card:last-child .bottom-card-image {
+    /* Keep default positioning at bottom */
+}
+
+/* ============================================
+   RESPONSIVE - TABLET
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .solution4-section {
+        padding: 32px;
+        min-height: auto;
+    }
+
+    .solution4-title {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .solution4-subtitle {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution4-main-card {
+        flex-direction: row;
+        gap: 16px;
+        height: auto;
+        min-height: auto;
+        align-items: center;
+    }
+
+    .clinica-pata-side {
+        max-width: 140px;
+        min-width: 140px;
+        height: auto;
+        padding: 12px;
+        overflow: visible;
+    }
+
+    /* Hide image in Clínica PATA on tablet */
+    .clinica-image {
+        display: none !important;
+    }
+
+    .small-cards-grid {
+        width: 100%;
+        min-width: 100%;
+        gap: 12px;
+        padding: 12px 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .small-card {
+        flex: 1 0 0;
+        min-width: 140px;
+        max-width: 200px;
+        height: 270px;
+        min-height: 270px;
+        max-height: 270px;
+    }
+
+    .solution4-bottom-cards {
+        flex-direction: column;
+    }
+
+    .bottom-card {
+        min-height: auto;
+        height: auto;
+        padding: 16px;
+    }
+
+    /* Hide images in both bottom cards on tablet */
+    .bottom-card-image {
+        display: none;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+    .solution4-section {
+        padding: 24px 16px;
+        min-height: auto;
+    }
+
+    .solution4-container {
+        gap: 32px;
+    }
+
+    .solution4-header {
+        gap: 16px;
+    }
+
+    .solution4-label {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .solution4-title {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution4-subtitle {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .solution4-main-card {
+        padding: 16px;
+        min-height: auto;
+        height: auto;
+        flex-direction: column;
+    }
+
+    .clinica-pata-side {
+        padding: 12px;
+        max-width: 100%;
+        min-width: 100%;
+        height: auto;
+        overflow: visible;
+    }
+
+    /* Hide image in Clínica PATA on mobile */
+    .clinica-image {
+        display: none !important;
+        visibility: hidden;
+    }
+
+    .clinica-icon-bubble {
+        z-index: 10;
+    }
+
+    .clinica-title {
+        font-size: 20px;
+        line-height: 24px;
+        z-index: 10;
+        visibility: visible;
+        display: block;
+    }
+
+    .clinica-text-group {
+        z-index: 10;
+        visibility: visible;
+    }
+
+    .clinica-urgencias,
+    .clinica-consultas {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .clinica-plus {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .small-cards-grid {
+        flex-direction: column;
+        padding: 12px 0;
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .small-card {
+        height: auto;
+        min-height: auto;
+        padding: 16px 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .small-card-title {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .small-card-text {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .solution4-bottom-cards {
+        gap: 16px;
+    }
+
+    .bottom-card {
+        min-height: auto;
+        height: auto;
+        padding: 16px;
+    }
+
+    .bottom-card-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .bottom-card-text {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    /* Hide images in both bottom cards on mobile */
+    .bottom-card-image {
+        display: none;
+    }
+}
+
+/* ============================================
+   ANIMATIONS & INTERACTIONS
+   ============================================ */
+
+.small-card,
+.bottom-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.small-card:hover,
+.bottom-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        0px 4px 24px 0px #FFDEB3,
+        0px 0px 16px 0px rgba(255, 148, 61, 0.5),
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+}

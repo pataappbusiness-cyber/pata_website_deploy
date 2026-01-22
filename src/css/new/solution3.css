@@ -1,0 +1,471 @@
+/* ============================================
+   SECTION 9: SOLUTION3 - Só a PATA faz isto (85vh)
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3205&m=dev
+   ============================================ */
+
+.solution3-section {
+    position: relative;
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 40px;
+    overflow: hidden;
+}
+
+/* ===== BACKGROUND VIDEO + OVERLAY ===== */
+
+.solution3-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.solution3-background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+}
+
+.solution3-overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* ===== MAIN CONTAINER ===== */
+
+.solution3-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+    max-width: 1280px;
+}
+
+/* ===== TITLE ===== */
+
+.solution3-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #FEFEFF;
+    text-align: center;
+    margin: 0;
+}
+
+/* ===== CARDS CONTAINER ===== */
+
+.solution3-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    width: 100%;
+    align-items: stretch;
+    justify-content: center;
+}
+
+/* ===== CARD BASE ===== */
+
+.solution3-card {
+    flex: 1 1 300px;
+    min-width: 300px;
+    min-height: 380px;
+    background: linear-gradient(180deg, rgba(255, 180, 119, 0.92) 0%, rgba(255, 148, 61, 0.92) 100%);
+    border: 0.5px solid #FFC392;
+    border-radius: 16px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 45.8px 0px rgba(255, 180, 119, 0.25);
+    overflow: hidden;
+}
+
+.solution3-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+/* ===== CARD 1 ELEMENTS ===== */
+
+.solution3-card-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #272727;
+    text-align: center;
+    margin: 0;
+}
+
+.solution3-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+}
+
+.solution3-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    text-align: center;
+}
+
+.solution3-text-regular {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.solution3-text-bold {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.solution3-credit-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.solution3-credit-intro {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+}
+
+.solution3-credit-badge {
+    position: relative;
+    background: #FFF4E6;
+    border-radius: 8px;
+    padding: 4px 12px;
+    box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+}
+
+.solution3-credit-badge::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+    pointer-events: none;
+}
+
+.solution3-credit-value {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.solution3-credit-outro {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+}
+
+/* ===== CARD 2 ELEMENTS ===== */
+
+.solution3-card-title-alt {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #272727;
+    text-align: center;
+    margin: 0;
+}
+
+.solution3-comparison-container {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.solution3-comparison-box {
+    position: relative;
+    flex: 1;
+    background: #FFF4E6;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+}
+
+.solution3-comparison-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+    pointer-events: none;
+}
+
+.solution3-comparison-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.solution3-comparison-quote {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 16px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+.solution3-card-footer {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE - TABLET (max-width: 1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .solution3-section {
+        padding: 64px 24px;
+    }
+
+    .solution3-title {
+        font-size: 52px;
+        line-height: 38px;
+    }
+
+    .solution3-cards-container {
+        gap: 12px;
+    }
+
+    .solution3-card {
+        padding: 22px 8px;
+        min-height: 390px;
+    }
+
+    .solution3-card-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution3-credit-value {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution3-card-title-alt {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution3-comparison-container {
+        gap: 8px;
+    }
+
+    .solution3-card-footer {
+        font-size: 18px;
+        line-height: 20px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (max-width: 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .solution3-section {
+        padding: 40px 8px;
+        min-height: auto;
+    }
+
+    .solution3-container {
+        gap: 40px;
+    }
+
+    .solution3-title {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution3-cards-container {
+        flex-direction: column;
+        gap: 28px;
+    }
+
+    .solution3-card {
+        flex: 1 1 100%;
+        min-width: 100%;
+        padding: 22px 24px;
+        min-height: 380px;
+    }
+
+    .solution3-card-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution3-credit-value {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution3-card-title-alt {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution3-comparison-container {
+        gap: 8px;
+    }
+
+    .solution3-card-footer {
+        font-size: 18px;
+        line-height: 20px;
+        max-width: 342px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - SMALL MOBILE (max-width: 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+    .solution3-section {
+        padding: 32px 8px;
+    }
+
+    .solution3-container {
+        gap: 32px;
+    }
+
+    .solution3-title {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .solution3-card {
+        padding: 20px 16px;
+    }
+
+    .solution3-card-title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .solution3-text-regular {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .solution3-text-bold {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .solution3-credit-intro {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .solution3-credit-value {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .solution3-credit-outro {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution3-card-title-alt {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .solution3-comparison-title {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .solution3-comparison-quote {
+        font-size: 11px;
+        line-height: 14px;
+    }
+
+    .solution3-card-footer {
+        font-size: 16px;
+        line-height: 18px;
+    }
+}

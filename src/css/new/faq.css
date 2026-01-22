@@ -1,0 +1,304 @@
+/* ============================================
+   FAQ SECTION - SECÇÃO 13
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3380&m=dev
+   ============================================ */
+
+/* ============================================
+   FAQ SECTION CONTAINER
+   ============================================ */
+
+.faq-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 85vh;
+  padding: 48px 64px;
+  background-color: #FEFEFF;
+  overflow: hidden;
+}
+
+/* ============================================
+   FAQ TITLE
+   ============================================ */
+
+.faq-title {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 36px;
+  text-align: center;
+  color: #3D3D3D;
+  margin: 0 0 48px 0;
+  max-width: 900px;
+}
+
+/* ============================================
+   FAQ ACCORDION CONTAINER
+   ============================================ */
+
+.faq-container {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============================================
+   FAQ ITEM (Accordion Item)
+   ============================================ */
+
+.faq-item {
+  position: relative;
+  width: 100%;
+}
+
+/* FAQ Question Button */
+.faq-question-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  gap: 34px;
+  text-align: left;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-question-button:hover .faq-question-text {
+  color: #FFB477;
+}
+
+.faq-question-button:hover .faq-toggle-button {
+  border-color: #FF9E5A;
+  background-color: #FFF5ED;
+}
+
+/* Question Text */
+.faq-question-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 28px;
+  color: #3D3D3D;
+  flex: 1;
+  transition: color 0.3s ease;
+}
+
+/* Toggle Button (Circle with Arrow) */
+.faq-toggle-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  border: 2px solid #FFB477;
+  background-color: #FEFEFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Arrow Icon */
+.faq-arrow-icon {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(90deg);
+}
+
+/* Rotated Arrow when expanded */
+.faq-item.active .faq-arrow-icon {
+  transform: rotate(-90deg);
+}
+
+/* FAQ Answer Container */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s ease;
+  opacity: 0;
+  padding: 0;
+}
+
+/* Expanded Answer */
+.faq-item.active .faq-answer {
+  max-height: 800px;
+  opacity: 1;
+  padding: 20px 0 4px 0;
+  overflow: visible;
+}
+
+/* Answer Text */
+.faq-answer-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 26px;
+  color: #666666;
+  margin: 0;
+  padding-right: 54px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* FAQ Separator Line */
+.faq-separator {
+  width: 100%;
+  height: 1px;
+  background-color: #E5E5E5;
+  margin: 0;
+  border: none;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+  .faq-section {
+    padding: 40px 48px;
+  }
+
+  .faq-title {
+    font-size: 28px;
+    line-height: 32px;
+    margin-bottom: 40px;
+  }
+
+  .faq-question-text {
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .faq-answer-text {
+    font-size: 17px;
+    line-height: 24px;
+    padding-right: 60px;
+  }
+
+  .faq-container {
+    gap: 20px;
+  }
+}
+
+/* Mobile (max 767px) */
+@media (max-width: 767px) {
+  .faq-section {
+    padding: 32px 24px;
+    min-height: auto;
+  }
+
+  .faq-title {
+    font-size: 24px;
+    line-height: 28px;
+    margin-bottom: 32px;
+  }
+
+  .faq-question-button {
+    gap: 16px;
+  }
+
+  .faq-question-text {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .faq-toggle-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .faq-arrow-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .faq-answer-text {
+    font-size: 16px;
+    line-height: 22px;
+    padding-right: 0;
+  }
+
+  .faq-container {
+    gap: 16px;
+  }
+
+  .faq-item.active .faq-answer {
+    padding: 12px 0 0 0;
+  }
+}
+
+/* Small Mobile (max 480px) */
+@media (max-width: 480px) {
+  .faq-section {
+    padding: 24px 16px;
+  }
+
+  .faq-title {
+    font-size: 20px;
+    line-height: 24px;
+    margin-bottom: 24px;
+  }
+
+  .faq-question-text {
+    font-size: 16px;
+    line-height: 20px;
+  }
+
+  .faq-toggle-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .faq-arrow-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .faq-answer-text {
+    font-size: 15px;
+    line-height: 20px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Focus States */
+.faq-question-button:focus-visible {
+  outline: 2px solid #FFB477;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .faq-arrow-icon,
+  .faq-answer,
+  .faq-question-button,
+  .faq-toggle-button {
+    transition: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .faq-toggle-button {
+    border-width: 3px;
+  }
+
+  .faq-question-text {
+    font-weight: 700;
+  }
+}

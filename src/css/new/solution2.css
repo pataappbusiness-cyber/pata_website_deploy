@@ -1,0 +1,452 @@
+/* ============================================
+   SECTION 8: SOLUTION2 - Compare as suas opções (85vh)
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3108&m=dev
+   ============================================ */
+
+.solution2-section {
+    position: relative;
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    background: #FEFEFF;
+    gap: 40px;
+}
+
+/* ===== HEADER ===== */
+
+.solution2-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.solution2-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.solution2-subtitle {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #525252;
+    margin: 0;
+}
+
+/* ===== TABLE CONTAINER ===== */
+
+.solution2-table-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* ===== COMPARISON TABLE ===== */
+
+.comparison-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.16);
+}
+
+/* ===== TABLE ROWS ===== */
+
+.table-row {
+    display: flex;
+    width: 100%;
+    min-height: 48px;
+}
+
+.table-row-last {
+    /* Last row might need specific styling */
+}
+
+/* ===== TABLE CELLS ===== */
+
+.table-cell {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 8px;
+    text-align: center;
+    border-bottom: 1px solid #D4D4D4;
+}
+
+/* Remove border from last row cells */
+.table-row-last .table-cell {
+    border-bottom: 1px solid #FEFEFF;
+}
+
+/* ===== HEADER CELLS ===== */
+
+.table-header .table-cell {
+    background: #272727;
+    color: #FEFEFF;
+    height: 48px;
+    padding: 12px 8px;
+}
+
+.header-cell-criteria p {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #FEFEFF;
+    margin: 0;
+}
+
+.header-cell-pata {
+    background: #FFB477 !important;
+    border-bottom: 1px solid #FEFEFF !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.header-cell-pata .pata-logo {
+    height: 24px;
+    width: auto;
+    object-fit: contain;
+}
+
+.header-cell-pata p {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #272727;
+    margin: 0;
+}
+
+.header-cell-clinic p,
+.header-cell-google p {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #FEFEFF;
+    margin: 0;
+}
+
+/* ===== CRITERIA CELLS ===== */
+
+.criteria-cell {
+    background: #FEFEFF;
+}
+
+.criteria-cell h6 {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.criteria-cell p {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+/* ===== PATA CELLS (ORANGE) ===== */
+
+.pata-cell {
+    background: linear-gradient(180deg, #FFB477 0%, #FFC392 100%);
+    border-bottom: 1px solid #FEFEFF !important;
+}
+
+.pata-cell p {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.pata-cell-last {
+    border-bottom: 0 !important;
+}
+
+/* ===== REGULAR CELLS (WHITE) ===== */
+
+.regular-cell {
+    background: #FEFEFF;
+}
+
+.regular-cell p {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+/* ===== SMALL TEXT (Last row) ===== */
+
+.small-text {
+    font-size: 14px !important;
+    line-height: 16px !important;
+}
+
+/* ===== FOOTER DISCLAIMER ===== */
+
+.solution2-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+    max-width: 590px;
+}
+
+.footer-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #525252;
+    margin: 0;
+}
+
+.footer-text {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #525252;
+    margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE - TABLET (max-width: 1024px)
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .solution2-section {
+        padding: 40px 32px;
+        min-height: auto;
+    }
+
+    .solution2-title {
+        font-size: 44px;
+        line-height: 48px;
+    }
+
+    .solution2-subtitle {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .solution2-table-container {
+        max-width: 100%;
+    }
+
+    .table-cell {
+        padding: 12px 6px;
+    }
+
+    .header-cell-criteria p {
+        font-size: 18px;
+    }
+
+    .header-cell-pata .pata-logo {
+        height: 22px;
+    }
+
+    .header-cell-pata p {
+        font-size: 14px;
+    }
+
+    .header-cell-clinic p,
+    .header-cell-google p {
+        font-size: 16px;
+    }
+
+    .criteria-cell h6,
+    .criteria-cell p,
+    .pata-cell p,
+    .regular-cell p {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .small-text {
+        font-size: 13px !important;
+        line-height: 15px !important;
+    }
+
+    .footer-title {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .footer-text {
+        font-size: 13px;
+        line-height: 15px;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (max-width: 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+    .solution2-section {
+        padding: 32px 24px;
+        gap: 32px;
+    }
+
+    .solution2-title {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution2-subtitle {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .table-row {
+        min-height: 40px;
+    }
+
+    .table-cell {
+        padding: 10px 4px;
+        font-size: 14px;
+    }
+
+    .table-header .table-cell {
+        height: 40px;
+        padding: 10px 4px;
+    }
+
+    .header-cell-criteria p {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .header-cell-pata .pata-logo {
+        height: 20px;
+    }
+
+    .header-cell-pata p {
+        font-size: 14px;
+    }
+
+    .header-cell-clinic p,
+    .header-cell-google p {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .criteria-cell h6,
+    .criteria-cell p,
+    .pata-cell p,
+    .regular-cell p {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .small-text {
+        font-size: 11px !important;
+        line-height: 13px !important;
+    }
+
+    .footer-title {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .footer-text {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .solution2-footer {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - SMALL MOBILE (max-width: 480px)
+   ============================================ */
+
+@media (max-width: 480px) {
+    .solution2-section {
+        padding: 24px 16px;
+        gap: 24px;
+    }
+
+    .solution2-title {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .solution2-subtitle {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .table-cell {
+        padding: 8px 3px;
+    }
+
+    .header-cell-criteria p {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .header-cell-pata .pata-logo {
+        height: 18px;
+    }
+
+    .header-cell-pata p {
+        font-size: 12px;
+    }
+
+    .header-cell-clinic p,
+    .header-cell-google p {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .criteria-cell h6,
+    .criteria-cell p,
+    .pata-cell p,
+    .regular-cell p {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .small-text {
+        font-size: 10px !important;
+        line-height: 12px !important;
+    }
+}

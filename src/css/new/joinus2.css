@@ -1,0 +1,553 @@
+/* ============================================
+   SECTION 12: JOINUS2 - Benefícios dos Primeiros 500
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3354&m=dev
+   ============================================ */
+
+/* ============================================
+   JOINUS2 SECTION - BASE STYLES
+   ============================================ */
+
+.joinus2-section {
+  position: relative;
+  min-height: 90vh;
+  width: 100%;
+  padding: 120px 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #000000;
+}
+
+/* Liquid Gradient Background (same as header) */
+.joinus2-section .liquid-gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      var(--gradient-color-1),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 20% 30%,
+      var(--gradient-color-2),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 80% 50%,
+      var(--gradient-color-3),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 70% 80% at 50% 100%,
+      var(--gradient-color-4),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 90% 70% at 10% 80%,
+      var(--gradient-color-5),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 40% 40% at 70% 20%,
+      var(--gradient-color-6),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 30% 70%,
+      var(--gradient-color-7),
+      transparent
+    ),
+    var(--gradient-color-8);
+  background-size: 200% 200%;
+  animation: liquid-gradient-animation 20s ease-in-out infinite;
+  filter: blur(80px);
+  opacity: 0.9;
+}
+
+/* ============================================
+   MAIN CONTAINER
+   ============================================ */
+
+.joinus2-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  align-items: center;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+
+.joinus2-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+}
+
+.joinus2-title {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #3D3D3D;
+  margin: 0;
+}
+
+/* ============================================
+   BENEFITS CARDS GRID
+   ============================================ */
+
+.joinus2-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1280px;
+}
+
+/* ============================================
+   BENEFIT CARD
+   ============================================ */
+
+.benefit-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 12px;
+  border-radius: 60px;
+  overflow: hidden;
+  border: 0.5px solid rgba(255, 148, 61, 0.5);
+  border-top: 1px solid rgba(255, 148, 61, 0.5);
+  box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+  width: 100%;
+  height: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0px 8px 16px 0px rgba(255, 180, 119, 0.35);
+}
+
+/* Background Layers */
+.benefit-card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 60px;
+  overflow: hidden;
+}
+
+.benefit-card-bg-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFF4E6;
+  z-index: 1;
+}
+
+.benefit-card-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+.benefit-card-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 245, 238, 0) 0%,
+    rgba(255, 245, 238, 0) 50%,
+    rgba(255, 148, 61, 0.15) 100%
+  );
+  z-index: 3;
+}
+
+/* Card Content */
+.benefit-card-content {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+  max-width: 220px;
+  width: 100%;
+}
+
+.benefit-card-title {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #3D3D3D;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.benefit-card-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #3D3D3D;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Inner Shadows */
+.benefit-card-shadows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 60px;
+  pointer-events: none;
+  z-index: 5;
+  box-shadow:
+    inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+/* ============================================
+   BOTTOM TEXT SECTION
+   ============================================ */
+
+.joinus2-bottom-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.joinus2-bottom-statement {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+  color: #FEFEFF;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* ============================================
+   WARNING CARD
+   ============================================ */
+
+.joinus2-warning-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px 24px;
+  background: #FFF4E6;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+  width: 100%;
+  max-width: 450px;
+}
+
+.warning-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.warning-icon-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: #FFF4E6;
+  border: 0.5px solid #FFE1C9;
+  border-radius: 204px;
+  box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+  position: relative;
+}
+
+.warning-icon-bubble::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+  pointer-events: none;
+}
+
+.warning-icon-bubble svg {
+  position: relative;
+  z-index: 1;
+}
+
+.warning-card-title {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #3D3D3D;
+  margin: 0;
+  text-align: center;
+}
+
+.warning-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.warning-card-text {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 16px;
+  color: #3D3D3D;
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.warning-card-shadows {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow:
+    inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+/* ============================================
+   RESPONSIVE - TABLET
+   ============================================ */
+
+@media (max-width: 1024px) {
+  .joinus2-section {
+    padding: 100px 64px;
+    min-height: 85vh;
+  }
+
+  .joinus2-container {
+    gap: 48px;
+  }
+
+  .joinus2-title {
+    font-size: 40px;
+    line-height: 48px;
+  }
+
+  .joinus2-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .benefit-card {
+    padding: 20px 12px;
+    height: 280px;
+  }
+
+  .benefit-card-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .benefit-card-text {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .joinus2-bottom-statement {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .joinus2-warning-card {
+    max-width: 400px;
+    padding: 12px 20px 20px;
+  }
+
+  .warning-card-text {
+    font-size: 11px;
+    line-height: 15px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .joinus2-section {
+    padding: 80px 24px;
+    min-height: auto;
+  }
+
+  .joinus2-container {
+    gap: 40px;
+  }
+
+  .joinus2-title {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .joinus2-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    max-width: 400px;
+  }
+
+  .benefit-card {
+    padding: 24px 16px;
+    border-radius: 50px;
+    height: 280px;
+  }
+
+  .benefit-card-background,
+  .benefit-card-bg-color,
+  .benefit-card-gradient,
+  .benefit-card-shadows {
+    border-radius: 50px;
+  }
+
+  .benefit-card-title {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .benefit-card-text {
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .joinus2-bottom-statement {
+    font-size: 16px;
+    line-height: 20px;
+    max-width: 340px;
+  }
+
+  .joinus2-warning-card {
+    max-width: 100%;
+    padding: 12px 16px 20px;
+  }
+
+  .warning-card-title {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .warning-card-text {
+    font-size: 11px;
+    line-height: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .joinus2-section {
+    padding: 60px 20px;
+  }
+
+  .joinus2-title {
+    font-size: 28px;
+    line-height: 36px;
+  }
+
+  .joinus2-cards-grid {
+    gap: 12px;
+  }
+
+  .benefit-card {
+    height: 260px;
+    border-radius: 40px;
+  }
+
+  .benefit-card-background,
+  .benefit-card-bg-color,
+  .benefit-card-gradient,
+  .benefit-card-shadows {
+    border-radius: 40px;
+  }
+
+  .benefit-card-title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+
+  .benefit-card-text {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .joinus2-bottom-statement {
+    font-size: 14px;
+    line-height: 18px;
+    max-width: 300px;
+  }
+
+  .joinus2-warning-card {
+    padding: 10px 12px 16px;
+  }
+
+  .warning-icon-bubble {
+    width: 36px;
+    height: 36px;
+  }
+
+  .warning-icon-bubble svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .warning-card-title {
+    font-size: 15px;
+    line-height: 17px;
+  }
+
+  .warning-card-text {
+    font-size: 10px;
+    line-height: 14px;
+  }
+}

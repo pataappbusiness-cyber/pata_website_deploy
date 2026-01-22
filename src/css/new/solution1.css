@@ -1,0 +1,529 @@
+/* ============================================
+   SECTION 7: SOLUTION1 - Faça as contas (85vh)
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3081&m=dev
+   ============================================ */
+
+.solution1-section {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 0 0 0;
+    background: #FEFEFF;
+    overflow: hidden;
+}
+
+/* Main Title */
+.solution1-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #FF943D;
+    text-align: center;
+    margin: 0 0 40px 0;
+    z-index: 10;
+}
+
+/* Cards Container */
+.solution1-cards-container {
+    display: flex;
+    width: 100%;
+    flex: 1;
+    gap: 0;
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+/* ============================================
+   LEFT CARD - Sem PATA (Grey)
+   ============================================ */
+
+.solution1-card-left {
+    position: relative;
+    flex: 0 0 35%;
+    width: 35%;
+    min-width: 400px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    overflow: hidden;
+}
+
+/* Left Card Background Video - Covers entire panel */
+.solution1-card-left .card-background-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.solution1-card-left .card-background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.solution1-card-left .card-overlay-saturation {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    mix-blend-mode: saturation;
+}
+
+.solution1-card-left .card-overlay-multiply {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    mix-blend-mode: multiply;
+}
+
+/* Left Card Content Box - Centered on top of video */
+.solution1-card-left .card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 280px;
+    min-width: 240px;
+    min-height: 142px;
+    height: 361px;
+    padding: 16px 24px;
+    background: linear-gradient(
+        to bottom,
+        rgba(212, 212, 212, 0.9),
+        rgba(190, 190, 190, 0.9)
+    );
+    border: 0.5px solid #D4D4D4;
+    border-radius: 16px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* Pet Icons Container */
+.solution1-icons {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.solution1-icon {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+}
+
+/* Card Title and Price */
+.solution1-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    color: #272727;
+}
+
+.solution1-card-label {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0;
+}
+
+.solution1-card-price {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    margin: 0;
+}
+
+/* Card Source */
+.solution1-card-source {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #3D3D3D;
+    text-align: center;
+    margin: 0;
+}
+
+.solution1-card-source a {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #525252;
+    text-decoration: underline;
+    text-decoration-skip-ink: none;
+}
+
+.solution1-card-source a:hover {
+    color: #3D3D3D;
+}
+
+/* ============================================
+   RIGHT CARD - Com PATA (Orange)
+   ============================================ */
+
+.solution1-card-right {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 40px;
+    overflow: hidden;
+}
+
+/* Right Card Background Video - Covers entire panel */
+.solution1-card-right .card-background-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.solution1-card-right .card-background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.solution1-card-right .card-overlay-dark {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.solution1-card-right .card-overlay-orange {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 143, 87, 0.15);
+}
+
+/* Right Card Content Box - Centered on top of video */
+.solution1-card-right .card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 440px;
+    min-width: 400px;
+    min-height: 142px;
+    padding: 22px 24px;
+    border: 0.5px solid #FFC392;
+    border-radius: 16px;
+    box-shadow: 0px 0px 45.8px 0px rgba(255, 180, 119, 0.27);
+    overflow: hidden;
+}
+
+/* Inner Backgrounds */
+.solution1-card-right .card-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(255, 180, 119, 0.92),
+        rgba(255, 148, 61, 0.92)
+    );
+    mix-blend-mode: screen;
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+.solution1-card-right .card-content::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 148, 61, 0.6);
+    border-radius: 16px;
+    pointer-events: none;
+}
+
+/* Right Card Icons (with hearts) */
+.solution1-card-right .solution1-icons {
+    position: relative;
+    z-index: 3;
+    gap: 4px;
+}
+
+.solution1-card-right .solution1-icon {
+    width: 44px;
+    height: 44px;
+}
+
+/* Right Card Two-Column Layout */
+.solution1-card-columns {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+    color: #272727;
+}
+
+.solution1-card-column {
+    flex: 1 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.solution1-card-column h4 {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    margin: 0;
+    text-align: center;
+}
+
+.solution1-card-column h2 {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Subscription Details */
+.solution1-subscription-details {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #272727;
+    text-align: center;
+    margin: 0;
+}
+
+/* Card Disclaimer */
+.solution1-card-disclaimer {
+    position: relative;
+    z-index: 3;
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #272727;
+    text-align: center;
+    margin: 0;
+}
+
+.solution1-card-disclaimer em {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .solution1-section {
+        padding: 32px 0 0 0;
+        gap: 32px;
+        height: auto;
+    }
+
+    .solution1-title {
+        font-size: 44px;
+        line-height: 32px;
+    }
+
+    .solution1-cards-container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .solution1-card-left,
+    .solution1-card-right {
+        width: 100%;
+        min-width: unset;
+        flex: 0 0 auto;
+        min-height: 440px;
+        padding: 48px 12px;
+    }
+
+    .solution1-card-left .card-content {
+        max-width: 100%;
+        width: auto;
+        height: auto;
+        min-height: 300px;
+    }
+
+    .solution1-card-right .card-content {
+        max-width: 100%;
+        width: auto;
+        min-width: unset;
+    }
+
+    .solution1-card-price {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .solution1-card-column h2 {
+        font-size: 40px;
+        line-height: 44px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .solution1-section {
+        padding: 20px 0 0 0;
+        gap: 24px;
+        height: auto;
+    }
+
+    .solution1-title {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution1-cards-container {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .solution1-card-left,
+    .solution1-card-right {
+        width: 100%;
+        min-width: unset;
+        flex: 0 0 auto;
+        min-height: 440px;
+        max-height: 440px;
+        padding: 48px 12px;
+    }
+
+    .solution1-card-left .card-content {
+        min-height: 142px;
+        height: auto;
+        padding: 16px 24px;
+        gap: 12px;
+    }
+
+    .solution1-card-right .card-content {
+        padding: 22px 24px;
+        gap: 12px;
+        min-height: 142px;
+    }
+
+    .solution1-icons {
+        gap: 12px;
+    }
+
+    .solution1-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .solution1-card-right .solution1-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .solution1-card-label {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .solution1-card-price {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .solution1-card-info {
+        gap: 2px;
+    }
+
+    .solution1-card-source {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .solution1-card-source a {
+        font-size: 11px;
+        line-height: 14px;
+    }
+
+    .solution1-card-columns {
+        flex-direction: row;
+        gap: 20px;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+    .solution1-card-column {
+        gap: 16px;
+        text-align: center;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .solution1-card-column:first-child {
+        gap: 8px;
+    }
+
+    .solution1-card-column h4 {
+        font-size: 18px;
+        line-height: 20px;
+        width: 100%;
+    }
+
+    .solution1-card-column h2 {
+        font-size: 32px;
+        line-height: 36px;
+        width: 100%;
+    }
+
+    .solution1-subscription-details {
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+    }
+
+    .solution1-card-disclaimer {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .solution1-card-disclaimer em {
+        font-size: 11px;
+    }
+}

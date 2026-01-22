@@ -1,0 +1,817 @@
+/* ============================================
+   SECTION 11: JOINUS1 - Os primeiros 500 (85vh)
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3270&m=dev
+   ============================================ */
+
+.joinus1-section {
+    position: relative;
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-white);
+    padding: 80px 0;
+}
+
+.joinus1-container {
+    width: 100%;
+    max-width: 1280px;
+    padding: 0 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    align-items: center;
+}
+
+/* ==================== HEADER ==================== */
+
+.joinus1-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+}
+
+.joinus1-title {
+    font-family: var(--font-family);
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 38px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+.joinus1-subtitle {
+    font-family: var(--font-family);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+/* ==================== TOP CARDS ==================== */
+
+.joinus1-top-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+}
+
+.joinus1-card {
+    position: relative;
+    border: 0.5px solid #FFC392;
+    border-radius: 16px;
+    padding: 22px 24px;
+    min-height: 346px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-shadow:
+        0px 0px 45.8px 0px rgba(255, 180, 119, 0.25);
+}
+
+/* Card 1 & 2 - With Background Images */
+.joinus1-card-1,
+.joinus1-card-2 {
+    background: transparent;
+}
+
+.card-background-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.card-background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+/* Card 1 Overlays - primeiros_500_1.png */
+.joinus1-card-1 .card-overlay-saturation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    mix-blend-mode: saturation;
+    z-index: 2;
+    border-radius: 16px;
+}
+
+.joinus1-card-1 .card-overlay-multiply {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    mix-blend-mode: multiply;
+    z-index: 3;
+    border-radius: 16px;
+}
+
+/* Card 2 Overlays - primeiros_500_2.png */
+.joinus1-card-2 .card-overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    mix-blend-mode: multiply;
+    z-index: 2;
+    border-radius: 16px;
+}
+
+.joinus1-card-2 .card-overlay-orange {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 148, 61, 0.35);
+    z-index: 3;
+    border-radius: 16px;
+}
+
+/* Card 3 - Orange Gradient */
+.joinus1-card-3 {
+    background: linear-gradient(180deg, rgba(255, 180, 119, 0.92) 0%, rgba(255, 148, 61, 0.92) 100%);
+}
+
+/* Card Content */
+.card-content-inner {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.icon-bubble {
+    background: #FFF4E6;
+    border: 0.5px solid #FFE1C9;
+    border-radius: 204px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0px 4px 8px 0px rgba(255, 180, 119, 0.25),
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+.card-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    width: 100%;
+}
+
+.card-label {
+    font-family: var(--font-family);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #FEFEFF;
+    text-align: center;
+    margin: 0;
+}
+
+.joinus1-card-3 .card-label,
+.joinus1-card-3 .card-section-title,
+.joinus1-card-3 .card-description {
+    color: #3D3D3D;
+}
+
+/* Price Badge */
+.price-badge {
+    background: #FFF4E6;
+    border-radius: 8px;
+    padding: 4px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0px 4px 8px 0px rgba(255, 180, 119, 0.25),
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+.price-value {
+    font-family: var(--font-family);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.price-value-orange {
+    color: #FF943D;
+}
+
+.price-subtitle {
+    font-family: var(--font-family);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.price-inline {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+}
+
+.price-suffix {
+    font-family: var(--font-family);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    margin: 0;
+}
+
+/* Card 3 Sections */
+.card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.card-section-title {
+    font-family: var(--font-family);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.card-divider {
+    width: 100%;
+    height: 0;
+    border-bottom: 1px solid #3D3D3D;
+    margin: 4px 0;
+}
+
+.card-description {
+    font-family: var(--font-family);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+/* ==================== MIDDLE TITLE ==================== */
+
+.joinus1-middle-title {
+    font-family: var(--font-family);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #000000;
+    margin: 0;
+    text-align: center;
+}
+
+/* ==================== BOTTOM CARDS (Subscription Plans) ==================== */
+
+.joinus1-bottom-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    width: 100%;
+    align-items: flex-end;
+}
+
+.bottom-plan-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+/* Best Value Badge */
+.best-value-badge {
+    background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
+    border: 0.5px solid #FFB477;
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow:
+        0px 0px 20px 0px #FFDEB3,
+        0px 0px 12px 0px rgba(255, 148, 61, 0.4),
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 0px rgba(255, 213, 179, 0.6);
+}
+
+.best-value-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.best-value-text {
+    font-family: var(--font-family);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #272727;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Plan Cards */
+.bottom-plan-card {
+    border-radius: 16px;
+    padding: 12px 16px;
+    min-height: 244px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0px 0px 20px -4px #FFDEB3,
+        0px 0px 12px 0px rgba(255, 148, 61, 0.4);
+}
+
+/* Plan Card 1 */
+.bottom-plan-card-1 {
+    background: linear-gradient(180deg, #FFE1C9 0%, #FFC392 100%);
+    border: 0.5px solid #FFC392;
+    padding-bottom: 24px;
+}
+
+.bottom-plan-card-1::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+}
+
+/* Plan Card 2 */
+.bottom-plan-card-2 {
+    background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
+    border: 1px solid rgba(255, 210, 173, 0.8);
+    padding-top: 12px;
+    padding-bottom: 40px;
+    position: relative;
+}
+
+.bottom-plan-card-2::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
+    border-radius: inherit;
+    z-index: 1;
+}
+
+.bottom-plan-card-2::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 2;
+    box-shadow:
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+}
+
+.bottom-plan-card-2 .plan-card-content {
+    position: relative;
+    z-index: 3;
+}
+
+/* Plan Card 3 */
+.bottom-plan-card-3 {
+    background: linear-gradient(180deg, rgba(255, 225, 201, 0.92) 0%, rgba(255, 195, 146, 0.92) 100%);
+    border: 0.5px solid #FFC392;
+}
+
+.bottom-plan-card-3::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow:
+        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+        inset 0px -2px 4px 0px #FF9B4A,
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+}
+
+/* Plan Card Content */
+.plan-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.plan-badge {
+    background: #FFF4E6;
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+        0px 4px 8px 0px rgba(255, 180, 119, 0.25),
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+.plan-badge-text {
+    font-family: var(--font-family);
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.plan-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+}
+
+.plan-title {
+    font-family: var(--font-family);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.plan-subtitle {
+    font-family: var(--font-family);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.plan-highlight {
+    font-family: var(--font-family);
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.plan-number {
+    font-family: var(--font-family);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 53px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.plan-footer-text {
+    font-family: var(--font-family);
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+.plan-divider {
+    width: 100%;
+    height: 0;
+    border-bottom: 0.5px solid #3D3D3D;
+    margin: 4px 0;
+}
+
+.plan-footer-italic {
+    font-family: var(--font-family);
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 16px;
+    color: #3D3D3D;
+    margin: 0;
+    text-align: center;
+}
+
+/* ==================== RESPONSIVE - TABLET ==================== */
+
+@media (max-width: 1024px) {
+    .joinus1-container {
+        padding: 0 22px;
+    }
+
+    .joinus1-title {
+        font-size: 52px;
+        line-height: 38px;
+    }
+
+    .joinus1-subtitle {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    /* Top cards - stack vertically */
+    .joinus1-top-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .joinus1-card {
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .joinus1-card-1 {
+        min-height: 142px;
+    }
+
+    .joinus1-card-2 {
+        min-height: 280px;
+    }
+
+    /* Card 3 - Split into 2 columns */
+    .joinus1-card-3 {
+        min-height: 142px;
+        padding: 12px 40px;
+    }
+
+    .joinus1-card-3 .card-content-inner {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .joinus1-card-3 .card-section {
+        flex: 1 0 200px;
+        min-width: 200px;
+    }
+
+    .joinus1-card-3 .card-divider {
+        display: none;
+    }
+
+    .joinus1-card-3 .card-section-title {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .joinus1-card-3 .card-description {
+        font-size: 14px;
+        line-height: 16px;
+        max-width: 300px;
+    }
+
+    .price-badge {
+        padding: 4px 24px;
+    }
+
+    /* Bottom cards - keep in row */
+    .joinus1-bottom-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+
+    .bottom-plan-card {
+        padding: 12px 16px;
+    }
+
+    .bottom-plan-card-1 {
+        padding: 12px 16px;
+    }
+
+    .bottom-plan-card-2 {
+        padding: 14px 12px;
+    }
+
+    .bottom-plan-card-3 {
+        padding: 14px 16px;
+    }
+
+    /* Adjust font sizes for bottom cards */
+    .plan-badge-text {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .plan-title {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .plan-subtitle {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .plan-highlight {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .plan-number {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .plan-footer-text {
+        font-size: 14px;
+        line-height: 16px;
+        max-width: 140px;
+    }
+
+    .best-value-text {
+        font-size: 18px;
+        line-height: 20px;
+    }
+}
+
+/* ==================== RESPONSIVE - MOBILE ==================== */
+
+@media (max-width: 768px) {
+    .joinus1-section {
+        min-height: auto;
+        padding: 60px 0;
+    }
+
+    .joinus1-container {
+        padding: 0 24px;
+        gap: 48px;
+    }
+
+    .joinus1-title {
+        font-size: 32px;
+        line-height: 28px;
+    }
+
+    .joinus1-subtitle {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    /* Top cards - stack vertically */
+    .joinus1-top-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .joinus1-card {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    .joinus1-card-3 {
+        padding: 20px;
+    }
+
+    .joinus1-card-3 .card-content-inner {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .joinus1-card-3 .card-section {
+        width: 100%;
+    }
+
+    .joinus1-card-3 .card-divider {
+        display: block;
+    }
+
+    .card-label {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .price-value {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .card-section-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .card-description {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .joinus1-middle-title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    /* Bottom cards - stack vertically */
+    .joinus1-bottom-cards {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .bottom-plan-card-wrapper {
+        width: 100%;
+    }
+
+    .best-value-text {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .plan-badge-text {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .plan-title {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .plan-subtitle {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .plan-highlight {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .plan-number {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .plan-footer-text {
+        font-size: 16px;
+        line-height: 18px;
+        max-width: 100%;
+    }
+
+    .plan-footer-italic {
+        font-size: 12px;
+        line-height: 16px;
+    }
+}

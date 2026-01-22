@@ -3,12 +3,12 @@
 /* ============================================= */
 
 .section-wrapper {
-    background: white;
+    background: #FFF8F2;
     position: relative;
 }
 
 #problem2 {
-    background-color: #F2EFF2;
+    background-color: #FFF8F2;
     padding: 80px 40px;
 }
 
