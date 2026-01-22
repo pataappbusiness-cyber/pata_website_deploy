@@ -1,0 +1,639 @@
+/* ============================================
+   PATA WEBSITE - SECTIONS STYLES
+   Version: 4.0 (PREVC)
+   ============================================ */
+
+/* ============================================
+   SECTION 1: HEADER (HOME) - 100vh
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2915
+   ============================================ */
+
+.header-section {
+  position: relative;
+  height: 100vh;
+  min-height: 928px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 120px;
+  padding-bottom: 60px;
+  background: var(--bg-black);
+}
+
+/* Liquid Gradient Animated Background */
+.liquid-gradient-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      var(--gradient-color-1),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 20% 30%,
+      var(--gradient-color-2),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 80% 50%,
+      var(--gradient-color-3),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 70% 80% at 50% 100%,
+      var(--gradient-color-4),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 90% 70% at 10% 80%,
+      var(--gradient-color-5),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 40% 40% at 70% 20%,
+      var(--gradient-color-6),
+      transparent
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 30% 70%,
+      var(--gradient-color-7),
+      transparent
+    ),
+    var(--gradient-color-8);
+
+  background-size: 200% 200%;
+  animation: liquid-gradient-animation 20s ease-in-out infinite;
+  filter: blur(80px);
+  opacity: 0.9;
+}
+
+/* ============================================
+   MOUSE HIGHLIGHT EFFECT - SPOTLIGHT INTERATIVO
+   ============================================ */
+
+.mouse-highlight {
+  /* Positioning */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Não bloqueia interações */
+  z-index: 2; /* Acima do liquid-gradient (z-index: 1), abaixo do conteúdo (z-index: 10+) */
+
+  /* Initial state - invisível até o mouse entrar */
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  /* Gradiente radial usando CSS variables para performance */
+  background: radial-gradient(
+    circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 180, 119, 0.25) 0%,   /* Centro brilhante laranja */
+    rgba(255, 148, 61, 0.15) 20%,   /* Transição 1 */
+    rgba(255, 148, 61, 0.08) 40%,   /* Transição 2 */
+    rgba(255, 148, 61, 0) 70%       /* Fade total */
+  );
+
+  /* Performance optimization */
+  will-change: transform;
+  transform: translateZ(0); /* Force GPU layer */
+  backface-visibility: hidden;
+
+  /* Blend mode para integração suave com o gradiente líquido */
+  mix-blend-mode: screen; /* Torna o efeito aditivo (mais luz) */
+}
+
+/* Estado ativo quando mouse está sobre a secção */
+.header-section:hover .mouse-highlight {
+  opacity: 1;
+}
+
+/* Main Container */
+.header-container {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* TÍTULO - SEMPRE NO TOPO */
+.header-content {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  z-index: 10;
+}
+
+.header-launch {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  color: #FF943D;
+  font-size: 24px;
+  font-family: 'Mona Sans', sans-serif;
+  font-weight: 600;
+  font-variation-settings: "wght" 600;
+  line-height: 28px;
+  text-align: center;
+}
+
+.header-title {
+  align-self: stretch;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0;
+}
+
+.header-title-white {
+  color: #FEFEFF;
+  font-size: 48px;
+  font-family: 'Mona Sans', sans-serif;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  line-height: 40px;
+}
+
+.header-title-orange {
+  color: #FF943D;
+  font-size: 48px;
+  font-family: 'Mona Sans', sans-serif;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  line-height: 44px;
+}
+
+/* VISUAL CONTAINER - ABAIXO DO TÍTULO */
+.header-visual-container {
+  align-self: stretch;
+  padding-left: 80px;
+  padding-right: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* ============================================
+   IMAGE PILLS - CAPSULAS ARREDONDADAS
+   ============================================ */
+
+/* Container das Pills */
+.visual-pills-left,
+.visual-pills-right {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.visual-pills-left {
+  align-items: flex-end;
+}
+
+.visual-pills-right {
+  align-items: flex-start;
+}
+
+/* Base Pill Styling */
+.image-pill {
+  width: 151px;
+  position: relative;
+  border-radius: 550px;
+  box-shadow: 0px 0px 12px rgba(255, 148.18, 61.30, 0.40);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.pill-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================================
+   PILL 1 - ESQUERDA SUPERIOR (Cão pequeno)
+   Figma: 296-2581
+   ============================================ */
+.pill-left-top {
+  height: 176px;
+  max-height: 176px;
+  flex: 1 1 0;
+  position: relative;
+  border-radius: 550px;
+  border-top: 1px solid rgba(254, 254, 255, 0.85);
+  overflow: hidden;
+  box-shadow:
+    0px 0px 20px -4px #FFDEB3,
+    0px 0px 12px 0px rgba(255, 148, 61, 0.4);
+}
+
+.pill-left-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background: linear-gradient(180deg, #FFC392 0%, #FFB477 100%);
+  z-index: 1;
+}
+
+.pill-left-top::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background:
+    linear-gradient(180deg, rgba(255, 148, 61, 0) 0%, rgba(255, 148, 61, 0.2) 49.08%, rgba(255, 148, 61, 0.2) 100%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.pill-left-top img {
+  position: relative;
+  z-index: 3;
+}
+
+.pill-left-top .pill-inner-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+    inset 0px -2px 4px 0px #FF9B4A,
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ============================================
+   PILL 2 - ESQUERDA INFERIOR (Médico veterinário)
+   Figma: 296-2580
+   ============================================ */
+.pill-left-bottom {
+  height: 302px;
+  flex: 1 1 0;
+  position: relative;
+  border-radius: 550px;
+  border: 2px solid #FF943D;
+  overflow: hidden;
+  box-shadow:
+    0px 0px 20px -4px #FFDEB3,
+    0px 0px 12px 0px rgba(255, 148, 61, 0.4);
+}
+
+.pill-left-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background: linear-gradient(180deg, #FFC392 0%, #FFB477 100%);
+  z-index: 1;
+}
+
+.pill-left-bottom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background:
+    linear-gradient(180deg, rgba(255, 148, 61, 0) 0%, rgba(255, 148, 61, 0.34) 55.25%, rgba(255, 148, 61, 0.34) 100%);
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.pill-left-bottom img {
+  position: relative;
+  z-index: 3;
+}
+
+.pill-left-bottom .pill-inner-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+    inset 0px -2px 4px 0px #FF9B4A,
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ============================================
+   PILL 3 - DIREITA SUPERIOR
+   Figma: 296-2592
+   ============================================ */
+.pill-right-top {
+  height: 322px;
+  flex: 1 1 0;
+  position: relative;
+  border-radius: 550px;
+  border-top: 1px solid rgba(254, 254, 255, 0.80);
+  overflow: hidden;
+  box-shadow:
+    0px 0px 20px -4px #FFDEB3,
+    0px 0px 12px 0px rgba(255, 148, 61, 0.4);
+}
+
+.pill-right-top::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background: linear-gradient(180deg, #FFC392 0%, #FFB477 100%);
+  z-index: 1;
+}
+
+.pill-right-top::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background:
+    linear-gradient(0deg, rgba(255, 148.18, 61.30, 0.08) 0%, rgba(255, 148.18, 61.30, 0.08) 100%),
+    linear-gradient(180deg, rgba(255, 148, 61, 0) 0%, rgba(255, 148, 61, 0.20) 100%),
+    rgba(219, 93, 35, 0.20),
+    radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, rgba(179, 80, 0, 0.30) 0%, rgba(255, 245, 238, 0.30) 100%);
+  background-blend-mode: overlay, overlay, normal, normal, normal;
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.pill-right-top img {
+  position: relative;
+  z-index: 3;
+}
+
+.pill-right-top .pill-inner-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+    inset 0px -2px 4px 0px #FF9B4A,
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ============================================
+   PILL 4 - DIREITA INFERIOR
+   Figma: 296-2593
+   ============================================ */
+.pill-right-bottom {
+  height: 156px;
+  max-height: 156px;
+  flex: 1 1 0;
+  position: relative;
+  border-radius: 550px;
+  border-top: 1px solid rgba(254, 254, 255, 0.80);
+  overflow: hidden;
+  box-shadow:
+    0px 0px 20px -4px #FFDEB3,
+    0px 0px 12px 0px rgba(255, 148, 61, 0.4);
+}
+
+.pill-right-bottom::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background: linear-gradient(180deg, #FFC392 0%, #FFB477 100%);
+  z-index: 1;
+}
+
+.pill-right-bottom::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 550px;
+  background:
+    linear-gradient(0deg, rgba(255, 148.18, 61.30, 0.08) 0%, rgba(255, 148.18, 61.30, 0.08) 100%),
+    linear-gradient(180deg, rgba(255, 148, 61, 0) 0%, rgba(255, 148, 61, 0.20) 100%),
+    radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, rgba(179, 80, 0, 0.20) 0%, rgba(255, 245, 238, 0.20) 100%);
+  background-blend-mode: overlay, normal, normal, normal;
+  mix-blend-mode: overlay;
+  z-index: 2;
+}
+
+.pill-right-bottom img {
+  position: relative;
+  z-index: 3;
+}
+
+.pill-right-bottom .pill-inner-shadow {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow:
+    inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+    inset 0px -2px 4px 0px #FF9B4A,
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ============================================
+   MOCKUP CENTRAL
+   ============================================ */
+
+.mockup-center {
+  width: 620px;
+  height: 616px;
+  max-width: 820px;
+  min-width: 620px;
+  padding: 40px 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  transition: transform 0.1s ease-out;
+  will-change: transform;
+}
+
+.mockup-image {
+  width: 476px;
+  height: auto;
+  object-fit: contain;
+  position: relative;
+  z-index: 5;
+  filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4));
+}
+
+/* ============================================
+   RESPONSIVE - TABLET (769px - 1024px)
+   ============================================ */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .header-visual-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .image-pill {
+    width: 130px;
+  }
+
+  .mockup-center {
+    width: 520px;
+    min-width: 520px;
+    height: 560px;
+  }
+
+  .mockup-image {
+    width: 420px;
+    height: auto;
+  }
+
+  /* Mouse Highlight - Raio reduzido em tablet */
+  .mouse-highlight {
+    background: radial-gradient(
+      circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), /* Raio menor com CSS vars */
+      rgba(255, 180, 119, 0.20) 0%,
+      rgba(255, 148, 61, 0.10) 20%,
+      rgba(255, 148, 61, 0) 70%
+    );
+  }
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE (max-width: 768px)
+   ============================================ */
+
+@media (max-width: 768px) {
+  .header-section {
+    min-height: 100vh;
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .header-launch {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  .header-title-white,
+  .header-title-orange {
+    font-size: 32px;
+    line-height: 36px;
+  }
+
+  .header-visual-container {
+    flex-direction: column;
+    padding-left: 24px;
+    padding-right: 24px;
+    gap: 24px;
+  }
+
+  .visual-pills-left,
+  .visual-pills-right {
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .image-pill {
+    width: 120px;
+  }
+
+  .pill-left-top,
+  .pill-right-bottom {
+    height: 150px;
+    max-height: 150px;
+  }
+
+  .pill-left-bottom,
+  .pill-right-top {
+    height: 200px;
+  }
+
+  .mockup-center {
+    width: 100%;
+    min-width: auto;
+    height: auto;
+    padding: 20px;
+  }
+
+  .mockup-image {
+    width: 340px;
+    height: auto;
+    max-width: 90%;
+  }
+
+  /* Mouse Highlight - Desativado em mobile */
+  .mouse-highlight {
+    display: none;
+  }
+}
+
+/* Mouse Highlight - Detecção de hover capability (remove em touch devices) */
+@media (hover: none) {
+  .mouse-highlight {
+    display: none;
+  }
+}
+
+/* ============================================
+   DRAGGABLE ELEMENT - Interactive Bone
+   Reference: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2626&m=dev
+   ============================================ */
+
+.draggable-element {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: grab;
+  user-select: none;
+  transition: none;
+}
+
+.draggable-element:active {
+  cursor: grabbing;
+}
+
+.draggable-element img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .draggable-element {
+    bottom: 20px;
+    right: 20px;
+    width: 124px;
+    height: 124px;
+  }
+}

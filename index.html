@@ -230,6 +230,8 @@
     <!-- Deferred JavaScript - Non-blocking -->
     <!-- 1. Lottie (module script, async by default) - Kept on CDN for web component benefits -->
     <script defer src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.5/dist/dotlottie-wc.js" type="module"></script>
+    <!-- Lottie Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
     <!-- 2. Splitting.js - Text Animation Library -->
     <script defer src="https://unpkg.com/splitting/dist/splitting.min.js"></script>
     <!-- 3. Bundled Vendor Scripts (GSAP + ScrollTrigger) - Saves HTTP requests -->
@@ -242,6 +244,8 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <!-- 7. Main function.js -->
     <script defer src="./src/js/function.min.js"></script>
+    <!-- 8. New Main.js - Lottie and interactions -->
+    <script type="module" defer src="./src/js/new/main.js"></script>
 </head>
 <body>
     <!-- Skip to main content link for accessibility -->
@@ -483,71 +487,37 @@
          Tablet: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2683
          Phone: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2942
          ============================================ -->
-    <section class="problem2-section" data-name="problem2" data-node-id="135:2423">
-        <div class="problem2-header">
-            <div class="problem2-images">
-                <div class="problem2-icon-placeholder">
-                    <!-- TODO: Add cao_doente icon -->
-                    <img src="src/img/icons/cao_doente.svg" alt="Cão doente" width="120" height="120" loading="lazy">
-                </div>
-                <div class="problem2-icon-placeholder">
-                    <!-- TODO: Add gato_doente icon -->
-                    <img src="src/img/icons/gato_doente.svg" alt="Gato doente" width="120" height="120" loading="lazy">
+    <section id="problem2" class="section-wrapper">
+        <div class="problem2-container">
+            <!-- Left Column: Text Content -->
+            <div class="problem2-content">
+                <h2 class="problem2-title">Imagine isto:</h2>
+
+                <div class="problem2-text-group">
+                    <p class="problem2-story">
+                        São 3h da manhã. O Max vomitou duas vezes. Abre a app PATA.
+                        <br><br>
+                        Em 47 segundos, está em videochamada com a Dra. Ana. Ela vê o Max, faz perguntas, acalma-o: "É indigestão. Vou receitar um protetor gástrico. Amanhã estará bem." A receita chega ao email em segundos. A app mostra a farmácia mais próxima que abre às 9h. De manhã, avias em 2 minutos.
+                    </p>
+
+                    <p class="problem2-conclusion">
+                        Volta a dormir. O Max também.
+                    </p>
+
+                    <!-- Cost Card - Figma Design: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2959 -->
+                    <div class="problem2-cost" data-node-id="337:2959">
+                        <h4 class="problem2-cost-label">Custo total:</h4>
+                        <div class="problem2-cost-box">
+                            <h2 class="problem2-cost-value">€187</h2>
+                        </div>
+                        <h4 class="problem2-cost-label">da consulta.</h4>
+                    </div>
                 </div>
             </div>
-            <h2 class="problem2-title">O Problema É Real</h2>
-            <h4 class="problem2-subtitle">
-                Estas histórias acontecem todos os dias em Portugal.
-            </h4>
-        </div>
 
-        <div class="problem2-cards">
-            <!-- Card 1 - Left animated -->
-            <div class="problem2-card">
-                <div class="problem2-card-icon">
-                    <!-- TODO: Add tutores_adiam_consultas icon -->
-                    <img src="src/img/icons/tutores portugueses adiam consultas 1.svg" alt="Tutores adiam consultas" width="100" height="100" loading="lazy">
-                </div>
-                <div class="problem2-stat-badge">
-                    <h2>38%</h2>
-                </div>
-                <h6 class="problem2-card-label">dos tutores portugueses adiam consultas veterinárias por questões financeiras</h6>
-            </div>
-
-            <!-- Card 2 - Left animated -->
-            <div class="problem2-card">
-                <div class="problem2-card-icon">
-                    <!-- TODO: Add custo_consulta icon -->
-                    <img src="src/img/icons/custo medio de uma consulta veterinaria 1.svg" alt="Custo consulta" width="100" height="100" loading="lazy">
-                </div>
-                <div class="problem2-stat-badge">
-                    <h2>€45-60</h2>
-                </div>
-                <h6 class="problem2-card-label">custo médio de uma consulta veterinária de despiste em Portugal</h6>
-            </div>
-
-            <!-- Card 3 - Right animated -->
-            <div class="problem2-card">
-                <div class="problem2-card-icon">
-                    <!-- TODO: Add distancia icon -->
-                    <img src="src/img/icons/distancia media ate ao veterinario 1.svg" alt="Distância" width="100" height="100" loading="lazy">
-                </div>
-                <div class="problem2-stat-badge">
-                    <h2>50km</h2>
-                </div>
-                <h6 class="problem2-card-label">distância média até ao veterinário em zonas rurais portuguesas</h6>
-            </div>
-
-            <!-- Card 4 - Right animated -->
-            <div class="problem2-card">
-                <div class="problem2-card-icon">
-                    <!-- TODO: Add lares_animais icon -->
-                    <img src="src/img/icons/lares portugueses com animais 1.svg" alt="Lares com animais" width="100" height="100" loading="lazy">
-                </div>
-                <div class="problem2-stat-badge">
-                    <h2>3.9M</h2>
-                </div>
-                <h6 class="problem2-card-label">lares portugueses com animais de companhia merecem alternativas</h6>
+            <!-- Right Column: Lottie Animation -->
+            <div class="problem2-animation">
+                <div id="problem2-lottie" class="lottie-container"></div>
             </div>
         </div>
     </section>

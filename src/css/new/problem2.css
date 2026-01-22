@@ -1,0 +1,214 @@
+/* ============================================= */
+/*              Problem2 Section                 */
+/* ============================================= */
+
+.section-wrapper {
+    background: white;
+    position: relative;
+}
+
+#problem2 {
+    background-color: #F2EFF2;
+    padding: 80px 40px;
+}
+
+.problem2-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Left Column: Content */
+.problem2-content {
+    width: 570px;
+    max-width: 600px;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.problem2-title {
+    color: var(--color-neutral-200, #525252);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 38px;
+    margin: 0;
+}
+
+.problem2-text-group {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.problem2-story {
+    color: var(--color-neutral-200, #525252);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    margin: 0;
+}
+
+.problem2-conclusion {
+    color: var(--color-neutral-200, #525252);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    margin: 0;
+}
+
+/* Cost Display - Figma Design: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2959 */
+.problem2-cost {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 8px;
+}
+
+.problem2-cost-label {
+    color: var(--color-neutral-100, #3D3D3D);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.problem2-cost-box {
+    background: var(--color-complementary-800, #FFF4E6);
+    padding: 8px 12px;
+    border-radius: 8px;
+    /* Drop shadow */
+    box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+    /* Inset shadows */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: clip;
+}
+
+.problem2-cost-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+        inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
+        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+    pointer-events: none;
+}
+
+.problem2-cost-value {
+    color: var(--color-neutral-200, #525252);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 53px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Right Column: Lottie Animation */
+.problem2-animation {
+    width: 570px;
+    height: 481px;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lottie-container {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#problem2-lottie {
+    width: 100%;
+    height: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .problem2-container {
+        gap: 40px;
+    }
+
+    .problem2-content,
+    .problem2-animation {
+        width: 100%;
+        max-width: 600px;
+    }
+
+    .problem2-animation {
+        height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    #problem2 {
+        padding: 60px 20px;
+    }
+
+    .problem2-title {
+        font-size: 40px;
+        line-height: 44px;
+    }
+
+    .problem2-story {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .problem2-conclusion {
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .problem2-cost-label {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .problem2-cost-value {
+        font-size: 36px;
+        line-height: 40px;
+    }
+
+    .problem2-animation {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .problem2-content {
+        min-width: 280px;
+    }
+
+    .problem2-title {
+        font-size: 32px;
+        line-height: 36px;
+    }
+
+    .problem2-conclusion {
+        font-size: 20px;
+        line-height: 24px;
+    }
+}

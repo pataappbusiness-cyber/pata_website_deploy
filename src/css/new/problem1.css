@@ -1,0 +1,557 @@
+/* ============================================
+   PROBLEM 1 SECTION - ESPECIFICAÇÕES TÉCNICAS FIGMA
+   Node ID: 337:2936
+   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2936&m=dev
+   ============================================ */
+
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+
+:root {
+  /* Neutrals */
+  --color-neutral-100: #3D3D3D;
+  --color-neutral-200: #525252;
+  --color-neutral-800: #D4D4D4;
+  --color-neutral-950: #FEFEFF;
+
+  /* Accent */
+  --dark-orange: #FF943D;
+
+  /* Price Display */
+  --price-dark-grey: #272727;
+}
+
+/* ============================================
+   MAIN SECTION
+   ============================================ */
+
+.problem1-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: white;
+  box-shadow: inset 0px -14px 52.9px 0px rgba(0, 0, 0, 0.25);
+  min-height: 800px;
+}
+
+/* ============================================
+   LEFT PANEL - Traditional Vet (Grey/Dark)
+   ============================================ */
+
+.left-panel {
+  flex: 1 0 0;
+  align-self: stretch;
+  min-height: 800px;
+  padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  min-width: 1px;
+}
+
+/* Background Container - Fills entire panel */
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Overlays - Left Panel */
+.overlay-saturation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  mix-blend-mode: saturation;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overlay-dark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  mix-blend-mode: multiply;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Price Card Grey */
+.price-card-grey {
+  /* Container */
+  width: 100%;
+  max-width: 400px;
+  min-width: 280px;
+  min-height: 142px;
+
+  /* Styling */
+  background: rgba(212, 212, 212, 0.9);
+  border: 0.5px solid #D4D4D4;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+
+  /* Overflow */
+  overflow: hidden;
+
+  /* Position */
+  position: relative;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+/* Card Content Container */
+.price-card-grey .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Typography - Left Panel */
+.left-panel h3 {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700; /* Bold */
+  line-height: 36px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #3D3D3D; /* color-neutral/100 */
+
+  /* Layout */
+  text-align: center;
+  width: 100%;
+
+  /* Display */
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.left-panel .price {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 52px;
+  font-weight: 700; /* Bold */
+  line-height: 38px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #272727; /* Darker grey for emphasis */
+
+  /* Layout */
+  text-align: center;
+  width: 230px;
+
+  /* Display */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.left-panel .source {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.left-panel .source p {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600; /* SemiBold */
+  line-height: 20px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #525252; /* color-neutral/200 */
+
+  /* Layout */
+  text-align: center;
+  margin: 0;
+}
+
+.left-panel .source a {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600; /* SemiBold */
+  line-height: 16px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #525252;
+
+  /* Decoration - Thin underline */
+  text-decoration: underline;
+  text-decoration-thickness: 0.5px;
+  text-decoration-skip-ink: none;
+
+  /* Display */
+  display: block;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* ============================================
+   RIGHT PANEL - PATA Solution (Orange/Warm)
+   ============================================ */
+
+.right-panel {
+  flex: 1 0 0;
+  align-self: stretch;
+  min-height: 800px;
+  padding: 40px 0;
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  min-width: 1px;
+}
+
+/* Background Overlay - Orange */
+.right-panel .overlay-orange {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(255, 148, 61, 0.15) 0%,
+    rgba(255, 148, 61, 0.15) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Price Card Orange */
+.price-card-orange {
+  /* Container */
+  width: 100%;
+  max-width: 443px;
+  min-width: 440px;
+  min-height: 142px;
+
+  /* Complex Background Gradient */
+  background-image:
+    linear-gradient(180deg,
+      rgba(255, 180, 119, 0.2) 0%,
+      rgba(255, 148, 61, 0.2) 100%),
+    linear-gradient(90deg,
+      rgba(255, 210, 173, 0.9) 0%,
+      rgba(255, 210, 173, 0.9) 100%);
+
+  /* Border */
+  border-top: 1px solid rgba(254, 254, 255, 0.5);
+  border-radius: 16px;
+
+  /* Shadow */
+  box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 24px;
+
+  /* Overflow */
+  overflow: hidden;
+
+  /* Position */
+  position: relative;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+/* Inner Shadows (Button-Solid/Active Effect) */
+.price-card-orange .inner-shadows {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+
+  box-shadow:
+    inset 0px -2px 4px 0px #FF9B4A,
+    inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+}
+
+/* Card Content Container */
+.price-card-orange .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+/* Typography - Right Panel */
+.right-panel h3 {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 32px;
+  font-weight: 700; /* Bold */
+  line-height: 36px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #3D3D3D; /* color-neutral/100 */
+
+  /* Layout */
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+.right-panel .price {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 52px;
+  font-weight: 700; /* Bold */
+  line-height: 38px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #3D3D3D;
+
+  /* Layout */
+  text-align: center;
+  width: 230px;
+}
+
+.right-panel .benefits {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 600; /* SemiBold */
+  line-height: 20px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #525252; /* color-neutral/200 */
+
+  /* Layout */
+  text-align: center;
+  width: 100%;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* Info Box (White Card Inside Orange Card) */
+.info-box {
+  /* Container */
+  width: 100%;
+  max-width: 400px;
+  min-width: 280px;
+
+  /* Styling */
+  background: #FEFEFF; /* color-neutral/950 */
+  border: 0.5px solid #D4D4D4;
+  border-radius: 8px;
+
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+
+  /* Overflow */
+  overflow: hidden;
+
+  /* Position */
+  position: relative;
+  flex-shrink: 0;
+}
+
+.info-box h4 {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600; /* SemiBold */
+  line-height: 28px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: var(--dark-orange, #FF943D);
+
+  /* Layout */
+  text-align: center;
+  width: 100%;
+
+  /* Display */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
+.info-box p {
+  /* Font */
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600; /* SemiBold */
+  line-height: 16px;
+  letter-spacing: 0;
+
+  /* Color */
+  color: #525252; /* color-neutral/200 */
+
+  /* Layout */
+  text-align: center;
+  width: 100%;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE BEHAVIOR
+   ============================================ */
+
+/* Desktop: Side-by-side (default - already defined above) */
+@media (min-width: 768px) {
+  .problem1-section {
+    flex-direction: row;
+  }
+
+  .left-panel,
+  .right-panel {
+    flex: 1 0 0;
+  }
+}
+
+/* Tablet Adjustments */
+@media (max-width: 1024px) {
+  .left-panel h3,
+  .right-panel h3 {
+    font-size: 28px;
+    line-height: 32px;
+  }
+
+  .left-panel .price,
+  .right-panel .price {
+    font-size: 48px;
+    line-height: 36px;
+  }
+
+  .price-card-orange {
+    min-width: 380px;
+  }
+}
+
+/* Mobile: Stacked */
+@media (max-width: 767px) {
+  .problem1-section {
+    flex-direction: column;
+    min-height: 1600px; /* 800px x 2 panels */
+  }
+
+  .left-panel,
+  .right-panel {
+    flex: none;
+    width: 100%;
+    min-height: 800px;
+  }
+
+  /* Adjust card widths for mobile */
+  .price-card-grey,
+  .price-card-orange {
+    max-width: 90%;
+    min-width: 280px;
+  }
+
+  /* Allow orange card to be flexible on mobile */
+  .price-card-orange {
+    min-width: 280px; /* Override 440px desktop min-width */
+  }
+
+  /* Typography Responsive */
+  .left-panel h3,
+  .right-panel h3 {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  .left-panel .price,
+  .right-panel .price {
+    font-size: 42px;
+    line-height: 32px;
+  }
+
+  .right-panel .benefits,
+  .left-panel .source p {
+    font-size: 16px;
+    line-height: 18px;
+  }
+
+  .info-box h4 {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .info-box p,
+  .left-panel .source a {
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   Z-INDEX LAYERS
+   ============================================ */
+
+/* Ensure proper layering:
+   z-index: 0 → Video background
+   z-index: 1 → Overlays
+   z-index: 2 → Price cards
+*/

@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+
+    <!-- Primary Meta Tags -->
+    <title>PATA - Veterinária Online 24/7 | Telemedicina Veterinária em Portugal</title>
+    <meta name="title" content="PATA - Veterinária Online 24/7 | Telemedicina Veterinária em Portugal">
+    <meta name="description" content="Acesso a veterinários licenciados em menos de 60 segundos. Consultas online, IA inteligente, farmácia veterinária. Cuide do seu cão ou gato 24/7 sem sair de casa.">
+    <meta name="keywords" content="veterinário online, telemedicina veterinária, consulta veterinária, cuidados animais, vet online portugal">
+    <link rel="canonical" href="https://pata.care/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://pata.care/">
+    <meta property="og:title" content="PATA - Veterinária Online 24/7 | Telemedicina Veterinária">
+    <meta property="og:description" content="Acesso a veterinários licenciados em menos de 60 segundos. Cuide do seu patudo 24/7.">
+    <meta property="og:image" content="https://pata.care/metadata/facebook/facebook-min.jpg">
+    <meta property="og:locale" content="pt_PT">
+    <meta property="og:site_name" content="PATA">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://pata.care/">
+    <meta property="twitter:title" content="PATA - Veterinária Online 24/7">
+    <meta property="twitter:description" content="Acesso a veterinários licenciados em menos de 60 segundos.">
+    <meta property="twitter:image" content="https://pata.care/metadata/twitter/twitter-min.jpg">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="./src/img/icons/logo.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="./src/img/icons/32_logo.svg">
+    <link rel="icon" type="image/png" sizes="16x16" href="/src/img/icons/16_logo.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/img/icons/apple-touch-pata.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VeterinaryCare",
+        "name": "PATA",
+        "description": "Telemedicina veterinária 24/7 em Portugal",
+        "url": "https://pata.pt",
+        "logo": "https://pata.pt/src/img/icons/logo_signature.svg",
+        "telephone": "+351-XXX-XXX-XXX",
+        "email": "ola@pata.pt",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "PT"
+        },
+        "sameAs": [
+            "https://www.instagram.com/pata_care/",
+            "https://www.facebook.com/profile.php?id=61583374457894",
+            "https://www.linkedin.com/company/pata-care",
+            "https://www.tiktok.com/@pataapp0"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "description": "Consulta veterinária de urgência online",
+            "price": "10.99",
+            "priceCurrency": "EUR"
+        }
+    }
+    </script>
+
+    <!-- Resource Hints for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Google Fonts - Mona Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+
+    <!-- Lottie Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="./src/css/new/global.css">
+    <link rel="stylesheet" href="./src/css/new/sections.css">
+    <link rel="stylesheet" href="./src/css/new/problem1.css">
+    <link rel="stylesheet" href="./src/css/new/problem2.css">
+    <link rel="stylesheet" href="./src/css/new/problem3.css">
+
+    <!-- Critical CSS Inline (Navbar) -->
+    <style>
+        /* Navbar Critical CSS */
+        :root {
+            --z-sticky: 1000;
+            --transition-fast: 0.2s ease;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: var(--z-sticky);
+            padding: 24px 84px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-menu-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-height: 1px;
+            background: rgba(254, 254, 255, 0.9);
+            backdrop-filter: blur(35px) saturate(180%);
+            -webkit-backdrop-filter: blur(35px) saturate(180%);
+            border: 0.25px solid #F2EFF2;
+            border-radius: 16px;
+            box-shadow: 0px 0px 15px 0px rgba(255, 155, 74, 0.1);
+        }
+
+        .navbar-logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            z-index: 1001;
+        }
+
+        .navbar-logo {
+            width: 95px;
+            height: 32px;
+            object-fit: contain;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .navbar-link {
+            font-family: 'Mona Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 16px;
+            color: #3D3D3D;
+            text-decoration: none;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .navbar-link:hover {
+            color: #FF943D;
+        }
+
+        .navbar-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #FF943D;
+            transition: width 0.3s ease;
+        }
+
+        .navbar-link:hover::after {
+            width: 100%;
+        }
+
+        .navbar-buttons {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .navbar-cta-button {
+            background: #FFB477;
+            border: 0.5px solid #FFA45B;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            padding: 0 12px;
+            height: 40px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
+        }
+
+        .navbar-cta-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            box-shadow:
+                inset 0px -2px 4px 0px #FF9B4A,
+                inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+            pointer-events: none;
+        }
+
+        .navbar-cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 12px 0px rgba(255, 180, 119, 0.25);
+        }
+
+        .navbar-cta-button span {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 1.1;
+            color: #272727;
+            font-family: 'Mona Sans', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar-cta-mobile {
+            display: none;
+        }
+
+        .navbar-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .navbar-toggle span {
+            width: 24px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.90);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 1024px) {
+            .navbar-menu-container {
+                padding: 0 32px;
+            }
+
+            .navbar-links {
+                gap: 24px;
+            }
+
+            .navbar-link {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 0;
+            }
+
+            .navbar-menu-container {
+                padding: 0 24px;
+            }
+
+            .navbar-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                padding: 80px 40px;
+                gap: 32px;
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-left: 1px solid rgba(255, 255, 255, 0.10);
+            }
+
+            .navbar-links.active {
+                right: 0;
+            }
+
+            .navbar-link {
+                font-size: 18px;
+                width: 100%;
+                color: #FFFFFF;
+            }
+
+            .navbar-cta-mobile {
+                display: flex;
+                width: 100%;
+                margin-top: 24px;
+            }
+
+            .navbar-buttons {
+                display: none;
+            }
+
+            .navbar-toggle {
+                display: flex;
+            }
+
+            .navbar-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+
+            .navbar-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .navbar-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- NAVBAR (Preserved from existing site) -->
+    <header class="navbar" data-name="navigation-bar">
+        <div class="navbar-menu-container">
+            <!-- Logo -->
+            <a href="#hero" class="navbar-logo-link">
+                <img src="src/img/icons/logo_signature.svg" alt="PATA Logo" class="navbar-logo">
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="navbar-links" id="navbar-links">
+                <a href="#problems" class="navbar-link">Problema</a>
+                <a href="#solution" class="navbar-link">Solução</a>
+                <a href="#join-us" class="navbar-link">Junte-se a nós</a>
+                <!-- Mobile CTA Button -->
+                <button class="navbar-cta-button navbar-cta-mobile">
+                    <span>Contactar</span>
+                </button>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="navbar-buttons">
+                <button class="navbar-cta-button">
+                    <span>Contactar</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="navbar-toggle" id="navbarToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+
+        <!-- ============================================
+             SECTION 1: HEADER (HOME) - 100vh
+             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2915
+             ============================================ -->
+        <section id="hero" class="header-section">
+
+            <!-- Liquid Gradient Animated Background -->
+            <div class="liquid-gradient-bg" aria-hidden="true"></div>
+
+            <!-- 🆕 NOVO: Mouse Highlight Layer -->
+            <div class="mouse-highlight" aria-hidden="true"></div>
+
+            <!-- Main Container -->
+            <div class="header-container">
+
+                <!-- 1. TÍTULO NO TOPO (Primeiro Elemento) -->
+                <div class="header-content">
+                    <div class="header-launch">Lançamento: 2026</div>
+                    <h1 class="header-title">
+                        <span class="header-title-white">
+                            São três da manhã.<br>
+                            O seu patudo não está bem.<br>
+                        </span>
+                        <span class="header-title-orange">E agora?</span>
+                    </h1>
+                </div>
+
+                <!-- 2. VISUAL CONTAINER (Segundo Elemento) -->
+                <div class="header-visual-container">
+
+                    <!-- Pills Esquerda -->
+                    <div class="visual-pills-left">
+                        <!-- Pill 1 - Superior Esquerda (Cão com médico) -->
+                        <div class="image-pill pill-left-top" data-parallax="0.3">
+                            <img
+                                src="./src/img/new_images/cao_medico.png"
+                                alt="Cão com médico veterinário"
+                                class="pill-image"
+                                loading="lazy">
+                            <div class="pill-inner-shadow"></div>
+                        </div>
+
+                        <!-- Pill 2 - Inferior Esquerda (Veterinário) -->
+                        <div class="image-pill pill-left-bottom" data-parallax="0.5">
+                            <img
+                                src="./src/img/new_images/vet.png"
+                                alt="Veterinário profissional"
+                                class="pill-image"
+                                loading="lazy">
+                            <div class="pill-inner-shadow"></div>
+                        </div>
+                    </div>
+
+                    <!-- Mockup Central -->
+                    <div class="mockup-center" data-parallax="0.2">
+                        <img
+                            src="./src/img/new_images/mockup.png"
+                            alt="PATA App"
+                            class="mockup-image"
+                            loading="eager">
+                    </div>
+
+                    <!-- Pills Direita -->
+                    <div class="visual-pills-right">
+                        <!-- Pill 3 - Superior Direita (Cão feliz) -->
+                        <div class="image-pill pill-right-top" data-parallax="0.4">
+                            <img
+                                src="./src/img/new_images/cao.png"
+                                alt="Cão feliz"
+                                class="pill-image"
+                                loading="lazy">
+                            <div class="pill-inner-shadow"></div>
+                        </div>
+
+                        <!-- Pill 4 - Inferior Direita (Gatinho) -->
+                        <div class="image-pill pill-right-bottom" data-parallax="0.6">
+                            <img
+                                src="./src/img/new_images/gatinho.png"
+                                alt="Gatinho adorável"
+                                class="pill-image"
+                                loading="lazy">
+                            <div class="pill-inner-shadow"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ============================================
+             SECTION 2: PROBLEM1 (PROBLEMA) - Two Panel Comparison
+             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2936&m=dev
+             ============================================ -->
+        <section id="problem1" class="problem1-section">
+
+            <!-- LEFT PANEL - Traditional Vet (Grey/Dark) -->
+            <div class="left-panel">
+                <!-- Background Video + Overlays -->
+                <div class="background-container">
+                    <video
+                        class="background-video"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        data-lazy-video>
+                        <source data-src="./src/img/videos/problem1_video1.mp4" type="video/mp4">
+                    </video>
+                    <div class="overlay-saturation"></div>
+                    <div class="overlay-dark"></div>
+                </div>
+
+                <!-- Price Card -->
+                <div class="price-card-grey">
+                    <div class="card-content">
+                        <h3>Neste momento, uma urgência veterinária noturna custa:</h3>
+                        <div class="price">€70,90</div>
+                    </div>
+                    <div class="source">
+                        <p>Preço urgência noturna:</p>
+                        <a
+                            href="https://www.veterinaria-atual.pt/destaques/quais-os-precos-medios-dos-servicos-veterinarios-em-portugal/"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            VetBizz Consulting / Veterinária Atual, 2024
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL - PATA Solution (Orange/Warm) -->
+            <div class="right-panel">
+                <!-- Background Video + Orange Overlay -->
+                <div class="background-container">
+                    <video
+                        class="background-video"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        data-lazy-video>
+                        <source data-src="./src/img/videos/problem1_video2.mp4" type="video/mp4">
+                    </video>
+                    <div class="overlay-orange"></div>
+                </div>
+
+                <!-- Price Card -->
+                <div class="price-card-orange">
+                    <div class="card-content">
+                        <h3>Com PATA</h3>
+                        <div class="price">€10,99</div>
+                    </div>
+
+                    <p class="benefits">Sem sair do sofá.<br>Sem acordar a família.<br>Sem filas de espera.<br>Veterinário licenciado em videochamada.<br>Em 60 segundos.</p>
+
+                    <div class="info-box">
+                        <h4>Porquê tão mais barato?</h4>
+                        <p>Sem instalações físicas. Sem rececionistas. Sem salas de espera. Só pagamos veterinários — e eles recebem mais do que em clínica.</p>
+                    </div>
+
+                    <!-- Inner Shadows -->
+                    <div class="inner-shadows"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================================
+             SECTION 3: PROBLEM2 - 85vh
+             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2953&m=dev
+             ============================================ -->
+        <section id="problem2" class="problem2-section">
+
+            <!-- Container Principal -->
+            <div class="problem2-container">
+
+                <!-- Lado Esquerdo: Lottie Animation -->
+                <div class="problem2-visual">
+                    <!-- Lottie Animation Container -->
+                    <!-- Lottie URL: https://lottie.host/c4616add-375a-4af6-89ab-542e9d891567/Ln5f5XoscU.lottie -->
+                    <div id="lottie-problem2" class="lottie-container"></div>
+                </div>
+
+                <!-- Lado Direito: Conteúdo -->
+                <div class="problem2-content">
+
+                    <!-- Título Principal -->
+                    <h1 class="problem2-title">Imagine isto:</h1>
+
+                    <!-- História Narrativa -->
+                    <p class="problem2-story">
+                        São 3h da manhã. O Max vomitou duas vezes. Abre a app PATA.
+                        <br><br>
+                        Em 47 segundos, está em videochamada com a Dra. Ana. Ela vê o Max,
+                        faz perguntas, acalma-o: "É indigestão. Vou receitar um protetor gástrico.
+                        Amanhã estará bem." A receita chega ao email em segundos. A app mostra
+                        a farmácia mais próxima que abre às 9h. De manhã, avias em 2 minutos.
+                    </p>
+
+                    <!-- Conclusão -->
+                    <h3 class="problem2-conclusion">Volta a dormir. O Max também.</h3>
+
+                    <!-- Cartão de Custo -->
+                    <div class="cost-card">
+                        <h4 class="cost-label">Custo total:</h4>
+                        <h2 class="cost-value">€187</h2>
+                        <h4 class="cost-label-bottom">da consulta.</h4>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ============================================= -->
+        <!--                  Problem 3                    -->
+        <!-- ============================================= -->
+
+        <section id="problem3" class="section-wrapper">
+            <div class="problem3-container">
+
+                <!-- Left Column: Header Content -->
+                <div class="problem3-header">
+                    <!-- Cat Icon + Title -->
+                    <div class="problem3-title-wrapper">
+                        <!-- Cat SVG Icon -->
+                        <div class="problem3-cat-icon">
+                            <svg width="154" height="125" viewBox="0 0 154 125" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Cat tail -->
+                                <rect x="117.2" y="21.88" width="37.75" height="44.36" fill="#3D3D3D" stroke="#3D3D3D" stroke-width="4" transform="rotate(24 117.2 21.88)"/>
+                                <!-- Left eye -->
+                                <ellipse cx="85.21" cy="32.42" rx="3.76" ry="4.62" fill="#3D3D3D"/>
+                                <!-- Right eye -->
+                                <ellipse cx="66.01" cy="32.42" rx="3.69" ry="4.62" fill="#3D3D3D"/>
+                                <!-- Nose -->
+                                <path d="M63.88 41.11H87.93V49.05H63.88V41.11Z" fill="#3D3D3D"/>
+                                <!-- Body -->
+                                <rect x="22.68" y="3.41" width="87.52" height="117.93" rx="20" fill="#3D3D3D"/>
+                            </svg>
+                        </div>
+
+                        <!-- Title Text -->
+                        <div class="problem3-title-text">
+                            <h2 class="problem3-title-main">
+                                <span class="problem3-title-orange">2 milhões</span>
+                                <br>
+                                <span class="problem3-title-regular">de lares portugueses</span>
+                                <br>
+                                <span class="problem3-title-regular">amam um </span>
+                                <span class="problem3-title-orange">animal</span>
+                            </h2>
+                        </div>
+                    </div>
+
+                    <!-- Subtitle & Description -->
+                    <div class="problem3-text-group">
+                        <h4 class="problem3-subtitle">
+                            Mas amar não paga consultas. E quando a emergência acontece às 3h da manhã, o amor não responde ao telefone.
+                        </h4>
+
+                        <p class="problem3-description">
+                            Estes números não são estatísticas.<br>
+                            São noites mal dormidas. São decisões impossíveis.<br>
+                            São histórias que acontecem todos os dias.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Column: Statistics Cards -->
+                <div class="problem3-stats">
+
+                    <!-- Card 1: Custo Urgência -->
+                    <div class="problem3-stat-card">
+                        <!-- Clock Icon -->
+                        <div class="problem3-stat-icon">
+                            <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M27 1C12.64 1 1 12.64 1 27C1 41.36 12.64 53 27 53C41.36 53 53 41.36 53 27C53 12.64 41.36 1 27 1ZM27 48C15.42 48 6 38.58 6 27C6 15.42 15.42 6 27 6C38.58 6 48 15.42 48 27C48 38.58 38.58 48 27 48ZM28 14H24V29L37 37L39 33.5L28 27V14Z" fill="#3D3D3D"/>
+                            </svg>
+                        </div>
+
+                        <div class="problem3-stat-value-box">
+                            <h2 class="problem3-stat-value">€70,90</h2>
+                        </div>
+
+                        <div class="problem3-stat-info">
+                            <h6 class="problem3-stat-label">
+                                Custo médio de urgência<br>
+                                veterinária noturna
+                            </h6>
+                            <a href="https://www.veterinaria-atual.pt/destaques/quais-os-precos-medios-dos-servicos-veterinarios-em-portugal/"
+                               target="_blank"
+                               class="problem3-stat-source">
+                                VetBizz, 2024
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Custo Emergência -->
+                    <div class="problem3-stat-card">
+                        <!-- Notes Icon -->
+                        <div class="problem3-stat-icon">
+                            <svg width="54" height="54" viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M42 1H12C6.48 1 2 5.48 2 11V43C2 48.52 6.48 53 12 53H42C47.52 53 52 48.52 52 43V11C52 5.48 47.52 1 42 1ZM42 43H12V11H42V43ZM17 18H37V23H17V18ZM17 28H37V33H17V28Z" fill="#3D3D3D"/>
+                            </svg>
+                        </div>
+
+                        <div class="problem3-stat-value-box">
+                            <h2 class="problem3-stat-value">€300-400</h2>
+                        </div>
+
+                        <div class="problem3-stat-info">
+                            <h6 class="problem3-stat-label">
+                                Custo médio de um caso de emergência completo
+                            </h6>
+                            <a href="https://www.generalitranquilidade.pt/blog/familia/preco-consulta-veterinario"
+                               target="_blank"
+                               class="problem3-stat-source">
+                                Generali
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Lares com Animais -->
+                    <div class="problem3-stat-card">
+                        <!-- Car Icon -->
+                        <div class="problem3-stat-icon">
+                            <svg width="64" height="54" viewBox="0 0 64 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M54.92 9H47.08L41 9.67V15.33L8.92 15.33C4.92 15.33 1.08 18.33 1.08 23V38.33C1.08 42 4 45 7.67 45H10C10 49.42 13.58 53 18 53C22.42 53 26 49.42 26 45H38C38 49.42 41.58 53 46 53C50.42 53 54 49.42 54 45H56.33C60 45 62.92 42 62.92 38.33V23C62.92 15 58.92 9 54.92 9ZM18 48C16.34 48 15 46.66 15 45C15 43.34 16.34 42 18 42C19.66 42 21 43.34 21 45C21 46.66 19.66 48 18 48ZM46 48C44.34 48 43 46.66 43 45C43 43.34 44.34 42 46 42C47.66 42 49 43.34 49 45C49 46.66 47.66 48 46 48ZM54.92 30H41V15H54.92V30Z" fill="#3D3D3D"/>
+                            </svg>
+                        </div>
+
+                        <div class="problem3-stat-value-box">
+                            <h2 class="problem3-stat-value">54%</h2>
+                        </div>
+
+                        <div class="problem3-stat-info">
+                            <h6 class="problem3-stat-label">
+                                Dos lares portugueses têm animais — 6,7 milhões de patudos
+                            </h6>
+                            <a href="https://www.veterinaria-atual.pt/na-clinica/portugal-tem-67-milhoes-de-animais-de-estimacao/"
+                               target="_blank"
+                               class="problem3-stat-source">
+                                Vet. Atual
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Text (Mobile/Tablet) -->
+                    <h4 class="problem3-stats-footer">
+                        Estes números não são estatísticas.<br>
+                        São noites mal dormidas. São decisões impossíveis.<br>
+                        São histórias que acontecem todos os dias.
+                    </h4>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ============================================
+         DRAGGABLE ELEMENT (Fixed during scroll)
+         Reference: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2626&m=dev
+         ============================================ -->
+    <div class="draggable-element" id="draggableElement">
+        <img src="src/img/icons/BONE.svg" alt="Brinca comigo" width="64" height="64" loading="lazy">
+    </div>
+
+    <!-- JavaScript -->
+    <script src="./src/js/new/main.js"></script>
+
+</body>
+</html>
