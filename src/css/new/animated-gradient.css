@@ -1,0 +1,52 @@
+/* ============================================
+   ANIMATED GRADIENT BACKGROUND
+   Global background animation for sections
+   ============================================ */
+
+.animated-gradient {
+    background: linear-gradient(90deg, #FFF8F2 0%, #ffe5d0 100%);
+    background-size: 200% 200%;
+    animation: animated-gradient-flow 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    position: relative;
+}
+
+/* White overlay to soften the gradient */
+.animated-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Ensure content appears above the overlay */
+.animated-gradient > * {
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes animated-gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/*
+   NOTE: Sections with videos or custom gradients should NOT have
+   the "animated-gradient" class applied in the HTML:
+   - header-section (has liquid shader)
+   - problem1-section (has video backgrounds)
+   - solution1-section (has video backgrounds)
+   - solution4-section (has custom gradient/background)
+   - joinus1-section (has custom gradient/background)
+*/

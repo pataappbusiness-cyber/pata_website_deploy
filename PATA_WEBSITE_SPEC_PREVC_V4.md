@@ -2,6 +2,7 @@
 
 **Versão:** 4.0 - PREVC Workflow  
 **Data:** 20 Janeiro 2026  
+
 **Responsável:** CTO Claude  
 **Executor:** Claude Code  
 **Verificador:** Diogo (Humano)  

@@ -1,15 +1,15 @@
 /* ============================================= */
 /*              Problem2 Section                 */
+/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-2618&m=dev */
 /* ============================================= */
-
-.section-wrapper {
-    background: #FFF8F2;
-    position: relative;
-}
 
 #problem2 {
     background-color: #FFF8F2;
-    padding: 80px 40px;
+    padding: 40px;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .problem2-container {
@@ -30,6 +30,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    flex: 1 0 0;
 }
 
 .problem2-title {
@@ -54,6 +55,7 @@
     font-weight: 400;
     line-height: 22px;
     margin: 0;
+    white-space: pre-wrap;
 }
 
 .problem2-conclusion {
@@ -65,7 +67,7 @@
     margin: 0;
 }
 
-/* Cost Display - Figma Design: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2959 */
+/* Cost Display - Figma Design */
 .problem2-cost {
     display: flex;
     flex-direction: column;
@@ -134,15 +136,9 @@
     align-items: center;
 }
 
-.lottie-container {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-#problem2-lottie {
-    width: 100%;
-    height: 100%;
+.problem2-animation dotlottie-wc {
+    max-width: 100%;
+    height: auto;
 }
 
 /* Responsive Design */
@@ -159,6 +155,13 @@
 
     .problem2-animation {
         height: 400px;
+        max-width: 100%;
+    }
+
+    .problem2-animation dotlottie-wc {
+        width: 474px !important;
+        height: 400px !important;
+        max-width: 100%;
     }
 }
 
@@ -194,6 +197,13 @@
 
     .problem2-animation {
         height: 300px;
+        max-width: 100%;
+    }
+
+    .problem2-animation dotlottie-wc {
+        width: 355px !important;
+        height: 300px !important;
+        max-width: 100%;
     }
 }
 

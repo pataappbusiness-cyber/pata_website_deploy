@@ -1,10 +1,17 @@
 /* ============================================= */
 /*              Problem3 Section                 */
+/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-2633&m=dev */
 /* ============================================= */
 
 #problem3 {
     background-color: #FFF8F2;
-    padding: 40px 48px;
+    padding: 40px 40px 80px 40px;
+    height: 85vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .problem3-container {
@@ -16,26 +23,32 @@
     justify-content: center;
 }
 
-/* ===== LEFT COLUMN: HEADER ===== */
+/* Left Column: Header Content */
 .problem3-header {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    min-width: 300px;
+    align-items: flex-start;
+    flex: 1 0 0;
+    min-width: 0;
 }
 
-/* Title Wrapper */
+/* Cat Icon + Title Wrapper */
 .problem3-title-wrapper {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    width: 100%;
 }
 
 .problem3-cat-icon {
     width: 154px;
     height: 125px;
     flex-shrink: 0;
+    overflow: clip;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .problem3-cat-icon svg {
@@ -43,39 +56,41 @@
     height: 100%;
 }
 
-/* Title Text */
+.problem3-cat-icon dotlottie-wc {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
 .problem3-title-text {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex: 1 0 0;
+    min-width: 0;
 }
 
 .problem3-title-main {
-    margin: 0;
-    font-family: 'Mona Sans', sans-serif;
-    font-weight: 700;
-    line-height: 1;
-}
-
-.problem3-title-main .problem3-title-orange {
-    color: var(--dark-orange, #FF943D);
-    font-size: 52px;
-    line-height: 38px;
-}
-
-.problem3-title-main .problem3-title-regular {
     color: var(--color-neutral-100, #3D3D3D);
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 38px;
+    margin: 0;
+}
+
+.problem3-title-orange {
+    color: var(--color-primary-500, #FF943D);
+}
+
+.problem3-title-regular {
     font-size: 32px;
     line-height: 36px;
 }
 
-/* Text Group */
+/* Subtitle & Description */
 .problem3-text-group {
-    padding-left: 18px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+    padding-left: 18px;
 }
 
 .problem3-subtitle {
@@ -84,8 +99,9 @@
     font-size: 24px;
     font-weight: 600;
     line-height: 28px;
-    max-width: 478px;
     margin: 0;
+    max-width: 478px;
+    white-space: pre-wrap;
 }
 
 .problem3-description {
@@ -97,23 +113,20 @@
     margin: 0;
 }
 
-/* ===== RIGHT COLUMN: STATISTICS CARDS ===== */
+/* Right Column: Statistics Cards */
 .problem3-stats {
-    flex: 1;
-    max-width: 1000px;
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
-    justify-content: center;
     align-items: flex-start;
-    align-content: flex-start;
+    justify-content: center;
+    flex: 1 0 0;
+    max-width: 1000px;
+    min-width: 0;
 }
 
-/* Individual Stat Card */
+/* Statistics Card */
 .problem3-stat-card {
-    flex: 1 1 0;
-    min-width: 200px;
-    max-width: 300px;
     background: var(--color-neutral-950, #FEFEFF);
     border: 0.5px solid var(--color-neutral-800, #D4D4D4);
     border-radius: 16px;
@@ -122,12 +135,15 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    box-shadow: 0px 4px 8px rgba(255, 180, 119, 0.15);
+    flex: 1 0 0;
+    max-width: 300px;
+    min-width: 200px;
+    /* Drop shadow */
+    box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
     position: relative;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Card Hover Effect - Subtle Inner Glow */
 .problem3-stat-card::after {
     content: '';
     position: absolute;
@@ -135,17 +151,16 @@
     border-radius: inherit;
     box-shadow:
         inset 0px -2px 4px 0px #FF9B4A,
-        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+        inset 0px 0px 2px 0px rgba(255, 213, 179, 0.6);
     pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
-.problem3-stat-card:hover::after {
-    opacity: 1;
+.problem3-stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 8px 16px rgba(255, 180, 119, 0.25);
 }
 
-/* Stat Icon */
+/* Icon */
 .problem3-stat-icon {
     width: 54px;
     height: 54px;
@@ -153,25 +168,34 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: clip;
 }
 
-.problem3-stat-icon svg {
+.problem3-stat-icon img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: contain;
 }
 
-/* Stat Value Box */
+/* Value Box */
 .problem3-stat-value-box {
     background: var(--color-complementary-800, #FFF4E6);
     padding: 4px 12px;
     border-radius: 8px;
+    box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
+    position: relative;
+    overflow: clip;
+}
+
+.problem3-stat-value-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
     box-shadow:
-        0px 4px 8px rgba(255, 180, 119, 0.25),
         inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    pointer-events: none;
 }
 
 .problem3-stat-value {
@@ -184,9 +208,8 @@
     margin: 0;
 }
 
-/* Stat Info */
+/* Info */
 .problem3-stat-info {
-    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -200,6 +223,8 @@
     font-weight: 700;
     line-height: 24px;
     margin: 0;
+    white-space: pre-wrap;
+    text-align: center;
 }
 
 .problem3-stat-source {
@@ -209,18 +234,18 @@
     font-weight: 600;
     line-height: 16px;
     text-decoration: underline;
+    text-decoration-skip-ink: none;
     cursor: pointer;
-    transition: color 0.2s ease;
+    transition: opacity 0.2s ease;
 }
 
 .problem3-stat-source:hover {
-    color: var(--dark-orange, #FF943D);
+    opacity: 0.7;
 }
 
-/* Stats Footer Text */
+/* Footer Text (Mobile/Tablet Only) */
 .problem3-stats-footer {
-    width: 100%;
-    max-width: 478px;
+    display: none;
     color: var(--color-neutral-200, #525252);
     font-family: 'Mona Sans', sans-serif;
     font-size: 18px;
@@ -228,32 +253,11 @@
     line-height: 20px;
     text-align: center;
     margin: 0;
-    display: none;
+    width: 100%;
+    max-width: 478px;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-
-/* Large Tablets & Small Desktops (1024px - 1200px) */
-@media (max-width: 1200px) {
-    .problem3-container {
-        gap: 30px;
-    }
-
-    .problem3-title-main .problem3-title-orange {
-        font-size: 44px;
-        line-height: 42px;
-    }
-
-    .problem3-title-main .problem3-title-regular {
-        font-size: 28px;
-        line-height: 32px;
-    }
-
-    .problem3-subtitle {
-        font-size: 22px;
-        line-height: 26px;
-    }
-}
 
 /* Tablets (768px - 1024px) */
 @media (max-width: 1024px) {
@@ -263,37 +267,57 @@
 
     .problem3-container {
         flex-direction: column;
-        gap: 40px;
+        gap: 32px;
     }
 
-    .problem3-header,
-    .problem3-stats {
-        max-width: 100%;
-        width: 100%;
+    .problem3-title-main {
+        font-size: 40px;
+    }
+
+    .problem3-title-regular {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .problem3-subtitle {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .problem3-description {
+        font-size: 16px;
+        line-height: 20px;
     }
 
     .problem3-stats {
+        flex-direction: row;
         justify-content: center;
     }
 
     .problem3-stat-card {
-        flex: 1 1 calc(33.333% - 18px);
-        min-width: 220px;
-    }
-
-    .problem3-description {
-        display: none;
-    }
-
-    .problem3-stats-footer {
-        display: block;
+        flex: 0 1 calc(50% - 9px);
+        min-width: 200px;
     }
 }
 
-/* Mobile Landscape & Small Tablets (600px - 768px) */
+/* Mobile (< 768px) */
 @media (max-width: 768px) {
     #problem3 {
         padding: 40px 20px;
+    }
+
+    .problem3-container {
+        gap: 24px;
+    }
+
+    .problem3-cat-icon {
+        width: 123px;
+        height: 100px;
+    }
+
+    .problem3-cat-icon dotlottie-wc {
+        width: 123px !important;
+        height: 100px !important;
     }
 
     .problem3-title-wrapper {
@@ -302,119 +326,93 @@
         text-align: center;
     }
 
-    .problem3-cat-icon {
-        width: 120px;
-        height: 100px;
+    .problem3-title-text {
+        width: 100%;
     }
 
-    .problem3-title-main .problem3-title-orange {
-        font-size: 36px;
-        line-height: 38px;
+    .problem3-title-main {
+        font-size: 32px;
+        line-height: 36px;
     }
 
-    .problem3-title-main .problem3-title-regular {
+    .problem3-title-regular {
         font-size: 24px;
         line-height: 28px;
     }
 
     .problem3-text-group {
         padding-left: 0;
+        align-items: center;
         text-align: center;
     }
 
     .problem3-subtitle {
-        font-size: 20px;
-        line-height: 24px;
-        max-width: 100%;
+        font-size: 18px;
+        line-height: 22px;
     }
 
     .problem3-description {
+        display: none;
+    }
+
+    .problem3-stats {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .problem3-stat-card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    .problem3-stats-footer {
+        display: block;
+    }
+}
+
+/* Mobile Small (< 480px) */
+@media (max-width: 480px) {
+    #problem3 {
+        padding: 32px 16px;
+    }
+
+    .problem3-cat-icon {
+        width: 98px;
+        height: 80px;
+    }
+
+    .problem3-cat-icon dotlottie-wc {
+        width: 98px !important;
+        height: 80px !important;
+    }
+
+    .problem3-title-main {
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .problem3-title-regular {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .problem3-subtitle {
         font-size: 16px;
         line-height: 20px;
     }
 
     .problem3-stat-card {
-        flex: 1 1 calc(50% - 9px);
-        min-width: 160px;
+        padding: 20px 12px;
+    }
+
+    .problem3-stat-label {
+        font-size: 18px;
+        line-height: 22px;
     }
 
     .problem3-stats-footer {
         font-size: 16px;
         line-height: 18px;
-    }
-}
-
-/* Mobile Portrait (< 600px) */
-@media (max-width: 600px) {
-    #problem3 {
-        padding: 32px 16px;
-    }
-
-    .problem3-container {
-        gap: 32px;
-    }
-
-    .problem3-title-main .problem3-title-orange {
-        font-size: 32px;
-        line-height: 34px;
-    }
-
-    .problem3-title-main .problem3-title-regular {
-        font-size: 20px;
-        line-height: 24px;
-    }
-
-    .problem3-subtitle {
-        font-size: 18px;
-        line-height: 22px;
-    }
-
-    .problem3-description {
-        font-size: 15px;
-        line-height: 19px;
-    }
-
-    .problem3-stat-card {
-        flex: 1 1 100%;
-        max-width: 400px;
-        min-width: unset;
-    }
-
-    .problem3-stat-label {
-        font-size: 18px;
-        line-height: 22px;
-    }
-
-    .problem3-stat-value {
-        font-size: 28px;
-        line-height: 32px;
-    }
-}
-
-/* Extra Small Mobile (< 400px) */
-@media (max-width: 400px) {
-    .problem3-cat-icon {
-        width: 100px;
-        height: 83px;
-    }
-
-    .problem3-title-main .problem3-title-orange {
-        font-size: 28px;
-        line-height: 30px;
-    }
-
-    .problem3-title-main .problem3-title-regular {
-        font-size: 18px;
-        line-height: 22px;
-    }
-
-    .problem3-subtitle {
-        font-size: 16px;
-        line-height: 20px;
-    }
-
-    .problem3-stat-label {
-        font-size: 16px;
-        line-height: 20px;
     }
 }

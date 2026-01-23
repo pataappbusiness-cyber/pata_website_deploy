@@ -19,55 +19,94 @@
   background: #000000;
 }
 
-/* Liquid Gradient Background (same as header and joinus2) */
-.joinus3-section .liquid-gradient-bg {
+/* Liquid Shader Canvas Styling (same as header) */
+.joinus3-section .liquid-shader-canvas {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background:
-    radial-gradient(
-      ellipse 80% 50% at 50% -20%,
-      var(--gradient-color-1),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 20% 30%,
-      var(--gradient-color-2),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 50% 60% at 80% 50%,
-      var(--gradient-color-3),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 70% 80% at 50% 100%,
-      var(--gradient-color-4),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 90% 70% at 10% 80%,
-      var(--gradient-color-5),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 40% 40% at 70% 20%,
-      var(--gradient-color-6),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 50% 50% at 30% 70%,
-      var(--gradient-color-7),
-      transparent
-    ),
-    var(--gradient-color-8);
-  background-size: 200% 200%;
-  animation: liquid-gradient-animation 20s ease-in-out infinite;
-  filter: blur(80px);
-  opacity: 0.9;
+  pointer-events: none; /* Allow clicks to pass through to content */
+  filter: blur(125px) contrast(1.80);
+}
+
+/* Black overlay on top of shader (20% opacity) */
+.joinus3-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.20);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Fallback gradient for browsers without WebGL or with reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .joinus3-section .liquid-shader-canvas {
+    display: none;
+  }
+
+  .joinus3-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        var(--gradient-color-1),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 20% 30%,
+        var(--gradient-color-2),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 60% at 80% 50%,
+        var(--gradient-color-3),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 70% 80% at 50% 100%,
+        var(--gradient-color-4),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 90% 70% at 10% 80%,
+        var(--gradient-color-5),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 40% 40% at 70% 20%,
+        var(--gradient-color-6),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 50% at 30% 70%,
+        var(--gradient-color-7),
+        transparent
+      ),
+      var(--gradient-color-8);
+    background-size: 200% 200%;
+    animation: liquid-gradient-animation 20s ease-in-out infinite;
+    filter: blur(80px);
+    opacity: 0.9;
+  }
+}
+
+/* Performance optimization for mobile */
+@media (max-width: 768px) {
+  .joinus3-section .liquid-shader-canvas {
+    opacity: 0.8; /* Slightly reduce complexity visual impact */
+  }
 }
 
 /* ============================================
@@ -103,26 +142,16 @@
   position: relative;
   width: 106px;
   height: 90px;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.joinus3-icon-main {
-  position: absolute;
-  top: 27.03%;
-  left: -0.22%;
-  right: -0.58%;
-  bottom: 0.19%;
-  width: auto;
-  height: auto;
-}
-
-.joinus3-icon-heart {
-  position: absolute;
-  top: 5.41%;
-  left: 40.7%;
-  width: 20.35%;
-  height: 20.27%;
+.joinus3-icon-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Title and Subtitle */
@@ -185,45 +214,17 @@
   position: relative;
   width: 54px;
   height: 54px;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-/* Zero with % symbol */
-.joinus3-stat-icon .icon-zero {
-  position: absolute;
-  left: 10px;
-  top: 12.01px;
-  width: 25.824px;
-  height: 35.472px;
-}
-
-.joinus3-stat-icon .icon-percent {
-  position: absolute;
-  left: 36px;
-  top: 6px;
-  width: 12px;
-  height: 12px;
-}
-
-/* Zero with € symbol */
-.joinus3-stat-icon .icon-euro {
-  position: absolute;
-  left: 37px;
-  top: 6px;
-  width: 12px;
-  height: 12px;
-}
-
-/* 100% icon */
-.joinus3-stat-icon .icon-100 {
-  position: absolute;
-  top: 0;
-  left: 1.85%;
-  right: 2.23%;
-  bottom: 0.08%;
-  width: auto;
-  height: auto;
+/* SVG Icon Styling */
+.joinus3-stat-icon .icon-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Stat Badge */

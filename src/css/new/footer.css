@@ -1,0 +1,277 @@
+/* ============================================
+   FOOTER COMPONENT
+   Figma Desktop: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3466
+   Figma Tablet: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4071
+   Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4698
+   ============================================ */
+
+.footer {
+    background: #272727;
+    padding: 64px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+}
+
+/* Main Container - Two Column Layout */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 58px;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Left Section - Brand */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1 0 300px;
+    min-width: 300px;
+    padding-left: 24px;
+}
+
+.footer-logo-wrapper {
+    width: 142px;
+    height: 48px;
+    overflow: hidden;
+}
+
+.footer-logo {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.footer-tagline {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 22px;
+    color: #FEFEFF;
+    margin: 0;
+}
+
+/* Social Links */
+.footer-social {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.footer-social-link {
+    display: block;
+    width: 32px;
+    height: 32px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.footer-social-link:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.footer-social-link img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.footer-email {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #FEFEFF;
+    text-decoration: none;
+    width: auto;
+    height: auto;
+}
+
+.footer-email:hover {
+    transform: none;
+    opacity: 0.8;
+}
+
+/* Right Section - Quick Links */
+.footer-links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1 0 300px;
+    min-width: 300px;
+}
+
+.footer-links-title {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #FEFEFF;
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-link {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #FEFEFF;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.footer-link:hover {
+    opacity: 0.7;
+}
+
+/* Footer Bottom Section */
+.footer-bottom {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    width: 100%;
+}
+
+.footer-copyright-section {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.footer-copyright,
+.footer-legal {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 16px;
+    color: #FEFEFF;
+    margin: 0;
+}
+
+.footer-disclaimer {
+    font-family: 'Mona Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    font-style: italic;
+    line-height: 16px;
+    color: #FEFEFF;
+    margin: 0;
+}
+
+/* Tablet Breakpoint (max-width: 1024px) */
+@media (max-width: 1024px) {
+    .footer {
+        padding: 56px 32px;
+        gap: 36px;
+    }
+
+    .footer-container {
+        gap: 48px;
+    }
+
+    .footer-brand {
+        padding-left: 16px;
+    }
+
+    .footer-tagline {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .footer-email {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .footer-links-title {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .footer-copyright,
+    .footer-legal {
+        font-size: 13px;
+        line-height: 15px;
+    }
+
+    .footer-disclaimer {
+        font-size: 11px;
+        line-height: 15px;
+    }
+}
+
+/* Mobile Breakpoint (max-width: 768px) */
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 24px;
+        gap: 24px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .footer-brand {
+        min-width: 100%;
+        padding-left: 0;
+        align-items: flex-start;
+    }
+
+    .footer-logo-wrapper {
+        width: 120px;
+        height: 40px;
+    }
+
+    .footer-tagline {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .footer-social {
+        flex-wrap: wrap;
+    }
+
+    .footer-email {
+        font-size: 18px;
+        line-height: 22px;
+        width: 100%;
+    }
+
+    .footer-links-section {
+        min-width: 100%;
+    }
+
+    .footer-links-title {
+        font-size: 16px;
+        line-height: 18px;
+    }
+
+    .footer-link {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .footer-copyright,
+    .footer-legal {
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .footer-disclaimer {
+        font-size: 11px;
+        line-height: 15px;
+    }
+}

@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: center;
     padding: 40px;
-    background: #FEFEFF;
+    background: #FFF8F2;
     overflow: hidden;
 }
 
@@ -146,6 +146,15 @@
     z-index: 1;
 }
 
+.clinica-icon-bubble img {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+}
+
 .clinica-title {
     font-family: 'Mona Sans', sans-serif;
     font-size: 24px;
@@ -255,6 +264,15 @@
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
+.small-card-icon img {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
+}
+
 .small-card-title {
     font-family: 'Mona Sans', sans-serif;
     font-size: 18px;
@@ -328,6 +346,15 @@
         0px 4px 8px 0px rgba(255, 180, 119, 0.25),
         inset 0px -2px 4px 0px rgba(255, 155, 74, 0.2),
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
+}
+
+.bottom-card-icon img {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px;
+    min-height: 28px;
+    max-width: 28px;
+    max-height: 28px;
 }
 
 .bottom-card-title {

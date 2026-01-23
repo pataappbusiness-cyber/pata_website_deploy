@@ -19,55 +19,94 @@
   background: #000000;
 }
 
-/* Liquid Gradient Background (same as header) */
-.joinus2-section .liquid-gradient-bg {
+/* Liquid Shader Canvas Styling (same as header) */
+.joinus2-section .liquid-shader-canvas {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  background:
-    radial-gradient(
-      ellipse 80% 50% at 50% -20%,
-      var(--gradient-color-1),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 50% at 20% 30%,
-      var(--gradient-color-2),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 50% 60% at 80% 50%,
-      var(--gradient-color-3),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 70% 80% at 50% 100%,
-      var(--gradient-color-4),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 90% 70% at 10% 80%,
-      var(--gradient-color-5),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 40% 40% at 70% 20%,
-      var(--gradient-color-6),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 50% 50% at 30% 70%,
-      var(--gradient-color-7),
-      transparent
-    ),
-    var(--gradient-color-8);
-  background-size: 200% 200%;
-  animation: liquid-gradient-animation 20s ease-in-out infinite;
-  filter: blur(80px);
-  opacity: 0.9;
+  pointer-events: none; /* Allow clicks to pass through to content */
+  filter: blur(125px) contrast(1.80);
+}
+
+/* Black overlay on top of shader (20% opacity) */
+.joinus2-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.20);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Fallback gradient for browsers without WebGL or with reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .joinus2-section .liquid-shader-canvas {
+    display: none;
+  }
+
+  .joinus2-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        var(--gradient-color-1),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 20% 30%,
+        var(--gradient-color-2),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 60% at 80% 50%,
+        var(--gradient-color-3),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 70% 80% at 50% 100%,
+        var(--gradient-color-4),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 90% 70% at 10% 80%,
+        var(--gradient-color-5),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 40% 40% at 70% 20%,
+        var(--gradient-color-6),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 50% at 30% 70%,
+        var(--gradient-color-7),
+        transparent
+      ),
+      var(--gradient-color-8);
+    background-size: 200% 200%;
+    animation: liquid-gradient-animation 20s ease-in-out infinite;
+    filter: blur(80px);
+    opacity: 0.9;
+  }
+}
+
+/* Performance optimization for mobile */
+@media (max-width: 768px) {
+  .joinus2-section .liquid-shader-canvas {
+    opacity: 0.8; /* Slightly reduce complexity visual impact */
+  }
 }
 
 /* ============================================
