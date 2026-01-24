@@ -21,6 +21,8 @@
     gap: 40px;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+    width: 100%;
 }
 
 /* Left Column: Header Content */
@@ -31,6 +33,18 @@
     align-items: flex-start;
     flex: 1 0 0;
     min-width: 0;
+
+    /* Animation - Reveal from left */
+    transform: translateX(-100%);
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    pointer-events: none;
+}
+
+.problem3-header.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Cat Icon + Title Wrapper */
@@ -123,6 +137,18 @@
     flex: 1 0 0;
     max-width: 1000px;
     min-width: 0;
+
+    /* Animation - Reveal from right */
+    transform: translateX(100%);
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    pointer-events: none;
+}
+
+.problem3-stats.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Statistics Card */
@@ -263,11 +289,31 @@
 @media (max-width: 1024px) {
     #problem3 {
         padding: 40px 32px;
+        height: auto;
+        min-height: 85vh;
     }
 
     .problem3-container {
         flex-direction: column;
         gap: 32px;
+    }
+
+    /* Disable horizontal animations on tablet to prevent overflow */
+    .problem3-header {
+        transform: translateY(50%);
+    }
+
+    .problem3-header.visible {
+        transform: translateY(0);
+    }
+
+    /* Override stats container animation to prevent horizontal overflow */
+    .problem3-stats {
+        transform: translateY(50%);
+    }
+
+    .problem3-stats.visible {
+        transform: translateY(0);
     }
 
     .problem3-title-main {
@@ -291,12 +337,28 @@
 
     .problem3-stats {
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: center;
+        align-items: center;
     }
 
     .problem3-stat-card {
         flex: 0 1 calc(50% - 9px);
         min-width: 200px;
+        max-width: 300px;
+    }
+
+    /* Override individual card animations to prevent overflow on tablet */
+    .problem3-stat-card:nth-child(1),
+    .problem3-stat-card:nth-child(2),
+    .problem3-stat-card:nth-child(3) {
+        transform: none !important;
+    }
+
+    .problem3-stat-card:nth-child(1).visible,
+    .problem3-stat-card:nth-child(2).visible,
+    .problem3-stat-card:nth-child(3).visible {
+        transform: none !important;
     }
 }
 
@@ -304,6 +366,8 @@
 @media (max-width: 768px) {
     #problem3 {
         padding: 40px 20px;
+        height: auto;
+        min-height: 85vh;
     }
 
     .problem3-container {
@@ -358,16 +422,48 @@
     .problem3-stats {
         flex-direction: column;
         width: 100%;
+        align-items: center;
     }
 
     .problem3-stat-card {
         width: 100%;
-        max-width: 100%;
+        max-width: 300px;
         min-width: 0;
+    }
+
+    /* Override individual card animations to prevent overflow */
+    .problem3-stat-card:nth-child(1),
+    .problem3-stat-card:nth-child(2),
+    .problem3-stat-card:nth-child(3) {
+        transform: none !important;
+    }
+
+    .problem3-stat-card:nth-child(1).visible,
+    .problem3-stat-card:nth-child(2).visible,
+    .problem3-stat-card:nth-child(3).visible {
+        transform: none !important;
     }
 
     .problem3-stats-footer {
         display: block;
+    }
+
+    /* Disable horizontal animations on mobile to prevent overflow */
+    .problem3-header {
+        transform: translateY(50%);
+    }
+
+    .problem3-header.visible {
+        transform: translateY(0);
+    }
+
+    /* Override stats container animation to prevent horizontal overflow */
+    .problem3-stats {
+        transform: translateY(50%);
+    }
+
+    .problem3-stats.visible {
+        transform: translateY(0);
     }
 }
 

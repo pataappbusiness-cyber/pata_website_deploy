@@ -64,6 +64,18 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.16);
+
+    /* Animation - Reveal from left */
+    transform: translateX(-100%);
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    pointer-events: none;
+}
+
+.comparison-table.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ===== TABLE ROWS ===== */

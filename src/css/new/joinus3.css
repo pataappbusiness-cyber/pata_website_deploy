@@ -204,8 +204,7 @@
   flex-direction: column;
   gap: 8px;
   align-items: center;
-  max-width: 340px;
-  min-width: 140px;
+  width: 200px;
   flex-shrink: 0;
 }
 
@@ -278,6 +277,46 @@
   white-space: pre-wrap;
   width: 100%;
   min-width: min-content;
+}
+
+/* ============================================
+   STAT CARDS REVEAL ANIMATIONS
+   ============================================ */
+
+/* Stat Card 1 */
+.joinus3-stat-card:nth-child(1) {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.joinus3-stat-card:nth-child(1).visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stat Card 2 */
+.joinus3-stat-card:nth-child(2) {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease 0.1s, transform 0.5s ease 0.1s;
+}
+
+.joinus3-stat-card:nth-child(2).visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stat Card 3 */
+.joinus3-stat-card:nth-child(3) {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+
+.joinus3-stat-card:nth-child(3).visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ============================================
@@ -498,7 +537,7 @@
   }
 
   .joinus3-stat-card {
-    min-width: 120px;
+    width: 180px;
   }
 
   .joinus3-stat-icon {
@@ -579,8 +618,8 @@
   }
 
   .joinus3-stat-card {
-    min-width: 140px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 240px;
   }
 
   .joinus3-stat-badge-text {

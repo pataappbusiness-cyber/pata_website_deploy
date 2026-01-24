@@ -115,6 +115,18 @@
     border: 0.5px solid #D4D4D4;
     border-radius: 16px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+
+    /* Animation */
+    transform: translateX(-100%);
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    pointer-events: none;
+}
+
+.solution1-card-left .card-content.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Pet Icons Container */
@@ -249,6 +261,18 @@
     border-radius: 16px;
     box-shadow: 0px 0px 45.8px 0px rgba(255, 180, 119, 0.27);
     overflow: hidden;
+
+    /* Animation */
+    transform: translateX(100%);
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    pointer-events: none;
+}
+
+.solution1-card-right .card-content.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Inner Backgrounds */

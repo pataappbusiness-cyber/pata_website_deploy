@@ -112,6 +112,44 @@
   border-radius: 16px;
   border: 2px solid rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, background 0.3s ease;
+
+  /* Default animation state */
+  opacity: 0.25;
+  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, background 0.3s ease;
+  pointer-events: none;
+}
+
+/* First stat - Reveal from left */
+.validation-stat:nth-child(1) {
+  transform: translateX(-100%);
+}
+
+.validation-stat:nth-child(1).visible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Second stat - Reveal from bottom */
+.validation-stat:nth-child(2) {
+  transform: translateY(100%);
+}
+
+.validation-stat:nth-child(2).visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Third stat - Reveal from right */
+.validation-stat:nth-child(3) {
+  transform: translateX(100%);
+}
+
+.validation-stat:nth-child(3).visible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .validation-stat:hover {

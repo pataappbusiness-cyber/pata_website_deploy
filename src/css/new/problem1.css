@@ -137,6 +137,18 @@
   position: relative;
   flex-shrink: 0;
   z-index: 2;
+
+  /* Animation */
+  transform: translateX(-100%);
+  opacity: 0.25;
+  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+  pointer-events: none;
+}
+
+.price-card-grey.visible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Card Content Container */
@@ -313,6 +325,18 @@
   position: relative;
   flex-shrink: 0;
   z-index: 2;
+
+  /* Animation */
+  transform: translateX(100%);
+  opacity: 0.25;
+  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+  pointer-events: none;
+}
+
+.price-card-orange.visible {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* Inner Shadows (Button-Solid/Active Effect) */

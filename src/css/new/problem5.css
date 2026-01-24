@@ -74,6 +74,44 @@
     flex: 0 1 calc(33.333% - 22px);
     max-width: 340px;
     min-width: 250px;
+
+    /* Default animation state */
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    pointer-events: none;
+}
+
+/* First testimonial - Reveal from left */
+.testimonial-item:nth-child(1) {
+    transform: translateX(-100%);
+}
+
+.testimonial-item:nth-child(1).visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Second testimonial - Reveal from bottom */
+.testimonial-item:nth-child(2) {
+    transform: translateY(100%);
+}
+
+.testimonial-item:nth-child(2).visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Third testimonial - Reveal from right */
+.testimonial-item:nth-child(3) {
+    transform: translateX(100%);
+}
+
+.testimonial-item:nth-child(3).visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ============================================

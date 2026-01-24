@@ -75,6 +75,86 @@
         0px 0px 45.8px 0px rgba(255, 180, 119, 0.25);
 }
 
+/* ===== CARD REVEAL ANIMATIONS ===== */
+
+/* Card 1 - Slide from left */
+.joinus1-card-1 {
+    opacity: 0;
+    transform: translateX(-150px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.joinus1-card-1.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Card 2 - Slide from bottom */
+.joinus1-card-2 {
+    opacity: 0;
+    transform: translateY(150px);
+    transition: opacity 0.2s ease 0.05s, transform 0.2s ease 0.05s;
+}
+
+.joinus1-card-2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Card 3 - Slide from right */
+.joinus1-card-3 {
+    opacity: 0;
+    transform: translateX(150px);
+    transition: opacity 0.2s ease 0.1s, transform 0.2s ease 0.1s;
+}
+
+.joinus1-card-3.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Overlay fade-in for Card 1 and 2 - happens AFTER card slides in */
+.joinus1-card-1 .card-overlay-saturation,
+.joinus1-card-1 .card-overlay-multiply,
+.joinus1-card-2 .card-overlay-dark,
+.joinus1-card-2 .card-overlay-orange {
+    opacity: 0 !important;
+    transition: opacity 0.2s ease 0s;
+}
+
+.joinus1-card-1.visible .card-overlay-saturation,
+.joinus1-card-1.visible .card-overlay-multiply {
+    opacity: 1 !important;
+    transition-delay: 0.2s;
+}
+
+.joinus1-card-2.visible .card-overlay-dark {
+    opacity: 1 !important;
+    transition-delay: 0.25s;
+}
+
+.joinus1-card-2.visible .card-overlay-orange {
+    opacity: 1 !important;
+    transition-delay: 0.25s;
+}
+
+/* Text fade-in for Card 1 and 2 - happens AFTER overlays */
+.joinus1-card-1 .card-content-inner,
+.joinus1-card-2 .card-content-inner {
+    opacity: 0;
+    transition: opacity 0.2s ease 0s;
+}
+
+.joinus1-card-1.visible .card-content-inner {
+    opacity: 1;
+    transition-delay: 0.4s;
+}
+
+.joinus1-card-2.visible .card-content-inner {
+    opacity: 1;
+    transition-delay: 0.45s;
+}
+
 /* Card 1 & 2 - With Background Images */
 .joinus1-card-1,
 .joinus1-card-2 {
@@ -370,6 +450,44 @@
     box-shadow:
         0px 0px 20px -4px #FFDEB3,
         0px 0px 12px 0px rgba(255, 148, 61, 0.4);
+}
+
+/* ===== BOTTOM PLAN CARDS REVEAL ANIMATIONS ===== */
+
+/* Plan Card 1 - Slide from left */
+.bottom-plan-card-1 {
+    opacity: 0;
+    transform: translateX(-150px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.bottom-plan-card-1.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Plan Card 2 - Slide from bottom */
+.bottom-plan-card-2 {
+    opacity: 0;
+    transform: translateY(150px);
+    transition: opacity 0.2s ease 0.05s, transform 0.2s ease 0.05s;
+}
+
+.bottom-plan-card-2.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Plan Card 3 - Slide from right */
+.bottom-plan-card-3 {
+    opacity: 0;
+    transform: translateX(150px);
+    transition: opacity 0.2s ease 0.1s, transform 0.2s ease 0.1s;
+}
+
+.bottom-plan-card-3.visible {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 /* Plan Card 1 */

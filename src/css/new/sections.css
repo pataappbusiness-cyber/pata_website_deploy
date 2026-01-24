@@ -520,6 +520,70 @@
 }
 
 /* ============================================
+   HEADER REVEAL ANIMATIONS
+   ============================================ */
+
+/* Header content - fade in */
+.header-content {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.header-content.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Left pills - fade in (no transform to avoid parallax conflict) */
+.pill-left-top {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.2s;
+}
+
+.pill-left-top.visible {
+  opacity: 1;
+}
+
+.pill-left-bottom {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.3s;
+}
+
+.pill-left-bottom.visible {
+  opacity: 1;
+}
+
+/* Right pills - fade in (no transform to avoid parallax conflict) */
+.pill-right-top {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.2s;
+}
+
+.pill-right-top.visible {
+  opacity: 1;
+}
+
+.pill-right-bottom {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.3s;
+}
+
+.pill-right-bottom.visible {
+  opacity: 1;
+}
+
+/* Center mockup - fade in */
+.mockup-center {
+  opacity: 0;
+  transition: opacity 0.6s ease 0.4s;
+}
+
+.mockup-center.visible {
+  opacity: 1;
+}
+
+/* ============================================
    RESPONSIVE - TABLET (769px - 1024px)
    ============================================ */
 
@@ -586,25 +650,7 @@
 
   .visual-pills-left,
   .visual-pills-right {
-    flex-direction: row;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-  }
-
-  .image-pill {
-    width: 120px;
-  }
-
-  .pill-left-top,
-  .pill-right-bottom {
-    height: 150px;
-    max-height: 150px;
-  }
-
-  .pill-left-bottom,
-  .pill-right-top {
-    height: 200px;
+    display: none;
   }
 
   .mockup-center {
@@ -615,9 +661,9 @@
   }
 
   .mockup-image {
-    width: 340px;
+    width: 100%;
     height: auto;
-    max-width: 90%;
+    max-width: 480px;
   }
 
   /* Mouse Highlight - Desativado em mobile */

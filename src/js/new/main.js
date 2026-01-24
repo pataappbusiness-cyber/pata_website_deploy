@@ -284,8 +284,9 @@ class DraggableElement {
    ============================================ */
 
 class ContactButtons {
-  constructor() {
+  constructor(smoothScroll) {
     this.ctaButtons = document.querySelectorAll('.navbar-cta-button');
+    this.smoothScroll = smoothScroll;
 
     if (this.ctaButtons.length > 0) {
       this.init();
@@ -294,14 +295,21 @@ class ContactButtons {
 
   init() {
     this.ctaButtons.forEach(button => {
-      button.addEventListener('click', () => this.scrollToContact());
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.scrollToContact();
+      });
     });
   }
 
   scrollToContact() {
-    const contactSection = document.querySelector('#contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'auto' }); // No smooth scroll as per spec
+    const contactSection = document.querySelector('#reservar');
+    if (!contactSection) return;
+
+    if (this.smoothScroll && typeof this.smoothScroll.scrollTo === 'function') {
+      this.smoothScroll.scrollTo(contactSection.offsetTop);
+    } else {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
     }
   }
 }
@@ -352,6 +360,787 @@ class VideoLazyLoader {
 
     // Remove atributo data-lazy-video após carregar
     video.removeAttribute('data-lazy-video');
+  }
+}
+
+/* ============================================
+   SECTION 2: PROBLEM1 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class Problem1Animations {
+  constructor() {
+    this.section = document.querySelector('.problem1-section');
+    this.greyCard = document.querySelector('.price-card-grey');
+    this.orangeCard = document.querySelector('.price-card-orange');
+    this.isVisible = false;
+
+    if (this.section && this.greyCard && this.orangeCard) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showCards();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideCards();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showCards() {
+    // Show both cards at the same time
+    this.greyCard.classList.add('visible');
+    this.orangeCard.classList.add('visible');
+  }
+
+  hideCards() {
+    // Hide both cards
+    this.greyCard.classList.remove('visible');
+    this.orangeCard.classList.remove('visible');
+  }
+}
+
+/* ============================================
+   SECTION 7: SOLUTION1 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class Solution1Animations {
+  constructor() {
+    this.section = document.querySelector('.solution1-section');
+    this.leftCard = document.querySelector('.solution1-card-left .card-content');
+    this.rightCard = document.querySelector('.solution1-card-right .card-content');
+    this.isVisible = false;
+
+    if (this.section && this.leftCard && this.rightCard) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showCards();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideCards();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showCards() {
+    // Show both cards at the same time
+    this.leftCard.classList.add('visible');
+    this.rightCard.classList.add('visible');
+  }
+
+  hideCards() {
+    // Hide both cards
+    this.leftCard.classList.remove('visible');
+    this.rightCard.classList.remove('visible');
+  }
+}
+
+/* ============================================
+   SECTION 9: SOLUTION3 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class Solution3Animations {
+  constructor() {
+    this.section = document.querySelector('.solution3-section');
+    this.cards = document.querySelectorAll('.solution3-card');
+    this.isVisible = false;
+
+    if (this.section && this.cards.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showCards();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideCards();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showCards() {
+    // Show all cards at the same time
+    this.cards.forEach(card => {
+      card.classList.add('visible');
+    });
+  }
+
+  hideCards() {
+    // Hide all cards
+    this.cards.forEach(card => {
+      card.classList.remove('visible');
+    });
+  }
+}
+
+/* ============================================
+   SECTION 10: SOLUTION4 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class Solution4Animations {
+  constructor() {
+    this.section = document.querySelector('.solution4-section');
+    this.mainCard = document.querySelector('.solution4-main-card');
+    this.bottomCards = document.querySelectorAll('.bottom-card');
+    this.isVisible = false;
+
+    if (this.section && (this.mainCard || this.bottomCards.length > 0)) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showCards();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideCards();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showCards() {
+    // Show main card and bottom cards
+    if (this.mainCard) {
+      this.mainCard.classList.add('visible');
+    }
+    this.bottomCards.forEach(card => {
+      card.classList.add('visible');
+    });
+  }
+
+  hideCards() {
+    // Hide main card and bottom cards
+    if (this.mainCard) {
+      this.mainCard.classList.remove('visible');
+    }
+    this.bottomCards.forEach(card => {
+      card.classList.remove('visible');
+    });
+  }
+}
+
+/* ============================================
+   SECTION 11: JOINUS1 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class JoinUs1Animations {
+  constructor() {
+    this.section = document.querySelector('.joinus1-section');
+    this.card1 = document.querySelector('.joinus1-card-1');
+    this.card2 = document.querySelector('.joinus1-card-2');
+    this.card3 = document.querySelector('.joinus1-card-3');
+    this.planCard1 = document.querySelector('.bottom-plan-card-1');
+    this.planCard2 = document.querySelector('.bottom-plan-card-2');
+    this.planCard3 = document.querySelector('.bottom-plan-card-3');
+    this.topCardsVisible = false;
+    this.bottomCardsVisible = false;
+
+    if (this.section) {
+      this.init();
+    }
+  }
+
+  init() {
+    // Observer for top cards
+    const topCardsOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const topCardsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.topCardsVisible) {
+          this.showTopCards();
+          this.topCardsVisible = true;
+        } else if (!entry.isIntersecting && this.topCardsVisible) {
+          this.hideTopCards();
+          this.topCardsVisible = false;
+        }
+      });
+    }, topCardsOptions);
+
+    if (this.card1 || this.card2 || this.card3) {
+      topCardsObserver.observe(this.section);
+    }
+
+    // Observer for bottom plan cards
+    const bottomCardsElement = document.querySelector('.joinus1-bottom-cards');
+    if (bottomCardsElement) {
+      const bottomCardsOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+      };
+
+      const bottomCardsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.bottomCardsVisible) {
+            this.showBottomCards();
+            this.bottomCardsVisible = true;
+          } else if (!entry.isIntersecting && this.bottomCardsVisible) {
+            this.hideBottomCards();
+            this.bottomCardsVisible = false;
+          }
+        });
+      }, bottomCardsOptions);
+
+      bottomCardsObserver.observe(bottomCardsElement);
+    }
+  }
+
+  showTopCards() {
+    // Show top three cards
+    if (this.card1) {
+      this.card1.classList.add('visible');
+    }
+    if (this.card2) {
+      this.card2.classList.add('visible');
+    }
+    if (this.card3) {
+      this.card3.classList.add('visible');
+    }
+  }
+
+  hideTopCards() {
+    // Hide top three cards
+    if (this.card1) {
+      this.card1.classList.remove('visible');
+    }
+    if (this.card2) {
+      this.card2.classList.remove('visible');
+    }
+    if (this.card3) {
+      this.card3.classList.remove('visible');
+    }
+  }
+
+  showBottomCards() {
+    // Show bottom plan cards
+    if (this.planCard1) {
+      this.planCard1.classList.add('visible');
+    }
+    if (this.planCard2) {
+      this.planCard2.classList.add('visible');
+    }
+    if (this.planCard3) {
+      this.planCard3.classList.add('visible');
+    }
+  }
+
+  hideBottomCards() {
+    // Hide bottom plan cards
+    if (this.planCard1) {
+      this.planCard1.classList.remove('visible');
+    }
+    if (this.planCard2) {
+      this.planCard2.classList.remove('visible');
+    }
+    if (this.planCard3) {
+      this.planCard3.classList.remove('visible');
+    }
+  }
+}
+
+/* ============================================
+   SECTION 12: JOINUS2 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class JoinUs2Animations {
+  constructor() {
+    this.section = document.querySelector('.joinus2-section');
+    this.cards = document.querySelectorAll('.joinus2-cards-grid .benefit-card');
+    this.warningCard = document.querySelector('.joinus2-warning-card');
+    this.isVisible = false;
+
+    if (this.section && this.cards.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showCards();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideCards();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showCards() {
+    // Show all 4 cards (first two from left, last two from right)
+    this.cards.forEach(card => {
+      card.classList.add('visible');
+    });
+
+    // Show warning card
+    if (this.warningCard) {
+      this.warningCard.classList.add('visible');
+    }
+  }
+
+  hideCards() {
+    // Hide all 4 cards
+    this.cards.forEach(card => {
+      card.classList.remove('visible');
+    });
+
+    // Hide warning card
+    if (this.warningCard) {
+      this.warningCard.classList.remove('visible');
+    }
+  }
+}
+
+/* ============================================
+   SECTION 1: HEADER - REVEAL ANIMATIONS
+   ============================================ */
+
+class HeaderAnimations {
+  constructor() {
+    this.section = document.querySelector('.header-section');
+    this.headerContent = document.querySelector('.header-content');
+    this.pillLeftTop = document.querySelector('.pill-left-top');
+    this.pillLeftBottom = document.querySelector('.pill-left-bottom');
+    this.pillRightTop = document.querySelector('.pill-right-top');
+    this.pillRightBottom = document.querySelector('.pill-right-bottom');
+    this.mockupCenter = document.querySelector('.mockup-center');
+    this.isVisible = false;
+
+    if (this.section) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showElements();
+          this.isVisible = true;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showElements() {
+    // Show header content
+    if (this.headerContent) {
+      this.headerContent.classList.add('visible');
+    }
+
+    // Show left pills
+    if (this.pillLeftTop) {
+      this.pillLeftTop.classList.add('visible');
+    }
+    if (this.pillLeftBottom) {
+      this.pillLeftBottom.classList.add('visible');
+    }
+
+    // Show right pills
+    if (this.pillRightTop) {
+      this.pillRightTop.classList.add('visible');
+    }
+    if (this.pillRightBottom) {
+      this.pillRightBottom.classList.add('visible');
+    }
+
+    // Show center mockup
+    if (this.mockupCenter) {
+      this.mockupCenter.classList.add('visible');
+    }
+  }
+}
+
+/* ============================================
+   SECTION 15: JOINUS3 - STAT CARDS REVEAL ANIMATIONS
+   ============================================ */
+
+class JoinUs3Animations {
+  constructor() {
+    this.section = document.querySelector('.joinus3-section');
+    this.statCards = document.querySelectorAll('.joinus3-stat-card');
+    this.isVisible = false;
+
+    if (this.section && this.statCards.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showCards();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideCards();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showCards() {
+    this.statCards.forEach(card => {
+      card.classList.add('visible');
+    });
+  }
+
+  hideCards() {
+    this.statCards.forEach(card => {
+      card.classList.remove('visible');
+    });
+  }
+}
+
+/* ============================================
+   SECTION 3: PROBLEM2 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class Problem2Animations {
+  constructor() {
+    this.section = document.querySelector('#problem2');
+    this.content = document.querySelector('.problem2-content');
+    this.animation = document.querySelector('.problem2-animation');
+    this.isVisible = false;
+
+    if (this.section && (this.content || this.animation)) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showElements();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideElements();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showElements() {
+    if (this.content) {
+      this.content.classList.add('visible');
+    }
+    if (this.animation) {
+      this.animation.classList.add('visible');
+    }
+  }
+
+  hideElements() {
+    if (this.content) {
+      this.content.classList.remove('visible');
+    }
+    if (this.animation) {
+      this.animation.classList.remove('visible');
+    }
+  }
+}
+
+/* ============================================
+   SECTION 4: PROBLEM3 - CARD SCROLL ANIMATIONS
+   ============================================ */
+
+class Problem3Animations {
+  constructor() {
+    this.section = document.querySelector('#problem3');
+    this.header = document.querySelector('.problem3-header');
+    this.stats = document.querySelector('.problem3-stats');
+    this.isVisible = false;
+
+    if (this.section && (this.header || this.stats)) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showElements();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideElements();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showElements() {
+    if (this.header) {
+      this.header.classList.add('visible');
+    }
+    if (this.stats) {
+      this.stats.classList.add('visible');
+    }
+  }
+
+  hideElements() {
+    if (this.header) {
+      this.header.classList.remove('visible');
+    }
+    if (this.stats) {
+      this.stats.classList.remove('visible');
+    }
+  }
+}
+
+/* ============================================
+   SECTION 6: PROBLEM5 - TESTIMONIALS SCROLL ANIMATIONS
+   ============================================ */
+
+class Problem5Animations {
+  constructor() {
+    this.section = document.querySelector('.problem5-section');
+    this.testimonials = document.querySelectorAll('.testimonial-item');
+    this.isVisible = false;
+
+    if (this.section && this.testimonials.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showTestimonials();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideTestimonials();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showTestimonials() {
+    this.testimonials.forEach(testimonial => {
+      testimonial.classList.add('visible');
+    });
+  }
+
+  hideTestimonials() {
+    this.testimonials.forEach(testimonial => {
+      testimonial.classList.remove('visible');
+    });
+  }
+}
+
+/* ============================================
+   SECTION 5: PROBLEM4 - VALIDATION STATS SCROLL ANIMATIONS
+   ============================================ */
+
+class Problem4Animations {
+  constructor() {
+    this.section = document.querySelector('.problem4-section');
+    this.stats = document.querySelectorAll('.validation-stat');
+    this.isVisible = false;
+
+    if (this.section && this.stats.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showStats();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideStats();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showStats() {
+    this.stats.forEach(stat => {
+      stat.classList.add('visible');
+    });
+  }
+
+  hideStats() {
+    this.stats.forEach(stat => {
+      stat.classList.remove('visible');
+    });
+  }
+}
+
+/* ============================================
+   SECTION 8: SOLUTION2 - COMPARISON TABLE SCROLL ANIMATIONS
+   ============================================ */
+
+class Solution2Animations {
+  constructor() {
+    this.section = document.querySelector('.solution2-section');
+    this.table = document.querySelector('.comparison-table');
+    this.isVisible = false;
+
+    if (this.section && this.table) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showTable();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideTable();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showTable() {
+    if (this.table) {
+      this.table.classList.add('visible');
+    }
+  }
+
+  hideTable() {
+    if (this.table) {
+      this.table.classList.remove('visible');
+    }
   }
 }
 
@@ -407,15 +1196,183 @@ function initProblem2Lottie() {
 }
 
 /* ============================================
+   SMOOTH SCROLL - CUSTOM IMPLEMENTATION
+   ============================================ */
+
+class SmoothScroll {
+  constructor() {
+    this.scrollTarget = 0;
+    this.scrollCurrent = 0;
+    this.ease = 0.1;
+    this.rafId = null;
+    this.isRunning = false;
+    this.isScrolling = false;
+    this.scrollTimeout = null;
+    this.init();
+  }
+
+  init() {
+    try {
+      // Set initial scroll position
+      this.scrollCurrent = window.pageYOffset;
+      this.scrollTarget = window.pageYOffset;
+
+      // Handle wheel events for smooth mouse wheel scrolling
+      this.handleWheel = this.handleWheel.bind(this);
+      window.addEventListener('wheel', this.handleWheel, { passive: false });
+
+      // Handle keyboard events (arrow keys, page up/down, etc.)
+      this.handleKeyboard = this.handleKeyboard.bind(this);
+      window.addEventListener('keydown', this.handleKeyboard, { passive: false });
+
+      // Handle scrollbar dragging and other scroll events
+      this.handleScroll = this.handleScroll.bind(this);
+      window.addEventListener('scroll', this.handleScroll, { passive: true });
+
+      // Handle anchor links
+      this.setupAnchorLinks();
+
+      // Start animation loop
+      this.isRunning = true;
+      this.raf();
+
+      console.log('✨ Smooth scroll initialized');
+    } catch (error) {
+      console.error('❌ Error initializing smooth scroll:', error);
+    }
+  }
+
+  handleWheel(e) {
+    e.preventDefault();
+    this.isScrolling = true;
+    this.scrollTarget += e.deltaY;
+
+    // Clamp scroll target to valid range
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    this.scrollTarget = Math.max(0, Math.min(this.scrollTarget, maxScroll));
+
+    // Reset scrolling flag after a delay
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.isScrolling = false;
+    }, 100);
+  }
+
+  handleKeyboard(e) {
+    // Handle arrow keys and page navigation
+    const keyActions = {
+      'ArrowDown': 100,
+      'ArrowUp': -100,
+      'PageDown': window.innerHeight * 0.8,
+      'PageUp': -window.innerHeight * 0.8,
+      'Home': -this.scrollTarget,
+      'End': document.documentElement.scrollHeight - window.innerHeight - this.scrollTarget,
+      ' ': window.innerHeight * 0.8 // Space bar
+    };
+
+    if (keyActions[e.key] !== undefined) {
+      e.preventDefault();
+      this.isScrolling = true;
+      this.scrollTarget += keyActions[e.key];
+
+      // Clamp scroll target to valid range
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      this.scrollTarget = Math.max(0, Math.min(this.scrollTarget, maxScroll));
+
+      // Reset scrolling flag
+      clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        this.isScrolling = false;
+      }, 100);
+    }
+  }
+
+  handleScroll(e) {
+    // Handle scrollbar dragging - update target to match actual scroll
+    if (!this.isScrolling) {
+      const currentScroll = window.pageYOffset;
+      // Only update if there's a significant difference (user is dragging scrollbar)
+      if (Math.abs(currentScroll - this.scrollCurrent) > 5) {
+        this.scrollTarget = currentScroll;
+        this.scrollCurrent = currentScroll;
+      }
+    }
+  }
+
+  setupAnchorLinks() {
+    // Get all anchor links that point to sections on this page
+    const anchorLinks = document.querySelectorAll('a[href^="#"]');
+
+    anchorLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+
+        // Skip empty or just # links
+        if (href === '#' || href === '') return;
+
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          this.scrollTo(target.offsetTop);
+        }
+      });
+    });
+  }
+
+  scrollTo(targetPosition) {
+    this.isScrolling = true;
+    this.scrollTarget = targetPosition;
+
+    clearTimeout(this.scrollTimeout);
+    this.scrollTimeout = setTimeout(() => {
+      this.isScrolling = false;
+    }, 100);
+  }
+
+  raf() {
+    if (!this.isRunning) return;
+
+    // Lerp (linear interpolation) for smooth scrolling
+    this.scrollCurrent += (this.scrollTarget - this.scrollCurrent) * this.ease;
+
+    // Round to avoid sub-pixel rendering issues
+    const rounded = Math.round(this.scrollCurrent * 100) / 100;
+
+    // Apply scroll
+    window.scrollTo(0, rounded);
+
+    // Continue animation loop
+    this.rafId = requestAnimationFrame(() => this.raf());
+  }
+
+  destroy() {
+    this.isRunning = false;
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+    }
+    clearTimeout(this.scrollTimeout);
+    window.removeEventListener('wheel', this.handleWheel);
+    window.removeEventListener('keydown', this.handleKeyboard);
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+}
+
+/* ============================================
    INITIALIZE ALL MODULES
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Initialize Smooth Scroll
+  const smoothScroll = new SmoothScroll();
+
   // Initialize Navbar
   new Navbar();
 
   // Initialize Header Parallax
   new HeaderParallax();
+
+  // Initialize Header Reveal Animations
+  new HeaderAnimations();
 
   // Initialize Mouse Highlight
   const mouseHighlight = new MouseHighlight();
@@ -423,11 +1380,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize Draggable Element
   new DraggableElement();
 
-  // Initialize Contact Buttons
-  new ContactButtons();
+  // Initialize Contact Buttons (pass smooth scroll instance)
+  new ContactButtons(smoothScroll);
 
   // Initialize Video Lazy Loader
   new VideoLazyLoader();
+
+  // Initialize Problem1 Card Animations
+  new Problem1Animations();
+
+  // Initialize Problem2 Card Animations
+  new Problem2Animations();
+
+  // Initialize Problem3 Card Animations
+  new Problem3Animations();
+
+  // Initialize Problem4 Validation Stats Animations
+  new Problem4Animations();
+
+  // Initialize Problem5 Testimonials Animations
+  new Problem5Animations();
+
+  // Initialize Solution1 Card Animations
+  new Solution1Animations();
+
+  // Initialize Solution2 Table Animations
+  new Solution2Animations();
+
+  // Initialize Solution3 Card Animations
+  new Solution3Animations();
+
+  // Initialize Solution4 Card Animations
+  new Solution4Animations();
+
+  // Initialize JoinUs1 Card Animations
+  new JoinUs1Animations();
+
+  // Initialize JoinUs2 Card Animations
+  new JoinUs2Animations();
+
+  // Initialize JoinUs3 Stat Cards Animations
+  new JoinUs3Animations();
 
   // Initialize Problem2 Lottie Animation
   initProblem2Lottie();
@@ -435,6 +1428,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cleanup on page unload (boa prática)
   window.addEventListener('beforeunload', () => {
     mouseHighlight.destroy();
+    smoothScroll.destroy();
   });
 
   console.log('🐾 PATA Website - All modules initialized');

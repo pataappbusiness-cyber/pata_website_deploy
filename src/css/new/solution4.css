@@ -109,6 +109,19 @@
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
     position: relative;
     overflow: visible;
+
+    /* Animation */
+    transform: translateX(100%);
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
+    pointer-events: none;
+}
+
+/* Visible state */
+.solution4-main-card.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ============================================
@@ -322,6 +335,28 @@
     position: relative;
     overflow: hidden;
     text-align: center;
+
+    /* Animation */
+    opacity: 0.25;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
+    pointer-events: none;
+}
+
+/* First bottom card - slides from left */
+.bottom-card:nth-child(1) {
+    transform: translateX(-100%);
+}
+
+/* Second bottom card - slides from right */
+.bottom-card:nth-child(2) {
+    transform: translateX(100%);
+}
+
+/* Visible state */
+.bottom-card.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .bottom-card-header {
@@ -616,18 +651,57 @@
    ANIMATIONS & INTERACTIONS
    ============================================ */
 
-.small-card,
-.bottom-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Circling halo glow animation - smaller, sharper, more opaque */
+@keyframes circling-halo {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9),
+            inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px 4px 10px 0px rgba(255, 180, 119, 0.9),
+            inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px 4px 10px 0px rgba(255, 180, 119, 0.9),
+            inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px -4px 10px 0px rgba(255, 180, 119, 0.9),
+            inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9),
+            inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
 }
 
-.small-card:hover,
+.solution4-main-card:hover,
 .bottom-card:hover {
     transform: translateY(-4px);
-    box-shadow:
-        0px 4px 24px 0px #FFDEB3,
-        0px 0px 16px 0px rgba(255, 148, 61, 0.5),
-        inset 0px 0px 15px 0px rgba(255, 244, 230, 0.4),
-        inset 0px -2px 4px 0px #FF9B4A,
-        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    animation: circling-halo 2s ease-in-out infinite;
 }
