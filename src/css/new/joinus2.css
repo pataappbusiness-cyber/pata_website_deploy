@@ -435,8 +435,8 @@
   line-height: 16px;
   color: #3D3D3D;
   margin: 0;
-  white-space: pre-wrap;
   text-align: center;
+  width: 100%;
 }
 
 .warning-card-shadows {
@@ -554,6 +554,11 @@
   .benefit-card-text {
     font-size: 18px;
     line-height: 20px;
+  }
+
+  /* Move image down on second card for better text visibility */
+  .benefit-card:nth-child(2) .benefit-card-image {
+    top: 32px;
   }
 
   .joinus2-bottom-statement {

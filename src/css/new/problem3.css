@@ -240,6 +240,7 @@
     flex-direction: column;
     gap: 4px;
     text-align: center;
+    align-items: center;
 }
 
 .problem3-stat-label {
@@ -260,9 +261,12 @@
     font-weight: 600;
     line-height: 16px;
     text-decoration: underline;
+    text-decoration-thickness: 0.5px;
     text-decoration-skip-ink: none;
     cursor: pointer;
     transition: opacity 0.2s ease;
+    text-align: center;
+    display: block;
 }
 
 .problem3-stat-source:hover {
@@ -368,10 +372,12 @@
         padding: 40px 20px;
         height: auto;
         min-height: 85vh;
+        overflow: visible;
     }
 
     .problem3-container {
         gap: 24px;
+        overflow: visible;
     }
 
     .problem3-cat-icon {
@@ -399,20 +405,35 @@
         line-height: 36px;
     }
 
+    .problem3-title-orange {
+        display: block;
+    }
+
     .problem3-title-regular {
         font-size: 24px;
         line-height: 28px;
+        display: block;
+    }
+
+    .problem3-header {
+        gap: 16px;
     }
 
     .problem3-text-group {
         padding-left: 0;
         align-items: center;
         text-align: center;
+        width: 100%;
     }
 
     .problem3-subtitle {
         font-size: 18px;
         line-height: 22px;
+        text-align: center;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        white-space: normal;
     }
 
     .problem3-description {
@@ -421,14 +442,43 @@
 
     .problem3-stats {
         flex-direction: column;
+        flex-wrap: nowrap;
         width: 100%;
-        align-items: center;
+        align-items: stretch;
+        gap: 10px;
     }
 
     .problem3-stat-card {
         width: 100%;
-        max-width: 300px;
+        max-width: 100%;
         min-width: 0;
+        padding: 10px 12px 14px 12px;
+        gap: 6px;
+        min-height: auto;
+        align-items: center;
+        text-align: center;
+    }
+
+    .problem3-stat-value {
+        text-align: center;
+        width: 100%;
+    }
+
+    .problem3-stat-label {
+        text-align: center;
+        white-space: normal;
+        width: 100%;
+    }
+
+    .problem3-stat-source {
+        text-align: center;
+        padding-bottom: 4px;
+        width: 100%;
+    }
+
+    .problem3-stat-info {
+        align-items: center;
+        width: 100%;
     }
 
     /* Override individual card animations to prevent overflow */
@@ -446,6 +496,7 @@
 
     .problem3-stats-footer {
         display: block;
+        margin-top: 16px;
     }
 
     /* Disable horizontal animations on mobile to prevent overflow */
@@ -499,12 +550,50 @@
     }
 
     .problem3-stat-card {
-        padding: 20px 12px;
+        padding: 10px 12px;
+        gap: 4px;
+    }
+
+    .problem3-stat-icon {
+        width: 32px;
+        height: 32px;
+    }
+
+    .problem3-stat-value-box {
+        padding: 2px 6px;
+    }
+
+    .problem3-stat-value {
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+    }
+
+    .problem3-stat-value-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     .problem3-stat-label {
-        font-size: 18px;
-        line-height: 22px;
+        font-size: 12px;
+        line-height: 14px;
+        text-align: center;
+    }
+
+    .problem3-stat-source {
+        font-size: 10px;
+        line-height: 12px;
+        text-align: center;
+        padding-bottom: 4px;
+        display: block;
+    }
+
+    .problem3-stat-info {
+        text-align: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
     }
 
     .problem3-stats-footer {

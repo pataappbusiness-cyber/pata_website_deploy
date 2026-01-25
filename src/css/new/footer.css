@@ -34,9 +34,17 @@
 }
 
 .footer-logo-wrapper {
+    display: block;
     width: 142px;
     height: 48px;
     overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+}
+
+.footer-logo-wrapper:hover {
+    opacity: 0.8;
 }
 
 .footer-logo {

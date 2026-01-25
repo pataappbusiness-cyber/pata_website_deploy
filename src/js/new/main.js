@@ -763,6 +763,80 @@ class JoinUs2Animations {
 }
 
 /* ============================================
+   SECTION 14: RESERVAR - REVEAL ANIMATIONS
+   ============================================ */
+
+class ReservarAnimations {
+  constructor() {
+    this.section = document.querySelector('.reservar-section');
+    this.formCard = document.querySelector('.reservar-form-card');
+    this.carousel = document.querySelector('.reservar-image-carousel');
+    this.infoCards = document.querySelectorAll('.reservar-info-card');
+    this.isVisible = false;
+
+    if (this.section) {
+      this.init();
+    }
+  }
+
+  init() {
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !this.isVisible) {
+          this.showElements();
+          this.isVisible = true;
+        } else if (!entry.isIntersecting && this.isVisible) {
+          this.hideElements();
+          this.isVisible = false;
+        }
+      });
+    }, options);
+
+    observer.observe(this.section);
+  }
+
+  showElements() {
+    // Show form card from left
+    if (this.formCard) {
+      this.formCard.classList.add('visible');
+    }
+
+    // Show carousel from right
+    if (this.carousel) {
+      this.carousel.classList.add('visible');
+    }
+
+    // Show info cards from bottom
+    this.infoCards.forEach(card => {
+      card.classList.add('visible');
+    });
+  }
+
+  hideElements() {
+    // Hide form card
+    if (this.formCard) {
+      this.formCard.classList.remove('visible');
+    }
+
+    // Hide carousel
+    if (this.carousel) {
+      this.carousel.classList.remove('visible');
+    }
+
+    // Hide info cards
+    this.infoCards.forEach(card => {
+      card.classList.remove('visible');
+    });
+  }
+}
+
+/* ============================================
    SECTION 1: HEADER - REVEAL ANIMATIONS
    ============================================ */
 
@@ -1418,6 +1492,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize JoinUs2 Card Animations
   new JoinUs2Animations();
+
+  // Initialize Reservar Reveal Animations
+  new ReservarAnimations();
 
   // Initialize JoinUs3 Stat Cards Animations
   new JoinUs3Animations();

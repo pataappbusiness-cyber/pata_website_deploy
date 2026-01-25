@@ -44,7 +44,7 @@
   flex: 1 0 0;
   align-self: stretch;
   min-height: 800px;
-  padding: 40px 0;
+  padding: 40px;
   position: relative;
   overflow: hidden;
 
@@ -256,7 +256,7 @@
   flex: 1 0 0;
   align-self: stretch;
   min-height: 800px;
-  padding: 40px 0;
+  padding: 40px;
   position: relative;
   overflow: hidden;
 
@@ -518,14 +518,14 @@
 @media (max-width: 767px) {
   .problem1-section {
     flex-direction: column;
-    min-height: 1600px; /* 800px x 2 panels */
+    min-height: 120vh; /* 60vh x 2 panels */
   }
 
   .left-panel,
   .right-panel {
     flex: none;
     width: 100%;
-    min-height: 800px;
+    min-height: 60vh;
   }
 
   /* Adjust card widths for mobile */

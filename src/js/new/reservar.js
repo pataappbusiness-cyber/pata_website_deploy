@@ -10,7 +10,9 @@
    ============================================ */
 
 const RESERVAR_CONFIG = {
-  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwLjXT0tVa9jKMfdq5M12VYxsXpWfCne7uWHktjc6QO3PdUxu5GhXNUX1W5nu41CNA/exec',
+  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyAuxVlgbXlV23Lk2rSNZqUKftULv2kqkGNHNr7Egd8NGscffMMNWa9Q5Aw8GT7JJPs/exec',
+
+  
   MAX_SPOTS: 500,
   CAROUSEL_INTERVAL: 5000, // 5 seconds
   DEBUG_MODE: false

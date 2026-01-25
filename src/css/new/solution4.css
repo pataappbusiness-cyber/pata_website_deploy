@@ -552,6 +552,7 @@
         min-height: auto;
         height: auto;
         flex-direction: column;
+        gap: 4px;
     }
 
     .clinica-pata-side {
@@ -560,6 +561,7 @@
         min-width: 100%;
         height: auto;
         overflow: visible;
+        gap: 4px;
     }
 
     /* Hide image in Clínica PATA on mobile */
@@ -583,6 +585,10 @@
     .clinica-text-group {
         z-index: 10;
         visibility: visible;
+        flex-direction: row;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .clinica-urgencias,
@@ -592,13 +598,13 @@
     }
 
     .clinica-plus {
-        font-size: 20px;
-        line-height: 24px;
+        font-size: 16px;
+        line-height: 20px;
     }
 
     .small-cards-grid {
         flex-direction: column;
-        padding: 12px 0;
+        padding: 0;
         width: 100%;
         min-width: 100%;
     }
