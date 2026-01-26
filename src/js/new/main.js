@@ -77,6 +77,18 @@ class HeaderParallax {
     this.header = document.querySelector('.header-section');
     this.parallaxElements = document.querySelectorAll('[data-parallax]');
 
+    // Smooth animation properties
+    this.mouseX = 0;
+    this.mouseY = 0;
+    this.targetX = 0;
+    this.targetY = 0;
+    this.ease = 0.12; // Lower = smoother (0.05-0.15 range)
+    this.rafId = null;
+    this.isActive = false;
+
+    // Store current positions for each element
+    this.elementPositions = new Map();
+
     if (this.header && this.parallaxElements.length > 0) {
       this.init();
     }
@@ -85,10 +97,19 @@ class HeaderParallax {
   init() {
     // Only enable parallax on devices with pointer (not touch)
     if (window.matchMedia('(pointer: fine)').matches) {
+      // Initialize element positions
+      this.parallaxElements.forEach(element => {
+        this.elementPositions.set(element, { currentX: 0, currentY: 0, targetX: 0, targetY: 0 });
+      });
+
       this.header.addEventListener('mousemove', (e) => this.handleMouseMove(e));
 
       // Reset position when mouse leaves
       this.header.addEventListener('mouseleave', () => this.resetPositions());
+
+      // Start animation loop
+      this.isActive = true;
+      this.animate();
     }
   }
 
@@ -97,24 +118,49 @@ class HeaderParallax {
     const { innerWidth, innerHeight } = window;
 
     // Calculate mouse position relative to center (-1 to 1)
-    const x = (clientX / innerWidth - 0.5) * 2;
-    const y = (clientY / innerHeight - 0.5) * 2;
+    this.targetX = (clientX / innerWidth - 0.5) * 2;
+    this.targetY = (clientY / innerHeight - 0.5) * 2;
+  }
 
+  animate() {
+    if (!this.isActive) return;
+
+    // Smoothly interpolate mouse position
+    this.mouseX += (this.targetX - this.mouseX) * this.ease;
+    this.mouseY += (this.targetY - this.mouseY) * this.ease;
+
+    // Update each parallax element
     this.parallaxElements.forEach(element => {
       const speed = parseFloat(element.dataset.parallax) || 0.3;
+      const positions = this.elementPositions.get(element);
 
-      // Apply transformation based on mouse movement
-      const moveX = x * 50 * speed;
-      const moveY = y * 50 * speed;
+      // Calculate target positions
+      positions.targetX = this.mouseX * 50 * speed;
+      positions.targetY = this.mouseY * 50 * speed;
 
-      element.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      // Smoothly interpolate element position
+      positions.currentX += (positions.targetX - positions.currentX) * this.ease;
+      positions.currentY += (positions.targetY - positions.currentY) * this.ease;
+
+      // Apply transformation
+      element.style.transform = `translate(${positions.currentX}px, ${positions.currentY}px)`;
     });
+
+    // Continue animation loop
+    this.rafId = requestAnimationFrame(() => this.animate());
   }
 
   resetPositions() {
-    this.parallaxElements.forEach(element => {
-      element.style.transform = 'translate(0, 0)';
-    });
+    // Smoothly return to center
+    this.targetX = 0;
+    this.targetY = 0;
+  }
+
+  destroy() {
+    this.isActive = false;
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+    }
   }
 }
 
@@ -1443,7 +1489,7 @@ document.addEventListener('DOMContentLoaded', () => {
   new Navbar();
 
   // Initialize Header Parallax
-  new HeaderParallax();
+  const headerParallax = new HeaderParallax();
 
   // Initialize Header Reveal Animations
   new HeaderAnimations();
@@ -1456,6 +1502,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize Contact Buttons (pass smooth scroll instance)
   new ContactButtons(smoothScroll);
+
+  // Initialize Scroll to Top Button (pass smooth scroll instance)
+  window.scrollToTopButton = new ScrollToTopButton(smoothScroll);
 
   // Initialize Video Lazy Loader
   new VideoLazyLoader();
@@ -1506,6 +1555,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('beforeunload', () => {
     mouseHighlight.destroy();
     smoothScroll.destroy();
+    headerParallax.destroy();
+    if (window.scrollToTopButton) {
+      window.scrollToTopButton.destroy();
+    }
   });
 
   console.log('🐾 PATA Website - All modules initialized');

@@ -11,7 +11,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .problem3-container {
@@ -21,7 +21,7 @@
     gap: 40px;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow: visible;
     width: 100%;
 }
 
@@ -132,11 +132,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 18px;
-    align-items: flex-start;
+    align-items: stretch;
     justify-content: center;
     flex: 1 0 0;
-    max-width: 1000px;
+    max-width: 650px;
     min-width: 0;
+    overflow: visible;
 
     /* Animation - Reveal from right */
     transform: translateX(100%);
@@ -163,11 +164,12 @@
     gap: 16px;
     flex: 1 0 0;
     max-width: 300px;
-    min-width: 200px;
+    min-width: 210px;
     /* Drop shadow */
     box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .problem3-stat-card::after {
@@ -287,69 +289,186 @@
     max-width: 478px;
 }
 
+/* ===== HOVER & CLICK INTERACTIONS ===== */
+
+/* Circling halo animation for problem3 cards */
+@keyframes circling-halo-orange {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.3),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.5);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.3),
+            4px 4px 10px 0px rgba(255, 180, 119, 0.5);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.3),
+            -4px 4px 10px 0px rgba(255, 180, 119, 0.5);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.3),
+            -4px -4px 10px 0px rgba(255, 180, 119, 0.5);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.3),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.5);
+    }
+}
+
+/* Hover effect - lift and glow */
+.problem3-stat-card:hover {
+    transform: scale(1.02) translateY(-10px);
+    animation: circling-halo-orange 2s ease-in-out infinite;
+}
+
+/* Active/click effect - press down */
+.problem3-stat-card:active {
+    transform: scale(0.98) translateY(5px);
+    animation: none;
+    box-shadow: 0px 2px 4px 0px rgba(255, 180, 119, 0.2);
+}
+
 /* ===== RESPONSIVE DESIGN ===== */
 
 /* Tablets (768px - 1024px) */
 @media (max-width: 1024px) {
     #problem3 {
-        padding: 40px 32px;
+        padding: 40px 48px;
         height: auto;
         min-height: 85vh;
     }
 
     .problem3-container {
         flex-direction: column;
-        gap: 32px;
+        gap: 24px;
+        max-width: 100%;
+        align-items: center;
     }
 
     /* Disable horizontal animations on tablet to prevent overflow */
     .problem3-header {
         transform: translateY(50%);
+        align-items: center !important;
+        justify-content: center;
+        max-width: 600px;
+        margin: 0 auto;
+        width: 100%;
+        gap: 16px;
     }
 
     .problem3-header.visible {
         transform: translateY(0);
     }
 
+    /* Cat icon + title - center everything */
+    .problem3-title-wrapper {
+        flex-direction: column;
+        align-items: center !important;
+        justify-content: center;
+        text-align: center;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .problem3-cat-icon {
+        width: 104px;
+        height: 84px;
+        margin: 0 auto;
+    }
+
+    .problem3-cat-icon dotlottie-wc {
+        width: 104px !important;
+        height: 84px !important;
+    }
+
+    .problem3-title-text {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .problem3-title-main {
+        font-size: 48px;
+        line-height: 53px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .problem3-title-orange {
+        display: block;
+        text-align: center;
+    }
+
+    .problem3-title-regular {
+        font-size: 24px;
+        line-height: 28px;
+        display: block;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    /* Subtitle section */
+    .problem3-text-group {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        gap: 8px;
+        max-width: 600px;
+        width: 100%;
+        align-items: center !important;
+        justify-content: center;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .problem3-subtitle {
+        font-size: 20px;
+        line-height: 24px;
+        text-align: center !important;
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        white-space: normal;
+    }
+
+    .problem3-description {
+        display: none;
+    }
+
     /* Override stats container animation to prevent horizontal overflow */
     .problem3-stats {
         transform: translateY(50%);
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 1000px;
     }
 
     .problem3-stats.visible {
         transform: translateY(0);
     }
 
-    .problem3-title-main {
-        font-size: 40px;
-    }
-
-    .problem3-title-regular {
-        font-size: 28px;
-        line-height: 32px;
-    }
-
-    .problem3-subtitle {
-        font-size: 20px;
-        line-height: 24px;
-    }
-
-    .problem3-description {
-        font-size: 16px;
-        line-height: 20px;
-    }
-
-    .problem3-stats {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-    }
-
     .problem3-stat-card {
         flex: 0 1 calc(50% - 9px);
         min-width: 200px;
         max-width: 300px;
+        min-height: 240px;
     }
 
     /* Override individual card animations to prevent overflow on tablet */
@@ -364,6 +483,16 @@
     .problem3-stat-card:nth-child(3).visible {
         transform: none !important;
     }
+
+    /* Show footer text on tablet */
+    .problem3-stats-footer {
+        display: block;
+        font-size: 14px;
+        line-height: 16px;
+        color: var(--color-neutral-300, #686868);
+        min-width: 600px;
+        flex: 1 0 0;
+    }
 }
 
 /* Mobile (< 768px) */
@@ -376,7 +505,7 @@
     }
 
     .problem3-container {
-        gap: 24px;
+        gap: 32px;
         overflow: visible;
     }
 

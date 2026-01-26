@@ -133,25 +133,11 @@
     border-radius: 16px;
     box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
     overflow: visible;
+    cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.testimonial-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0px 8px 16px 0px rgba(255, 180, 119, 0.25);
-}
-
-/* Inner shadows overlay */
-.testimonial-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    box-shadow:
-        inset 0px -2px 4px 0px #FF9B4A,
-        inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
-    pointer-events: none;
-}
+/* Inner shadows overlay - Removed as they're now in the circling halo animation */
 
 /* ============================================
    QUOTE CONTENT
@@ -234,8 +220,8 @@
    ============================================ */
 
 .pet-icon {
-    width: 54px;
-    height: 54px;
+    width: 70px;
+    height: 70px;
     overflow: hidden;
     border-radius: 50%;
     display: flex;
@@ -248,9 +234,11 @@
     transform: scale(1.1);
 }
 
-.pet-icon svg {
+.pet-icon svg,
+.pet-icon img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
 }
 
 /* ============================================
@@ -371,13 +359,18 @@
 
     .testimonials-grid {
         flex-direction: column;
-        gap: 8px;
+        gap: 0px;
     }
 
     .testimonial-item {
         width: 100%;
         max-width: 100%;
         min-width: 100%;
+        margin-bottom: -32px;
+    }
+
+    .testimonial-item:last-child {
+        margin-bottom: 0;
     }
 
     .testimonial-card {
@@ -450,8 +443,8 @@
     }
 
     .pet-icon {
-        width: 48px;
-        height: 48px;
+        width: 64px;
+        height: 64px;
     }
 
     .problem5-footer-main {
@@ -468,4 +461,62 @@
         font-size: 20px;
         line-height: 24px;
     }
+}
+
+/* ============================================
+   HOVER & CLICK INTERACTIONS
+   ============================================ */
+
+/* Circling halo animation */
+@keyframes circling-halo-testimonial {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.5),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.6),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.5),
+            4px 4px 10px 0px rgba(255, 180, 119, 0.6),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.5),
+            -4px 4px 10px 0px rgba(255, 180, 119, 0.6),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.5),
+            -4px -4px 10px 0px rgba(255, 180, 119, 0.6),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.4),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.5),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.6),
+            inset 0px -2px 4px 0px #FF9B4A,
+            inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
+    }
+}
+
+.testimonial-item.visible .testimonial-card:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo-testimonial 2s ease-in-out infinite;
+}
+
+.testimonial-item.visible .testimonial-card:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
 }

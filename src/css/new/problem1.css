@@ -137,11 +137,12 @@
   position: relative;
   flex-shrink: 0;
   z-index: 2;
+  cursor: pointer;
 
   /* Animation */
   transform: translateX(-100%);
   opacity: 0.25;
-  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
   pointer-events: none;
 }
 
@@ -325,11 +326,12 @@
   position: relative;
   flex-shrink: 0;
   z-index: 2;
+  cursor: pointer;
 
   /* Animation */
   transform: translateX(100%);
   opacity: 0.25;
-  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+  transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
   pointer-events: none;
 }
 
@@ -579,3 +581,95 @@
    z-index: 1 → Overlays
    z-index: 2 → Price cards
 */
+
+/* ============================================
+   HOVER & CLICK INTERACTIONS
+   ============================================ */
+
+/* Circling halo animation for grey card */
+@keyframes circling-halo-grey {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            4px -4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            4px 4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            -4px 4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            -4px -4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            4px -4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Circling halo animation for orange card */
+@keyframes circling-halo-orange {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px 4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px 4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px #FFDEB3,
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+}
+
+.price-card-grey.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo-grey 2s ease-in-out infinite;
+}
+
+.price-card-grey.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
+}
+
+.price-card-orange.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo-orange 2s ease-in-out infinite;
+}
+
+.price-card-orange.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
+}

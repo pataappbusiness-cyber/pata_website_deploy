@@ -259,7 +259,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.1s ease-out;
   will-change: transform;
 }
 
@@ -506,7 +505,6 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  transition: transform 0.1s ease-out;
   will-change: transform;
 }
 
@@ -694,13 +692,13 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
-  cursor: grab;
+  cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto;
   user-select: none;
   transition: none;
 }
 
 .draggable-element:active {
-  cursor: grabbing;
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, move;
 }
 
 .draggable-element img {

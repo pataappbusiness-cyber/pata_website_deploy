@@ -109,6 +109,7 @@
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
     position: relative;
     overflow: visible;
+    cursor: pointer;
 
     /* Animation */
     transform: translateX(100%);
@@ -335,6 +336,7 @@
     position: relative;
     overflow: hidden;
     text-align: center;
+    cursor: pointer;
 
     /* Animation */
     opacity: 0.25;
@@ -459,12 +461,17 @@
         line-height: 24px;
     }
 
+    .solution4-cards {
+        align-items: center;
+    }
+
     .solution4-main-card {
         flex-direction: row;
         gap: 16px;
         height: auto;
         min-height: auto;
         align-items: center;
+        max-width: 600px;
     }
 
     .clinica-pata-side {
@@ -478,6 +485,18 @@
     /* Hide image in Clínica PATA on tablet */
     .clinica-image {
         display: none !important;
+    }
+
+    .clinica-text-group {
+        flex-direction: row;
+        gap: 8px;
+        flex-wrap: nowrap;
+        justify-content: center;
+    }
+
+    .clinica-urgencias,
+    .clinica-consultas {
+        white-space: nowrap;
     }
 
     .small-cards-grid {
@@ -500,12 +519,14 @@
 
     .solution4-bottom-cards {
         flex-direction: column;
+        align-items: center;
     }
 
     .bottom-card {
         min-height: auto;
         height: auto;
         padding: 16px;
+        max-width: 600px;
     }
 
     /* Hide images in both bottom cards on tablet */
@@ -526,6 +547,10 @@
 
     .solution4-container {
         gap: 32px;
+    }
+
+    .solution4-cards {
+        align-items: center;
     }
 
     .solution4-header {
@@ -553,6 +578,7 @@
         height: auto;
         flex-direction: column;
         gap: 4px;
+        max-width: 400px;
     }
 
     .clinica-pata-side {
@@ -629,12 +655,14 @@
 
     .solution4-bottom-cards {
         gap: 16px;
+        align-items: center;
     }
 
     .bottom-card {
         min-height: auto;
         height: auto;
         padding: 16px;
+        max-width: 400px;
     }
 
     .bottom-card-title {
@@ -706,8 +734,22 @@
     }
 }
 
-.solution4-main-card:hover,
-.bottom-card:hover {
-    transform: translateY(-4px);
+.solution4-main-card.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo 2s ease-in-out infinite;
+}
+
+.solution4-main-card.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
+}
+
+.bottom-card.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo 2s ease-in-out infinite;
+}
+
+.bottom-card.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
 }

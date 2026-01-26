@@ -115,11 +115,12 @@
     border: 0.5px solid #D4D4D4;
     border-radius: 16px;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 
     /* Animation */
     transform: translateX(-100%);
     opacity: 0.25;
-    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
@@ -262,11 +263,12 @@
     border-radius: 16px;
     box-shadow: 0px 0px 45.8px 0px rgba(255, 180, 119, 0.27);
     overflow: hidden;
+    cursor: pointer;
 
     /* Animation */
     transform: translateX(100%);
     opacity: 0.25;
-    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
@@ -422,7 +424,7 @@
     }
 
     .solution1-card-right .card-content {
-        max-width: 100%;
+        max-width: 500px;
         width: auto;
         min-width: unset;
     }
@@ -485,6 +487,7 @@
         padding: 22px 24px;
         gap: 12px;
         min-height: 142px;
+        max-width: 400px;
     }
 
     .solution1-icons {
@@ -569,4 +572,96 @@
     .solution1-card-disclaimer em {
         font-size: 11px;
     }
+}
+
+/* ============================================
+   HOVER & CLICK INTERACTIONS
+   ============================================ */
+
+/* Circling halo animation for grey card */
+@keyframes circling-halo-solution1-grey {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            4px -4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            4px 4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            -4px 4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            -4px -4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px rgba(0, 0, 0, 0.3),
+            0px 0px 16px 0px rgba(0, 0, 0, 0.2),
+            4px -4px 10px 0px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Circling halo animation for orange card */
+@keyframes circling-halo-solution1-orange {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px 4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px 4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+}
+
+.solution1-card-left .card-content.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo-solution1-grey 2s ease-in-out infinite;
+}
+
+.solution1-card-left .card-content.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
+}
+
+.solution1-card-right .card-content.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo-solution1-orange 2s ease-in-out infinite;
+}
+
+.solution1-card-right .card-content.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
 }

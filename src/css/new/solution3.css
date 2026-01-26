@@ -101,10 +101,11 @@
     justify-content: center;
     box-shadow: 0px 0px 45.8px 0px rgba(255, 180, 119, 0.25);
     overflow: hidden;
+    cursor: pointer;
 
     /* Animation */
     opacity: 0.25;
-    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
+    transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
@@ -335,6 +336,7 @@
     .solution3-card {
         padding: 22px 8px;
         min-height: 390px;
+        max-width: 550px;
     }
 
     .solution3-card-title {
@@ -384,13 +386,14 @@
     .solution3-cards-container {
         flex-direction: column;
         gap: 28px;
+        align-items: center;
     }
 
     .solution3-card {
         flex: 1 1 100%;
-        min-width: 100%;
         padding: 20px 22px;
         min-height: auto;
+        max-width: 400px;
     }
 
     .solution3-card-content {
@@ -511,4 +514,52 @@
         font-size: 16px;
         line-height: 18px;
     }
+}
+
+/* ============================================
+   HOVER & CLICK INTERACTIONS
+   ============================================ */
+
+/* Circling halo animation */
+@keyframes circling-halo-solution3 {
+    0% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    25% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px 4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    50% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px 4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    75% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            -4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+    100% {
+        box-shadow:
+            0px 4px 24px 0px rgba(255, 180, 119, 0.6),
+            0px 0px 16px 0px rgba(255, 148, 61, 0.7),
+            4px -4px 10px 0px rgba(255, 180, 119, 0.9);
+    }
+}
+
+.solution3-card.visible:hover {
+    transform: scale(1.02) translateY(-10px) !important;
+    animation: circling-halo-solution3 2s ease-in-out infinite;
+}
+
+.solution3-card.visible:active {
+    transform: scale(0.98) translateY(10px) !important;
+    animation: none;
 }

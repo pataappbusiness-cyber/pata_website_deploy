@@ -11,7 +11,7 @@
 
 const RESERVAR_CONFIG = {
   GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxRAv7LDqur3YshpQ4bN0ZKzM9LSSjH95wJMFQC62qsnFZcHauW9DdW-NLcb2pTMaHZ/exec',
-
+  COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbxRAv7LDqur3YshpQ4bN0ZKzM9LSSjH95wJMFQC62qsnFZcHauW9DdW-NLcb2pTMaHZ/exec',
 
   MAX_SPOTS: 500,
   CAROUSEL_INTERVAL: 5000, // 5 seconds
@@ -256,6 +256,11 @@ class ReservarFormSubmitter {
       this.showSuccessModal();
       this.validator.resetForm();
 
+      // Reload remaining spots after submission
+      setTimeout(() => {
+        loadRemainingSpots();
+      }, 1000);
+
       // Log success
       if (RESERVAR_CONFIG.DEBUG_MODE) {
         console.log('✅ Form submitted successfully:', formData);
@@ -360,10 +365,89 @@ window.addEventListener('keydown', function(e) {
 });
 
 /* ============================================
+   REMAINING SPOTS COUNTER
+   ============================================ */
+
+/**
+ * Load and update the remaining spots counter from Google Sheets
+ */
+async function loadRemainingSpots() {
+  // Check if URL is configured
+  if (!RESERVAR_CONFIG.COUNT_ACTION_URL ||
+      RESERVAR_CONFIG.COUNT_ACTION_URL.includes('YOUR_SCRIPT_URL_HERE')) {
+    updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+    return;
+  }
+
+  try {
+    // Use JSONP to avoid CORS issues
+    const url = `${RESERVAR_CONFIG.COUNT_ACTION_URL}?action=getCount&callback=handleReservarCountResponse`;
+    const script = document.createElement('script');
+    script.src = url;
+
+    // Timeout fallback in case the request fails
+    const timeout = setTimeout(() => {
+      updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+    }, 5000);
+
+    // Global callback function for JSONP response
+    window.handleReservarCountResponse = function(response) {
+      clearTimeout(timeout);
+
+      if (response.success) {
+        const remaining = RESERVAR_CONFIG.MAX_SPOTS - response.count;
+        updateSpotCounter(remaining);
+
+        // Show "lista cheia" state if no spots left
+        if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) {
+          showListaCheia();
+        }
+      } else {
+        updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+      }
+    };
+
+    document.head.appendChild(script);
+  } catch (error) {
+    console.error('Error loading remaining spots:', error);
+    updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+  }
+}
+
+/**
+ * Update the spot counter in the UI
+ */
+function updateSpotCounter(count) {
+  const spotElement = document.getElementById('remainingSpots');
+  if (spotElement) {
+    spotElement.textContent = count;
+  }
+}
+
+/**
+ * Show the "lista cheia" state when no spots are available
+ */
+function showListaCheia() {
+  const mainContent = document.getElementById('reservarMainContent');
+  const listaCheia = document.getElementById('reservarListaCheia');
+
+  if (mainContent) {
+    mainContent.style.display = 'none';
+  }
+
+  if (listaCheia) {
+    listaCheia.style.display = 'flex';
+  }
+}
+
+/* ============================================
    INITIALIZE ON DOM READY
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Load and update remaining spots counter
+  loadRemainingSpots();
+
   // Initialize carousel
   const carousel = new ReservarCarousel();
 

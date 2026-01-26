@@ -25,6 +25,7 @@
   --bg-black: #000000;
   --bg-white: #FFFFFF;
 
+
   /* Primary Colors (PATA Orange) */
   --color-primary-500: #DF6E39;
   --color-primary-700: #C65420;
@@ -68,11 +69,114 @@
   box-sizing: border-box;
 }
 
-html {
+html,
+body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: auto; /* Let JavaScript handle smooth scrolling */
+
+  /* Custom cursor - black version for light backgrounds */
+  cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto;
+}
+
+/* Remove all drag/move/grab cursors and replace with custom cursors */
+/* Default state for draggable elements and move/grab cursors */
+img,
+[draggable="true"],
+.draggable,
+img[src*="BONE.svg"],
+img[src*="bone.svg"],
+*[style*="cursor: move"],
+*[style*="cursor: grab"],
+*[style*="cursor: -webkit-grab"] {
+  cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Active/dragging state - use hover cursor (with 65% opacity) */
+*:active,
+img:active,
+img[src*="BONE.svg"]:active,
+img[src*="bone.svg"]:active,
+[draggable="true"]:active,
+.draggable:active,
+*[style*="cursor: grabbing"],
+*[style*="cursor: -webkit-grabbing"],
+*:active[style*="cursor: move"],
+*:active[style*="cursor: grab"],
+*:active[style*="cursor: -webkit-grab"] {
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, auto !important;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Force cursor on BONE.svg and draggable-element specifically */
+img[src$="BONE.svg"],
+img[src$="bone.svg"],
+.draggable-element {
+  cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto !important;
+}
+
+img[src$="BONE.svg"]:active,
+img[src$="bone.svg"]:active,
+.draggable-element:active {
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, move !important;
+}
+
+/* Ensure draggable-element image doesn't interfere */
+.draggable-element img {
+  pointer-events: none !important;
+}
+
+/* ============================================
+   WHITE CURSOR FOR SPECIFIC SECTIONS
+   ============================================ */
+
+/* White cursor for hero, problem1, problem3, problem4, solution1, joinus2, and joinus3 sections */
+#hero,
+#hero *,
+#problem1,
+#problem1 *,
+#problem3,
+#problem3 *,
+#problem4,
+#problem4 *,
+#solution1,
+#solution1 *,
+#joinus2,
+#joinus2 *,
+#joinus3,
+#joinus3 * {
+  cursor: url('/src/img/icons/rato_pata_branco.svg') 16 14, auto !important;
+}
+
+/* White cursor with 65% opacity on hover for interactive elements in these sections */
+#hero a:hover,
+#hero button:hover,
+#hero [class*="card"]:hover,
+#hero [role="button"]:hover,
+#problem1 a:hover,
+#problem1 button:hover,
+#problem1 [class*="card"]:hover,
+#problem3 a:hover,
+#problem3 button:hover,
+#problem3 .problem3-stat-card:hover,
+#problem3 [class*="card"]:hover,
+#problem4 a:hover,
+#problem4 button:hover,
+#problem4 [class*="card"]:hover,
+#solution1 a:hover,
+#solution1 button:hover,
+#solution1 [class*="card"]:hover,
+#joinus2 a:hover,
+#joinus2 button:hover,
+#joinus2 [class*="card"]:hover,
+#joinus3 a:hover,
+#joinus3 button:hover,
+#joinus3 [class*="card"]:hover {
+  cursor: url('/src/img/icons/rato_pata_branco_hover.svg') 16 14, pointer !important;
 }
 
 /* Fallback for browsers with JS disabled */
@@ -338,4 +442,51 @@ blockquote {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ============================================
+   CUSTOM CURSOR FOR INTERACTIVE ELEMENTS
+   ============================================ */
+
+/* White cursor on hover for all interactive elements */
+a:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.clickable:hover,
+[role="button"]:hover,
+[onclick]:hover,
+.scroll-to-top-btn:hover,
+/* Cards */
+[class*="card"]:hover,
+.price-card-grey:hover,
+.price-card-orange:hover,
+.problem3-stat-card:hover,
+.testimonial-card:hover,
+.solution1-card-left:hover,
+.solution1-card-right:hover,
+/* FAQ items */
+.faq-item:hover,
+.faq-question:hover,
+/* Navbar items */
+.navbar-link:hover,
+.navbar-cta:hover,
+.mobile-menu-link:hover,
+/* Footer links */
+footer a:hover,
+.footer-link:hover {
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
+}
+
+/* White cursor for scroll-to-top button when it has white-arrow class (on dark backgrounds) */
+.scroll-to-top-btn.white-arrow {
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
+}
+
+.scroll-to-top-btn.white-arrow:hover {
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
+}
+
+.scroll-to-top-btn.white-arrow:active {
+  cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
