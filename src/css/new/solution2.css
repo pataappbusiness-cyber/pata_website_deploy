@@ -13,6 +13,7 @@
     justify-content: center;
     padding: 48px 40px;
     gap: 40px;
+    overflow-x: hidden;
 }
 
 /* ===== HEADER ===== */
@@ -25,6 +26,7 @@
     gap: 16px;
     width: 100%;
     max-width: 1200px;
+    box-sizing: border-box;
 }
 
 .solution2-title {
@@ -34,6 +36,9 @@
     line-height: 53px;
     color: #3D3D3D;
     margin: 0;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .solution2-subtitle {
@@ -43,6 +48,9 @@
     line-height: 28px;
     color: #525252;
     margin: 0;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 /* ===== TABLE CONTAINER ===== */
@@ -53,6 +61,8 @@
     align-items: center;
     width: 100%;
     max-width: 800px;
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
 /* ===== COMPARISON TABLE ===== */
@@ -61,9 +71,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    max-width: 100%;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.16);
+    box-sizing: border-box;
 
     /* Animation - Reveal from left */
     transform: translateX(-100%);
@@ -83,7 +95,9 @@
 .table-row {
     display: flex;
     width: 100%;
+    max-width: 100%;
     min-height: 48px;
+    align-items: stretch;
 }
 
 .table-row-last {
@@ -93,13 +107,18 @@
 /* ===== TABLE CELLS ===== */
 
 .table-cell {
-    flex: 1;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 25%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 16px 8px;
     text-align: center;
     border-bottom: 1px solid #D4D4D4;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 /* Remove border from last row cells */
@@ -114,6 +133,9 @@
     color: #FEFEFF;
     height: 48px;
     padding: 12px 8px;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: 25%;
 }
 
 .header-cell-criteria p {
@@ -123,22 +145,30 @@
     line-height: 24px;
     color: #FEFEFF;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
 }
 
 .header-cell-pata {
     background: #FFB477 !important;
     border-bottom: 1px solid #FEFEFF !important;
     display: flex;
-    flex-direction: row;
+    flex-direction: row !important;
     align-items: center;
     justify-content: center;
     gap: 2px;
+    overflow: hidden;
 }
 
 .header-cell-pata .pata-logo {
     height: 24px;
     width: auto;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 .header-cell-pata p {
@@ -148,6 +178,11 @@
     line-height: 16px;
     color: #272727;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    white-space: normal;
+    flex-shrink: 1;
 }
 
 .header-cell-clinic p,
@@ -158,12 +193,18 @@
     line-height: 20px;
     color: #FEFEFF;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
 }
 
 /* ===== CRITERIA CELLS ===== */
 
 .criteria-cell {
     background: #FEFEFF;
+    overflow: hidden;
 }
 
 .criteria-cell h6 {
@@ -173,6 +214,12 @@
     line-height: 20px;
     color: #3D3D3D;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
 }
 
 .criteria-cell p {
@@ -182,6 +229,12 @@
     line-height: 20px;
     color: #3D3D3D;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
 }
 
 /* ===== PATA CELLS (ORANGE) ===== */
@@ -189,6 +242,7 @@
 .pata-cell {
     background: linear-gradient(180deg, #FFB477 0%, #FFC392 100%);
     border-bottom: 1px solid #FEFEFF !important;
+    overflow: hidden;
 }
 
 .pata-cell p {
@@ -198,6 +252,12 @@
     line-height: 20px;
     color: #3D3D3D;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
 }
 
 .pata-cell-last {
@@ -208,6 +268,7 @@
 
 .regular-cell {
     background: #FEFEFF;
+    overflow: hidden;
 }
 
 .regular-cell p {
@@ -217,6 +278,12 @@
     line-height: 20px;
     color: #3D3D3D;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    width: 100%;
+    max-width: 100%;
+    white-space: normal;
 }
 
 /* ===== SMALL TEXT (Last row) ===== */
@@ -224,6 +291,8 @@
 .small-text {
     font-size: 14px !important;
     line-height: 16px !important;
+    width: 100% !important;
+    max-width: 100% !important;
 }
 
 /* ===== FOOTER DISCLAIMER ===== */
@@ -235,6 +304,8 @@
     text-align: center;
     gap: 4px;
     max-width: 590px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .footer-title {
@@ -244,6 +315,9 @@
     line-height: 20px;
     color: #525252;
     margin: 0;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 .footer-text {
@@ -253,6 +327,9 @@
     line-height: 16px;
     color: #525252;
     margin: 0;
+    width: 100%;
+    max-width: 100%;
+    word-wrap: break-word;
 }
 
 /* ============================================
@@ -330,18 +407,38 @@
 
 @media (max-width: 768px) {
     .solution2-section {
-        padding: 32px 24px;
+        padding: 32px 12px;
         gap: 32px;
+        box-sizing: border-box;
+    }
+
+    .solution2-header {
+        width: 100%;
+        padding: 0;
     }
 
     .solution2-title {
         font-size: 32px;
         line-height: 36px;
+        padding: 0 4px;
     }
 
     .solution2-subtitle {
         font-size: 18px;
         line-height: 22px;
+        padding: 0 4px;
+    }
+
+    .solution2-table-container {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        padding: 0;
+    }
+
+    .comparison-table {
+        width: 100%;
+        box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.12);
     }
 
     .table-row {
@@ -349,13 +446,13 @@
     }
 
     .table-cell {
-        padding: 10px 4px;
+        padding: 10px 2px;
         font-size: 14px;
     }
 
     .table-header .table-cell {
         height: 40px;
-        padding: 10px 4px;
+        padding: 10px 2px;
     }
 
     .header-cell-criteria p {
@@ -402,6 +499,9 @@
 
     .solution2-footer {
         max-width: 100%;
+        width: 100%;
+        padding: 0 4px;
+        box-sizing: border-box;
     }
 }
 
@@ -411,41 +511,76 @@
 
 @media (max-width: 480px) {
     .solution2-section {
-        padding: 24px 16px;
+        padding: 24px 6px;
         gap: 24px;
+        box-sizing: border-box;
+    }
+
+    .solution2-header {
+        padding: 0 2px;
     }
 
     .solution2-title {
         font-size: 28px;
         line-height: 32px;
+        padding: 0 2px;
     }
 
     .solution2-subtitle {
         font-size: 16px;
         line-height: 20px;
+        padding: 0 2px;
+    }
+
+    .solution2-table-container {
+        width: 100%;
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .comparison-table {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
     }
 
     .table-cell {
-        padding: 8px 3px;
+        padding: 8px 0.5px;
+        min-width: 0;
+    }
+
+    .table-header .table-cell {
+        padding: 8px 0.5px;
+    }
+
+    .solution2-footer {
+        padding: 0 2px;
     }
 
     .header-cell-criteria p {
         font-size: 14px;
-        line-height: 18px;
+        line-height: 16px;
+    }
+
+    .header-cell-pata {
+        gap: 1px;
+        padding: 8px 1px !important;
     }
 
     .header-cell-pata .pata-logo {
-        height: 18px;
+        height: 16px;
+        max-width: 18px;
     }
 
     .header-cell-pata p {
         font-size: 12px;
+        line-height: 14px;
     }
 
     .header-cell-clinic p,
     .header-cell-google p {
         font-size: 12px;
-        line-height: 16px;
+        line-height: 14px;
     }
 
     .criteria-cell h6,
@@ -459,5 +594,84 @@
     .small-text {
         font-size: 10px !important;
         line-height: 12px !important;
+    }
+}
+
+/* ============================================
+   RESPONSIVE - EXTRA SMALL MOBILE (max-width: 375px)
+   ============================================ */
+
+@media (max-width: 375px) {
+    .solution2-section {
+        padding: 20px 4px;
+        box-sizing: border-box;
+    }
+
+    .solution2-header {
+        padding: 0 1px;
+    }
+
+    .solution2-title {
+        padding: 0 1px;
+    }
+
+    .solution2-subtitle {
+        padding: 0 1px;
+    }
+
+    .solution2-table-container {
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .comparison-table {
+        border-radius: 6px;
+        box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.08);
+    }
+
+    .table-cell {
+        padding: 6px 0.25px;
+    }
+
+    .table-header .table-cell {
+        padding: 6px 0.25px;
+    }
+
+    .solution2-footer {
+        padding: 0 1px;
+    }
+
+    .header-cell-pata {
+        padding: 6px 0.5px !important;
+    }
+
+    .header-cell-pata .pata-logo {
+        height: 14px;
+        max-width: 16px;
+    }
+
+    .header-cell-pata p {
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .header-cell-criteria p,
+    .header-cell-clinic p,
+    .header-cell-google p {
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .criteria-cell h6,
+    .criteria-cell p,
+    .pata-cell p,
+    .regular-cell p {
+        font-size: 10px;
+        line-height: 12px;
+    }
+
+    .small-text {
+        font-size: 8px !important;
+        line-height: 10px !important;
     }
 }

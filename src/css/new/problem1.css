@@ -528,18 +528,19 @@
     flex: none;
     width: 100%;
     min-height: 60vh;
+    padding: 8px; /* Reduced padding for mobile */
   }
 
   /* Adjust card widths for mobile */
   .price-card-grey,
   .price-card-orange {
     max-width: 90%;
-    min-width: 280px;
+    min-width: 180px; /* Reduced for smaller screens */
   }
 
   /* Allow orange card to be flexible on mobile */
   .price-card-orange {
-    min-width: 280px; /* Override 440px desktop min-width */
+    min-width: 180px; /* Override 440px desktop min-width */
   }
 
   /* Typography Responsive */
@@ -559,6 +560,10 @@
   .left-panel .source p {
     font-size: 16px;
     line-height: 18px;
+  }
+
+  .info-box {
+    min-width: unset; /* Remove min-width constraint on mobile */
   }
 
   .info-box h4 {

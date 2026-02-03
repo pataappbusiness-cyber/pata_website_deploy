@@ -33,6 +33,9 @@
     align-items: flex-start;
     flex: 1 0 0;
     min-width: 0;
+    max-width: 100%;
+    z-index: 10;
+    position: relative;
 
     /* Animation - Reveal from left */
     transform: translateX(-100%);
@@ -59,7 +62,7 @@
     width: 154px;
     height: 125px;
     flex-shrink: 0;
-    overflow: clip;
+    overflow: visible;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -72,8 +75,10 @@
 
 .problem3-cat-icon dotlottie-wc {
     display: block;
-    max-width: 100%;
-    height: auto;
+    width: 154px !important;
+    height: 125px !important;
+    max-width: 154px !important;
+    max-height: 125px !important;
 }
 
 .problem3-title-text {
@@ -88,6 +93,8 @@
     font-weight: 700;
     line-height: 38px;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .problem3-title-orange {
@@ -116,6 +123,8 @@
     margin: 0;
     max-width: 478px;
     white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .problem3-description {
@@ -125,6 +134,8 @@
     font-weight: 400;
     line-height: 22px;
     margin: 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* Right Column: Statistics Cards */
@@ -168,6 +179,7 @@
     /* Drop shadow */
     box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
     position: relative;
+    z-index: 1;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
@@ -196,13 +208,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: clip;
+    overflow: visible;
 }
 
 .problem3-stat-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+.problem3-stat-icon dotlottie-wc {
+    width: 54px !important;
+    height: 54px !important;
+    max-width: 54px !important;
+    max-height: 54px !important;
+    flex-shrink: 0;
 }
 
 /* Value Box */
@@ -287,6 +307,8 @@
     margin: 0;
     width: 100%;
     max-width: 478px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 /* ===== HOVER & CLICK INTERACTIONS ===== */
@@ -357,17 +379,22 @@
 
     /* Disable horizontal animations on tablet to prevent overflow */
     .problem3-header {
-        transform: translateY(50%);
+        transform: none;
         align-items: center !important;
         justify-content: center;
-        max-width: 600px;
+        max-width: 100%;
         margin: 0 auto;
         width: 100%;
         gap: 16px;
+        opacity: 0;
+        transition: opacity 600ms ease-in-out;
+        z-index: unset;
+        position: static;
     }
 
     .problem3-header.visible {
-        transform: translateY(0);
+        transform: none;
+        opacity: 1;
     }
 
     /* Cat icon + title - center everything */
@@ -389,6 +416,20 @@
     .problem3-cat-icon dotlottie-wc {
         width: 104px !important;
         height: 84px !important;
+        max-width: 104px !important;
+        max-height: 84px !important;
+    }
+
+    .problem3-stat-icon {
+        width: 54px;
+        height: 54px;
+    }
+
+    .problem3-stat-icon dotlottie-wc {
+        width: 54px !important;
+        height: 54px !important;
+        max-width: 54px !important;
+        max-height: 54px !important;
     }
 
     .problem3-title-text {
@@ -425,7 +466,7 @@
         padding-left: 0 !important;
         padding-right: 0 !important;
         gap: 8px;
-        max-width: 600px;
+        max-width: 100%;
         width: 100%;
         align-items: center !important;
         justify-content: center;
@@ -452,23 +493,36 @@
 
     /* Override stats container animation to prevent horizontal overflow */
     .problem3-stats {
-        transform: translateY(50%);
+        transform: none;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
         align-items: stretch;
         max-width: 1000px;
+        width: 100%;
+        opacity: 0;
+        transition: opacity 600ms ease-in-out;
+        z-index: unset;
+        position: static;
     }
 
     .problem3-stats.visible {
-        transform: translateY(0);
+        transform: none;
+        opacity: 1;
     }
 
     .problem3-stat-card {
-        flex: 0 1 calc(50% - 9px);
+        flex: 0 1 calc(33.33% - 12px);
         min-width: 200px;
         max-width: 300px;
         min-height: 240px;
+        z-index: unset;
+        position: static;
+    }
+
+    /* Ensure third card stays in the grid */
+    .problem3-stat-card:nth-child(3) {
+        flex: 0 1 calc(33.33% - 12px);
     }
 
     /* Override individual card animations to prevent overflow on tablet */
@@ -490,39 +544,63 @@
         font-size: 14px;
         line-height: 16px;
         color: var(--color-neutral-300, #686868);
-        min-width: 600px;
-        flex: 1 0 0;
+        min-width: unset;
+        flex: 1 0 100%;
+        width: 100%;
+        margin-top: 16px;
     }
 }
 
 /* Mobile (< 768px) */
 @media (max-width: 768px) {
     #problem3 {
-        padding: 40px 20px;
+        padding: 40px 15px;
         height: auto;
-        min-height: 85vh;
+        min-height: auto;
         overflow: visible;
     }
 
     .problem3-container {
-        gap: 32px;
+        gap: 40px;
         overflow: visible;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .problem3-header {
+        gap: 20px;
+        width: 100%;
+        max-width: 600px;
+        transform: none;
+        opacity: 0;
+        transition: opacity 600ms ease-in-out;
+        z-index: unset;
+        position: static;
+        flex-shrink: 0;
+    }
+
+    .problem3-header.visible {
+        transform: none;
+        opacity: 1;
     }
 
     .problem3-cat-icon {
-        width: 123px;
-        height: 100px;
+        width: 104px;
+        height: 84px;
     }
 
     .problem3-cat-icon dotlottie-wc {
-        width: 123px !important;
-        height: 100px !important;
+        width: 104px !important;
+        height: 84px !important;
+        max-width: 104px !important;
+        max-height: 84px !important;
     }
 
     .problem3-title-wrapper {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 4px;
     }
 
     .problem3-title-text {
@@ -530,34 +608,36 @@
     }
 
     .problem3-title-main {
-        font-size: 32px;
-        line-height: 36px;
+        font-size: 48px;
+        line-height: 53px;
+        text-align: center;
     }
 
     .problem3-title-orange {
         display: block;
+        text-align: center;
     }
 
     .problem3-title-regular {
         font-size: 24px;
         line-height: 28px;
         display: block;
-    }
-
-    .problem3-header {
-        gap: 16px;
+        font-weight: 600;
+        text-align: center;
     }
 
     .problem3-text-group {
-        padding-left: 0;
-        align-items: center;
+        padding-left: 18px;
+        align-items: flex-start;
         text-align: center;
         width: 100%;
+        max-width: 100%;
+        gap: 20px;
     }
 
     .problem3-subtitle {
         font-size: 18px;
-        line-height: 22px;
+        line-height: 20px;
         text-align: center;
         width: 100%;
         max-width: 100%;
@@ -573,19 +653,53 @@
         flex-direction: column;
         flex-wrap: nowrap;
         width: 100%;
-        align-items: stretch;
-        gap: 10px;
+        align-items: center;
+        align-content: flex-start;
+        gap: 18px;
+        transform: none;
+        max-width: 1000px;
+        opacity: 0;
+        transition: opacity 600ms ease-in-out;
+        z-index: unset;
+        position: static;
+        flex-shrink: 0;
+    }
+
+    .problem3-stats.visible {
+        transform: none;
+        opacity: 1;
     }
 
     .problem3-stat-card {
         width: 100%;
-        max-width: 100%;
+        max-width: 400px;
         min-width: 0;
         padding: 10px 12px 14px 12px;
         gap: 6px;
         min-height: auto;
         align-items: center;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        visibility: visible;
+        z-index: unset;
+        position: static;
+    }
+
+    .problem3-stat-icon {
+        width: 54px;
+        height: 54px;
+    }
+
+    .problem3-stat-icon dotlottie-wc {
+        width: 54px !important;
+        height: 54px !important;
+        max-width: 54px !important;
+        max-height: 54px !important;
+    }
+
+    .problem3-stat-value-box {
+        padding: 4px 12px;
     }
 
     .problem3-stat-value {
@@ -624,48 +738,42 @@
     }
 
     .problem3-stats-footer {
-        display: block;
+        display: block !important;
         margin-top: 16px;
-    }
-
-    /* Disable horizontal animations on mobile to prevent overflow */
-    .problem3-header {
-        transform: translateY(50%);
-    }
-
-    .problem3-header.visible {
-        transform: translateY(0);
-    }
-
-    /* Override stats container animation to prevent horizontal overflow */
-    .problem3-stats {
-        transform: translateY(50%);
-    }
-
-    .problem3-stats.visible {
-        transform: translateY(0);
+        width: 100%;
+        max-width: 400px;
+        min-width: unset;
+        flex: 0 0 auto;
+        font-size: 14px;
+        line-height: 16px;
+        color: #686868;
+        visibility: visible;
+        opacity: 1;
+        text-align: center;
     }
 }
 
 /* Mobile Small (< 480px) */
 @media (max-width: 480px) {
     #problem3 {
-        padding: 32px 16px;
+        padding: 40px 15px;
     }
 
     .problem3-cat-icon {
-        width: 98px;
-        height: 80px;
+        width: 84px;
+        height: 68px;
     }
 
     .problem3-cat-icon dotlottie-wc {
-        width: 98px !important;
-        height: 80px !important;
+        width: 84px !important;
+        height: 68px !important;
+        max-width: 84px !important;
+        max-height: 68px !important;
     }
 
     .problem3-title-main {
-        font-size: 28px;
-        line-height: 32px;
+        font-size: 40px;
+        line-height: 44px;
     }
 
     .problem3-title-regular {
@@ -675,17 +783,25 @@
 
     .problem3-subtitle {
         font-size: 16px;
-        line-height: 20px;
+        line-height: 18px;
     }
 
     .problem3-stat-card {
         padding: 10px 12px;
         gap: 4px;
+        min-width: 0;
     }
 
     .problem3-stat-icon {
         width: 32px;
         height: 32px;
+    }
+
+    .problem3-stat-icon dotlottie-wc {
+        width: 32px !important;
+        height: 32px !important;
+        max-width: 32px !important;
+        max-height: 32px !important;
     }
 
     .problem3-stat-value-box {
@@ -696,12 +812,6 @@
         font-size: 18px;
         line-height: 22px;
         text-align: center;
-    }
-
-    .problem3-stat-value-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .problem3-stat-label {
@@ -725,8 +835,17 @@
         flex-direction: column;
     }
 
+    .problem3-stat-value-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .problem3-stats-footer {
         font-size: 16px;
         line-height: 18px;
+        width: 100%;
+        max-width: 100%;
+        min-width: unset;
     }
 }

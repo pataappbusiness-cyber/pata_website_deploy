@@ -236,12 +236,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (!prefersReducedMotion) {
-    // Initialize shader instances for each section
-    window.liquidShaders = {
-      header: new LiquidShader('liquid-shader-canvas'),
-      joinus2: new LiquidShader('liquid-shader-canvas-joinus2'),
-      joinus3: new LiquidShader('liquid-shader-canvas-joinus3')
-    };
+    // Initialize shader instances only for canvases that exist on the page
+    window.liquidShaders = {};
+
+    const canvasIds = [
+      'liquid-shader-canvas',
+      'liquid-shader-canvas-joinus2',
+      'liquid-shader-canvas-joinus3'
+    ];
+
+    canvasIds.forEach((canvasId) => {
+      if (document.getElementById(canvasId)) {
+        const key = canvasId.replace('liquid-shader-canvas-', '').replace('liquid-shader-canvas', 'header');
+        window.liquidShaders[key] = new LiquidShader(canvasId);
+      }
+    });
   }
 });
 

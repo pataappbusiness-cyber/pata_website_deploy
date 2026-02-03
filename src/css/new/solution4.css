@@ -578,16 +578,20 @@
         height: auto;
         flex-direction: column;
         gap: 4px;
+        width: 100%;
         max-width: 400px;
     }
 
     .clinica-pata-side {
         padding: 12px;
         max-width: 100%;
-        min-width: 100%;
+        min-width: unset;
+        width: 100%;
         height: auto;
         overflow: visible;
         gap: 4px;
+        box-sizing: border-box;
+        flex: none;
     }
 
     /* Hide image in Clínica PATA on mobile */
@@ -632,33 +636,44 @@
         flex-direction: column;
         padding: 0;
         width: 100%;
-        min-width: 100%;
+        min-width: unset;
+        flex: none;
     }
 
     .small-card {
         height: auto;
         min-height: auto;
+        min-width: unset;
         padding: 16px 12px;
         width: 100%;
         max-width: 100%;
+        box-sizing: border-box;
+        overflow-wrap: break-word;
+        flex: none;
     }
 
     .small-card-title {
         font-size: 16px;
         line-height: 18px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .small-card-text {
         font-size: 12px;
         line-height: 14px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
     }
 
     .solution4-bottom-cards {
+        flex-direction: column;
         gap: 16px;
         align-items: center;
     }
 
     .bottom-card {
+        min-width: unset;
         min-height: auto;
         height: auto;
         padding: 16px;
