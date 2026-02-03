@@ -250,11 +250,11 @@ li {
     padding: 40px 24px 32px;
     border-bottom: 2px solid var(--border-light);
     background: transparent;
-    color: var(--white);
+    color: var(--dark);
 }
 
 .policy-header h1 {
-    color: var(--white);
+    color: var(--dark);
     margin-bottom: 12px;
 }
 
@@ -262,7 +262,7 @@ li {
     font-size: var(--fs-h2);
     line-height: var(--lh-h2);
     font-weight: var(--fw-semibold);
-    color: var(--white);
+    color: var(--dark);
     max-width: 600px;
     margin: 0 auto;
     display: flex;
@@ -275,7 +275,7 @@ li {
 .policy-header .last-update {
     font-size: var(--fs-small);
     line-height: var(--lh-small);
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.6);
     margin-top: 16px;
 }
 
