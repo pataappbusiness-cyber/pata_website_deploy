@@ -1379,6 +1379,19 @@ class SmoothScroll {
   }
 
   handleKeyboard(e) {
+    // Don't handle keyboard scrolling if user is typing in a form field
+    const activeElement = document.activeElement;
+    const isFormElement = activeElement && (
+      activeElement.tagName === 'INPUT' ||
+      activeElement.tagName === 'TEXTAREA' ||
+      activeElement.tagName === 'SELECT' ||
+      activeElement.isContentEditable
+    );
+
+    if (isFormElement) {
+      return; // Allow default behavior for form inputs
+    }
+
     // Handle arrow keys and page navigation
     const keyActions = {
       'ArrowDown': 100,
