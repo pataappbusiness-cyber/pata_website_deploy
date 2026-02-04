@@ -68,17 +68,11 @@
     justify-content: center;
 }
 
-.problem3-cat-icon svg {
+.problem3-cat-icon svg,
+.problem3-cat-icon img {
     width: 100%;
     height: 100%;
-}
-
-.problem3-cat-icon dotlottie-wc {
-    display: block;
-    width: 154px !important;
-    height: 125px !important;
-    max-width: 154px !important;
-    max-height: 125px !important;
+    object-fit: contain;
 }
 
 .problem3-title-text {
@@ -413,11 +407,11 @@
         margin: 0 auto;
     }
 
-    .problem3-cat-icon dotlottie-wc {
-        width: 104px !important;
-        height: 84px !important;
-        max-width: 104px !important;
-        max-height: 84px !important;
+    .problem3-cat-icon svg,
+    .problem3-cat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .problem3-stat-icon {
@@ -425,11 +419,10 @@
         height: 54px;
     }
 
-    .problem3-stat-icon dotlottie-wc {
-        width: 54px !important;
-        height: 54px !important;
-        max-width: 54px !important;
-        max-height: 54px !important;
+    .problem3-stat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .problem3-title-text {
@@ -589,11 +582,11 @@
         height: 84px;
     }
 
-    .problem3-cat-icon dotlottie-wc {
-        width: 104px !important;
-        height: 84px !important;
-        max-width: 104px !important;
-        max-height: 84px !important;
+    .problem3-cat-icon svg,
+    .problem3-cat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .problem3-title-wrapper {
@@ -691,11 +684,10 @@
         height: 54px;
     }
 
-    .problem3-stat-icon dotlottie-wc {
-        width: 54px !important;
-        height: 54px !important;
-        max-width: 54px !important;
-        max-height: 54px !important;
+    .problem3-stat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .problem3-stat-value-box {
@@ -764,11 +756,11 @@
         height: 68px;
     }
 
-    .problem3-cat-icon dotlottie-wc {
-        width: 84px !important;
-        height: 68px !important;
-        max-width: 84px !important;
-        max-height: 68px !important;
+    .problem3-cat-icon svg,
+    .problem3-cat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .problem3-title-main {
@@ -797,11 +789,10 @@
         height: 32px;
     }
 
-    .problem3-stat-icon dotlottie-wc {
-        width: 32px !important;
-        height: 32px !important;
-        max-width: 32px !important;
-        max-height: 32px !important;
+    .problem3-stat-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 
     .problem3-stat-value-box {
