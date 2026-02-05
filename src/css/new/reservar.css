@@ -699,3 +699,12 @@
     line-height: 14px;
   }
 }
+
+/* ============================================
+   RECAPTCHA V3 BADGE
+   ============================================ */
+
+/* Hide the floating reCAPTCHA v3 badge */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}

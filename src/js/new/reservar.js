@@ -10,8 +10,8 @@
    ============================================ */
 
 const RESERVAR_CONFIG = {
-  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbz-8hKHWnv_TXMlRHgU_9YHQgKPGqtl9YylNOdNNQQxVN9MLSmN3eJH3rIVy1oseogc/exec',
-  COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbz-8hKHWnv_TXMlRHgU_9YHQgKPGqtl9YylNOdNNQQxVN9MLSmN3eJH3rIVy1oseogc/exec',
+  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxvyUT6Km7LqpxHlEHgPyP801gpjcowrXlN10uJv91MtMAbbP-ioJWhDFCmhrmu1M6E/exec',
+  COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbxvyUT6Km7LqpxHlEHgPyP801gpjcowrXlN10uJv91MtMAbbP-ioJWhDFCmhrmu1M6E/exec',
 
   MAX_SPOTS: 500,
   CAROUSEL_INTERVAL: 5000, // 5 seconds
@@ -153,15 +153,6 @@ class ReservarFormValidator {
       }
     });
 
-    // Validate reCAPTCHA
-    if (typeof grecaptcha !== 'undefined') {
-      const recaptchaResponse = grecaptcha.getResponse();
-      if (!recaptchaResponse) {
-        alert('Por favor, complete o reCAPTCHA.');
-        isValid = false;
-      }
-    }
-
     return isValid;
   }
 
@@ -196,11 +187,6 @@ class ReservarFormValidator {
     Object.values(this.fields).forEach(field => {
       if (field) this.clearFieldError(field);
     });
-
-    // Reset reCAPTCHA
-    if (typeof grecaptcha !== 'undefined') {
-      grecaptcha.reset();
-    }
   }
 }
 
@@ -232,43 +218,58 @@ class ReservarFormSubmitter {
       return;
     }
 
-    // Get form data
-    const formData = {
-      nome: document.getElementById('reservarNome').value.trim(),
-      email: document.getElementById('reservarEmail').value.trim(),
-      distrito: document.getElementById('reservarDistrito').value,
-      animal: document.getElementById('reservarAnimal').value,
-      marketing: document.getElementById('reservarMarketing').checked ? 'Sim' : 'Não',
-      timestamp: new Date().toISOString()
-    };
-
-    // Add reCAPTCHA response if available
-    if (typeof grecaptcha !== 'undefined') {
-      formData['g-recaptcha-response'] = grecaptcha.getResponse();
-    }
-
     // Disable submit button
     this.submitButton.disabled = true;
     this.submitButton.textContent = 'A enviar...';
 
-    try {
-      await this.submitViaIframe(formData);
-      this.showSuccessModal();
-      this.validator.resetForm();
+    // Get reCAPTCHA v3 token and submit
+    if (typeof grecaptcha !== 'undefined') {
+      grecaptcha.ready(() => {
+        grecaptcha.execute('6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb', { action: 'waitlist_signup' })
+          .then(async (token) => {
+            // Get form data
+            const formData = {
+              nome: document.getElementById('reservarNome').value.trim(),
+              email: document.getElementById('reservarEmail').value.trim(),
+              distrito: document.getElementById('reservarDistrito').value,
+              animal: document.getElementById('reservarAnimal').value,
+              marketing: document.getElementById('reservarMarketing').checked ? 'Sim' : 'Não',
+              timestamp: new Date().toISOString(),
+              'g-recaptcha-response': token
+            };
 
-      // Reload remaining spots after submission
-      setTimeout(() => {
-        loadRemainingSpots();
-      }, 1000);
+            try {
+              await this.submitViaIframe(formData);
+              this.showSuccessModal();
+              this.validator.resetForm();
 
-      // Log success
-      if (RESERVAR_CONFIG.DEBUG_MODE) {
-        console.log('✅ Form submitted successfully:', formData);
-      }
-    } catch (error) {
-      alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
-      console.error('❌ Form submission error:', error);
-    } finally {
+              // Reload remaining spots after submission
+              setTimeout(() => {
+                loadRemainingSpots();
+              }, 1000);
+
+              // Log success
+              if (RESERVAR_CONFIG.DEBUG_MODE) {
+                console.log('✅ Form submitted successfully:', formData);
+              }
+            } catch (error) {
+              alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+              console.error('❌ Form submission error:', error);
+            } finally {
+              this.submitButton.disabled = false;
+              this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
+            }
+          })
+          .catch((error) => {
+            console.error('❌ reCAPTCHA error:', error);
+            alert('Erro ao verificar reCAPTCHA. Por favor, tente novamente.');
+            this.submitButton.disabled = false;
+            this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
+          });
+      });
+    } else {
+      // Fallback if grecaptcha is not loaded
+      alert('Erro ao carregar reCAPTCHA. Por favor, recarregue a página.');
       this.submitButton.disabled = false;
       this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
     }
