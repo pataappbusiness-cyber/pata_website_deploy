@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancelar Subscrição - PATA</title>
+    <link href="https://fonts.cdnfonts.com/css/mona-sans" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Mona Sans', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #FFF8F0 0%, #FFE8D6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 48px 32px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 32px;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        p {
+            font-size: 18px;
+            color: #525252;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+        .nome {
+            font-weight: 700;
+            color: #FF943D;
+        }
+        .warning {
+            background: #FFF5EE;
+            border: 2px solid #FFD4B0;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            font-size: 16px;
+            color: #272727;
+        }
+        .warning strong {
+            color: #FF943D;
+            font-weight: 700;
+        }
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+        .btn {
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .btn-cancel {
+            background: #FF943D;
+            color: #ffffff;
+            border: none;
+        }
+        .btn-cancel:hover {
+            background: #e8843a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 148, 61, 0.3);
+        }
+        .btn-back {
+            background: #f5f5f5;
+            color: #272727;
+            border: 2px solid #e5e5e5;
+        }
+        .btn-back:hover {
+            background: #e5e5e5;
+            transform: translateY(-2px);
+        }
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid #f0f0f0;
+            font-size: 14px;
+            color: #7d7d7d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🤔 Tem a certeza?</h1>
+        
+        <p>
+            <span class="nome" id="userName"></span>, está prestes a cancelar 
+            a sua subscrição da lista de espera da PATA.
+        </p>
+        
+        <div class="warning">
+            ⚠️ <strong>Atenção:</strong> Ao cancelar, irá perder a sua posição 
+            <strong>#<span id="userPosition"></span></strong> e os benefícios exclusivos de 
+            membro fundador.
+        </div>
+        
+        <div class="buttons">
+            <a href="#" id="confirmBtn" class="btn btn-cancel">
+                Sim, cancelar subscrição
+            </a>
+            <a href="https://pata.care" class="btn btn-back">
+                Não, manter-me na lista
+            </a>
+        </div>
+        
+        <div class="footer">
+            <p>
+                © 2025 PATA Telemedicina Veterinária Lda.<br>
+                Feito em Portugal 🇵🇹 para patudos de todo o mundo 🐾
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Ler parâmetros da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const nome = urlParams.get('nome') || 'Utilizador';
+        const posicao = urlParams.get('posicao') || '?';
+        const confirmUrl = urlParams.get('confirmUrl');
+
+        // Preencher dados
+        document.getElementById('userName').textContent = nome;
+        document.getElementById('userPosition').textContent = posicao;
+        
+        // Configurar botão de confirmação
+        if (confirmUrl) {
+            document.getElementById('confirmBtn').href = confirmUrl;
+        }
+    </script>
+</body>
+</html>
