@@ -1,3 +1,1017 @@
+/**
+ * ========================================
+ * PATA WAITLIST - GOOGLE APPS SCRIPT
+ * Versão: 8.1 - FIX 403 ERROR
+ * ========================================
+ *
+ * ÚLTIMA ATUALIZAÇÃO: 2025-02-05
+ *
+ * CHANGES V8.1:
+ * ✅ Melhorado tratamento de erros em doGet()
+ * ✅ JSONP sempre retornado mesmo em erros (evita CORS)
+ * ✅ Logging melhorado para debugging
+ *
+ * CHANGES V8.0:
+ * ✅ Migração completa de reCAPTCHA v2 → v3
+ * ✅ Score-based validation (threshold configurável)
+ * ✅ Action verification para prevenir replay attacks
+ * ✅ Logging de scores para análise futura
+ * ✅ Mantém CORS fix com redirect para unsubscribe
+ *
+ * ========================================
+ * INSTRUÇÕES DE DEPLOYMENT:
+ * ========================================
+ *
+ * 1. Cole este código no Google Apps Script
+ * 2. Clique em "Deploy" > "New deployment"
+ * 3. Selecione tipo: "Web app"
+ * 4. Configurações OBRIGATÓRIAS:
+ *    - Execute as: "Me" (sua conta Google)
+ *    - Who has access: "Anyone"
+ * 5. Clique "Deploy"
+ * 6. Copie o URL de deployment (termina em /exec)
+ * 7. Cole o URL no seu reservar.js (linhas 13-14)
+ *
+ * IMPORTANTE: Se fizer alterações no código:
+ * - Clique "Deploy" > "Manage deployments"
+ * - Clique no ícone de editar (lápis)
+ * - Selecione "New version"
+ * - Clique "Deploy"
+ *
+ * ========================================
+ */
 
+// ========================================
+// CONFIGURAÇÃO
+// ========================================
 
+const CONFIG = {
+  // Configurações da Sheet
+  SHEET_NAME: 'Lista de Espera',
+  MAX_SPOTS: 500,
+  
+  // Email
+  SEND_CONFIRMATION_EMAIL: true,
+  EMAIL_FROM: 'ola@pata.care',
+  EMAIL_FROM_NAME: 'PATA - Telemedicina Veterinária',
+  
+  // reCAPTCHA v3
+  RECAPTCHA_SECRET_KEY: '6Le6-2EsAAAAABx3Dh7hXIX__DdvL8is3bJbFmcb',
+  VALIDATE_RECAPTCHA: true,
+  RECAPTCHA_SCORE_THRESHOLD: 0.5,  // 0.0 = bot, 1.0 = humano. Ajustar conforme necessário
+  RECAPTCHA_EXPECTED_ACTION: 'waitlist_signup',  // Deve corresponder ao action no frontend
+  
+  // URLs
+  SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbztRQdsokp0xLmPuzYx_z6LVgKTEsRuB3jyT07BvLt4a8pa8jjtWqrTcyuLMRPuIQja/exec',
+  WEBSITE_URL: 'https://pata.care',
+  PRIVACY_URL: 'https://pata.care/politica-privacidade/',
+  
+  // URLs de redirect para páginas externas
+  UNSUBSCRIBE_CONFIRM_URL: 'https://pata.care/unsubscribe/confirm',
+  UNSUBSCRIBE_SUCCESS_URL: 'https://pata.care/unsubscribe/sucess',
+  UNSUBSCRIBE_ERROR_URL: 'https://pata.care/unsubscribe/error',
+  
+  // Debug
+  DEBUG: true
+};
 
+// ========================================
+// MAIN HANDLERS
+// ========================================
+
+function doGet(e) {
+  try {
+    if (!e || !e.parameter) {
+      log('⚠️ GET Request sem parâmetros válidos');
+      const defaultCallback = 'handleReservarCountResponse';
+      return ContentService
+        .createTextOutput(defaultCallback + '(' + JSON.stringify({
+          success: false,
+          message: 'Invalid request - missing parameters'
+        }) + ')')
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+
+    const action = e.parameter.action || '';
+    const email = e.parameter.email || '';
+    const callback = e.parameter.callback || '';
+
+    log('📥 GET Request - Action: ' + action + ' | Email: ' + email + ' | Callback: ' + callback);
+
+    // Unsubscribe retorna HtmlOutput para redirect (evita CORS)
+    if (action === 'confirmUnsubscribe') {
+      return processUnsubscribe(email);
+    }
+
+    let result;
+
+    switch(action) {
+      case 'getCount':
+        result = getSubmissionCountData();
+        break;
+
+      case 'getRemainingSpots':
+        result = getRemainingSpots();
+        break;
+
+      default:
+        result = { success: false, message: 'Invalid action: ' + action };
+    }
+
+    log('📤 Response: ' + JSON.stringify(result));
+
+    // SEMPRE retornar JSONP para evitar CORS
+    if (callback) {
+      return ContentService
+        .createTextOutput(callback + '(' + JSON.stringify(result) + ')')
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+
+    // Fallback para JSON direto
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (error) {
+    log('❌ Error in doGet: ' + error.toString());
+    const callback = (e && e.parameter && e.parameter.callback) || 'handleReservarCountResponse';
+    return ContentService
+      .createTextOutput(callback + '(' + JSON.stringify({
+        success: false,
+        message: error.toString()
+      }) + ')')
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+}
+
+function doPost(e) {
+  try {
+    log('📥 POST Request received');
+    
+    let data;
+    if (e.postData && e.postData.type === 'application/json') {
+      data = JSON.parse(e.postData.contents);
+    } else {
+      data = e.parameter;
+    }
+    
+    log('📦 Data: ' + JSON.stringify(data));
+    
+    const result = handleFormSubmission(data);
+    
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+      
+  } catch (error) {
+    log('❌ Error in doPost: ' + error.toString());
+    return createErrorResponse(error);
+  }
+}
+
+// ========================================
+// reCAPTCHA v3 VALIDATION
+// ========================================
+
+/**
+ * Verifica o token reCAPTCHA v3
+ * Valida: success, score (threshold), e action (anti-replay)
+ */
+function verifyRecaptcha(token) {
+  if (!CONFIG.VALIDATE_RECAPTCHA) {
+    log('⚠️ reCAPTCHA validation disabled (test mode)');
+    return { success: true, message: 'Validation skipped (test mode)', score: 1.0 };
+  }
+  
+  if (!token || token.trim() === '') {
+    log('🚫 reCAPTCHA token vazio');
+    return { success: false, message: 'Verificação de segurança não fornecida. Recarregue a página.' };
+  }
+  
+  if (!CONFIG.RECAPTCHA_SECRET_KEY || CONFIG.RECAPTCHA_SECRET_KEY === 'COLA_AQUI_A_TUA_SECRET_KEY') {
+    log('❌ RECAPTCHA_SECRET_KEY não configurada!');
+    return { success: false, message: 'Erro de configuração do servidor.' };
+  }
+  
+  try {
+    const verificationUrl = 'https://www.google.com/recaptcha/api/siteverify';
+    const payload = {
+      secret: CONFIG.RECAPTCHA_SECRET_KEY,
+      response: token
+    };
+    
+    const options = {
+      method: 'post',
+      payload: payload,
+      muteHttpExceptions: true
+    };
+    
+    log('🔍 Verificando reCAPTCHA v3...');
+    
+    const response = UrlFetchApp.fetch(verificationUrl, options);
+    const result = JSON.parse(response.getContentText());
+    
+    log('📊 reCAPTCHA v3 response: ' + JSON.stringify(result));
+    
+    // 1. Verificar se a validação base passou
+    if (result.success !== true) {
+      const errorCodes = result['error-codes'] || [];
+      log('❌ reCAPTCHA inválido: ' + JSON.stringify(errorCodes));
+      
+      let errorMessage = 'Verificação de segurança falhou.';
+      
+      if (errorCodes.includes('timeout-or-duplicate')) {
+        errorMessage = 'Verificação expirada. Por favor, recarregue a página e tente novamente.';
+      } else if (errorCodes.includes('invalid-input-response')) {
+        errorMessage = 'Verificação inválida. Recarregue a página.';
+      }
+      
+      return { 
+        success: false, 
+        message: errorMessage,
+        errorCodes: errorCodes
+      };
+    }
+    
+    // 2. Verificar score (v3 específico)
+    const score = result.score || 0;
+    log('📈 reCAPTCHA v3 Score: ' + score + ' (threshold: ' + CONFIG.RECAPTCHA_SCORE_THRESHOLD + ')');
+    
+    if (score < CONFIG.RECAPTCHA_SCORE_THRESHOLD) {
+      log('⚠️ Score abaixo do threshold: ' + score + ' < ' + CONFIG.RECAPTCHA_SCORE_THRESHOLD);
+      return { 
+        success: false, 
+        message: 'Não foi possível verificar que é humano. Tente novamente ou contacte-nos.',
+        score: score
+      };
+    }
+    
+    // 3. Verificar action (previne replay attacks)
+    if (CONFIG.RECAPTCHA_EXPECTED_ACTION && result.action !== CONFIG.RECAPTCHA_EXPECTED_ACTION) {
+      log('⚠️ Action mismatch: esperado "' + CONFIG.RECAPTCHA_EXPECTED_ACTION + '", recebido "' + result.action + '"');
+      return { 
+        success: false, 
+        message: 'Verificação de segurança inválida. Recarregue a página.',
+        score: score
+      };
+    }
+    
+    log('✅ reCAPTCHA v3 verificado - Score: ' + score + ' | Action: ' + result.action);
+    return { 
+      success: true, 
+      message: 'reCAPTCHA válido',
+      score: score,
+      action: result.action
+    };
+    
+  } catch (error) {
+    log('❌ Erro ao verificar reCAPTCHA: ' + error.toString());
+    return { 
+      success: false, 
+      message: 'Erro ao verificar segurança. Tente novamente.',
+      error: error.toString()
+    };
+  }
+}
+
+// ========================================
+// FORM SUBMISSION
+// ========================================
+
+function handleFormSubmission(data) {
+  log('📝 Processing submission: ' + data.email);
+  
+  // 1. VERIFICAR reCAPTCHA v3
+  const recaptchaToken = data['g-recaptcha-response'] || data.recaptchaToken || '';
+  
+  if (!recaptchaToken) {
+    log('🚫 reCAPTCHA token não fornecido');
+    return createResponse(false, 'Erro de verificação. Recarregue a página e tente novamente.');
+  }
+  
+  const recaptchaResult = verifyRecaptcha(recaptchaToken);
+  if (!recaptchaResult.success) {
+    return createResponse(false, recaptchaResult.message);
+  }
+  
+  log('✅ reCAPTCHA v3 válido - Score: ' + recaptchaResult.score);
+  
+  // 2. VERIFICAR CAPACIDADE
+  const sheet = getOrCreateSheet();
+  const currentCount = getActiveCount(sheet);
+  
+  if (currentCount >= CONFIG.MAX_SPOTS) {
+    log('🚫 Lista cheia');
+    return createResponse(false, 'A lista de espera está cheia.');
+  }
+  
+  // 3. VERIFICAR EMAIL DUPLICADO
+  const existingEntry = findEntryByEmail(sheet, data.email);
+  
+  if (existingEntry) {
+    if (existingEntry.status === 'Ativo') {
+      log('⚠️ Email duplicado ativo: ' + data.email);
+      return createResponse(false, 'O email já está na lista. Escreva outro.');
+    } else if (existingEntry.status === 'Cancelado') {
+      log('🔄 Reativando entry cancelada: ' + data.email);
+      reactivateEntry(sheet, existingEntry.row, data);
+      
+      if (CONFIG.SEND_CONFIRMATION_EMAIL) {
+        sendConfirmationEmail(data.nome, data.email, existingEntry.position);
+      }
+      
+      return createResponse(true, 'Subscrição reativada com sucesso!', {
+        position: existingEntry.position,
+        remaining: CONFIG.MAX_SPOTS - currentCount - 1
+      });
+    }
+  }
+  
+  // 4. ADICIONAR NOVA ENTRY
+  const position = currentCount + 1;
+  sheet.appendRow([
+    new Date(),
+    data.nome,
+    data.email,
+    data.distrito,
+    data.animal,
+    position,
+    'Ativo'
+  ]);
+  
+  log('✅ Adicionado na posição: ' + position);
+  
+  // 5. ENVIAR EMAIL
+  if (CONFIG.SEND_CONFIRMATION_EMAIL) {
+    try {
+      sendConfirmationEmail(data.nome, data.email, position);
+      log('📧 Email enviado: ' + data.email);
+    } catch (error) {
+      log('⚠️ Erro no email: ' + error.toString());
+    }
+  }
+  
+  return createResponse(true, 'Submissão bem-sucedida!', {
+    position: position,
+    remaining: CONFIG.MAX_SPOTS - position
+  });
+}
+
+// ========================================
+// UNSUBSCRIBE SYSTEM (REDIRECT-BASED)
+// ========================================
+
+/**
+ * Processar cancelamento com REDIRECT direto
+ * Usa HtmlOutput para fazer redirect server-side (evita CORS)
+ */
+function processUnsubscribe(email) {
+  const baseSuccessUrl = CONFIG.UNSUBSCRIBE_SUCCESS_URL;
+  const baseErrorUrl = CONFIG.UNSUBSCRIBE_ERROR_URL;
+  
+  if (!email) {
+    log('❌ Unsubscribe: Email não fornecido');
+    return HtmlService.createHtmlOutput(
+      '<html><head><meta http-equiv="refresh" content="0;url=' + baseErrorUrl + '?message=' + encodeURIComponent('Email não fornecido') + '"></head><body>A redirecionar...</body></html>'
+    );
+  }
+  
+  const sheet = getOrCreateSheet();
+  const entry = findEntryByEmail(sheet, email);
+  
+  if (!entry) {
+    log('❌ Unsubscribe: Email não encontrado - ' + email);
+    return HtmlService.createHtmlOutput(
+      '<html><head><meta http-equiv="refresh" content="0;url=' + baseErrorUrl + '?message=' + encodeURIComponent('Email não encontrado na lista de espera') + '"></head><body>A redirecionar...</body></html>'
+    );
+  }
+  
+  if (entry.status === 'Cancelado') {
+    log('⚠️ Unsubscribe: Já cancelado - ' + email);
+    return HtmlService.createHtmlOutput(
+      '<html><head><meta http-equiv="refresh" content="0;url=' + baseErrorUrl + '?message=' + encodeURIComponent('Esta subscrição já foi cancelada anteriormente') + '"></head><body>A redirecionar...</body></html>'
+    );
+  }
+  
+  try {
+    const statusCol = 7;
+    sheet.getRange(entry.row, statusCol).setValue('Cancelado');
+    
+    log('✅ Subscrição cancelada: ' + email);
+    
+    const successUrl = baseSuccessUrl + '?nome=' + encodeURIComponent(entry.name);
+    return HtmlService.createHtmlOutput(
+      '<html><head><meta http-equiv="refresh" content="0;url=' + successUrl + '"></head><body>A redirecionar...</body></html>'
+    );
+    
+  } catch (error) {
+    log('❌ Erro ao cancelar: ' + error.toString());
+    return HtmlService.createHtmlOutput(
+      '<html><head><meta http-equiv="refresh" content="0;url=' + baseErrorUrl + '?message=' + encodeURIComponent('Erro ao processar cancelamento') + '"></head><body>A redirecionar...</body></html>'
+    );
+  }
+}
+
+// ========================================
+// SHEET MANAGEMENT
+// ========================================
+
+function getOrCreateSheet() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
+  
+  if (!sheet) {
+    log('📄 Creating new sheet');
+    sheet = ss.insertSheet(CONFIG.SHEET_NAME);
+    setupSheetHeaders(sheet);
+  }
+  
+  return sheet;
+}
+
+function setupSheetHeaders(sheet) {
+  const headers = ['Data/Hora', 'Nome', 'Email', 'Distrito', 'Animal', 'Posição', 'Estado'];
+  sheet.appendRow(headers);
+  
+  const headerRange = sheet.getRange(1, 1, 1, headers.length);
+  headerRange.setBackground('#FF943D');
+  headerRange.setFontColor('#FFFFFF');
+  headerRange.setFontWeight('bold');
+  headerRange.setHorizontalAlignment('center');
+  
+  sheet.setFrozenRows(1);
+  sheet.setColumnWidth(1, 150);
+  sheet.setColumnWidth(2, 200);
+  sheet.setColumnWidth(3, 250);
+  sheet.setColumnWidth(4, 150);
+  sheet.setColumnWidth(5, 100);
+  sheet.setColumnWidth(6, 80);
+  sheet.setColumnWidth(7, 100);
+  
+  log('✅ Sheet configured');
+}
+
+function getActiveCount(sheet) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return 0;
+  
+  const statusCol = sheet.getRange(2, 7, lastRow - 1, 1).getValues();
+  return statusCol.filter(row => row[0] === 'Ativo').length;
+}
+
+function findEntryByEmail(sheet, email) {
+  const lastRow = sheet.getLastRow();
+  if (lastRow <= 1) return null;
+  
+  const data = sheet.getRange(2, 1, lastRow - 1, 7).getValues();
+  
+  for (let i = 0; i < data.length; i++) {
+    if (data[i][2].toString().toLowerCase() === email.toLowerCase()) {
+      return {
+        row: i + 2,
+        timestamp: data[i][0],
+        name: data[i][1],
+        email: data[i][2],
+        district: data[i][3],
+        animal: data[i][4],
+        position: data[i][5],
+        status: data[i][6]
+      };
+    }
+  }
+  
+  return null;
+}
+
+function reactivateEntry(sheet, row, newData) {
+  sheet.getRange(row, 1).setValue(new Date());
+  sheet.getRange(row, 2).setValue(newData.nome);
+  sheet.getRange(row, 4).setValue(newData.distrito);
+  sheet.getRange(row, 5).setValue(newData.animal);
+  sheet.getRange(row, 7).setValue('Ativo');
+  
+  log('✅ Entry reativada: ' + newData.email);
+}
+
+// ========================================
+// COUNTER FUNCTIONS
+// ========================================
+
+function getSubmissionCountData() {
+  try {
+    const sheet = getOrCreateSheet();
+    const count = getActiveCount(sheet);
+    
+    return {
+      success: true,
+      count: count,
+      maxSpots: CONFIG.MAX_SPOTS,
+      remaining: CONFIG.MAX_SPOTS - count
+    };
+  } catch (error) {
+    log('❌ Count error: ' + error);
+    return {
+      success: false,
+      message: error.toString(),
+      count: 0,
+      maxSpots: CONFIG.MAX_SPOTS
+    };
+  }
+}
+
+function getRemainingSpots() {
+  try {
+    const sheet = getOrCreateSheet();
+    const count = getActiveCount(sheet);
+    
+    return {
+      success: true,
+      remaining: CONFIG.MAX_SPOTS - count,
+      total: CONFIG.MAX_SPOTS
+    };
+  } catch (error) {
+    return { success: false, message: error.toString() };
+  }
+}
+
+// ========================================
+// EMAIL SYSTEM
+// ========================================
+
+function sendConfirmationEmail(nome, email, position) {
+  const subject = 'Está na lista | PATA';
+  
+  const confirmUrl = CONFIG.SCRIPT_URL + '?action=confirmUnsubscribe&email=' + encodeURIComponent(email);
+  const unsubscribeUrl = CONFIG.UNSUBSCRIBE_CONFIRM_URL + 
+    '?email=' + encodeURIComponent(email) +
+    '&nome=' + encodeURIComponent(nome) +
+    '&posicao=' + position +
+    '&confirmUrl=' + encodeURIComponent(confirmUrl);
+  
+  const htmlBody = generateWelcomeEmailHTML(nome, position, unsubscribeUrl);
+  
+  GmailApp.sendEmail(email, subject, '', {
+    htmlBody: htmlBody,
+    from: CONFIG.EMAIL_FROM,
+    name: CONFIG.EMAIL_FROM_NAME
+  });
+  
+  log('📧 Email enviado de ' + CONFIG.EMAIL_FROM + ' para: ' + email);
+}
+
+function generateWelcomeEmailHTML(nome, position, unsubscribeUrl) {
+  return `
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Está na lista | PATA</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #FFF8F0; -webkit-font-smoothing: antialiased;">
+    
+    <div style="display: none; max-height: 0; overflow: hidden;">
+        É oficialmente um dos primeiros 500. Preço de fundador bloqueado para sempre: €7,99/mês.
+    </div>
+    
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #FFF8F0; padding: 40px 20px;">
+        <tr>
+            <td align="center">
+                
+                <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width: 600px; width: 100%;">
+                    
+                    <tr>
+                        <td align="center" style="padding-bottom: 32px;">
+                            <span style="font-size: 32px; font-weight: 800; color: #1a1a1a;">PATA</span>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #FEFEFF; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                                <tr>
+                                    <td style="padding: 20px 40px;">
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                            <tr>
+                                                <td align="center" style="padding-bottom: 8px;">
+                                                    <span style="font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #FF943D;">CONFIRMADO</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="font-size: 20px; font-weight: 700; color: #272727; line-height: 24px; padding-bottom: 24px;">
+                                                    ${nome}, está na lista.
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 16px;">
+                                            <tr>
+                                                <td align="center">
+                                                    <table cellpadding="0" cellspacing="0" border="0" style="background: #272727; border-radius: 16px; padding: 24px 48px;">
+                                                        <tr>
+                                                            <td align="center" style="font-size: 18px; font-weight: 600; color: #D4D4D4; padding-bottom: 16px; line-height: 20px;">
+                                                                A sua posição
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" style="font-size: 52px; font-weight: 700; color: #FF943D; line-height: 38px;">
+                                                                ${position}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td align="center" style="font-size: 14px; font-weight: 600; color: #FEFEFF; padding-top: 16px; line-height: 16px;">
+                                                                de 500 membros fundadores
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 24px;">
+                                            <tr>
+                                                <td style="font-size: 18px; color: #272727; line-height: 22px; text-align: center; padding: 8px 0;">
+                                                    <span style="font-weight: 400;">Lembra-se daquela noite às 3h da manhã em que o seu patudo não estava bem?</span><br><br>
+                                                    <span style="font-weight: 600;">O Google só aumentava a ansiedade. A clínica estava fechada. As urgências a 40 minutos.</span><br><br>
+                                                    <strong style="font-weight: 700; font-size: 20px; line-height: 24px;">Isso vai mudar.</strong>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 12px;">
+                                            <tr>
+                                                <td align="center" style="font-size: 14px; font-weight: 600; color: #387BB2; line-height: 16px;">
+                                                    O que acabou de garantir
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: linear-gradient(136deg, #FF943D 0%, #FFB477 100%); border-radius: 12px; margin-bottom: 12px;">
+                                            <tr>
+                                                <td style="padding: 24px;">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="font-size: 20px; font-weight: 700; color: #FEFEFF; padding-bottom: 9px; line-height: 24px;">
+                                                                Preço de fundador — para sempre
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="font-size: 42px; font-weight: 700; color: #FEFEFF; padding-bottom: 12px; line-height: 46px;">
+                                                                €7,99/mês
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="font-size: 14px; font-weight: 400; color: #FEFEFF; line-height: 18px;">
+                                                                Após o período de testes, o preço será <strong style="font-weight: 600;">€14,99/mês</strong>. O seu nunca aumenta. Nem em 2027, nem em 2030. Nunca.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: linear-gradient(136deg, #387BB2 0%, #6AA5D6 100%); border-radius: 12px; margin-bottom: 12px;">
+                                            <tr>
+                                                <td style="padding: 24px;">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="font-size: 20px; font-weight: 700; color: #FEFEFF; padding-bottom: 6px; line-height: 24px;">
+                                                                Primeira consulta — oferta
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="font-size: 38px; font-weight: 700; color: #FEFEFF; padding-bottom: 8px; line-height: 42px;">
+                                                                €45 grátis
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="font-size: 14px; font-weight: 400; color: #FEFEFF; line-height: 18px;">
+                                                                Assim que a app estiver disponível, a primeira consulta veterinária é por nossa conta. Teste sem risco.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #1A1A1A; border-radius: 12px; margin-bottom: 24px;">
+                                            <tr>
+                                                <td style="padding: 24px;">
+                                                    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                                                        <tr>
+                                                            <td style="font-size: 20px; font-weight: 700; color: #FF943D; padding-bottom: 6px; line-height: 24px;">
+                                                                Badge de Fundador
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="font-size: 32px; font-weight: 700; color: #FEFEFF; padding-bottom: 8px; line-height: 36px;">
+                                                                Exclusivo e permanente
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="font-size: 14px; font-weight: 400; color: #D4D4D4; line-height: 18px;">
+                                                                Na app, vai ter um badge visível que o identifica como membro fundador. Isso não volta a estar disponível.
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 8px;">
+                                            <tr>
+                                                <td align="center" style="font-size: 14px; font-weight: 600; color: #525252; line-height: 16px;">
+                                                    O que vem a seguir
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #F8F8F8; border-radius: 8px; margin-bottom: 24px;">
+                                            <tr>
+                                                <td style="padding: 20px; font-size: 14px; color: #272727; line-height: 20px;">
+                                                    <strong style="color: #FF943D; font-weight: 600;">1. </strong><span style="font-weight: 400;">A sua posição está garantida</span><br>
+                                                    <strong style="color: #FF943D; font-weight: 600;">2. </strong><span style="font-weight: 400;">Recebe atualizações mensais sobre o desenvolvimento</span><br>
+                                                    <strong style="color: #FF943D; font-weight: 600;">3. </strong><span style="font-weight: 400;">48h antes do lançamento, é notificado/a</span><br>
+                                                    <strong style="color: #FF943D; font-weight: 600;">4. </strong><span style="font-weight: 400;">Tem 24h de vantagem para ativar a subscrição</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background: #FFF5EE; border-radius: 12px; margin-bottom: 24px; max-width: 300px; margin-left: auto; margin-right: auto;">
+                                            <tr>
+                                                <td style="padding: 12px 0; text-align: center;">
+                                                    <span style="font-size: 14px; font-weight: 600; color: #525252; line-height: 16px;">Lançamento previsto</span><br>
+                                                    <span style="font-size: 48px; font-weight: 700; color: #FF943D; line-height: 53px;">2026</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 8px;">
+                                            <tr>
+                                                <td style="font-size: 18px; color: #686868; line-height: 22px; text-align: center; padding-bottom: 8px;">
+                                                    <span style="font-weight: 400;">Daqui a 6 meses, às 3h da manhã, o mesmo vai acontecer.</span><br>
+                                                    <span style="font-weight: 400;">Mas desta vez, abre a app, vê o veterinário, recebe a resposta.</span><br>
+                                                    <strong style="color: #272727; font-weight: 600;">Volta a dormir. O seu patudo também.</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="font-size: 14px; font-weight: 600; color: #525252; padding-bottom: 8px; line-height: 16px;">
+                                                    Com carinho e entusiasmo,
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="font-size: 20px; font-weight: 700; color: #FF943D; line-height: 24px;">
+                                                    Equipa PATA
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="padding-top: 20px;">
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+
+                                <tr>
+                                    <td align="center" style="font-size: 18px; font-weight: 400; color: #7D7D7D; padding-bottom: 8px; line-height: 22px;">
+                                        Segue-nos nas redes sociais
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="padding-bottom: 17px; padding-top: 1px;">
+                                        <a href="https://www.instagram.com/pata_care/" style="color: #FF943D; text-decoration: none; font-weight: 700; font-size: 14px; margin: 0 14.25px;">Instagram</a>
+                                        <a href="https://www.facebook.com/share/1GAQaB476B/" style="color: #FF943D; text-decoration: none; font-weight: 700; font-size: 14px; margin: 0 14.25px;">Facebook</a>
+                                        <a href="https://www.linkedin.com/company/pata-care" style="color: #FF943D; text-decoration: none; font-weight: 700; font-size: 14px; margin: 0 14.25px;">LinkedIn</a>
+                                        <a href="https://www.tiktok.com/@pata_care" style="color: #FF943D; text-decoration: none; font-weight: 700; font-size: 14px; margin: 0 14.25px;">TikTok</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center" style="font-size: 14px; font-weight: 600; color: #A9A9A9; line-height: 16px; padding-bottom: 16px;">
+                                        PATA — Telemedicina Veterinária<br>
+                                        Projeto apoiado pelo StartUP Voucher (IAPMEI)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center" style="padding-bottom: 18px; padding-top: 4px;">
+                                        <a href="${CONFIG.PRIVACY_URL}" style="color: #A9A9A9; text-decoration: underline; font-weight: 600; font-size: 14px; margin: 0 10.25px;">Política de Privacidade</a>
+                                        <a href="${unsubscribeUrl}" style="color: #A9A9A9; text-decoration: underline; font-weight: 600; font-size: 14px; margin: 0 10.25px;">Cancelar subscrição</a>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center" style="font-size: 14px; font-weight: 600; color: #7D7D7D; line-height: 16px;">
+                                        © 2025 PATA. Feito em Portugal para patudos de todo o mundo.
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center" style="font-size: 10px; font-weight: 400; color: #A9A9A9; line-height: 15px; padding-top: 20px;">
+                                        A PATA oferece serviços de telemedicina veterinária complementares.<br>
+                                        Não substitui cuidados presenciais quando necessário.<br>
+                                        Em emergências graves, procure sempre uma clínica veterinária.
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                    
+                </table>
+                
+            </td>
+        </tr>
+    </table>
+    
+</body>
+</html>
+  `;
+}
+
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
+
+function createResponse(success, message, data = {}) {
+  return {
+    success: success,
+    message: message,
+    timestamp: new Date().toISOString(),
+    ...data
+  };
+}
+
+function createErrorResponse(error) {
+  return ContentService
+    .createTextOutput(JSON.stringify({
+      success: false,
+      message: error.toString()
+    }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function log(message) {
+  if (CONFIG.DEBUG) {
+    Logger.log(message);
+  }
+}
+
+// ========================================
+// ADMIN FUNCTIONS
+// ========================================
+
+function resetWaitlist() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName(CONFIG.SHEET_NAME);
+  
+  if (!sheet) {
+    log('⚠️ Sheet não encontrada');
+    return;
+  }
+  
+  const lastRow = sheet.getLastRow();
+  
+  if (lastRow > 1) {
+    try {
+      const dataRange = sheet.getRange(2, 1, lastRow - 1, 7);
+      dataRange.clearContent();
+      log('✅ Waitlist reset - ' + (lastRow - 1) + ' linhas apagadas');
+    } catch (error) {
+      log('❌ Erro: ' + error.toString());
+    }
+  } else {
+    log('⚠️ Waitlist já vazia');
+  }
+}
+
+function addTestData(quantity) {
+  const sheet = getOrCreateSheet();
+  const start = getActiveCount(sheet) + 1;
+  
+  for (let i = 0; i < quantity; i++) {
+    const pos = start + i;
+    sheet.appendRow([
+      new Date(),
+      'Teste ' + pos,
+      'teste' + pos + '@exemplo.pt',
+      'Lisboa',
+      pos % 2 === 0 ? 'Cão' : 'Gato',
+      pos,
+      'Ativo'
+    ]);
+  }
+  
+  log('✅ ' + quantity + ' entries de teste adicionadas');
+}
+
+function getStatistics() {
+  const sheet = getOrCreateSheet();
+  const lastRow = sheet.getLastRow();
+  
+  if (lastRow <= 1) {
+    return { 
+      total: 0, 
+      active: 0,
+      cancelled: 0,
+      remaining: CONFIG.MAX_SPOTS 
+    };
+  }
+  
+  const data = sheet.getRange(2, 1, lastRow - 1, 7).getValues();
+  
+  const stats = {
+    total: data.length,
+    active: data.filter(row => row[6] === 'Ativo').length,
+    cancelled: data.filter(row => row[6] === 'Cancelado').length,
+    remaining: CONFIG.MAX_SPOTS - data.filter(row => row[6] === 'Ativo').length,
+    percentageFilled: ((data.filter(row => row[6] === 'Ativo').length / CONFIG.MAX_SPOTS) * 100).toFixed(1) + '%',
+    byDistrito: {},
+    byAnimal: {}
+  };
+  
+  data.forEach(row => {
+    const distrito = row[3];
+    const animal = row[4];
+    stats.byDistrito[distrito] = (stats.byDistrito[distrito] || 0) + 1;
+    stats.byAnimal[animal] = (stats.byAnimal[animal] || 0) + 1;
+  });
+  
+  log('📊 Estatísticas: ' + JSON.stringify(stats, null, 2));
+  return stats;
+}
+
+function testScript() {
+  log('🧪 Testing script...');
+  
+  const sheet = getOrCreateSheet();
+  log('✅ Sheet: ' + sheet.getName());
+  
+  const count = getActiveCount(sheet);
+  log('✅ Active count: ' + count);
+  
+  const stats = getStatistics();
+  log('✅ Stats retrieved');
+  
+  log('✅ All tests passed!');
+}
+
+function testEmail() {
+  const testData = {
+    nome: 'Diogo Teste',
+    email: 'diogo.mig.ama.martins@gmail.com',
+    distrito: 'Évora',
+    animal: 'Cão'
+  };
+  
+  log('🧪 Iniciando teste completo...');
+  
+  const sheet = getOrCreateSheet();
+  const existingEntry = findEntryByEmail(sheet, testData.email);
+  
+  if (existingEntry) {
+    log('⚠️ Email já existe na posição ' + existingEntry.position + ' com status: ' + existingEntry.status);
+    
+    if (existingEntry.status === 'Cancelado') {
+      reactivateEntry(sheet, existingEntry.row, testData);
+      log('🔄 Entry reativada!');
+      sendConfirmationEmail(testData.nome, testData.email, existingEntry.position);
+      log('📧 Email de confirmação enviado para: ' + testData.email);
+    } else {
+      log('ℹ️ Entry já está ativa. A enviar email de teste...');
+      sendConfirmationEmail(testData.nome, testData.email, existingEntry.position);
+      log('📧 Email enviado para: ' + testData.email);
+    }
+  } else {
+    const currentCount = getActiveCount(sheet);
+    const position = currentCount + 1;
+    
+    sheet.appendRow([
+      new Date(),
+      testData.nome,
+      testData.email,
+      testData.distrito,
+      testData.animal,
+      position,
+      'Ativo'
+    ]);
+    
+    log('✅ Dados inseridos na sheet:');
+    log('   Nome: ' + testData.nome);
+    log('   Email: ' + testData.email);
+    log('   Distrito: ' + testData.distrito);
+    log('   Animal: ' + testData.animal);
+    log('   Posição: ' + position);
+    
+    sendConfirmationEmail(testData.nome, testData.email, position);
+    log('📧 Email de confirmação enviado para: ' + testData.email);
+  }
+  
+  log('🎉 Teste completo finalizado!');
+}

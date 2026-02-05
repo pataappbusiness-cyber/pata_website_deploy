@@ -299,39 +299,31 @@ class ReservarFormSubmitter {
     }
   }
 
-  submitViaIframe(formData) {
-    return new Promise((resolve, reject) => {
-      // Create hidden iframe
-      const iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      iframe.name = 'pata-reservar-submit-frame';
-      document.body.appendChild(iframe);
+  async submitViaIframe(formData) {
+    // Use URL-encoded form data instead of iframe to avoid caching issues
+    const formBody = Object.keys(formData)
+      .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(formData[key]))
+      .join('&');
 
-      // Create form
-      const form = document.createElement('form');
-      form.target = 'pata-reservar-submit-frame';
-      form.method = 'POST';
-      form.action = RESERVAR_CONFIG.GOOGLE_SCRIPT_URL;
-
-      // Add form data as hidden inputs
-      Object.keys(formData).forEach(key => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = formData[key];
-        form.appendChild(input);
+    try {
+      const response = await fetch(RESERVAR_CONFIG.GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formBody,
+        mode: 'no-cors' // Required for Google Apps Script cross-origin requests
       });
 
-      document.body.appendChild(form);
-      form.submit();
+      // With no-cors mode, we can't read the response, but submission will work
+      // Wait a bit to ensure the request completes
+      await new Promise(resolve => setTimeout(resolve, 1000));
 
-      // Clean up after 2 seconds
-      setTimeout(() => {
-        document.body.removeChild(form);
-        document.body.removeChild(iframe);
-        resolve();
-      }, 2000);
-    });
+      return true;
+    } catch (error) {
+      console.error('Submission error:', error);
+      throw error;
+    }
   }
 
   showSuccessModal() {
