@@ -199,10 +199,28 @@ class ReservarFormSubmitter {
     this.form = document.getElementById(formId);
     this.validator = validator;
     this.submitButton = document.getElementById('reservarSubmitBtn');
+    this.recaptchaReady = false;
 
     if (!this.form) return;
 
     this.init();
+    this.initRecaptcha();
+  }
+
+  initRecaptcha() {
+    // Wait for reCAPTCHA to be ready
+    const checkRecaptcha = () => {
+      if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
+        grecaptcha.ready(() => {
+          this.recaptchaReady = true;
+          console.log('✅ reCAPTCHA ready');
+        });
+      } else {
+        // Retry after 100ms if not ready yet
+        setTimeout(checkRecaptcha, 100);
+      }
+    };
+    checkRecaptcha();
   }
 
   init() {
@@ -215,6 +233,12 @@ class ReservarFormSubmitter {
 
     // Validate form
     if (!this.validator.validateForm()) {
+      return;
+    }
+
+    // Check if reCAPTCHA is ready
+    if (!this.recaptchaReady) {
+      alert('Por favor, aguarde enquanto o reCAPTCHA está a carregar...');
       return;
     }
 
