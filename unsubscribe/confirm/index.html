@@ -150,7 +150,7 @@
             document.getElementById('confirmLink').href = confirmUrl;
         } else if (email) {
             // Fallback: construir URL manualmente
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbz9Xe9bliyn0_c6Npeoyw0Ai-An-7eH4lJ5RVJMx8a-O434Lg89IyPDbKhTv_t7P5DK/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbz-8hKHWnv_TXMlRHgU_9YHQgKPGqtl9YylNOdNNQQxVN9MLSmN3eJH3rIVy1oseogc/exec';
             document.getElementById('confirmLink').href = scriptUrl + '?action=confirmUnsubscribe&email=' + encodeURIComponent(email);
         } else {
             // Sem dados válidos
@@ -162,4 +162,5 @@
     </script>
 </body>
 </html>
+
 
