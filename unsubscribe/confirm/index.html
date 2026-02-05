@@ -150,7 +150,7 @@
             document.getElementById('confirmLink').href = confirmUrl;
         } else if (email) {
             // Fallback: construir URL manualmente
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzQrkpvo9XFPz8ny0jK3uStqlaFSWCSv2TTQ3_NGZAeDIjhnep6-cUApyrn9_ZlhtbA/exec';
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbz9Xe9bliyn0_c6Npeoyw0Ai-An-7eH4lJ5RVJMx8a-O434Lg89IyPDbKhTv_t7P5DK/exec';
             document.getElementById('confirmLink').href = scriptUrl + '?action=confirmUnsubscribe&email=' + encodeURIComponent(email);
         } else {
             // Sem dados válidos
