@@ -28,6 +28,12 @@
         .emoji {
             font-size: 64px;
             margin-bottom: 24px;
+            animation: shake 0.5s ease-in-out;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
         }
         h1 {
             font-size: 32px;
@@ -44,12 +50,30 @@
             font-size: 16px;
             color: #272727;
             font-weight: 500;
+            line-height: 1.6;
+        }
+        .error-code {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #525252;
         }
         p {
             font-size: 16px;
             color: #7d7d7d;
             line-height: 1.6;
             margin-bottom: 24px;
+        }
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 32px;
         }
         .btn {
             display: inline-block;
@@ -61,11 +85,21 @@
             font-weight: 600;
             font-size: 16px;
             transition: all 0.3s ease;
+            border: none;
         }
         .btn:hover {
             background: #e8843a;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(255, 148, 61, 0.3);
+        }
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #272727;
+            border: 2px solid #e5e5e5;
+        }
+        .btn-secondary:hover {
+            background: #e5e5e5;
+            transform: translateY(-2px);
         }
         .support-link {
             color: #FF943D;
@@ -75,26 +109,74 @@
         .support-link:hover {
             text-decoration: underline;
         }
+        .footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 2px solid #f0f0f0;
+            font-size: 14px;
+            color: #7d7d7d;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="emoji">⚠️</div>
         <h1>Ops! Algo correu mal</h1>
-        <div class="error" id="errorMessage">
-            Erro desconhecido
+        
+        <div class="error">
+            <strong>Detalhes do erro:</strong><br>
+            <span id="errorMessage">Erro desconhecido</span>
+            <div class="error-code" id="errorCode"></div>
         </div>
+        
         <p>
-            Se precisares de ajuda, contacta-nos através de:<br>
+            Não te preocupes! Podes tentar novamente ou contactar-nos se o problema persistir.
+        </p>
+        
+        <div class="buttons">
+            <a href="javascript:history.back()" class="btn">
+                🔄 Tentar Novamente
+            </a>
+            <a href="https://pata.care" class="btn btn-secondary">
+                🏠 Voltar ao Website
+            </a>
+        </div>
+        
+        <p style="margin-top: 32px; font-size: 14px;">
+            <strong>Precisa de ajuda?</strong><br>
+            Contacta-nos através de:<br>
             <a href="mailto:ola@pata.care" class="support-link">ola@pata.care</a>
         </p>
-        <a href="https://pata.care" class="btn">Voltar ao Website</a>
+        
+        <div class="footer">
+            <p>
+                © 2025 PATA Telemedicina Veterinária Lda.<br>
+                Feito em Portugal 🇵🇹 para patudos de todo o mundo 🐾
+            </p>
+        </div>
     </div>
 
     <script>
+        // Ler mensagem de erro dos parâmetros da URL
         const urlParams = new URLSearchParams(window.location.search);
-        const message = urlParams.get('message') || 'Erro desconhecido';
+        const message = urlParams.get('message') || 'Erro desconhecido ao processar o pedido';
+        
+        // Atualizar mensagem de erro
         document.getElementById('errorMessage').textContent = message;
+        
+        // Mostrar código de erro técnico se disponível
+        const errorCodeEl = document.getElementById('errorCode');
+        if (message.includes('Email não encontrado')) {
+            errorCodeEl.textContent = 'ERR_EMAIL_NOT_FOUND';
+        } else if (message.includes('já foi cancelada')) {
+            errorCodeEl.textContent = 'ERR_ALREADY_CANCELLED';
+        } else if (message.includes('Email não fornecido')) {
+            errorCodeEl.textContent = 'ERR_MISSING_EMAIL';
+        } else if (message.includes('conexão')) {
+            errorCodeEl.textContent = 'ERR_NETWORK';
+        } else {
+            errorCodeEl.textContent = 'ERR_UNKNOWN';
+        }
     </script>
 </body>
 </html>

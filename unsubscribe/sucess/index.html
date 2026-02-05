@@ -28,6 +28,11 @@
         .emoji {
             font-size: 64px;
             margin-bottom: 24px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
         h1 {
             font-size: 32px;
@@ -43,6 +48,18 @@
         }
         .nome {
             font-weight: 700;
+            color: #FF943D;
+        }
+        .info-box {
+            background: #FFF5EE;
+            border: 2px solid #FFD4B0;
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
+            font-size: 16px;
+            color: #272727;
+        }
+        .info-box strong {
             color: #FF943D;
         }
         .btn {
@@ -69,20 +86,51 @@
             font-size: 14px;
             color: #7d7d7d;
         }
+        .social-links {
+            margin-top: 24px;
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .social-link {
+            color: #FF943D;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .social-link:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="emoji">😢</div>
+        <div class="emoji">👋</div>
         <h1>Subscrição Cancelada</h1>
         <p>
             <span class="nome" id="userName"></span>, a sua subscrição foi removida 
             da lista de espera da PATA.
         </p>
+        
+        <div class="info-box">
+            💔 Lamentamos ver-te partir!<br><br>
+            Se mudares de ideias, podes sempre voltar a registar-te no nosso website. 
+            A tua posição anterior não estará disponível, mas podes juntar-te novamente à lista.
+        </div>
+        
         <p style="font-size: 16px; color: #7d7d7d;">
-            Lamentamos ver-te partir! Se mudares de ideias, podes sempre 
-            voltar a registar-te no nosso website.
+            Continua a acompanhar-nos nas redes sociais para ficares a par das novidades!
         </p>
+        
+        <div class="social-links">
+            <a href="https://www.instagram.com/pata_care/" class="social-link" target="_blank">Instagram</a>
+            <a href="https://www.facebook.com/share/1GAQaB476B/" class="social-link" target="_blank">Facebook</a>
+            <a href="https://www.linkedin.com/company/pata-care" class="social-link" target="_blank">LinkedIn</a>
+            <a href="https://www.tiktok.com/@pata_care" class="social-link" target="_blank">TikTok</a>
+        </div>
+        
         <a href="https://pata.care" class="btn">Voltar ao Website</a>
         
         <div class="footer">
@@ -94,6 +142,7 @@
     </div>
 
     <script>
+        // Ler nome dos parâmetros da URL
         const urlParams = new URLSearchParams(window.location.search);
         const nome = urlParams.get('nome') || 'Utilizador';
         document.getElementById('userName').textContent = nome;
