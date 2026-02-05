@@ -76,14 +76,10 @@
             background: #FF943D;
             color: #ffffff;
         }
-        .btn-cancel:hover:not(:disabled) {
+        .btn-cancel:hover {
             background: #e8843a;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(255, 148, 61, 0.3);
-        }
-        .btn-cancel:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
         .btn-back {
             background: #f5f5f5;
@@ -101,25 +97,6 @@
             font-size: 14px;
             color: #7d7d7d;
         }
-        .spinner {
-            display: none;
-            width: 24px;
-            height: 24px;
-            border: 3px solid #ffffff;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .loading .spinner {
-            display: block;
-        }
-        .loading .btn-text {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -127,21 +104,21 @@
         <h1>🤔 Tem a certeza?</h1>
         
         <p>
-            <span class="nome" id="userName"></span>, está prestes a cancelar 
+            <span class="nome" id="userName">Utilizador</span>, está prestes a cancelar 
             a sua subscrição da lista de espera da PATA.
         </p>
         
         <div class="warning">
             ⚠️ <strong>Atenção:</strong> Ao cancelar, irá perder a sua posição 
-            <strong>#<span id="userPosition"></span></strong> e os benefícios exclusivos de 
+            <strong>#<span id="userPosition">?</span></strong> e os benefícios exclusivos de 
             membro fundador.
         </div>
         
         <div class="buttons">
-            <button id="confirmBtn" class="btn btn-cancel">
-                <div class="spinner"></div>
-                <span class="btn-text">Sim, cancelar subscrição</span>
-            </button>
+            <!-- ✅ FIXED: Link direto para o script (redirect server-side) -->
+            <a id="confirmLink" href="#" class="btn btn-cancel">
+                Sim, cancelar subscrição
+            </a>
             <a href="https://pata.care" class="btn btn-back">
                 Não, manter-me na lista
             </a>
@@ -167,42 +144,21 @@
         document.getElementById('userName').textContent = nome;
         document.getElementById('userPosition').textContent = posicao;
         
-        // ✅ FIXED: Fazer fetch em vez de link direto
-        document.getElementById('confirmBtn').addEventListener('click', async function() {
-            if (!confirmUrl || !email) {
-                alert('Erro: Dados de cancelamento inválidos.');
-                return;
-            }
-
-            const btn = this;
-            btn.disabled = true;
-            btn.classList.add('loading');
-
-            try {
-                // Fazer request para o Google Apps Script
-                const response = await fetch(confirmUrl, {
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // ✅ Sucesso - redirecionar para página de sucesso
-                    window.location.href = `https://pata.care/unsubscribe/sucess?nome=${encodeURIComponent(nome)}`;
-                } else {
-                    // ❌ Erro - redirecionar para página de erro
-                    window.location.href = `https://pata.care/unsubscribe/error?message=${encodeURIComponent(data.message || 'Erro desconhecido')}`;
-                }
-
-            } catch (error) {
-                console.error('Erro ao cancelar subscrição:', error);
-                // ❌ Erro de rede - redirecionar para página de erro
-                window.location.href = `https://pata.care/unsubscribe/error?message=${encodeURIComponent('Erro de conexão. Por favor, tente novamente.')}`;
-            }
-        });
+        // ✅ FIXED: Definir link direto para o script
+        // O script faz o redirect automaticamente (evita CORS)
+        if (confirmUrl) {
+            document.getElementById('confirmLink').href = confirmUrl;
+        } else if (email) {
+            // Fallback: construir URL manualmente
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbzZ5vRYeiUmdzBQx2zRZynoGyaqmXyyJ7d-E0O5OEDRtCJ5iG2pFVxg_qHQZJUpIf8/exec';
+            document.getElementById('confirmLink').href = scriptUrl + '?action=confirmUnsubscribe&email=' + encodeURIComponent(email);
+        } else {
+            // Sem dados válidos
+            document.getElementById('confirmLink').onclick = function(e) {
+                e.preventDefault();
+                alert('Erro: Dados de cancelamento inválidos. Por favor, use o link do email.');
+            };
+        }
     </script>
 </body>
 </html>
