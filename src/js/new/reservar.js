@@ -223,50 +223,50 @@ class ReservarFormSubmitter {
     this.submitButton.textContent = 'A enviar...';
 
     // Get reCAPTCHA v3 token and submit
-    if (typeof grecaptcha !== 'undefined') {
-      grecaptcha.ready(() => {
-        grecaptcha.execute('6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb', { action: 'waitlist_signup' })
-          .then(async (token) => {
-            // Get form data
-            const formData = {
-              nome: document.getElementById('reservarNome').value.trim(),
-              email: document.getElementById('reservarEmail').value.trim(),
-              distrito: document.getElementById('reservarDistrito').value,
-              animal: document.getElementById('reservarAnimal').value,
-              marketing: document.getElementById('reservarMarketing').checked ? 'Sim' : 'Não',
-              timestamp: new Date().toISOString(),
-              'g-recaptcha-response': token
-            };
+    if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
+      try {
+        await new Promise((resolve) => grecaptcha.ready(resolve));
 
-            try {
-              await this.submitViaIframe(formData);
-              this.showSuccessModal();
-              this.validator.resetForm();
+        const token = await grecaptcha.execute('6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb', { action: 'waitlist_signup' });
 
-              // Reload remaining spots after submission
-              setTimeout(() => {
-                loadRemainingSpots();
-              }, 1000);
+        // Get form data
+        const formData = {
+          nome: document.getElementById('reservarNome').value.trim(),
+          email: document.getElementById('reservarEmail').value.trim(),
+          distrito: document.getElementById('reservarDistrito').value,
+          animal: document.getElementById('reservarAnimal').value,
+          marketing: document.getElementById('reservarMarketing').checked ? 'Sim' : 'Não',
+          timestamp: new Date().toISOString(),
+          'g-recaptcha-response': token
+        };
 
-              // Log success
-              if (RESERVAR_CONFIG.DEBUG_MODE) {
-                console.log('✅ Form submitted successfully:', formData);
-              }
-            } catch (error) {
-              alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
-              console.error('❌ Form submission error:', error);
-            } finally {
-              this.submitButton.disabled = false;
-              this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
-            }
-          })
-          .catch((error) => {
-            console.error('❌ reCAPTCHA error:', error);
-            alert('Erro ao verificar reCAPTCHA. Por favor, tente novamente.');
-            this.submitButton.disabled = false;
-            this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
-          });
-      });
+        try {
+          await this.submitViaIframe(formData);
+          this.showSuccessModal();
+          this.validator.resetForm();
+
+          // Reload remaining spots after submission
+          setTimeout(() => {
+            loadRemainingSpots();
+          }, 1000);
+
+          // Log success
+          if (RESERVAR_CONFIG.DEBUG_MODE) {
+            console.log('✅ Form submitted successfully:', formData);
+          }
+        } catch (error) {
+          alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+          console.error('❌ Form submission error:', error);
+        } finally {
+          this.submitButton.disabled = false;
+          this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
+        }
+      } catch (error) {
+        console.error('❌ reCAPTCHA error:', error);
+        alert('Erro ao verificar reCAPTCHA. Por favor, tente novamente.');
+        this.submitButton.disabled = false;
+        this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
+      }
     } else {
       // Fallback if grecaptcha is not loaded
       alert('Erro ao carregar reCAPTCHA. Por favor, recarregue a página.');
