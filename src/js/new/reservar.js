@@ -10,8 +10,8 @@
    ============================================ */
 
 const RESERVAR_CONFIG = {
-  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxvyUT6Km7LqpxHlEHgPyP801gpjcowrXlN10uJv91MtMAbbP-ioJWhDFCmhrmu1M6E/exec',
-  COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbxvyUT6Km7LqpxHlEHgPyP801gpjcowrXlN10uJv91MtMAbbP-ioJWhDFCmhrmu1M6E/exec',
+  GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbyHDjyAQRPlayMaVyMkWSQAlsUfWzfDL4Zzzh62bzgxjzr8iahSxglxIuTLHTSAd4jO/exec',
+  COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbyHDjyAQRPlayMaVyMkWSQAlsUfWzfDL4Zzzh62bzgxjzr8iahSxglxIuTLHTSAd4jO/exec',
 
   MAX_SPOTS: 500,
   CAROUSEL_INTERVAL: 5000, // 5 seconds
