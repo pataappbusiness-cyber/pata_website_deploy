@@ -1,11 +1,22 @@
 /* ============================================
    SECTION 14: RESERVAR O LUGAR - JavaScript
    Form validation, submission, and image carousel
+   Version: 9.0 - FIX 403 cross-origin
    ============================================ */
 
 'use strict';
 
-/* ============================================
+/* =================================
+
+
+
+
+
+
+
+
+
+===========
    CONFIGURATION
    ============================================ */
 
@@ -14,7 +25,7 @@ const RESERVAR_CONFIG = {
   COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbzw_TQ0TFaHOzea7Ev4IL8Je6EjE4jH_w-brF6ssIQXzzfIQf6z8dKuUNLJv_huNDQ8/exec',
 
   MAX_SPOTS: 500,
-  CAROUSEL_INTERVAL: 5000, // 5 seconds
+  CAROUSEL_INTERVAL: 5000,
   DEBUG_MODE: false
 };
 
@@ -34,19 +45,13 @@ class ReservarCarousel {
   }
 
   init() {
-    // Start carousel
     this.intervalId = setInterval(() => this.nextImage(), RESERVAR_CONFIG.CAROUSEL_INTERVAL);
     console.log('🎠 Reservar carousel initialized');
   }
 
   nextImage() {
-    // Remove active class from current image
     this.images[this.currentIndex].classList.remove('active');
-
-    // Move to next image
     this.currentIndex = (this.currentIndex + 1) % this.images.length;
-
-    // Add delay before showing next image for smooth transition
     setTimeout(() => {
       this.images[this.currentIndex].classList.add('active');
     }, 500);
@@ -80,14 +85,12 @@ class ReservarFormValidator {
   }
 
   init() {
-    // Add blur validation
     Object.values(this.fields).forEach(field => {
       if (field) {
         field.addEventListener('blur', () => this.validateField(field));
         field.addEventListener('input', () => this.clearFieldError(field));
       }
     });
-
     console.log('✅ Reservar form validation initialized');
   }
 
@@ -99,38 +102,19 @@ class ReservarFormValidator {
 
     switch (fieldId) {
       case 'nome':
-        if (!value) {
-          isValid = false;
-          errorMessage = 'Tem de inserir o nome.';
-        }
+        if (!value) { isValid = false; errorMessage = 'Tem de inserir o nome.'; }
         break;
-
       case 'email':
-        if (!value || !this.isValidEmail(value)) {
-          isValid = false;
-          errorMessage = 'Email inválido.';
-        }
+        if (!value || !this.isValidEmail(value)) { isValid = false; errorMessage = 'Email inválido.'; }
         break;
-
       case 'distrito':
-        if (!value) {
-          isValid = false;
-          errorMessage = 'Selecione um distrito.';
-        }
+        if (!value) { isValid = false; errorMessage = 'Selecione um distrito.'; }
         break;
-
       case 'animal':
-        if (!value) {
-          isValid = false;
-          errorMessage = 'Selecione uma opção.';
-        }
+        if (!value) { isValid = false; errorMessage = 'Selecione uma opção.'; }
         break;
-
       case 'privacy':
-        if (!field.checked) {
-          isValid = false;
-          errorMessage = 'Tem de aceitar a Política de Privacidade.';
-        }
+        if (!field.checked) { isValid = false; errorMessage = 'Tem de aceitar a Política de Privacidade.'; }
         break;
     }
 
@@ -139,27 +123,22 @@ class ReservarFormValidator {
     } else {
       this.clearFieldError(field);
     }
-
     return isValid;
   }
 
   validateForm() {
     let isValid = true;
-
-    // Validate all required fields
     Object.values(this.fields).forEach(field => {
       if (field && !this.validateField(field)) {
         isValid = false;
       }
     });
-
     return isValid;
   }
 
   showFieldError(field, message) {
     field.classList.add('error');
     field.setAttribute('aria-invalid', 'true');
-
     const errorElement = document.getElementById(`${field.id}Error`);
     if (errorElement) {
       errorElement.textContent = message;
@@ -170,7 +149,6 @@ class ReservarFormValidator {
   clearFieldError(field) {
     field.classList.remove('error');
     field.setAttribute('aria-invalid', 'false');
-
     const errorElement = document.getElementById(`${field.id}Error`);
     if (errorElement) {
       errorElement.classList.remove('show');
@@ -178,8 +156,7 @@ class ReservarFormValidator {
   }
 
   isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   resetForm() {
@@ -208,7 +185,6 @@ class ReservarFormSubmitter {
   }
 
   initRecaptcha() {
-    // Wait for reCAPTCHA to be ready
     const checkRecaptcha = () => {
       if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
         grecaptcha.ready(() => {
@@ -216,7 +192,6 @@ class ReservarFormSubmitter {
           console.log('✅ reCAPTCHA ready');
         });
       } else {
-        // Retry after 100ms if not ready yet
         setTimeout(checkRecaptcha, 100);
       }
     };
@@ -231,29 +206,22 @@ class ReservarFormSubmitter {
   async handleSubmit(e) {
     e.preventDefault();
 
-    // Validate form
-    if (!this.validator.validateForm()) {
-      return;
-    }
+    if (!this.validator.validateForm()) return;
 
-    // Check if reCAPTCHA is ready
     if (!this.recaptchaReady) {
       alert('Por favor, aguarde enquanto o reCAPTCHA está a carregar...');
       return;
     }
 
-    // Disable submit button
     this.submitButton.disabled = true;
     this.submitButton.textContent = 'A enviar...';
 
-    // Get reCAPTCHA v3 token and submit
     if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
       try {
         await new Promise((resolve) => grecaptcha.ready(resolve));
 
         const token = await grecaptcha.execute('6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb', { action: 'waitlist_signup' });
 
-        // Get form data
         const formData = {
           nome: document.getElementById('reservarNome').value.trim(),
           email: document.getElementById('reservarEmail').value.trim(),
@@ -265,22 +233,17 @@ class ReservarFormSubmitter {
         };
 
         try {
-          const result = await this.submitViaIframe(formData);
+          const result = await this.submitToGoogleScript(formData);
 
           if (result.success) {
             this.showSuccessModal();
             this.validator.resetForm();
-
-            // Reload remaining spots after submission
-            setTimeout(() => {
-              loadRemainingSpots();
-            }, 1000);
+            setTimeout(() => loadRemainingSpots(), 1000);
 
             if (RESERVAR_CONFIG.DEBUG_MODE) {
               console.log('✅ Form submitted successfully:', result);
             }
           } else {
-            // Show the actual error message from the server
             alert(result.message || 'Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
             console.error('❌ Server error:', result.message);
           }
@@ -298,7 +261,6 @@ class ReservarFormSubmitter {
         this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
       }
     } else {
-      // Fallback if grecaptcha is not loaded
       alert('Erro ao carregar reCAPTCHA. Por favor, recarregue a página.');
       this.submitButton.disabled = false;
       this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
@@ -306,95 +268,137 @@ class ReservarFormSubmitter {
   }
 
   /**
-   * Submit form data via hidden iframe + real HTML form
-   * This is the ONLY reliable way to POST to Google Apps Script cross-origin.
+   * Submit to Google Apps Script
    * 
-   * Why not fetch()?
-   * - Google Apps Script redirects POST requests (302)
-   * - fetch() with mode:'no-cors' blocks redirects → doPost() never executes
-   * - fetch() without no-cors fails CORS entirely
+   * Strategy: fetch() with redirect:'follow' sends JSON POST.
+   * Google Apps Script web apps DO support CORS when deployed as "Anyone".
+   * The 302 redirect is followed automatically to the /echo response URL.
    * 
-   * The iframe approach:
-   * - Creates a real HTML <form> targeting a hidden <iframe>
-   * - The browser follows the redirect natively (no CORS issues)
-   * - Google Apps Script's doPost() receives the full event object
-   * - We use a JSONP callback via a parallel GET to confirm success
+   * If CORS fails on certain browsers, falls back to no-cors + JSONP verify.
    */
-  submitViaIframe(formData) {
-    return new Promise((resolve, reject) => {
-      const iframeName = 'reservar_submit_iframe_' + Date.now();
-      const timeoutMs = 15000; // 15 second timeout
+  submitToGoogleScript(formData) {
+    return new Promise(async (resolve, reject) => {
+      const jsonPayload = JSON.stringify(formData);
 
-      // 1. Create hidden iframe
-      const iframe = document.createElement('iframe');
-      iframe.name = iframeName;
-      iframe.style.display = 'none';
-      document.body.appendChild(iframe);
+      // ── ATTEMPT 1: fetch with CORS (gets real response) ──
+      try {
+        console.log('📨 Attempt 1: fetch with CORS...');
 
-      // 2. Create hidden form targeting the iframe
-      const hiddenForm = document.createElement('form');
-      hiddenForm.method = 'POST';
-      hiddenForm.action = RESERVAR_CONFIG.GOOGLE_SCRIPT_URL;
-      hiddenForm.target = iframeName;
-      hiddenForm.style.display = 'none';
+        const response = await fetch(RESERVAR_CONFIG.GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: jsonPayload,
+          redirect: 'follow'
+        });
 
-      // 3. Add all form data as hidden inputs
-      Object.keys(formData).forEach(key => {
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = key;
-        input.value = formData[key];
-        hiddenForm.appendChild(input);
-      });
-
-      document.body.appendChild(hiddenForm);
-
-      // 4. Set up timeout
-      const timeout = setTimeout(() => {
-        cleanup();
-        // On timeout, we assume it worked (the form was submitted,
-        // we just can't read the cross-origin response)
-        // We verify via a GET request instead
-        verifySubmission(formData.email)
-          .then(resolve)
-          .catch(() => {
-            // Even if verification fails, the submission likely went through
-            resolve({ success: true, message: 'Submissão enviada (verificação pendente).' });
-          });
-      }, 5000); // Check after 5 seconds
-
-      // 5. Listen for iframe load (fires when GAS response loads in iframe)
-      iframe.addEventListener('load', () => {
-        clearTimeout(timeout);
-
-        // We can't read cross-origin iframe content, so verify via GET
-        setTimeout(() => {
-          verifySubmission(formData.email)
-            .then(resolve)
-            .catch(() => {
-              resolve({ success: true, message: 'Submissão enviada.' });
-            })
-            .finally(cleanup);
-        }, 1500); // Give GAS a moment to process
-      });
-
-      // 6. Cleanup function
-      function cleanup() {
-        try {
-          if (hiddenForm.parentNode) hiddenForm.parentNode.removeChild(hiddenForm);
-          if (iframe.parentNode) iframe.parentNode.removeChild(iframe);
-        } catch (e) {
-          // Ignore cleanup errors
+        if (response.ok) {
+          const result = await response.json();
+          console.log('✅ CORS fetch succeeded:', result);
+          resolve(result);
+          return;
         }
+
+        console.warn('⚠️ CORS fetch status:', response.status);
+        // Fall through to attempt 2
+      } catch (corsError) {
+        console.warn('⚠️ CORS fetch failed:', corsError.message);
+        // Fall through to attempt 2
       }
 
-      // 7. Submit the form!
-      hiddenForm.submit();
+      // ── ATTEMPT 2: no-cors + JSONP verification ──
+      try {
+        console.log('📨 Attempt 2: no-cors + JSONP...');
 
-      if (RESERVAR_CONFIG.DEBUG_MODE) {
-        console.log('📨 Form submitted via iframe to:', RESERVAR_CONFIG.GOOGLE_SCRIPT_URL);
-        console.log('📦 Form data:', formData);
+        // Record count BEFORE submission
+        let countBefore = -1;
+        try {
+          const beforeResult = await this.getCountViaJSONP();
+          countBefore = beforeResult.count;
+          console.log('📊 Count before:', countBefore);
+        } catch (e) {
+          console.warn('⚠️ Could not get pre-count');
+        }
+
+        // Fire-and-forget POST (no readable response with no-cors)
+        await fetch(RESERVAR_CONFIG.GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          body: jsonPayload,
+          mode: 'no-cors',
+          redirect: 'follow'
+        });
+
+        // Wait for Google Apps Script to process
+        console.log('⏳ Waiting for GAS to process...');
+        await new Promise(r => setTimeout(r, 4000));
+
+        // Verify: did the count increase?
+        try {
+          const afterResult = await this.getCountViaJSONP();
+          const countAfter = afterResult.count;
+          console.log('📊 Count after:', countAfter);
+
+          if (countBefore >= 0 && countAfter > countBefore) {
+            console.log('✅ Verified: count increased from', countBefore, 'to', countAfter);
+            resolve({ success: true, message: 'Submissão bem-sucedida!' });
+          } else if (countBefore >= 0 && countAfter === countBefore) {
+            // Count didn't change - could be duplicate email or reCAPTCHA failure
+            console.warn('⚠️ Count unchanged - possible duplicate or validation error');
+            resolve({
+              success: false,
+              message: 'O email já está na lista ou ocorreu um erro de validação. Tente com outro email.'
+            });
+          } else {
+            // Couldn't compare, assume success
+            resolve({ success: true, message: 'Submissão enviada.' });
+          }
+        } catch (verifyError) {
+          // Can't verify but submission was sent
+          console.warn('⚠️ Verification failed, assuming success');
+          resolve({ success: true, message: 'Submissão enviada.' });
+        }
+      } catch (fallbackError) {
+        console.error('❌ All submission methods failed:', fallbackError);
+        reject(fallbackError);
       }
+    });
+  }
+
+  /**
+   * Get current count via JSONP (always works cross-origin)
+   */
+  getCountViaJSONP() {
+    return new Promise((resolve, reject) => {
+      const callbackName = 'countCallback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+
+      const timeout = setTimeout(() => {
+        delete window[callbackName];
+        const el = document.getElementById(callbackName);
+        if (el) el.remove();
+        reject(new Error('JSONP timeout'));
+      }, 8000);
+
+      window[callbackName] = function(response) {
+        clearTimeout(timeout);
+        delete window[callbackName];
+        const el = document.getElementById(callbackName);
+        if (el) el.remove();
+
+        if (response && response.success) {
+          resolve(response);
+        } else {
+          reject(new Error('JSONP failed'));
+        }
+      };
+
+      const script = document.createElement('script');
+      script.id = callbackName;
+      script.src = `${RESERVAR_CONFIG.COUNT_ACTION_URL}?action=getCount&callback=${callbackName}&_t=${Date.now()}`;
+      script.onerror = () => {
+        clearTimeout(timeout);
+        delete window[callbackName];
+        reject(new Error('JSONP script error'));
+      };
+      document.head.appendChild(script);
     });
   }
 
@@ -405,60 +409,20 @@ class ReservarFormSubmitter {
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
 
-    // Focus management
     const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
     if (focusableElements.length > 0) {
       focusableElements[0].focus();
     }
 
-    // Auto-close after 5 seconds
-    setTimeout(() => {
-      this.closeModal();
-    }, 5000);
+    setTimeout(() => this.closeModal(), 5000);
   }
 
   closeModal() {
     const modal = document.getElementById('reservarSuccessModal');
     if (!modal) return;
-
     modal.classList.remove('show');
     modal.setAttribute('aria-hidden', 'true');
   }
-}
-
-/**
- * Verify that a submission was recorded by checking via JSONP GET request.
- * This is used after iframe submission since we can't read the iframe response.
- */
-function verifySubmission(email) {
-  return new Promise((resolve, reject) => {
-    const callbackName = 'verifyCallback_' + Date.now();
-    const timeout = setTimeout(() => {
-      delete window[callbackName];
-      reject(new Error('Verification timeout'));
-    }, 8000);
-
-    window[callbackName] = function(response) {
-      clearTimeout(timeout);
-      delete window[callbackName];
-
-      if (response && response.success) {
-        resolve(response);
-      } else {
-        reject(new Error(response ? response.message : 'Verification failed'));
-      }
-    };
-
-    // Use getCount to verify - if count increased, submission worked
-    const script = document.createElement('script');
-    script.src = `${RESERVAR_CONFIG.COUNT_ACTION_URL}?action=getCount&callback=${callbackName}`;
-    script.onerror = () => {
-      clearTimeout(timeout);
-      delete window[callbackName];
-      reject(new Error('Script load error'));
-    };
-    document.head.appendChild(script);
-  });
 }
 
 /* ============================================
@@ -468,35 +432,24 @@ function verifySubmission(email) {
 function closeReservarModal() {
   const modal = document.getElementById('reservarSuccessModal');
   if (!modal) return;
-
   modal.classList.remove('show');
   modal.setAttribute('aria-hidden', 'true');
 }
 
-// Close modal on overlay click
 window.addEventListener('click', function(e) {
   const modal = document.getElementById('reservarSuccessModal');
-  if (e.target === modal) {
-    closeReservarModal();
-  }
+  if (e.target === modal) closeReservarModal();
 });
 
-// Close modal on Escape key
 window.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    closeReservarModal();
-  }
+  if (e.key === 'Escape') closeReservarModal();
 });
 
 /* ============================================
    REMAINING SPOTS COUNTER
    ============================================ */
 
-/**
- * Load and update the remaining spots counter from Google Sheets
- */
 async function loadRemainingSpots() {
-  // Check if URL is configured
   if (!RESERVAR_CONFIG.COUNT_ACTION_URL ||
       RESERVAR_CONFIG.COUNT_ACTION_URL.includes('YOUR_SCRIPT_URL_HERE')) {
     updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
@@ -504,28 +457,20 @@ async function loadRemainingSpots() {
   }
 
   try {
-    // Use JSONP to avoid CORS issues
     const url = `${RESERVAR_CONFIG.COUNT_ACTION_URL}?action=getCount&callback=handleReservarCountResponse`;
     const script = document.createElement('script');
     script.src = url;
 
-    // Timeout fallback in case the request fails
     const timeout = setTimeout(() => {
       updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
     }, 5000);
 
-    // Global callback function for JSONP response
     window.handleReservarCountResponse = function(response) {
       clearTimeout(timeout);
-
       if (response.success) {
         const remaining = RESERVAR_CONFIG.MAX_SPOTS - response.count;
         updateSpotCounter(remaining);
-
-        // Show "lista cheia" state if no spots left
-        if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) {
-          showListaCheia();
-        }
+        if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
       } else {
         updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
       }
@@ -538,30 +483,16 @@ async function loadRemainingSpots() {
   }
 }
 
-/**
- * Update the spot counter in the UI
- */
 function updateSpotCounter(count) {
   const spotElement = document.getElementById('remainingSpots');
-  if (spotElement) {
-    spotElement.textContent = count;
-  }
+  if (spotElement) spotElement.textContent = count;
 }
 
-/**
- * Show the "lista cheia" state when no spots are available
- */
 function showListaCheia() {
   const mainContent = document.getElementById('reservarMainContent');
   const listaCheia = document.getElementById('reservarListaCheia');
-
-  if (mainContent) {
-    mainContent.style.display = 'none';
-  }
-
-  if (listaCheia) {
-    listaCheia.style.display = 'flex';
-  }
+  if (mainContent) mainContent.style.display = 'none';
+  if (listaCheia) listaCheia.style.display = 'flex';
 }
 
 /* ============================================
@@ -569,24 +500,13 @@ function showListaCheia() {
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Load and update remaining spots counter
   loadRemainingSpots();
-
-  // Initialize carousel
   const carousel = new ReservarCarousel();
-
-  // Initialize form validator
   const validator = new ReservarFormValidator('reservarForm');
-
-  // Initialize form submitter
   const submitter = new ReservarFormSubmitter('reservarForm', validator);
-
   console.log('🐾 Reservar section initialized');
 
-  // Cleanup on page unload
   window.addEventListener('beforeunload', () => {
-    if (carousel) {
-      carousel.destroy();
-    }
+    if (carousel) carousel.destroy();
   });
 });
