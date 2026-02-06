@@ -6,8 +6,7 @@
 
     <!-- Preconnect para domínios críticos -->
     <link rel="preconnect" href="https://media.pata.care" crossorigin>
-    <link rel="preconnect" href="https://cdn.consentmanager.net" crossorigin>
-    <link rel="preconnect" href="https://c.delivery.consentmanager.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
 
     <!-- LCP Image Preload -->
     <link rel="preload" href="./src/img/new_images/mockup_no_bg.webp" as="image" type="image/webp">
@@ -94,12 +93,7 @@
     }
     </script>
 
-    <!-- Resource Hints for Performance -->
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://unpkg.com">
-
     <!-- Mona Sans Font via Bunny.net (Privacy-friendly CDN) -->
-    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
     <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* Mona Sans Regular (400) */
@@ -131,8 +125,7 @@
     </style>
 
     <!-- Combined and Minified Stylesheet (19 files → 1) -->
-    <link rel="preload" href="./src/css/dist/styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="./src/css/dist/styles.min.css"></noscript>
+    <link rel="stylesheet" href="./src/css/dist/styles.min.css">
 
     <!-- Critical CSS Inline (Navbar) -->
     <style>
@@ -426,6 +419,20 @@
             .header-title { font-size: 40px; }
             .header-section { min-height: auto; padding-top: 80px; }
         }
+
+        /* CLS Prevention - Image & Video Sizing */
+        img, video {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .pill-image {
+            aspect-ratio: 3/4;
+        }
+
+        .mockup-image {
+            aspect-ratio: 476/952;
+        }
     </style>
 
 </head>
@@ -436,7 +443,7 @@
         <div class="navbar-menu-container">
             <!-- Logo -->
             <a href="#hero" class="navbar-logo-link">
-                <img src="src/img/icons/logo_signature.svg" alt="PATA Logo" class="navbar-logo">
+                <img src="src/img/icons/logo_signature.svg" alt="PATA Logo" class="navbar-logo" width="95" height="32">
             </a>
 
             <!-- Desktop Navigation Links -->
@@ -509,7 +516,9 @@
                                     src="./src/img/new_images/cao_medico.png"
                                     alt="Cão com médico veterinário"
                                     class="pill-image"
-                                    loading="lazy">
+                                    loading="lazy"
+                                    width="300"
+                                    height="400">
                             </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
@@ -522,7 +531,9 @@
                                     src="./src/img/new_images/vet.png"
                                     alt="Veterinário profissional"
                                     class="pill-image"
-                                    loading="lazy">
+                                    loading="lazy"
+                                    width="300"
+                                    height="400">
                             </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
@@ -536,7 +547,10 @@
                                 src="./src/img/new_images/mockup.png"
                                 alt="PATA App"
                                 class="mockup-image"
-                                loading="eager">
+                                loading="eager"
+                                width="476"
+                                height="952"
+                                fetchpriority="high">
                         </picture>
                     </div>
 
@@ -550,7 +564,9 @@
                                     src="./src/img/new_images/cao.png"
                                     alt="Cão feliz"
                                     class="pill-image"
-                                    loading="lazy">
+                                    loading="lazy"
+                                    width="300"
+                                    height="400">
                             </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
@@ -563,7 +579,9 @@
                                     src="./src/img/new_images/gatinho.png"
                                     alt="Gatinho adorável"
                                     class="pill-image"
-                                    loading="lazy">
+                                    loading="lazy"
+                                    width="300"
+                                    height="400">
                             </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
@@ -587,14 +605,13 @@
                 <div class="background-container">
                     <video
                         class="background-video"
-                        autoplay
                         loop
                         muted
                         playsinline
                         preload="none"
                         poster="https://media.pata.care/videos/problem1_video1_poster.jpg"
                         data-lazy-video>
-                        <source src="https://media.pata.care/videos/problem1_video1.mp4" data-src="https://media.pata.care/videos/problem1_video1.mp4" type="video/mp4">
+                        <source data-src="https://media.pata.care/videos/problem1_video1.mp4" type="video/mp4">
                     </video>
                     <div class="overlay-saturation"></div>
                     <div class="overlay-dark"></div>
@@ -624,14 +641,13 @@
                 <div class="background-container">
                     <video
                         class="background-video"
-                        autoplay
                         loop
                         muted
                         playsinline
                         preload="none"
                         poster="https://media.pata.care/videos/problem1_video2_poster.jpg"
                         data-lazy-video>
-                        <source src="https://media.pata.care/videos/problem1_video2.mp4" data-src="https://media.pata.care/videos/problem1_video2.mp4" type="video/mp4">
+                        <source data-src="https://media.pata.care/videos/problem1_video2.mp4" type="video/mp4">
                     </video>
                     <div class="overlay-orange"></div>
                 </div>
@@ -838,14 +854,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             <div class="problem4-background" aria-hidden="true">
                 <video
                     class="problem4-background-video"
-                    autoplay
                     loop
                     muted
                     playsinline
                     preload="none"
                     poster="https://media.pata.care/videos/2849936-hd_1280_720_24fps_poster.jpg"
                     data-lazy-video>
-                    <source src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" data-src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" type="video/mp4">
+                    <source data-src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" type="video/mp4">
                 </video>
                 <div class="problem4-overlay-dark"></div>
                 <div class="problem4-overlay-saturation"></div>
@@ -1041,14 +1056,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <div class="card-background-container">
                         <video
                             class="card-background-video"
-                            autoplay
                             loop
                             muted
                             playsinline
                             preload="none"
                             poster="https://media.pata.care/videos/1851002-hd_1280_720_24fps_poster.jpg"
                             data-lazy-video>
-                            <source src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" data-src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" type="video/mp4">
+                            <source data-src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" type="video/mp4">
                         </video>
                         <div class="card-overlay-saturation"></div>
                         <div class="card-overlay-multiply"></div>
@@ -1091,14 +1105,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <div class="card-background-container">
                         <video
                             class="card-background-video"
-                            autoplay
                             loop
                             muted
                             playsinline
                             preload="none"
                             poster="https://media.pata.care/videos/3939111-hd_1280_720_24fps_poster.jpg"
                             data-lazy-video>
-                            <source src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" data-src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" type="video/mp4">
+                            <source data-src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" type="video/mp4">
                         </video>
                         <div class="card-overlay-dark"></div>
                         <div class="card-overlay-orange"></div>
@@ -1335,14 +1348,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             <div class="solution3-background" aria-hidden="true">
                 <video
                     class="solution3-background-video"
-                    autoplay
                     loop
                     muted
                     playsinline
                     preload="none"
                     poster="https://media.pata.care/videos/6865078-hd_1366_720_25fps_poster.jpg"
                     data-lazy-video>
-                    <source src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" data-src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" type="video/mp4">
+                    <source data-src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" type="video/mp4">
                 </video>
                 <div class="solution3-overlay-dark"></div>
             </div>
@@ -1484,7 +1496,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="small-card">
                                 <div class="small-card-icon">
                                     <!-- AI Icon -->
-                                    <img src="./src/img/icons/AI.svg" alt="AI">
+                                    <img src="./src/img/icons/AI.svg" alt="AI" width="54" height="54">
                                 </div>
                                 <h6 class="small-card-title">PATA AI</h6>
                                 <p class="small-card-text">Assistente que ajuda a descrever sintomas antes da consulta. Mais eficiência. Menos ansiedade.</p>
@@ -1494,7 +1506,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="small-card">
                                 <div class="small-card-icon">
                                     <!-- 24/7 Icon -->
-                                    <img src="./src/img/icons/24_7.svg" alt="24/7">
+                                    <img src="./src/img/icons/24_7.svg" alt="24/7" width="54" height="54">
                                 </div>
                                 <h6 class="small-card-title">Videoconsultas 24/7</h6>
                                 <p class="small-card-text">Acompanhamento regular, check-ups, segunda opinião. Marque quando quiser, de onde estiver.</p>
@@ -1522,7 +1534,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="bottom-card-header">
                                 <div class="bottom-card-icon">
                                     <!-- Pharmacy Icon -->
-                                    <img src="./src/img/icons/farmacia.svg" alt="Farmacia">
+                                    <img src="./src/img/icons/farmacia.svg" alt="Farmacia" width="54" height="54">
                                 </div>
                                 <h4 class="bottom-card-title">Receita Digital — Válida em Qualquer Farmácia</h4>
                             </div>
@@ -1543,7 +1555,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="bottom-card-header">
                                 <div class="bottom-card-icon">
                                     <!-- Marketplace Icon -->
-                                    <img src="./src/img/icons/marketplace.svg" alt="Marketplace">
+                                    <img src="./src/img/icons/marketplace.svg" alt="Marketplace" width="54" height="54">
                                 </div>
                                 <h4 class="bottom-card-title">Loja PATA — Produtos Veterinários em Casa</h4>
                             </div>
@@ -2614,18 +2626,21 @@ Agora pode confiar em nós.</h2>
     </script>
 
     <!-- Consent Manager - Delayed Loading (1.5s after page load) -->
-    <script>
+    <!-- Consent Manager - Delayed Loading (5s after page load) -->
+    <script data-cfasync="false">
+    // data-cfasync="false" prevents Rocket Loader from interfering
     window.addEventListener('load', function() {
       setTimeout(function() {
         var s = document.createElement('script');
         s.type = 'text/javascript';
+        s.setAttribute('data-cfasync', 'false');
         s.src = 'https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js';
         s.setAttribute('data-cmp-ab', '1');
         s.setAttribute('data-cmp-host', 'c.delivery.consentmanager.net');
         s.setAttribute('data-cmp-cdn', 'cdn.consentmanager.net');
         s.setAttribute('data-cmp-codesrc', '16');
-        document.head.appendChild(s);
-      }, 1500);
+        document.body.appendChild(s); // append to body instead of head
+      }, 5000); // 5s instead of 1.5s
     });
     </script>
 
