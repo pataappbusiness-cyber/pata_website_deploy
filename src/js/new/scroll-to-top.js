@@ -171,7 +171,10 @@ class ScrollToTopButton {
 
 // Initialize when DOM is ready
 // Note: This is now initialized from main.js with smoothScroll instance
-// Export for use in main.js
+// Export for use in main.js (browser global)
+window.ScrollToTopButton = ScrollToTopButton;
+
+// Export for Node.js (if needed)
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = ScrollToTopButton;
 }

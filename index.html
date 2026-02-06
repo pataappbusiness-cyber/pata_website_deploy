@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
+    <!-- Consent Manager - Using defer to improve TBT without breaking blur overlay -->
     <script defer type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js" data-cmp-host="c.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-    <!-- Preconnect para Cloudflare R2 video CDN -->
+    <!-- Preconnect para domínios críticos -->
     <link rel="preconnect" href="https://media.pata.care" crossorigin>
+    <link rel="preconnect" href="https://cdn.consentmanager.net" crossorigin>
+    <link rel="preconnect" href="https://c.delivery.consentmanager.net" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="dns-prefetch" href="https://media.pata.care">
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y"></script>
+    <!-- Google Tag Manager - Delayed Loading (3s after page load) -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-JD85N7J78Y');
+    // Carregar GTM após page load para não impactar performance
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y';
+        document.head.appendChild(s);
+        s.onload = function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-JD85N7J78Y');
+        };
+      }, 3000); // 3s delay após load
+    });
     </script>
 
 
@@ -84,64 +97,51 @@
     </script>
 
     <!-- Resource Hints for Performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://www.google.com" crossorigin>
-    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdn.consentmanager.net">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://fonts.bunny.net">
 
     <!-- Preload LCP Image (Hero Carousel First Image) -->
     <link rel="preload" as="image" href="src/img/images/header_image1.webp" type="image/webp" imagesrcset="src/img/images/header_image1.webp 1920w, src/img/images/header_image1-1440.webp 1440w, src/img/images/header_image1-768.webp 768w" imagesizes="(max-width: 768px) 768px, (max-width: 1440px) 1440px, 1920px">
 
-    <!-- Google Fonts - Mona Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <!-- Mona Sans Font via Bunny.net (Privacy-friendly CDN) -->
+    <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+        /* Mona Sans Regular (400) */
+        @font-face {
+            font-family: 'Mona Sans';
+            src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
 
-    <!-- Stylesheets: Critical CSS loaded synchronously, rest loaded asynchronously -->
-    <link rel="stylesheet" href="./src/css/new/global.css">
-    <link rel="stylesheet" href="./src/css/new/sections.css">
+        /* Mona Sans SemiBold (600) */
+        @font-face {
+            font-family: 'Mona Sans';
+            src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-600-normal.woff2') format('woff2');
+            font-weight: 600;
+            font-style: normal;
+            font-display: swap;
+        }
 
-    <!-- Non-critical CSS: Loaded asynchronously for better performance -->
-    <link rel="preload" href="./src/css/new/animated-gradient.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/problem1.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/problem2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/problem3.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/problem4.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/problem5.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/solution1.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/solution2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/solution3.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/solution4.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/joinus1.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/joinus2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/faq.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/reservar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/joinus3.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/footer.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="./src/css/new/scroll-to-top.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+        /* Mona Sans Bold (700) */
+        @font-face {
+            font-family: 'Mona Sans';
+            src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-700-normal.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
 
-    <!-- Fallback for browsers without JavaScript -->
-    <noscript>
-        <link rel="stylesheet" href="./src/css/new/animated-gradient.css">
-        <link rel="stylesheet" href="./src/css/new/problem1.css">
-        <link rel="stylesheet" href="./src/css/new/problem2.css">
-        <link rel="stylesheet" href="./src/css/new/problem3.css">
-        <link rel="stylesheet" href="./src/css/new/problem4.css">
-        <link rel="stylesheet" href="./src/css/new/problem5.css">
-        <link rel="stylesheet" href="./src/css/new/solution1.css">
-        <link rel="stylesheet" href="./src/css/new/solution2.css">
-        <link rel="stylesheet" href="./src/css/new/solution3.css">
-        <link rel="stylesheet" href="./src/css/new/solution4.css">
-        <link rel="stylesheet" href="./src/css/new/joinus1.css">
-        <link rel="stylesheet" href="./src/css/new/joinus2.css">
-        <link rel="stylesheet" href="./src/css/new/faq.css">
-        <link rel="stylesheet" href="./src/css/new/reservar.css">
-        <link rel="stylesheet" href="./src/css/new/joinus3.css">
-        <link rel="stylesheet" href="./src/css/new/footer.css">
-        <link rel="stylesheet" href="./src/css/new/scroll-to-top.css">
-    </noscript>
+    <!-- Combined and Minified Stylesheet (19 files → 1) -->
+    <link rel="preload" href="./src/css/dist/styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./src/css/dist/styles.min.css"></noscript>
 
     <!-- Critical CSS Inline (Navbar) -->
     <style>
@@ -490,11 +490,14 @@
 
                     <!-- Mockup Central -->
                     <div class="mockup-center" data-parallax="0.2">
-                        <img
-                            src="./src/img/new_images/mockup.png"
-                            alt="PATA App"
-                            class="mockup-image"
-                            loading="eager">
+                        <picture>
+                            <source srcset="./src/img/new_images/mockup_no_bg.webp" type="image/webp">
+                            <img
+                                src="./src/img/new_images/mockup.png"
+                                alt="PATA App"
+                                class="mockup-image"
+                                loading="eager">
+                        </picture>
                     </div>
 
                     <!-- Pills Direita -->
@@ -1574,7 +1577,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <div class="joinus1-card joinus1-card-2">
                         <!-- Background Image with Overlays -->
                         <div class="card-background-container">
-                            <img src="./src/img/new_images/primeiros_500_2.png" alt="" class="card-background-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/primeiros_500_2.webp" type="image/webp">
+                                <img src="./src/img/new_images/primeiros_500_2.png" alt="" class="card-background-image">
+                            </picture>
                             <div class="card-overlay-dark"></div>
                             <div class="card-overlay-orange"></div>
                         </div>
@@ -1728,7 +1734,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <!-- Background Image with Overlays -->
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
-                            <img src="./src/img/new_images/1consulta_mes.png" alt="" class="benefit-card-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/1consulta_mes_no_bg.webp" type="image/webp">
+                                <img src="./src/img/new_images/1consulta_mes.png" alt="" class="benefit-card-image">
+                            </picture>
                             <div class="benefit-card-gradient"></div>
                         </div>
 
@@ -1747,7 +1756,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <!-- Background Image with Overlays -->
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
-                            <img src="./src/img/new_images/preco_bloqueado.png" alt="" class="benefit-card-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/preco_bloqueado_no_bg.webp" type="image/webp">
+                                <img src="./src/img/new_images/preco_bloqueado.png" alt="" class="benefit-card-image">
+                            </picture>
                             <div class="benefit-card-gradient"></div>
                         </div>
 
@@ -1766,7 +1778,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <!-- Background Image with Overlays -->
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
-                            <img src="./src/img/new_images/acesso_prioritario.png" alt="" class="benefit-card-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/acesso_prioritario_no_bg.webp" type="image/webp">
+                                <img src="./src/img/new_images/acesso_prioritario.png" alt="" class="benefit-card-image">
+                            </picture>
                             <div class="benefit-card-gradient"></div>
                         </div>
 
@@ -1785,7 +1800,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <!-- Background Image with Overlays -->
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
-                            <img src="./src/img/new_images/badge_founder.png" alt="" class="benefit-card-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/badge_founder_no_bg.webp" type="image/webp">
+                                <img src="./src/img/new_images/badge_founder.png" alt="" class="benefit-card-image">
+                            </picture>
                             <div class="benefit-card-gradient"></div>
                         </div>
 
@@ -2535,12 +2553,8 @@ Agora pode confiar em nós.</h2>
 
     <!-- JavaScript -->
     <!-- reCAPTCHA: Lazy loaded on form interaction (see inline script below) -->
-    <script defer src="./src/js/liquid-shader.js"></script>
-    <script defer src="./src/js/new/main.js"></script>
-    <script defer src="./src/js/new/faq.js"></script>
-    <script defer src="./src/js/new/reservar.js"></script>
-    <script defer src="./src/js/new/scroll-to-top.js"></script>
-    <script defer src="./src/js/new/scroll-button-shader.js"></script>
+    <!-- Combined and Minified JavaScript (6 files → 1) -->
+    <script defer src="./src/js/dist/scripts.min.js"></script>
 
     <!-- reCAPTCHA Lazy Loading: Only load when user interacts with form -->
     <script>
