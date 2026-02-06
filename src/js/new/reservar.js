@@ -1,7 +1,14 @@
 /* ============================================
    SECTION 14: RESERVAR O LUGAR - JavaScript
    Form validation, submission, and image carousel
-   Version: 11.0 - FIX counter update after submission
+   Version: 12.0 - FIX instant counter loading
+   
+   CHANGES v12.0:
+   ✅ Counter preloads immediately (not on DOMContentLoaded)
+   ✅ Cached value used instantly when DOM is ready
+   ✅ No flicker: counter shows real value or nothing
+   ✅ Post-submission uses server response directly
+   ✅ JSONP cleanup prevents duplicate callbacks
    ============================================ */
 
 'use strict';
@@ -18,6 +25,52 @@ const RESERVAR_CONFIG = {
   CAROUSEL_INTERVAL: 5000,
   DEBUG_MODE: false
 };
+
+/* ============================================
+   EARLY COUNTER PRELOAD
+   Fires JSONP immediately when this script loads
+   (before DOMContentLoaded), so by the time the
+   user scrolls to the section, the value is cached.
+   ============================================ */
+
+// Cached counter value — set by JSONP callback
+let _pataCounterCache = null;
+
+(function preloadCounter() {
+  const url = RESERVAR_CONFIG.COUNT_ACTION_URL +
+    '?action=getCount&callback=_pataPreloadCountCallback&_t=' + Date.now();
+
+  window._pataPreloadCountCallback = function(response) {
+    if (response && response.success) {
+      const remaining = response.remaining !== undefined
+        ? response.remaining
+        : (RESERVAR_CONFIG.MAX_SPOTS - response.count);
+      _pataCounterCache = remaining;
+
+      // If DOM is already ready, update immediately
+      const el = document.getElementById('remainingSpots');
+      if (el) {
+        el.textContent = remaining;
+      }
+    }
+    // Cleanup
+    delete window._pataPreloadCountCallback;
+    const scriptEl = document.getElementById('pataPreloadScript');
+    if (scriptEl) scriptEl.remove();
+  };
+
+  const script = document.createElement('script');
+  script.id = 'pataPreloadScript';
+  script.src = url;
+  script.onerror = function() {
+    delete window._pataPreloadCountCallback;
+    const scriptEl = document.getElementById('pataPreloadScript');
+    if (scriptEl) scriptEl.remove();
+  };
+
+  // Append to <head> immediately — no waiting for DOM
+  (document.head || document.documentElement).appendChild(script);
+})();
 
 /* ============================================
    IMAGE CAROUSEL
@@ -215,9 +268,10 @@ class ReservarFormSubmitter {
         this.showSuccessModal();
         this.validator.resetForm();
 
-        // FIX v11: Update counter immediately from server response
+        // Update counter immediately from server response
         if (result.remaining !== undefined) {
           updateSpotCounter(result.remaining);
+          _pataCounterCache = result.remaining;
           console.log('📊 Counter updated from response:', result.remaining);
         } else {
           // Fallback: reload via JSONP after delay
@@ -447,11 +501,9 @@ async function loadRemainingSpots() {
   }
 
   try {
-    // FIX v11: Clean up any previous JSONP script to avoid duplicates
+    // Clean up any previous JSONP script
     const oldScript = document.getElementById('pataCountScript');
     if (oldScript) oldScript.remove();
-
-    // Clean up previous callback
     if (window.handleReservarCountResponse) {
       delete window.handleReservarCountResponse;
     }
@@ -463,36 +515,31 @@ async function loadRemainingSpots() {
     script.id = 'pataCountScript';
     script.src = url;
 
-    // FIX v11: On timeout, only fallback to MAX_SPOTS if still showing placeholder
+    // On timeout, only fallback if no value exists yet
     const timeout = setTimeout(() => {
       console.warn('⚠️ Count request timed out');
       const el = document.getElementById('remainingSpots');
       if (el && (el.textContent === '...' || el.textContent === '')) {
         updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
       }
-      // If already has a real number, keep it — don't reset to 500
     }, 8000);
 
     window.handleReservarCountResponse = function(response) {
       clearTimeout(timeout);
       if (response && response.success) {
-        // FIX v11: Use response.remaining directly if available
         const remaining = response.remaining !== undefined
           ? response.remaining
           : (RESERVAR_CONFIG.MAX_SPOTS - response.count);
         updateSpotCounter(remaining);
+        _pataCounterCache = remaining;
         console.log('📊 Spots remaining:', remaining);
         if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
-      } else {
-        console.warn('⚠️ Count response unsuccessful');
-        // FIX v11: Don't reset to MAX_SPOTS on failure — keep current value
       }
     };
 
     document.head.appendChild(script);
   } catch (error) {
     console.error('Error loading remaining spots:', error);
-    // FIX v11: Don't reset to MAX_SPOTS on error — keep current value
   }
 }
 
@@ -513,7 +560,15 @@ function showListaCheia() {
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadRemainingSpots();
+  // If preload already got the value, apply it immediately
+  if (_pataCounterCache !== null) {
+    updateSpotCounter(_pataCounterCache);
+    console.log('📊 Counter applied from preload cache:', _pataCounterCache);
+  } else {
+    // Preload hasn't returned yet — it will update the DOM when it does
+    console.log('⏳ Waiting for preload counter...');
+  }
+
   const carousel = new ReservarCarousel();
   const validator = new ReservarFormValidator('reservarForm');
   const submitter = new ReservarFormSubmitter('reservarForm', validator);
