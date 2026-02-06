@@ -1,14 +1,14 @@
 /* ============================================
    SECTION 14: RESERVAR O LUGAR - JavaScript
    Form validation, submission, and image carousel
-   Version: 12.0 - FIX instant counter loading
+   Version: 13.0 - Bulletproof counter loading
    
-   CHANGES v12.0:
-   ✅ Counter preloads immediately (not on DOMContentLoaded)
-   ✅ Cached value used instantly when DOM is ready
-   ✅ No flicker: counter shows real value or nothing
-   ✅ Post-submission uses server response directly
-   ✅ JSONP cleanup prevents duplicate callbacks
+   CHANGES v13.0:
+   ✅ Default HTML shows 500 (not "..." — no flicker)
+   ✅ Preload JSONP fires immediately on script load
+   ✅ DOMContentLoaded retries if preload hasn't returned
+   ✅ Post-submission updates from server response
+   ✅ Counter never resets to 500 once a real value is set
    ============================================ */
 
 'use strict';
@@ -27,49 +27,60 @@ const RESERVAR_CONFIG = {
 };
 
 /* ============================================
-   EARLY COUNTER PRELOAD
-   Fires JSONP immediately when this script loads
-   (before DOMContentLoaded), so by the time the
-   user scrolls to the section, the value is cached.
+   COUNTER STATE
    ============================================ */
 
-// Cached counter value — set by JSONP callback
+// true once we have a real value from the server
+let _pataCounterLoaded = false;
+// the real remaining value
 let _pataCounterCache = null;
 
+/* ============================================
+   EARLY COUNTER PRELOAD
+   Fires JSONP the moment this script is parsed.
+   ============================================ */
+
 (function preloadCounter() {
-  const url = RESERVAR_CONFIG.COUNT_ACTION_URL +
-    '?action=getCount&callback=_pataPreloadCountCallback&_t=' + Date.now();
+  try {
+    const cbName = '_pataPreload_' + Date.now();
+    const url = RESERVAR_CONFIG.COUNT_ACTION_URL +
+      '?action=getCount&callback=' + cbName + '&_t=' + Date.now();
 
-  window._pataPreloadCountCallback = function(response) {
-    if (response && response.success) {
-      const remaining = response.remaining !== undefined
-        ? response.remaining
-        : (RESERVAR_CONFIG.MAX_SPOTS - response.count);
-      _pataCounterCache = remaining;
+    window[cbName] = function(response) {
+      // Cleanup
+      delete window[cbName];
+      var s = document.getElementById('pataPreloadScript');
+      if (s) s.remove();
 
-      // If DOM is already ready, update immediately
-      const el = document.getElementById('remainingSpots');
-      if (el) {
-        el.textContent = remaining;
+      if (response && response.success) {
+        var remaining = response.remaining !== undefined
+          ? response.remaining
+          : (RESERVAR_CONFIG.MAX_SPOTS - response.count);
+        
+        _pataCounterCache = remaining;
+        _pataCounterLoaded = true;
+
+        // Update DOM if element exists already
+        var el = document.getElementById('remainingSpots');
+        if (el) el.textContent = remaining;
+        
+        console.log('📊 Preload counter loaded:', remaining);
       }
-    }
-    // Cleanup
-    delete window._pataPreloadCountCallback;
-    const scriptEl = document.getElementById('pataPreloadScript');
-    if (scriptEl) scriptEl.remove();
-  };
+    };
 
-  const script = document.createElement('script');
-  script.id = 'pataPreloadScript';
-  script.src = url;
-  script.onerror = function() {
-    delete window._pataPreloadCountCallback;
-    const scriptEl = document.getElementById('pataPreloadScript');
-    if (scriptEl) scriptEl.remove();
-  };
-
-  // Append to <head> immediately — no waiting for DOM
-  (document.head || document.documentElement).appendChild(script);
+    var script = document.createElement('script');
+    script.id = 'pataPreloadScript';
+    script.src = url;
+    script.onerror = function() {
+      delete window[cbName];
+      var s = document.getElementById('pataPreloadScript');
+      if (s) s.remove();
+      console.warn('⚠️ Preload counter failed');
+    };
+    (document.head || document.documentElement).appendChild(script);
+  } catch (e) {
+    console.warn('⚠️ Preload error:', e);
+  }
 })();
 
 /* ============================================
@@ -271,10 +282,9 @@ class ReservarFormSubmitter {
         // Update counter immediately from server response
         if (result.remaining !== undefined) {
           updateSpotCounter(result.remaining);
-          _pataCounterCache = result.remaining;
           console.log('📊 Counter updated from response:', result.remaining);
         } else {
-          // Fallback: reload via JSONP after delay
+          // Fallback: reload via JSONP
           setTimeout(() => loadRemainingSpots(), 2000);
         }
       } else {
@@ -301,9 +311,6 @@ class ReservarFormSubmitter {
    * - The browser sends the POST directly
    * - Google Apps Script receives it and follows redirect to /echo
    * - We can read the JSON response from /echo
-   *
-   * The Apps Script doPost() needs to parse e.postData.contents as JSON
-   * (it already does this when type !== 'application/json').
    */
   async submitToGoogleScript(formData) {
     const jsonString = JSON.stringify(formData);
@@ -337,18 +344,15 @@ class ReservarFormSubmitter {
       }
 
       console.warn('⚠️ Attempt 1 status:', response.status);
-      // Fall through to attempt 2
 
     } catch (err) {
       console.warn('⚠️ Attempt 1 failed:', err.message);
-      // Fall through to attempt 2
     }
 
     // ── ATTEMPT 2: no-cors POST + count verification via JSONP ──
     try {
       console.log('📨 Attempt 2: no-cors + JSONP verification...');
 
-      // Get count BEFORE
       let countBefore = -1;
       try {
         const before = await this.getCountViaJSONP();
@@ -358,18 +362,15 @@ class ReservarFormSubmitter {
         console.warn('⚠️ Pre-count failed');
       }
 
-      // Fire the POST (no readable response)
       await fetch(scriptUrl, {
         method: 'POST',
         body: jsonString,
         mode: 'no-cors'
       });
 
-      // Wait for GAS to process
       console.log('⏳ Waiting 4s for GAS...');
       await new Promise(r => setTimeout(r, 4000));
 
-      // Get count AFTER
       try {
         const after = await this.getCountViaJSONP();
         const countAfter = after.count;
@@ -392,7 +393,6 @@ class ReservarFormSubmitter {
         console.warn('⚠️ Post-count verification failed');
       }
 
-      // Can't verify but POST was sent
       return { success: true, message: 'Submissão enviada.' };
 
     } catch (err) {
@@ -403,7 +403,6 @@ class ReservarFormSubmitter {
 
   /**
    * Get waitlist count via JSONP (always works cross-origin).
-   * Creates a <script> tag that loads the GET endpoint with a callback.
    */
   getCountViaJSONP() {
     return new Promise((resolve, reject) => {
@@ -412,7 +411,6 @@ class ReservarFormSubmitter {
         '?action=getCount&callback=' + cbName +
         '&_t=' + Date.now();
 
-      // Safety check - URL must not be empty
       if (!url || url.indexOf('http') !== 0) {
         reject(new Error('Invalid JSONP URL'));
         return;
@@ -493,15 +491,19 @@ window.addEventListener('keydown', function(e) {
    REMAINING SPOTS COUNTER
    ============================================ */
 
-async function loadRemainingSpots() {
+function loadRemainingSpots() {
+  if (_pataCounterLoaded) {
+    // Already have a real value — no need to fetch again
+    return;
+  }
+
   if (!RESERVAR_CONFIG.COUNT_ACTION_URL ||
       RESERVAR_CONFIG.COUNT_ACTION_URL.includes('YOUR_SCRIPT_URL_HERE')) {
-    updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
     return;
   }
 
   try {
-    // Clean up any previous JSONP script
+    // Clean up any previous JSONP
     const oldScript = document.getElementById('pataCountScript');
     if (oldScript) oldScript.remove();
     if (window.handleReservarCountResponse) {
@@ -515,26 +517,21 @@ async function loadRemainingSpots() {
     script.id = 'pataCountScript';
     script.src = url;
 
-    // On timeout, only fallback if no value exists yet
-    const timeout = setTimeout(() => {
-      console.warn('⚠️ Count request timed out');
-      const el = document.getElementById('remainingSpots');
-      if (el && (el.textContent === '...' || el.textContent === '')) {
-        updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
-      }
-    }, 8000);
-
     window.handleReservarCountResponse = function(response) {
-      clearTimeout(timeout);
       if (response && response.success) {
         const remaining = response.remaining !== undefined
           ? response.remaining
           : (RESERVAR_CONFIG.MAX_SPOTS - response.count);
         updateSpotCounter(remaining);
+        _pataCounterLoaded = true;
         _pataCounterCache = remaining;
-        console.log('📊 Spots remaining:', remaining);
+        console.log('📊 Spots remaining (retry):', remaining);
         if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
       }
+      // Cleanup
+      delete window.handleReservarCountResponse;
+      var s = document.getElementById('pataCountScript');
+      if (s) s.remove();
     };
 
     document.head.appendChild(script);
@@ -544,6 +541,8 @@ async function loadRemainingSpots() {
 }
 
 function updateSpotCounter(count) {
+  _pataCounterCache = count;
+  _pataCounterLoaded = true;
   const el = document.getElementById('remainingSpots');
   if (el) el.textContent = count;
 }
@@ -560,13 +559,15 @@ function showListaCheia() {
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // If preload already got the value, apply it immediately
-  if (_pataCounterCache !== null) {
-    updateSpotCounter(_pataCounterCache);
-    console.log('📊 Counter applied from preload cache:', _pataCounterCache);
+  // Apply cached value if preload already returned
+  if (_pataCounterLoaded && _pataCounterCache !== null) {
+    const el = document.getElementById('remainingSpots');
+    if (el) el.textContent = _pataCounterCache;
+    console.log('📊 Counter from preload cache:', _pataCounterCache);
   } else {
-    // Preload hasn't returned yet — it will update the DOM when it does
-    console.log('⏳ Waiting for preload counter...');
+    // Preload still pending — fire a backup request
+    console.log('⏳ Preload not ready, firing backup JSONP...');
+    loadRemainingSpots();
   }
 
   const carousel = new ReservarCarousel();
