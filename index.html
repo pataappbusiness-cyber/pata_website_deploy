@@ -104,12 +104,8 @@
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://fonts.bunny.net">
 
-    <!-- Preload LCP Image (Hero Carousel First Image) -->
-    <link rel="preload" as="image" href="src/img/images/header_image1.webp" type="image/webp" imagesrcset="src/img/images/header_image1.webp 1920w, src/img/images/header_image1-1440.webp 1440w, src/img/images/header_image1-768.webp 768w" imagesizes="(max-width: 768px) 768px, (max-width: 1440px) 1440px, 1920px">
-
     <!-- Mona Sans Font via Bunny.net (Privacy-friendly CDN) -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
-    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* Mona Sans Regular (400) */
         @font-face {
@@ -548,7 +544,7 @@
                         preload="none"
                         poster="https://media.pata.care/videos/problem1_video1_poster.jpg"
                         data-lazy-video>
-                        <source data-src="https://media.pata.care/videos/problem1_video1.mp4" type="video/mp4">
+                        <source src="https://media.pata.care/videos/problem1_video1.mp4" data-src="https://media.pata.care/videos/problem1_video1.mp4" type="video/mp4">
                     </video>
                     <div class="overlay-saturation"></div>
                     <div class="overlay-dark"></div>
@@ -585,7 +581,7 @@
                         preload="none"
                         poster="https://media.pata.care/videos/problem1_video2_poster.jpg"
                         data-lazy-video>
-                        <source data-src="https://media.pata.care/videos/problem1_video2.mp4" type="video/mp4">
+                        <source src="https://media.pata.care/videos/problem1_video2.mp4" data-src="https://media.pata.care/videos/problem1_video2.mp4" type="video/mp4">
                     </video>
                     <div class="overlay-orange"></div>
                 </div>
@@ -799,7 +795,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     preload="none"
                     poster="https://media.pata.care/videos/2849936-hd_1280_720_24fps_poster.jpg"
                     data-lazy-video>
-                    <source data-src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" type="video/mp4">
+                    <source src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" data-src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" type="video/mp4">
                 </video>
                 <div class="problem4-overlay-dark"></div>
                 <div class="problem4-overlay-saturation"></div>
@@ -1002,7 +998,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             preload="none"
                             poster="https://media.pata.care/videos/1851002-hd_1280_720_24fps_poster.jpg"
                             data-lazy-video>
-                            <source data-src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" type="video/mp4">
+                            <source src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" data-src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" type="video/mp4">
                         </video>
                         <div class="card-overlay-saturation"></div>
                         <div class="card-overlay-multiply"></div>
@@ -1052,7 +1048,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             preload="none"
                             poster="https://media.pata.care/videos/3939111-hd_1280_720_24fps_poster.jpg"
                             data-lazy-video>
-                            <source data-src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" type="video/mp4">
+                            <source src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" data-src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" type="video/mp4">
                         </video>
                         <div class="card-overlay-dark"></div>
                         <div class="card-overlay-orange"></div>
@@ -1296,7 +1292,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     preload="none"
                     poster="https://media.pata.care/videos/6865078-hd_1366_720_25fps_poster.jpg"
                     data-lazy-video>
-                    <source data-src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" type="video/mp4">
+                    <source src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" data-src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" type="video/mp4">
                 </video>
                 <div class="solution3-overlay-dark"></div>
             </div>
@@ -2207,7 +2203,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                      alt="Veterinária PATA"
                                      width="600"
                                      height="505"
-                                     loading="lazy"
+                                     loading="eager"
+                                     fetchpriority="high"
                                      class="reservar-carousel-image active">
                             </picture>
                             <picture>
