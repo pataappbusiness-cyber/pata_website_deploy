@@ -32,6 +32,14 @@
 #### 2. Eliminação de JavaScript Bloqueante (TBT = 13s!)
 - Adicionar `defer` ou `async` a TODOS os `<script>` tags externos
 
+
+
+
+
+
+
+
+
 - Mover scripts não-críticos para o final do `<body>`
 - Carregar reCAPTCHA **apenas quando o formulário recebe focus** (lazy load)
 - Carregar analytics (Google Analytics/Tag Manager) de forma assíncrona

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <script type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js" data-cmp-host="c.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
+    <script defer type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js" data-cmp-host="c.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
@@ -82,32 +82,62 @@
     <!-- Resource Hints for Performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://www.google.com" crossorigin>
+    <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.consentmanager.net">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
+    <!-- Preload LCP Image (Hero Carousel First Image) -->
+    <link rel="preload" as="image" href="src/img/images/header_image1.webp" type="image/webp" imagesrcset="src/img/images/header_image1.webp 1920w, src/img/images/header_image1-1440.webp 1440w, src/img/images/header_image1-768.webp 768w" imagesizes="(max-width: 768px) 768px, (max-width: 1440px) 1440px, 1920px">
 
     <!-- Google Fonts - Mona Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 
-    <!-- Stylesheets -->
+    <!-- Stylesheets: Critical CSS loaded synchronously, rest loaded asynchronously -->
     <link rel="stylesheet" href="./src/css/new/global.css">
-    <link rel="stylesheet" href="./src/css/new/animated-gradient.css">
     <link rel="stylesheet" href="./src/css/new/sections.css">
-    <link rel="stylesheet" href="./src/css/new/problem1.css">
-    <link rel="stylesheet" href="./src/css/new/problem2.css">
-    <link rel="stylesheet" href="./src/css/new/problem3.css">
-    <link rel="stylesheet" href="./src/css/new/problem4.css">
-    <link rel="stylesheet" href="./src/css/new/problem5.css">
-    <link rel="stylesheet" href="./src/css/new/solution1.css">
-    <link rel="stylesheet" href="./src/css/new/solution2.css">
-    <link rel="stylesheet" href="./src/css/new/solution3.css">
-    <link rel="stylesheet" href="./src/css/new/solution4.css">
-    <link rel="stylesheet" href="./src/css/new/joinus1.css">
-    <link rel="stylesheet" href="./src/css/new/joinus2.css">
-    <link rel="stylesheet" href="./src/css/new/faq.css">
-    <link rel="stylesheet" href="./src/css/new/reservar.css">
-    <link rel="stylesheet" href="./src/css/new/joinus3.css">
-    <link rel="stylesheet" href="./src/css/new/footer.css">
-    <link rel="stylesheet" href="./src/css/new/scroll-to-top.css">
+
+    <!-- Non-critical CSS: Loaded asynchronously for better performance -->
+    <link rel="preload" href="./src/css/new/animated-gradient.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/problem1.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/problem2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/problem3.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/problem4.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/problem5.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/solution1.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/solution2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/solution3.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/solution4.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/joinus1.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/joinus2.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/faq.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/reservar.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/joinus3.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/footer.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="./src/css/new/scroll-to-top.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+    <!-- Fallback for browsers without JavaScript -->
+    <noscript>
+        <link rel="stylesheet" href="./src/css/new/animated-gradient.css">
+        <link rel="stylesheet" href="./src/css/new/problem1.css">
+        <link rel="stylesheet" href="./src/css/new/problem2.css">
+        <link rel="stylesheet" href="./src/css/new/problem3.css">
+        <link rel="stylesheet" href="./src/css/new/problem4.css">
+        <link rel="stylesheet" href="./src/css/new/problem5.css">
+        <link rel="stylesheet" href="./src/css/new/solution1.css">
+        <link rel="stylesheet" href="./src/css/new/solution2.css">
+        <link rel="stylesheet" href="./src/css/new/solution3.css">
+        <link rel="stylesheet" href="./src/css/new/solution4.css">
+        <link rel="stylesheet" href="./src/css/new/joinus1.css">
+        <link rel="stylesheet" href="./src/css/new/joinus2.css">
+        <link rel="stylesheet" href="./src/css/new/faq.css">
+        <link rel="stylesheet" href="./src/css/new/reservar.css">
+        <link rel="stylesheet" href="./src/css/new/joinus3.css">
+        <link rel="stylesheet" href="./src/css/new/footer.css">
+        <link rel="stylesheet" href="./src/css/new/scroll-to-top.css">
+    </noscript>
 
     <!-- Critical CSS Inline (Navbar) -->
     <style>
@@ -610,8 +640,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                 <!-- Right Column: Animation -->
                 <div class="problem2-animation">
                     <!-- PATA App Image -->
-                    <img src="src/img/images/PATA_APP.png"
-                         alt="PATA App">
+                    <picture>
+                        <source srcset="src/img/images/PATA_APP.webp" type="image/webp">
+                        <img src="src/img/images/PATA_APP.png"
+                             alt="PATA App"
+                             width="1031"
+                             height="861"
+                             loading="lazy">
+                    </picture>
                 </div>
 
             </div>
@@ -839,7 +875,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                         <!-- Dog Icon -->
                         <div class="pet-icon">
-                            <img src="src/img/new_images/border_collie.png" alt="Border Collie">
+                            <picture>
+                                <source srcset="src/img/new_images/border_collie.webp" type="image/webp">
+                                <img src="src/img/new_images/border_collie.png"
+                                     alt="Border Collie"
+                                     width="300"
+                                     height="300"
+                                     loading="lazy">
+                            </picture>
                         </div>
                     </li>
 
@@ -861,7 +904,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                         <!-- Rafeiro Alentejano Icon -->
                         <div class="pet-icon">
-                            <img src="src/img/new_images/rafeiro_alentejano.png" alt="Rafeiro Alentejano">
+                            <picture>
+                                <source srcset="src/img/new_images/rafeiro_alentejano.webp" type="image/webp">
+                                <img src="src/img/new_images/rafeiro_alentejano.png"
+                                     alt="Rafeiro Alentejano"
+                                     width="300"
+                                     height="300"
+                                     loading="lazy">
+                            </picture>
                         </div>
                     </li>
 
@@ -883,7 +933,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                         <!-- Persa Icon -->
                         <div class="pet-icon">
-                            <img src="src/img/new_images/gato_persa.png" alt="Gato Persa">
+                            <picture>
+                                <source srcset="src/img/new_images/gato_persa.webp" type="image/webp">
+                                <img src="src/img/new_images/gato_persa.png"
+                                     alt="Gato Persa"
+                                     width="300"
+                                     height="300"
+                                     loading="lazy">
+                            </picture>
                         </div>
                     </li>
 
@@ -1344,7 +1401,15 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <h4 class="clinica-plus">+</h4>
                                 <h5 class="clinica-consultas">Consultas</h5>
                             </div>
-                            <img src="./src/img/new_images/clinica_pata.png" alt="Clínica PATA" class="clinica-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/clinica_pata.webp" type="image/webp">
+                                <img src="./src/img/new_images/clinica_pata.png"
+                                     alt="Clínica PATA"
+                                     class="clinica-image"
+                                     width="384"
+                                     height="800"
+                                     loading="lazy">
+                            </picture>
                         </div>
 
                         <!-- Right Side - 3 Small Cards -->
@@ -1397,7 +1462,15 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <h4 class="bottom-card-title">Receita Digital — Válida em Qualquer Farmácia</h4>
                             </div>
                             <p class="bottom-card-text">Após a consulta, o veterinário emite receita eletrónica válida diretamente para o seu email. A app indica a farmácia veterinária mais próxima (aberta ou com horário). Avia em minutos, sem repetir a história.</p>
-                            <img src="./src/img/new_images/receita_digital.png" alt="Receita Digital" class="bottom-card-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/receita_digital.webp" type="image/webp">
+                                <img src="./src/img/new_images/receita_digital.png"
+                                     alt="Receita Digital"
+                                     class="bottom-card-image"
+                                     width="615"
+                                     height="800"
+                                     loading="lazy">
+                            </picture>
                         </div>
 
                         <!-- Card - Loja PATA -->
@@ -1410,7 +1483,15 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <h4 class="bottom-card-title">Loja PATA — Produtos Veterinários em Casa</h4>
                             </div>
                             <p class="bottom-card-text">Ração premium. Suplementação recomendada por veterinários. Desparasitantes. Produtos de higiene e bem-estar. Entrega ao domicílio em 24-48h. Tudo sem receita médica, tudo num só lugar.</p>
-                            <img src="./src/img/new_images/loja_pata.png" alt="Loja PATA" class="bottom-card-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/loja_pata.webp" type="image/webp">
+                                <img src="./src/img/new_images/loja_pata.png"
+                                     alt="Loja PATA"
+                                     class="bottom-card-image"
+                                     width="800"
+                                     height="605"
+                                     loading="lazy">
+                            </picture>
                         </div>
 
                     </div>
@@ -1443,7 +1524,15 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <div class="joinus1-card joinus1-card-1">
                         <!-- Background Image with Overlays -->
                         <div class="card-background-container">
-                            <img src="./src/img/new_images/primeiros_500_1.png" alt="" class="card-background-image">
+                            <picture>
+                                <source srcset="./src/img/new_images/primeiros_500_1.webp" type="image/webp">
+                                <img src="./src/img/new_images/primeiros_500_1.png"
+                                     alt="Primeiros 500 fundadores"
+                                     class="card-background-image"
+                                     width="800"
+                                     height="534"
+                                     loading="lazy">
+                            </picture>
                             <div class="card-overlay-saturation"></div>
                             <div class="card-overlay-multiply"></div>
                         </div>
@@ -2429,13 +2518,34 @@ Agora pode confiar em nós.</h2>
     </button>
 
     <!-- JavaScript -->
-    <script src="https://www.google.com/recaptcha/api.js?render=6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb" async defer></script>
-    <script src="./src/js/liquid-shader.js"></script>
-    <script src="./src/js/new/main.js"></script>
-    <script src="./src/js/new/faq.js"></script>
-    <script src="./src/js/new/reservar.js"></script>
-    <script src="./src/js/new/scroll-to-top.js"></script>
-    <script src="./src/js/new/scroll-button-shader.js"></script>
+    <!-- reCAPTCHA: Lazy loaded on form interaction (see inline script below) -->
+    <script defer src="./src/js/liquid-shader.js"></script>
+    <script defer src="./src/js/new/main.js"></script>
+    <script defer src="./src/js/new/faq.js"></script>
+    <script defer src="./src/js/new/reservar.js"></script>
+    <script defer src="./src/js/new/scroll-to-top.js"></script>
+    <script defer src="./src/js/new/scroll-button-shader.js"></script>
+
+    <!-- reCAPTCHA Lazy Loading: Only load when user interacts with form -->
+    <script>
+      let recaptchaLoaded = false;
+      function loadRecaptcha() {
+        if (recaptchaLoaded) return;
+        recaptchaLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://www.google.com/recaptcha/api.js?render=6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb';
+        script.async = true;
+        document.head.appendChild(script);
+      }
+
+      // Load reCAPTCHA when form receives focus
+      window.addEventListener('DOMContentLoaded', function() {
+        const formInputs = document.querySelectorAll('#reservar input, #reservar textarea, #reservar select');
+        formInputs.forEach(function(input) {
+          input.addEventListener('focus', loadRecaptcha, { once: true });
+        });
+      });
+    </script>
 
 </body>
 </html>
