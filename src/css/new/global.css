@@ -74,7 +74,7 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: auto; /* Let JavaScript handle smooth scrolling */
+  scroll-behavior: smooth; /* Native browser smooth scroll */
 
   /* Custom cursor - black version for light backgrounds */
   cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto;
@@ -493,4 +493,31 @@ footer a:hover,
 
 .scroll-to-top-btn.white-arrow:active {
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
+}
+
+/* ============================================
+   DISABLE CUSTOM CURSORS ON MOBILE/TOUCH DEVICES
+   ============================================ */
+
+/* Remove custom cursor overhead on touch devices where it has no effect */
+@media (hover: none), (pointer: coarse) {
+  *, *::before, *::after,
+  html, body,
+  #hero, #hero *,
+  #problem1, #problem1 *,
+  #problem3, #problem3 *,
+  #problem4, #problem4 *,
+  #solution1, #solution1 *,
+  #joinus2, #joinus2 *,
+  #joinus3, #joinus3 *,
+  a, button, input,
+  [draggable="true"], .draggable,
+  img, .clickable, [role="button"],
+  [class*="card"],
+  .faq-item, .faq-question,
+  .navbar-link, .navbar-cta,
+  footer a, .footer-link,
+  .scroll-to-top-btn {
+    cursor: auto !important;
+  }
 }

@@ -262,12 +262,20 @@
   will-change: transform;
 }
 
+.image-pill picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .pill-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   position: relative;
   z-index: 2;
+  display: block;
 }
 
 /* ============================================
@@ -307,7 +315,8 @@
   z-index: 2;
 }
 
-.pill-left-top img {
+.pill-left-top img,
+.pill-left-top picture {
   position: relative;
   z-index: 3;
 }
@@ -360,7 +369,8 @@
   z-index: 2;
 }
 
-.pill-left-bottom img {
+.pill-left-bottom img,
+.pill-left-bottom picture {
   position: relative;
   z-index: 3;
 }
@@ -417,7 +427,8 @@
   z-index: 2;
 }
 
-.pill-right-top img {
+.pill-right-top img,
+.pill-right-top picture {
   position: relative;
   z-index: 3;
 }
@@ -474,7 +485,8 @@
   z-index: 2;
 }
 
-.pill-right-bottom img {
+.pill-right-bottom img,
+.pill-right-bottom picture {
   position: relative;
   z-index: 3;
 }

@@ -138,16 +138,11 @@ class ScrollToTopButton {
   scrollToTop() {
     console.log('📜 Scrolling to top...');
 
-    // Use custom smooth scroll if available (same as navbar/footer)
-    if (this.smoothScroll && typeof this.smoothScroll.scrollTo === 'function') {
-      this.smoothScroll.scrollTo(0);
-    } else {
-      // Fallback to native smooth scroll
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
+    // Use native smooth scroll (from CSS scroll-behavior: smooth)
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
 
     // Optional: Add haptic feedback on mobile
     if ('vibrate' in navigator) {

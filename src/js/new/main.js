@@ -352,11 +352,8 @@ class ContactButtons {
     const contactSection = document.querySelector('#reservar');
     if (!contactSection) return;
 
-    if (this.smoothScroll && typeof this.smoothScroll.scrollTo === 'function') {
-      this.smoothScroll.scrollTo(contactSection.offsetTop);
-    } else {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Use native smooth scroll (from CSS scroll-behavior: smooth)
+    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
@@ -1333,30 +1330,10 @@ class SmoothScroll {
 
   init() {
     try {
-      // Set initial scroll position
-      this.scrollCurrent = window.pageYOffset;
-      this.scrollTarget = window.pageYOffset;
-
-      // Handle wheel events for smooth mouse wheel scrolling
-      this.handleWheel = this.handleWheel.bind(this);
-      window.addEventListener('wheel', this.handleWheel, { passive: false });
-
-      // Handle keyboard events (arrow keys, page up/down, etc.)
-      this.handleKeyboard = this.handleKeyboard.bind(this);
-      window.addEventListener('keydown', this.handleKeyboard, { passive: false });
-
-      // Handle scrollbar dragging and other scroll events
-      this.handleScroll = this.handleScroll.bind(this);
-      window.addEventListener('scroll', this.handleScroll, { passive: true });
-
-      // Handle anchor links
+      // Only handle anchor links - let browser handle normal scrolling
       this.setupAnchorLinks();
 
-      // Start animation loop
-      this.isRunning = true;
-      this.raf();
-
-      console.log('✨ Smooth scroll initialized');
+      console.log('✨ Smooth scroll initialized (anchor links only)');
     } catch (error) {
       console.error('❌ Error initializing smooth scroll:', error);
     }
@@ -1446,7 +1423,8 @@ class SmoothScroll {
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          this.scrollTo(target.offsetTop);
+          // Use native smooth scroll (from CSS scroll-behavior: smooth)
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
@@ -1479,14 +1457,8 @@ class SmoothScroll {
   }
 
   destroy() {
-    this.isRunning = false;
-    if (this.rafId) {
-      cancelAnimationFrame(this.rafId);
-    }
+    // Cleanup (no event listeners to remove since we only handle anchor links)
     clearTimeout(this.scrollTimeout);
-    window.removeEventListener('wheel', this.handleWheel);
-    window.removeEventListener('keydown', this.handleKeyboard);
-    window.removeEventListener('scroll', this.handleScroll);
   }
 }
 

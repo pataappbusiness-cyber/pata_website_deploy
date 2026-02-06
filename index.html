@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <!-- Consent Manager - Using defer to improve TBT without breaking blur overlay -->
-    <script defer type="text/javascript" data-cmp-ab="1" src="https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js" data-cmp-host="c.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="16"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
@@ -11,8 +8,9 @@
     <link rel="preconnect" href="https://media.pata.care" crossorigin>
     <link rel="preconnect" href="https://cdn.consentmanager.net" crossorigin>
     <link rel="preconnect" href="https://c.delivery.consentmanager.net" crossorigin>
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-    <link rel="dns-prefetch" href="https://media.pata.care">
+
+    <!-- LCP Image Preload -->
+    <link rel="preload" href="./src/img/new_images/mockup_no_bg.webp" as="image" type="image/webp">
 
     <!-- Google Tag Manager - Delayed Loading (3s after page load) -->
     <script>
@@ -73,10 +71,10 @@
         "@type": "VeterinaryCare",
         "name": "PATA",
         "description": "Telemedicina veterinária 24/7 em Portugal",
-        "url": "https://pata.pt",
-        "logo": "https://pata.pt/src/img/icons/logo_signature.svg",
+        "url": "https://pata.care",
+        "logo": "https://pata.care/src/img/icons/logo_signature.svg",
         "telephone": "+351-XXX-XXX-XXX",
-        "email": "ola@pata.pt",
+        "email": "ola@pata.care",
         "address": {
             "@type": "PostalAddress",
             "addressCountry": "PT"
@@ -97,15 +95,12 @@
     </script>
 
     <!-- Resource Hints for Performance -->
-    <link rel="preconnect" href="https://www.google.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdn.consentmanager.net">
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="dns-prefetch" href="https://unpkg.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://fonts.bunny.net">
 
     <!-- Mona Sans Font via Bunny.net (Privacy-friendly CDN) -->
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* Mona Sans Regular (400) */
         @font-face {
@@ -388,6 +383,49 @@
                 max-width: 280px;
             }
         }
+
+        /* Hero Section Critical CSS */
+        .header-section {
+            position: relative;
+            height: 100vh;
+            min-height: 928px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: #000;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .header-title {
+            font-family: 'Mona Sans', sans-serif;
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .header-title-white { color: #FEFEFF; }
+        .header-title-orange { color: #FF943D; }
+
+        body {
+            font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #fff8f2;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-title { font-size: 40px; }
+            .header-section { min-height: auto; padding-top: 80px; }
+        }
     </style>
 
 </head>
@@ -465,21 +503,27 @@
                     <div class="visual-pills-left">
                         <!-- Pill 1 - Superior Esquerda (Cão com médico) -->
                         <div class="image-pill pill-left-top" data-parallax="0.3">
-                            <img
-                                src="./src/img/new_images/cao_medico.png"
-                                alt="Cão com médico veterinário"
-                                class="pill-image"
-                                loading="lazy">
+                            <picture>
+                                <source srcset="./src/img/new_images/cao_medico.webp" type="image/webp">
+                                <img
+                                    src="./src/img/new_images/cao_medico.png"
+                                    alt="Cão com médico veterinário"
+                                    class="pill-image"
+                                    loading="lazy">
+                            </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
 
                         <!-- Pill 2 - Inferior Esquerda (Veterinário) -->
                         <div class="image-pill pill-left-bottom" data-parallax="0.5">
-                            <img
-                                src="./src/img/new_images/vet.png"
-                                alt="Veterinário profissional"
-                                class="pill-image"
-                                loading="lazy">
+                            <picture>
+                                <source srcset="./src/img/new_images/vet.webp" type="image/webp">
+                                <img
+                                    src="./src/img/new_images/vet.png"
+                                    alt="Veterinário profissional"
+                                    class="pill-image"
+                                    loading="lazy">
+                            </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
                     </div>
@@ -500,21 +544,27 @@
                     <div class="visual-pills-right">
                         <!-- Pill 3 - Superior Direita (Cão feliz) -->
                         <div class="image-pill pill-right-top" data-parallax="0.4">
-                            <img
-                                src="./src/img/new_images/cao.png"
-                                alt="Cão feliz"
-                                class="pill-image"
-                                loading="lazy">
+                            <picture>
+                                <source srcset="./src/img/new_images/cao.webp" type="image/webp">
+                                <img
+                                    src="./src/img/new_images/cao.png"
+                                    alt="Cão feliz"
+                                    class="pill-image"
+                                    loading="lazy">
+                            </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
 
                         <!-- Pill 4 - Inferior Direita (Gatinho) -->
                         <div class="image-pill pill-right-bottom" data-parallax="0.6">
-                            <img
-                                src="./src/img/new_images/gatinho.png"
-                                alt="Gatinho adorável"
-                                class="pill-image"
-                                loading="lazy">
+                            <picture>
+                                <source srcset="./src/img/new_images/gatinho.webp" type="image/webp">
+                                <img
+                                    src="./src/img/new_images/gatinho.png"
+                                    alt="Gatinho adorável"
+                                    class="pill-image"
+                                    loading="lazy">
+                            </picture>
                             <div class="pill-inner-shadow"></div>
                         </div>
                     </div>
@@ -674,7 +724,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <div class="problem3-title-wrapper">
                         <!-- Animated Cat Icon -->
                         <div class="problem3-cat-icon">
-                            <img src="src/img/icons/gato_animado1.svg" alt="Cat Icon">
+                            <img src="src/img/icons/gato_animado1.svg" alt="Cat Icon" width="54" height="54">
                         </div>
 
                         <!-- Title Text -->
@@ -1408,7 +1458,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="clinica-pata-side">
                             <div class="clinica-icon-bubble">
                                 <!-- Hospital Icon -->
-                                <img src="./src/img/icons/hospital 1.svg" alt="Hospital">
+                                <img src="./src/img/icons/hospital 1.svg" alt="Hospital" width="54" height="54">
                             </div>
                             <h4 class="clinica-title">Clínica PATA</h4>
                             <div class="clinica-text-group">
@@ -1454,7 +1504,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="small-card">
                                 <div class="small-card-icon">
                                     <!-- Hospital Icon -->
-                                    <img src="./src/img/icons/hospital 1.svg" alt="Hospital">
+                                    <img src="./src/img/icons/hospital 1.svg" alt="Hospital" width="54" height="54">
                                 </div>
                                 <h6 class="small-card-title">Urgências</h6>
                                 <p class="small-card-text">O seu patudo não está bem? Videochamada com veterinário licenciado em menos de 60 segundos. Às três da manhã. Ao domingo. No feriado. Sempre.</p>
@@ -1862,6 +1912,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             <!-- FAQ Title -->
             <h2 class="faq-title">Perguntas frequentes sobre consultas veterinárias online</h2>
 
+            <!-- SVG Symbol Definition -->
+            <svg style="display:none">
+                <symbol id="faq-arrow" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </symbol>
+            </svg>
+
             <!-- FAQ Accordion Container -->
             <div class="faq-container">
 
@@ -1870,9 +1927,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">A PATA substitui o veterinário presencial?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -1889,9 +1944,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Os veterinários da PATA são licenciados?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -1908,9 +1961,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Quais animais a PATA atende?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -1927,9 +1978,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Como funciona a receita digital?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -1946,9 +1995,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Posso usar a PATA para emergências reais?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -1965,9 +2012,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">O que acontece se o veterinário não conseguir diagnosticar por vídeo?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -1984,9 +2029,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Posso cancelar a subscrição quando quiser?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -2003,9 +2046,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Quando posso usar a minha primeira consulta?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -2022,9 +2063,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Os meus dados estão seguros?</span>
                         <div class="faq-toggle-button">
-                            <svg class="faq-arrow-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                            <svg class="faq-arrow-icon"><use href="#faq-arrow"/></svg>
                         </div>
                     </button>
                     <div class="faq-answer">
@@ -2572,6 +2611,22 @@ Agora pode confiar em nós.</h2>
           input.addEventListener('focus', loadRecaptcha, { once: true });
         });
       });
+    </script>
+
+    <!-- Consent Manager - Delayed Loading (1.5s after page load) -->
+    <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.src = 'https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js';
+        s.setAttribute('data-cmp-ab', '1');
+        s.setAttribute('data-cmp-host', 'c.delivery.consentmanager.net');
+        s.setAttribute('data-cmp-cdn', 'cdn.consentmanager.net');
+        s.setAttribute('data-cmp-codesrc', '16');
+        document.head.appendChild(s);
+      }, 1500);
+    });
     </script>
 
 </body>
