@@ -1,14 +1,13 @@
 /* ============================================
    SECTION 14: RESERVAR O LUGAR - JavaScript
    Form validation, submission, and image carousel
-   Version: 14.0 - Use fetch for counter (JSONP blocked by CSP)
+   Version: 15.0 - No-flicker counter
    
-   CHANGES v14.0:
-   ✅ Counter loads via fetch (not JSONP — CSP blocks script.google.com)
-   ✅ Preload fires immediately on script parse
-   ✅ DOMContentLoaded applies cached value or retries
+   CHANGES v15.0:
+   ✅ Counter hidden until real value arrives (no 500→499 flicker)
+   ✅ Smooth fade-in when real value loads
+   ✅ fetch-based counter (JSONP removed — blocked by CSP)
    ✅ Post-submission updates from server response directly
-   ✅ Counter never resets to 500 once real value is set
    ============================================ */
 
 'use strict';
@@ -34,9 +33,7 @@ let _pataCounterLoaded = false;
 let _pataCounterCache = null;
 
 /* ============================================
-   FETCH COUNTER (replaces JSONP)
-   Uses fetch GET with redirect:follow — same
-   pattern that works for POST submissions.
+   FETCH COUNTER FROM SERVER
    ============================================ */
 
 function fetchCounterFromServer() {
@@ -49,10 +46,9 @@ function fetchCounterFromServer() {
       return response.text();
     })
     .then(function(text) {
-      // GAS may return JSONP-wrapped or plain JSON — handle both
       var jsonStr = text.trim();
 
-      // Strip JSONP wrapper if present: callbackName({...})
+      // Strip JSONP wrapper if present
       var jsonpMatch = jsonStr.match(/^[a-zA-Z_$][a-zA-Z0-9_$]*\s*\((.+)\)\s*;?\s*$/s);
       if (jsonpMatch) {
         jsonStr = jsonpMatch[1];
@@ -72,7 +68,6 @@ function fetchCounterFromServer() {
 
 /* ============================================
    EARLY COUNTER PRELOAD
-   Fires immediately when this script is parsed.
    ============================================ */
 
 (function preloadCounter() {
@@ -80,20 +75,35 @@ function fetchCounterFromServer() {
     .then(function(remaining) {
       _pataCounterCache = remaining;
       _pataCounterLoaded = true;
-
-      var el = document.getElementById('remainingSpots');
-      if (el) el.textContent = remaining;
-
+      applyCounterToDOM(remaining);
       console.log('📊 Preload counter loaded:', remaining);
-
-      if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) {
-        showListaCheia();
-      }
+      if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
     })
     .catch(function(err) {
       console.warn('⚠️ Preload counter failed:', err.message);
     });
 })();
+
+/* ============================================
+   APPLY COUNTER TO DOM
+   Sets value + reveals the counter line with fade-in
+   ============================================ */
+
+function applyCounterToDOM(count) {
+  _pataCounterCache = count;
+  _pataCounterLoaded = true;
+
+  var el = document.getElementById('remainingSpots');
+  if (!el) return;
+
+  el.textContent = count;
+
+  // Reveal the parent <p> counter line
+  var counterLine = el.closest('.reservar-counter');
+  if (counterLine) {
+    counterLine.style.opacity = '1';
+  }
+}
 
 /* ============================================
    IMAGE CAROUSEL
@@ -293,10 +303,9 @@ class ReservarFormSubmitter {
 
         // Update counter immediately from server response
         if (result.remaining !== undefined) {
-          updateSpotCounter(result.remaining);
+          applyCounterToDOM(result.remaining);
           console.log('📊 Counter updated from response:', result.remaining);
         } else {
-          // Fallback: reload via fetch
           setTimeout(() => loadRemainingSpots(), 2000);
         }
       } else {
@@ -313,31 +322,20 @@ class ReservarFormSubmitter {
   }
 
   /**
-   * Submit to Google Apps Script.
-   *
-   * KEY INSIGHT: Google Apps Script does NOT handle CORS preflight (OPTIONS).
-   * Sending Content-Type: application/json triggers a preflight → 405 error.
-   *
-   * SOLUTION: Send as Content-Type: text/plain.
-   * - text/plain is a "simple" content type → NO preflight request
-   * - The browser sends the POST directly
-   * - Google Apps Script receives it and follows redirect to /echo
-   * - We can read the JSON response from /echo
+   * Submit to Google Apps Script via text/plain fetch (no CORS preflight).
    */
   async submitToGoogleScript(formData) {
     const jsonString = JSON.stringify(formData);
     const scriptUrl = RESERVAR_CONFIG.GOOGLE_SCRIPT_URL;
 
-    // ── ATTEMPT 1: fetch with text/plain (no preflight, CORS works) ──
+    // ── ATTEMPT 1: fetch with text/plain ──
     try {
       console.log('📨 Attempt 1: fetch with text/plain (no preflight)...');
 
       const response = await fetch(scriptUrl, {
         method: 'POST',
         body: jsonString,
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
         redirect: 'follow'
       });
 
@@ -460,20 +458,20 @@ function loadRemainingSpots() {
 
   fetchCounterFromServer()
     .then(function(remaining) {
-      updateSpotCounter(remaining);
+      applyCounterToDOM(remaining);
       console.log('📊 Spots remaining (retry):', remaining);
       if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
     })
     .catch(function(err) {
       console.warn('⚠️ Counter retry failed:', err.message);
+      // After 10s total, show 500 as final fallback
+      setTimeout(function() {
+        if (!_pataCounterLoaded) {
+          applyCounterToDOM(RESERVAR_CONFIG.MAX_SPOTS);
+          console.warn('⚠️ Using fallback: 500');
+        }
+      }, 7000);
     });
-}
-
-function updateSpotCounter(count) {
-  _pataCounterCache = count;
-  _pataCounterLoaded = true;
-  const el = document.getElementById('remainingSpots');
-  if (el) el.textContent = count;
 }
 
 function showListaCheia() {
@@ -488,10 +486,16 @@ function showListaCheia() {
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Hide counter line until real value arrives
+  var counterLine = document.querySelector('.reservar-counter');
+  if (counterLine && !_pataCounterLoaded) {
+    counterLine.style.opacity = '0';
+    counterLine.style.transition = 'opacity 0.4s ease';
+  }
+
   // Apply cached value if preload already returned
   if (_pataCounterLoaded && _pataCounterCache !== null) {
-    const el = document.getElementById('remainingSpots');
-    if (el) el.textContent = _pataCounterCache;
+    applyCounterToDOM(_pataCounterCache);
     console.log('📊 Counter from preload cache:', _pataCounterCache);
   } else {
     // Preload still pending — fire backup
