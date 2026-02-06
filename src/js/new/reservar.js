@@ -1,7 +1,7 @@
 /* ============================================
    SECTION 14: RESERVAR O LUGAR - JavaScript
    Form validation, submission, and image carousel
-   Version: 10.0 - FIX CORS 405 preflight
+   Version: 11.0 - FIX counter update after submission
    ============================================ */
 
 'use strict';
@@ -214,7 +214,15 @@ class ReservarFormSubmitter {
       if (result.success) {
         this.showSuccessModal();
         this.validator.resetForm();
-        setTimeout(() => loadRemainingSpots(), 1000);
+
+        // FIX v11: Update counter immediately from server response
+        if (result.remaining !== undefined) {
+          updateSpotCounter(result.remaining);
+          console.log('📊 Counter updated from response:', result.remaining);
+        } else {
+          // Fallback: reload via JSONP after delay
+          setTimeout(() => loadRemainingSpots(), 2000);
+        }
       } else {
         alert(result.message || 'Ocorreu um erro. Por favor, tente novamente.');
         console.error('❌ Server error:', result.message);
@@ -315,7 +323,11 @@ class ReservarFormSubmitter {
 
         if (countBefore >= 0 && countAfter > countBefore) {
           console.log('✅ Verified: count went from', countBefore, 'to', countAfter);
-          return { success: true, message: 'Submissão bem-sucedida!' };
+          return {
+            success: true,
+            message: 'Submissão bem-sucedida!',
+            remaining: RESERVAR_CONFIG.MAX_SPOTS - countAfter
+          };
         } else if (countBefore >= 0 && countAfter === countBefore) {
           return {
             success: false,
@@ -435,30 +447,52 @@ async function loadRemainingSpots() {
   }
 
   try {
+    // FIX v11: Clean up any previous JSONP script to avoid duplicates
+    const oldScript = document.getElementById('pataCountScript');
+    if (oldScript) oldScript.remove();
+
+    // Clean up previous callback
+    if (window.handleReservarCountResponse) {
+      delete window.handleReservarCountResponse;
+    }
+
     const url = RESERVAR_CONFIG.COUNT_ACTION_URL +
       '?action=getCount&callback=handleReservarCountResponse&_t=' + Date.now();
+
     const script = document.createElement('script');
+    script.id = 'pataCountScript';
     script.src = url;
 
+    // FIX v11: On timeout, only fallback to MAX_SPOTS if still showing placeholder
     const timeout = setTimeout(() => {
-      updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
-    }, 5000);
+      console.warn('⚠️ Count request timed out');
+      const el = document.getElementById('remainingSpots');
+      if (el && (el.textContent === '...' || el.textContent === '')) {
+        updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+      }
+      // If already has a real number, keep it — don't reset to 500
+    }, 8000);
 
     window.handleReservarCountResponse = function(response) {
       clearTimeout(timeout);
-      if (response.success) {
-        const remaining = RESERVAR_CONFIG.MAX_SPOTS - response.count;
+      if (response && response.success) {
+        // FIX v11: Use response.remaining directly if available
+        const remaining = response.remaining !== undefined
+          ? response.remaining
+          : (RESERVAR_CONFIG.MAX_SPOTS - response.count);
         updateSpotCounter(remaining);
+        console.log('📊 Spots remaining:', remaining);
         if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
       } else {
-        updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+        console.warn('⚠️ Count response unsuccessful');
+        // FIX v11: Don't reset to MAX_SPOTS on failure — keep current value
       }
     };
 
     document.head.appendChild(script);
   } catch (error) {
     console.error('Error loading remaining spots:', error);
-    updateSpotCounter(RESERVAR_CONFIG.MAX_SPOTS);
+    // FIX v11: Don't reset to MAX_SPOTS on error — keep current value
   }
 }
 
