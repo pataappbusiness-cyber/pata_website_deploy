@@ -308,12 +308,12 @@ class ReservarFormSubmitter {
   /**
    * Submit form data via hidden iframe + real HTML form
    * This is the ONLY reliable way to POST to Google Apps Script cross-origin.
-   *
+   * 
    * Why not fetch()?
    * - Google Apps Script redirects POST requests (302)
    * - fetch() with mode:'no-cors' blocks redirects → doPost() never executes
    * - fetch() without no-cors fails CORS entirely
-   *
+   * 
    * The iframe approach:
    * - Creates a real HTML <form> targeting a hidden <iframe>
    * - The browser follows the redirect natively (no CORS issues)
