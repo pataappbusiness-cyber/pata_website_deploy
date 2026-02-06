@@ -1,7 +1,7 @@
 /* ============================================
    SECTION 14: RESERVAR O LUGAR - JavaScript
    Form validation, submission, and image carousel
-   Version: 9.0 - FIX 403 cross-origin
+   Version: 10.0 - FIX CORS 405 preflight
    ============================================ */
 
 'use strict';
@@ -28,10 +28,7 @@ class ReservarCarousel {
     this.images = document.querySelectorAll('.reservar-carousel-image');
     this.currentIndex = 0;
     this.intervalId = null;
-
-    if (this.images.length > 0) {
-      this.init();
-    }
+    if (this.images.length > 0) this.init();
   }
 
   init() {
@@ -48,9 +45,7 @@ class ReservarCarousel {
   }
 
   destroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
+    if (this.intervalId) clearInterval(this.intervalId);
   }
 }
 
@@ -119,9 +114,7 @@ class ReservarFormValidator {
   validateForm() {
     let isValid = true;
     Object.values(this.fields).forEach(field => {
-      if (field && !this.validateField(field)) {
-        isValid = false;
-      }
+      if (field && !this.validateField(field)) isValid = false;
     });
     return isValid;
   }
@@ -129,27 +122,19 @@ class ReservarFormValidator {
   showFieldError(field, message) {
     field.classList.add('error');
     field.setAttribute('aria-invalid', 'true');
-
-    const errorElement = document.getElementById(`${field.id}Error`);
-    if (errorElement) {
-      errorElement.textContent = message;
-      errorElement.classList.add('show');
-    }
+    const el = document.getElementById(`${field.id}Error`);
+    if (el) { el.textContent = message; el.classList.add('show'); }
   }
 
   clearFieldError(field) {
     field.classList.remove('error');
     field.setAttribute('aria-invalid', 'false');
-
-    const errorElement = document.getElementById(`${field.id}Error`);
-    if (errorElement) {
-      errorElement.classList.remove('show');
-    }
+    const el = document.getElementById(`${field.id}Error`);
+    if (el) el.classList.remove('show');
   }
 
   isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   resetForm() {
@@ -170,25 +155,23 @@ class ReservarFormSubmitter {
     this.validator = validator;
     this.submitButton = document.getElementById('reservarSubmitBtn');
     this.recaptchaReady = false;
-
     if (!this.form) return;
-
     this.init();
     this.initRecaptcha();
   }
 
   initRecaptcha() {
-    const checkRecaptcha = () => {
+    const check = () => {
       if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
         grecaptcha.ready(() => {
           this.recaptchaReady = true;
           console.log('✅ reCAPTCHA ready');
         });
       } else {
-        setTimeout(checkRecaptcha, 100);
+        setTimeout(check, 100);
       }
     };
-    checkRecaptcha();
+    check();
   }
 
   init() {
@@ -198,7 +181,6 @@ class ReservarFormSubmitter {
 
   async handleSubmit(e) {
     e.preventDefault();
-
     if (!this.validator.validateForm()) return;
 
     if (!this.recaptchaReady) {
@@ -209,187 +191,195 @@ class ReservarFormSubmitter {
     this.submitButton.disabled = true;
     this.submitButton.textContent = 'A enviar...';
 
-    if (typeof grecaptcha !== 'undefined' && grecaptcha.ready) {
-      try {
-        await new Promise((resolve) => grecaptcha.ready(resolve));
+    try {
+      await new Promise((resolve) => grecaptcha.ready(resolve));
 
-        const token = await grecaptcha.execute('6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb', { action: 'waitlist_signup' });
+      const token = await grecaptcha.execute(
+        '6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb',
+        { action: 'waitlist_signup' }
+      );
 
-        const formData = {
-          nome: document.getElementById('reservarNome').value.trim(),
-          email: document.getElementById('reservarEmail').value.trim(),
-          distrito: document.getElementById('reservarDistrito').value,
-          animal: document.getElementById('reservarAnimal').value,
-          marketing: document.getElementById('reservarMarketing').checked ? 'Sim' : 'Não',
-          timestamp: new Date().toISOString(),
-          'g-recaptcha-response': token
-        };
+      const formData = {
+        nome: document.getElementById('reservarNome').value.trim(),
+        email: document.getElementById('reservarEmail').value.trim(),
+        distrito: document.getElementById('reservarDistrito').value,
+        animal: document.getElementById('reservarAnimal').value,
+        marketing: document.getElementById('reservarMarketing').checked ? 'Sim' : 'Não',
+        timestamp: new Date().toISOString(),
+        'g-recaptcha-response': token
+      };
 
-        try {
-          const result = await this.submitToGoogleScript(formData);
+      const result = await this.submitToGoogleScript(formData);
 
-          if (result.success) {
-            this.showSuccessModal();
-            this.validator.resetForm();
-            setTimeout(() => loadRemainingSpots(), 1000);
-
-            if (RESERVAR_CONFIG.DEBUG_MODE) {
-              console.log('✅ Form submitted successfully:', result);
-            }
-          } else {
-            alert(result.message || 'Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
-            console.error('❌ Server error:', result.message);
-          }
-        } catch (error) {
-          alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
-          console.error('❌ Form submission error:', error);
-        } finally {
-          this.submitButton.disabled = false;
-          this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
-        }
-      } catch (error) {
-        console.error('❌ reCAPTCHA error:', error);
-        alert('Erro ao verificar reCAPTCHA. Por favor, tente novamente.');
-        this.submitButton.disabled = false;
-        this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
+      if (result.success) {
+        this.showSuccessModal();
+        this.validator.resetForm();
+        setTimeout(() => loadRemainingSpots(), 1000);
+      } else {
+        alert(result.message || 'Ocorreu um erro. Por favor, tente novamente.');
+        console.error('❌ Server error:', result.message);
       }
-    } else {
-      alert('Erro ao carregar reCAPTCHA. Por favor, recarregue a página.');
+    } catch (error) {
+      console.error('❌ Submission error:', error);
+      alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+    } finally {
       this.submitButton.disabled = false;
       this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
     }
   }
 
   /**
-   * Submit to Google Apps Script
+   * Submit to Google Apps Script.
    *
-   * Strategy: fetch() with redirect:'follow' sends JSON POST.
-   * Google Apps Script web apps DO support CORS when deployed as "Anyone".
-   * The 302 redirect is followed automatically to the /echo response URL.
+   * KEY INSIGHT: Google Apps Script does NOT handle CORS preflight (OPTIONS).
+   * Sending Content-Type: application/json triggers a preflight → 405 error.
    *
-   * If CORS fails on certain browsers, falls back to no-cors + JSONP verify.
+   * SOLUTION: Send as Content-Type: text/plain.
+   * - text/plain is a "simple" content type → NO preflight request
+   * - The browser sends the POST directly
+   * - Google Apps Script receives it and follows redirect to /echo
+   * - We can read the JSON response from /echo
+   *
+   * The Apps Script doPost() needs to parse e.postData.contents as JSON
+   * (it already does this when type !== 'application/json').
    */
-  submitToGoogleScript(formData) {
-    return new Promise(async (resolve, reject) => {
-      const jsonPayload = JSON.stringify(formData);
+  async submitToGoogleScript(formData) {
+    const jsonString = JSON.stringify(formData);
+    const scriptUrl = RESERVAR_CONFIG.GOOGLE_SCRIPT_URL;
 
-      // ── ATTEMPT 1: fetch with CORS (gets real response) ──
-      try {
-        console.log('📨 Attempt 1: fetch with CORS...');
+    // ── ATTEMPT 1: fetch with text/plain (no preflight, CORS works) ──
+    try {
+      console.log('📨 Attempt 1: fetch with text/plain (no preflight)...');
 
-        const response = await fetch(RESERVAR_CONFIG.GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: jsonPayload,
-          redirect: 'follow'
-        });
+      const response = await fetch(scriptUrl, {
+        method: 'POST',
+        body: jsonString,
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        redirect: 'follow'
+      });
 
-        if (response.ok) {
-          const result = await response.json();
-          console.log('✅ CORS fetch succeeded:', result);
-          resolve(result);
-          return;
+      if (response.ok) {
+        const text = await response.text();
+        console.log('📦 Raw response:', text);
+
+        try {
+          const result = JSON.parse(text);
+          console.log('✅ Attempt 1 succeeded:', result);
+          return result;
+        } catch (parseErr) {
+          console.warn('⚠️ Response not JSON, but request succeeded');
+          return { success: true, message: 'Submissão enviada.' };
         }
-
-        console.warn('⚠️ CORS fetch status:', response.status);
-        // Fall through to attempt 2
-      } catch (corsError) {
-        console.warn('⚠️ CORS fetch failed:', corsError.message);
-        // Fall through to attempt 2
       }
 
-      // ── ATTEMPT 2: no-cors + JSONP verification ──
+      console.warn('⚠️ Attempt 1 status:', response.status);
+      // Fall through to attempt 2
+
+    } catch (err) {
+      console.warn('⚠️ Attempt 1 failed:', err.message);
+      // Fall through to attempt 2
+    }
+
+    // ── ATTEMPT 2: no-cors POST + count verification via JSONP ──
+    try {
+      console.log('📨 Attempt 2: no-cors + JSONP verification...');
+
+      // Get count BEFORE
+      let countBefore = -1;
       try {
-        console.log('📨 Attempt 2: no-cors + JSONP...');
-
-        // Record count BEFORE submission
-        let countBefore = -1;
-        try {
-          const beforeResult = await this.getCountViaJSONP();
-          countBefore = beforeResult.count;
-          console.log('📊 Count before:', countBefore);
-        } catch (e) {
-          console.warn('⚠️ Could not get pre-count');
-        }
-
-        // Fire-and-forget POST (no readable response with no-cors)
-        await fetch(RESERVAR_CONFIG.GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          body: jsonPayload,
-          mode: 'no-cors',
-          redirect: 'follow'
-        });
-
-        // Wait for Google Apps Script to process
-        console.log('⏳ Waiting for GAS to process...');
-        await new Promise(r => setTimeout(r, 4000));
-
-        // Verify: did the count increase?
-        try {
-          const afterResult = await this.getCountViaJSONP();
-          const countAfter = afterResult.count;
-          console.log('📊 Count after:', countAfter);
-
-          if (countBefore >= 0 && countAfter > countBefore) {
-            console.log('✅ Verified: count increased from', countBefore, 'to', countAfter);
-            resolve({ success: true, message: 'Submissão bem-sucedida!' });
-          } else if (countBefore >= 0 && countAfter === countBefore) {
-            // Count didn't change - could be duplicate email or reCAPTCHA failure
-            console.warn('⚠️ Count unchanged - possible duplicate or validation error');
-            resolve({
-              success: false,
-              message: 'O email já está na lista ou ocorreu um erro de validação. Tente com outro email.'
-            });
-          } else {
-            // Couldn't compare, assume success
-            resolve({ success: true, message: 'Submissão enviada.' });
-          }
-        } catch (verifyError) {
-          // Can't verify but submission was sent
-          console.warn('⚠️ Verification failed, assuming success');
-          resolve({ success: true, message: 'Submissão enviada.' });
-        }
-      } catch (fallbackError) {
-        console.error('❌ All submission methods failed:', fallbackError);
-        reject(fallbackError);
+        const before = await this.getCountViaJSONP();
+        countBefore = before.count;
+        console.log('📊 Count before:', countBefore);
+      } catch (e) {
+        console.warn('⚠️ Pre-count failed');
       }
-    });
+
+      // Fire the POST (no readable response)
+      await fetch(scriptUrl, {
+        method: 'POST',
+        body: jsonString,
+        mode: 'no-cors'
+      });
+
+      // Wait for GAS to process
+      console.log('⏳ Waiting 4s for GAS...');
+      await new Promise(r => setTimeout(r, 4000));
+
+      // Get count AFTER
+      try {
+        const after = await this.getCountViaJSONP();
+        const countAfter = after.count;
+        console.log('📊 Count after:', countAfter);
+
+        if (countBefore >= 0 && countAfter > countBefore) {
+          console.log('✅ Verified: count went from', countBefore, 'to', countAfter);
+          return { success: true, message: 'Submissão bem-sucedida!' };
+        } else if (countBefore >= 0 && countAfter === countBefore) {
+          return {
+            success: false,
+            message: 'O email já está na lista ou ocorreu um erro de validação. Tente com outro email.'
+          };
+        }
+      } catch (e) {
+        console.warn('⚠️ Post-count verification failed');
+      }
+
+      // Can't verify but POST was sent
+      return { success: true, message: 'Submissão enviada.' };
+
+    } catch (err) {
+      console.error('❌ All attempts failed:', err);
+      throw err;
+    }
   }
 
   /**
-   * Get current count via JSONP (always works cross-origin)
+   * Get waitlist count via JSONP (always works cross-origin).
+   * Creates a <script> tag that loads the GET endpoint with a callback.
    */
   getCountViaJSONP() {
     return new Promise((resolve, reject) => {
-      const callbackName = 'countCallback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+      const cbName = '_pataCount_' + Date.now() + '_' + Math.floor(Math.random() * 10000);
+      const url = RESERVAR_CONFIG.COUNT_ACTION_URL +
+        '?action=getCount&callback=' + cbName +
+        '&_t=' + Date.now();
+
+      // Safety check - URL must not be empty
+      if (!url || url.indexOf('http') !== 0) {
+        reject(new Error('Invalid JSONP URL'));
+        return;
+      }
 
       const timeout = setTimeout(() => {
-        delete window[callbackName];
-        const el = document.getElementById(callbackName);
-        if (el) el.remove();
+        cleanup();
         reject(new Error('JSONP timeout'));
       }, 8000);
 
-      window[callbackName] = function(response) {
-        clearTimeout(timeout);
-        delete window[callbackName];
-        const el = document.getElementById(callbackName);
-        if (el) el.remove();
+      function cleanup() {
+        delete window[cbName];
+        const el = document.getElementById(cbName);
+        if (el && el.parentNode) el.parentNode.removeChild(el);
+      }
 
+      window[cbName] = function(response) {
+        clearTimeout(timeout);
+        cleanup();
         if (response && response.success) {
           resolve(response);
         } else {
-          reject(new Error('JSONP failed'));
+          reject(new Error('JSONP response unsuccessful'));
         }
       };
 
       const script = document.createElement('script');
-      script.id = callbackName;
-      script.src = `${RESERVAR_CONFIG.COUNT_ACTION_URL}?action=getCount&callback=${callbackName}&_t=${Date.now()}`;
+      script.id = cbName;
+      script.src = url;
       script.onerror = () => {
         clearTimeout(timeout);
-        delete window[callbackName];
-        reject(new Error('JSONP script error'));
+        cleanup();
+        reject(new Error('JSONP script load error'));
       };
       document.head.appendChild(script);
     });
@@ -398,15 +388,10 @@ class ReservarFormSubmitter {
   showSuccessModal() {
     const modal = document.getElementById('reservarSuccessModal');
     if (!modal) return;
-
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
-
-    const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-    if (focusableElements.length > 0) {
-      focusableElements[0].focus();
-    }
-
+    const focusable = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    if (focusable.length > 0) focusable[0].focus();
     setTimeout(() => this.closeModal(), 5000);
   }
 
@@ -419,7 +404,7 @@ class ReservarFormSubmitter {
 }
 
 /* ============================================
-   MODAL FUNCTIONS (Global for onclick)
+   MODAL FUNCTIONS (Global)
    ============================================ */
 
 function closeReservarModal() {
@@ -450,7 +435,8 @@ async function loadRemainingSpots() {
   }
 
   try {
-    const url = `${RESERVAR_CONFIG.COUNT_ACTION_URL}?action=getCount&callback=handleReservarCountResponse`;
+    const url = RESERVAR_CONFIG.COUNT_ACTION_URL +
+      '?action=getCount&callback=handleReservarCountResponse&_t=' + Date.now();
     const script = document.createElement('script');
     script.src = url;
 
@@ -477,19 +463,19 @@ async function loadRemainingSpots() {
 }
 
 function updateSpotCounter(count) {
-  const spotElement = document.getElementById('remainingSpots');
-  if (spotElement) spotElement.textContent = count;
+  const el = document.getElementById('remainingSpots');
+  if (el) el.textContent = count;
 }
 
 function showListaCheia() {
-  const mainContent = document.getElementById('reservarMainContent');
-  const listaCheia = document.getElementById('reservarListaCheia');
-  if (mainContent) mainContent.style.display = 'none';
-  if (listaCheia) listaCheia.style.display = 'flex';
+  const main = document.getElementById('reservarMainContent');
+  const cheia = document.getElementById('reservarListaCheia');
+  if (main) main.style.display = 'none';
+  if (cheia) cheia.style.display = 'flex';
 }
 
 /* ============================================
-   INITIALIZE ON DOM READY
+   INITIALIZE
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -498,8 +484,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const validator = new ReservarFormValidator('reservarForm');
   const submitter = new ReservarFormSubmitter('reservarForm', validator);
   console.log('🐾 Reservar section initialized');
-
-  window.addEventListener('beforeunload', () => {
-    if (carousel) carousel.destroy();
-  });
+  window.addEventListener('beforeunload', () => { if (carousel) carousel.destroy(); });
 });
