@@ -40,6 +40,7 @@
 
 
 
+
 - Mover scripts não-críticos para o final do `<body>`
 - Carregar reCAPTCHA **apenas quando o formulário recebe focus** (lazy load)
 - Carregar analytics (Google Analytics/Tag Manager) de forma assíncrona
