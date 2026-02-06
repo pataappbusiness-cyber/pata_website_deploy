@@ -1,633 +1,413 @@
-# Website Cleanup & Speed Optimization - Technical Specification
+# 🚀 PATA.CARE — Guia Completo de Otimização de Performance Web
 
-**Project:** Veterinary Website Audit & Optimization  
-**Developer:** Diogo  
-**CTO Reviewer:** Claude  
-**Date:** 2026-02-04  
-**Estimated Time:** 2-3 hours  
+## 📊 ESTADO ATUAL (Baseline)
+
+| Métrica | Valor Atual | Meta | Estado |
+|---------|-------------|------|--------|
+| **Performance Score** | 42/100 | ≥ 90 | 🔴 Crítico |
+| **FCP** (First Contentful Paint) | 1.6s | ≤ 1.8s | 🟢 OK |
+| **LCP** (Largest Contentful Paint) | 6.1s | ≤ 2.5s | 🔴 Crítico |
+| **TBT** (Total Blocking Time) | 13s | ≤ 200ms | 🔴 Crítico |
+| **CLS** (Cumulative Layout Shift) | 0 | ≤ 0.1 | 🟢 Perfeito |
+| **TTFB** (Time to First Byte) | 458ms | ≤ 200ms | 🟡 Aceitável |
+| **DOM Ready** | 2,071ms | ≤ 1,500ms | 🟡 Melhorável |
+| **onLoad** | 11,429ms | ≤ 3,000ms | 🔴 Crítico |
+| **Network Time** | 16,972ms | ≤ 5,000ms | 🔴 Crítico |
 
 ---
 
-## 🎯 MISSION OVERVIEW
+## 📋 LISTA DE BOAS PRÁTICAS DE OTIMIZAÇÃO WEB
 
-Perform a comprehensive audit of the website directory structure to:
-1. Identify all unused files not connected to index.html
-2. Clean up unused assets to reduce project bloat
-3. Generate speed optimization report with actionable recommendations
+### 🔴 PRIORIDADE CRÍTICA (Impacto Alto no Score)
+
+#### 1. Otimização de Imagens
+- Converter todas as imagens para **WebP** ou **AVIF** (redução de 25-50% no tamanho)
+- Definir `width` e `height` explícitos em todas as `<img>` tags (evita CLS)
+- Implementar **lazy loading** com `loading="lazy"` em imagens abaixo do fold
+- Usar `srcset` e `sizes` para servir imagens responsivas
+- Comprimir imagens: qualidade 80% para fotos, máximo 100KB para hero images
+- Usar `<picture>` element com fallbacks para browsers antigos
+- Preload da hero image/LCP image com `<link rel="preload" as="image">`
+
+#### 2. Eliminação de JavaScript Bloqueante (TBT = 13s!)
+- Adicionar `defer` ou `async` a TODOS os `<script>` tags externos
+
+- Mover scripts não-críticos para o final do `<body>`
+- Carregar reCAPTCHA **apenas quando o formulário recebe focus** (lazy load)
+- Carregar analytics (Google Analytics/Tag Manager) de forma assíncrona
+- Carregar cookie consent banner de forma diferida
+- Implementar `requestIdleCallback()` para scripts não-urgentes
+- Code-split JavaScript: separar código crítico de código secundário
+
+#### 3. Otimização de CSS
+- Fazer **inline do CSS crítico** (above-the-fold) no `<head>`
+- Carregar CSS não-crítico de forma assíncrona: `<link rel="preload" as="style">`
+- Minificar todos os ficheiros CSS
+- Remover CSS não utilizado (unused CSS)
+- Evitar `@import` em CSS (bloqueia rendering)
+- Usar `font-display: swap` para web fonts
+
+#### 4. Otimização de Fontes
+- Usar `font-display: swap` em todas as declarações `@font-face`
+- Fazer **preload** das fontes críticas: `<link rel="preload" as="font" crossorigin>`
+- Hospedar fontes localmente em vez de usar Google Fonts CDN (elimina DNS lookup)
+- Limitar variantes de fonte ao mínimo necessário (regular + bold)
+- Usar formato WOFF2 (melhor compressão)
+- Aplicar `unicode-range` para carregar apenas caracteres necessários
+
+### 🟡 PRIORIDADE MÉDIA (Impacto Moderado)
+
+#### 5. Otimização de Third-Party Scripts
+- **reCAPTCHA**: Carregar apenas no submit ou focus do formulário
+- **Cookie Consent**: Usar versão lightweight ou implementar custom
+- **Analytics**: Carregar após `window.onload`
+- **Chat widgets**: Carregar apenas após interação do utilizador
+- Estabelecer `dns-prefetch` e `preconnect` para domínios de terceiros:
+  ```html
+  <link rel="dns-prefetch" href="https://www.google.com">
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+  ```
+
+#### 6. Caching e Compressão
+- Ativar compressão **Brotli** (ou Gzip como fallback) no Cloudflare
+- Configurar **Cache-Control headers** agressivos para assets estáticos:
+  - Imagens: `max-age=31536000` (1 ano)
+  - CSS/JS: `max-age=31536000` com cache busting via hash no filename
+  - HTML: `max-age=0, must-revalidate`
+- Ativar Cloudflare **Auto Minify** para HTML, CSS e JS
+- Ativar **Cloudflare Polish** para otimização automática de imagens
+- Ativar **Early Hints** (103) no Cloudflare
+
+#### 7. Otimização do HTML
+- Minificar HTML (remover comentários, espaços desnecessários)
+- Remover meta tags desnecessárias
+- Usar `<link rel="preload">` para recursos críticos
+- Usar `<link rel="prefetch">` para páginas prováveis de navegação
+- Garantir que o DOCTYPE está correto e no topo
+- Remover inline styles desnecessários
+
+### 🟢 PRIORIDADE COMPLEMENTAR (Polish Final)
+
+#### 8. Otimização de Rede
+- Reduzir número total de HTTP requests
+- Combinar ficheiros CSS pequenos num só
+- Combinar ficheiros JS pequenos num só
+- Usar HTTP/2 ou HTTP/3 (verificar no Cloudflare)
+- Implementar Service Worker para caching offline
+
+#### 9. Performance Monitoring
+- Implementar `PerformanceObserver` para monitorização contínua
+- Configurar alertas para regressões de performance
+- Testar em múltiplas condições de rede (3G, 4G, WiFi)
+- Testar em dispositivos móveis reais
+
+#### 10. Acessibilidade que Afeta Performance
+- Evitar reflows desnecessários (não mudar layout após load)
+- Usar `will-change` CSS com moderação
+- Evitar animações que triggam layout/paint
+- Preferir `transform` e `opacity` para animações
 
 ---
 
-## 📋 TASK BREAKDOWN
+## 🔍 CHECKLIST RÁPIDO PRÉ-DEPLOY
 
-### **TASK 1: Dependency Analysis (30 min)**
-
-**Objective:** Map all files referenced in index.html and identify orphaned files
-
-**Process:**
-1. Parse `index.html` to extract all file references:
-   - CSS files (`<link>` tags)
-   - JavaScript files (`<script>` tags)
-   - Images (`<img src>`, CSS `background-image`)
-   - Fonts (`@font-face`, CSS font references)
-   - Other assets (favicons, manifests, etc.)
-
-2. Recursively scan referenced files for additional dependencies:
-   - CSS imports (`@import`)
-   - CSS url() references (images, fonts)
-   - JavaScript imports/requires
-   - JavaScript dynamic asset loading
-
-3. Compare against all files in project directory
-
-4. Generate comprehensive list of:
-   - ✅ **USED FILES** - Connected to index.html
-   - ❌ **UNUSED FILES** - Orphaned/not referenced
-   - ⚠️ **UNCERTAIN FILES** - Need manual review
-
-**Output:** `UNUSED_FILES_REPORT.md`
-
-**Expected Format:**
-```markdown
-# Unused Files Analysis Report
-
-## Summary
-- Total files scanned: X
-- Used files: Y
-- Unused files: Z
-- Uncertain files: W
-
-## ❌ UNUSED FILES (Safe to delete)
-### Images
-- /images/old-banner.jpg (150KB)
-- /images/unused-icon.png (25KB)
-
-### CSS
-- /css/legacy-styles.css (45KB)
-
-### JavaScript
-- /js/old-analytics.js (12KB)
-
-### Fonts
-- /fonts/unused-font.woff2 (80KB)
-
-**Total space to recover: XYZ KB**
-
-## ⚠️ UNCERTAIN FILES (Manual review needed)
-- /js/feature-flag.js - May be loaded conditionally
-- /images/backup-logo.svg - Possible fallback asset
-
-## ✅ FILES IN USE (Keep these)
-[Brief summary - full list in separate section]
+```
+□ Todas as imagens em WebP/AVIF com fallback
+□ Todas as imagens com width/height definidos
+□ Lazy loading em imagens abaixo do fold
+□ Hero image com preload
+□ CSS crítico inline no <head>
+□ Todos os scripts com defer/async
+□ reCAPTCHA com lazy load
+□ Fontes com font-display: swap
+□ Fontes em WOFF2 hospedadas localmente
+□ Compressão Brotli ativa
+□ Cache headers configurados
+□ HTML/CSS/JS minificados
+□ Sem CSS unused
+□ Third-party scripts diferidos
+□ Preconnect para domínios externos
 ```
 
 ---
+---
 
-### **TASK 2: Cleanup Execution (15 min)**
+# 🤖 PROMPT PARA CLAUDE CODE — Scan & Otimização do pata.care
 
-**Objective:** Remove unused files safely
+## INSTRUÇÕES PARA O CLAUDE CODE
 
-**Safety Checklist:**
-- [ ] Backup project before deletion
-- [ ] Review uncertain files manually
-- [ ] Delete only confirmed unused files
-- [ ] Test website functionality after deletion
-- [ ] Verify no broken links or 404s
-
-**Process:**
-1. Create backup of current project state
-2. Execute deletion of confirmed unused files
-3. Generate deletion log
-4. Verify index.html still loads correctly
-5. Check browser console for any 404 errors
-
-**Output:** 
-- Cleaned project directory
-- `DELETION_LOG.md` with list of removed files
+Copia e cola o seguinte prompt completo no Claude Code para ele analisar e otimizar o website:
 
 ---
 
-### **TASK 3: Speed Analysis & Optimization Report (45-60 min)**
+```
+# TAREFA: Auditoria Completa de Performance + Otimização do Website pata.care
 
-**Objective:** Comprehensive website performance audit with actionable improvements
+## CONTEXTO
+O website pata.care (hospedado no GitHub Pages com Cloudflare CDN) teve um score de 42/100 no PageSpeed Insights. Os principais problemas são:
+- LCP: 6.1s (meta: ≤2.5s) — conteúdo principal demora a aparecer
+- TBT: 13s (meta: ≤200ms) — JavaScript bloqueia o main thread
+- onLoad: 11.4s — página demora muito a carregar completamente
+- Network Time: 17s — assets pesados ou muitos requests
 
-**Analysis Categories:**
+O FCP (1.6s) e CLS (0) estão bons.
 
-#### **A. Asset Size Analysis**
-- Total page weight (HTML + CSS + JS + Images + Fonts)
-- Largest individual files (top 10)
-- File type breakdown (% of total weight)
-- Compression opportunities
+## FASE 1: AUDITORIA (Scan Completo)
 
-#### **B. Loading Performance**
-- Render-blocking resources
-- Critical CSS identification
-- JavaScript blocking assessment
-- Font loading strategy review
-- Image lazy-loading opportunities
+Analisa TODOS os ficheiros do website e gera um relatório detalhado com:
 
-#### **C. Network Efficiency**
-- HTTP requests count
-- Potential for file concatenation
-- CDN usage assessment
-- Caching strategy review
+### 1.1 Análise de Imagens
+- Lista TODAS as imagens do site com: nome, formato, tamanho em KB, dimensões
+- Identifica quais NÃO estão em WebP/AVIF
+- Identifica quais NÃO têm width/height definidos no HTML
+- Identifica quais NÃO têm loading="lazy" (exceto a hero image/LCP que deve ter preload)
+- Identifica quais NÃO têm srcset para responsividade
+- Calcula o peso total de todas as imagens
 
-#### **D. Image Optimization**
-- Already compressed images (note existing work)
-- Remaining optimization opportunities
-- Modern format recommendations (WebP, AVIF)
-- Responsive image strategy
-- Sprite sheet opportunities
+### 1.2 Análise de JavaScript
+- Lista TODOS os scripts (inline e externos) com: localização, tamanho, se tem defer/async
+- Identifica scripts que BLOQUEIAM o rendering (sem defer/async no <head>)
+- Identifica scripts de terceiros: reCAPTCHA, analytics, cookie consent, etc.
+- Verifica se reCAPTCHA está a carregar no page load (deveria ser lazy)
+- Calcula o peso total de JavaScript
+- Identifica código JavaScript não utilizado se possível
 
-#### **E. Code Optimization**
-- CSS minification status
-- JavaScript minification status
-- Unused CSS detection
-- Dead JavaScript code detection
-- Critical CSS extraction opportunity
+### 1.3 Análise de CSS
+- Lista TODOS os ficheiros/blocos CSS com: localização, tamanho
+- Verifica se existe CSS crítico inline no <head>
+- Verifica se CSS não-crítico está a bloquear rendering
+- Identifica @import statements (bloqueantes)
+- Verifica font-display em @font-face declarations
+- Calcula o peso total de CSS
 
-#### **F. Third-Party Resources**
-- External script impact
-- Analytics/tracking overhead
-- Social media widget performance
-- Font loading from external sources
+### 1.4 Análise de Fontes
+- Lista TODAS as fontes usadas com: nome, formato, tamanho, source (local vs CDN)
+- Verifica se têm font-display: swap
+- Verifica se estão em WOFF2
+- Verifica se têm preload
+- Identifica fontes carregadas mas não utilizadas
 
-**Output:** `SPEED_OPTIMIZATION_REPORT.md`
+### 1.5 Análise de HTML
+- Verifica estrutura do <head> (ordem dos recursos)
+- Lista todos os <link> tags com rel, type, e propósito
+- Verifica se existe preconnect/dns-prefetch para domínios externos
+- Conta total de HTTP requests que a página faz
+- Verifica se HTML está minificado
+- Identifica inline styles desnecessários
 
-**Expected Format:**
+### 1.6 Análise de Third-Party
+- Lista TODOS os domínios externos carregados
+- Para cada um: propósito, tamanho dos recursos, impacto na performance
+- Classifica cada um como: crítico / diferível / removível
+
+### 1.7 Relatório Resumo
+Gera uma tabela com:
+| Categoria | Problemas Encontrados | Impacto Estimado | Prioridade |
+E uma lista ordenada por impacto das otimizações a fazer.
+
+## FASE 2: OTIMIZAÇÃO (Aplicar Correções)
+
+Após a auditoria, aplica AS SEGUINTES OTIMIZAÇÕES por ordem de prioridade:
+
+### 2.1 Otimização de Imagens (Impacto: ALTO)
+- Converte TODAS as imagens para WebP usando ferramentas de linha de comando (cwebp ou similar)
+- Mantém originais como fallback com <picture> element
+- Adiciona width e height a TODAS as <img> tags
+- Adiciona loading="lazy" a imagens abaixo do fold
+- Adiciona preload à hero image / imagem LCP
+- Comprime imagens para qualidade 80% (ou o melhor compromisso qualidade/tamanho)
+- Gera versões responsivas (1x, 2x) se aplicável
+
+### 2.2 Otimização de JavaScript (Impacto: MUITO ALTO - TBT é 13s!)
+- Adiciona defer a TODOS os scripts não-críticos
+- Move scripts para o final do </body> se ainda não estão
+- Implementa lazy loading do reCAPTCHA:
+  ```javascript
+  // Carregar reCAPTCHA apenas quando o formulário recebe focus
+  let recaptchaLoaded = false;
+  function loadRecaptcha() {
+    if (recaptchaLoaded) return;
+    recaptchaLoaded = true;
+    const script = document.createElement('script');
+    script.src = 'https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY';
+    script.async = true;
+    document.head.appendChild(script);
+  }
+  // Adicionar listener ao primeiro input do formulário
+  document.querySelector('form input, form textarea')?.addEventListener('focus', loadRecaptcha, { once: true });
+  ```
+- Implementa carregamento diferido de analytics:
+  ```javascript
+  // Carregar analytics após page load
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      // Código de analytics aqui
+    }, 2000); // 2s delay após load
+  });
+  ```
+- Implementa carregamento diferido do cookie consent
+- Minifica todo o JavaScript inline
+
+### 2.3 Otimização de CSS (Impacto: ALTO)
+- Extrai CSS crítico (above-the-fold) e coloca inline no <head>
+- Carrega CSS restante de forma assíncrona:
+  ```html
+  <link rel="preload" href="styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="styles.css"></noscript>
+  ```
+- Minifica todos os ficheiros CSS
+- Remove CSS não utilizado
+- Substitui @import por <link> tags
+
+### 2.4 Otimização de Fontes (Impacto: MÉDIO)
+- Adiciona font-display: swap a todas as @font-face
+- Converte fontes para WOFF2 se não estão
+- Adiciona preload para fontes críticas
+- Se usa Google Fonts, faz download e hospeda localmente
+- Remove variantes de fonte não utilizadas
+
+### 2.5 Otimização de HTML (Impacto: MÉDIO)
+- Reorganiza <head> para ordem ótima:
+  1. charset e viewport meta
+  2. Preconnect/dns-prefetch
+  3. Preload de recursos críticos
+  4. CSS crítico inline
+  5. CSS não-crítico async
+  6. Scripts diferidos
+- Adiciona preconnect para domínios de terceiros
+- Minifica HTML
+- Remove comentários HTML desnecessários
+
+### 2.6 Configuração de Resource Hints
+Adiciona ao <head>:
+```html
+<!-- DNS Prefetch & Preconnect para domínios externos -->
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.google.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
+<!-- Adicionar outros domínios externos identificados na auditoria -->
+```
+
+## FASE 3: VALIDAÇÃO
+
+Após aplicar todas as otimizações:
+
+### 3.1 Verificação de Funcionalidade
+- Testa que o formulário de contacto/waitlist ainda funciona
+- Testa que o reCAPTCHA lazy-loaded funciona corretamente
+- Testa que o cookie consent aparece corretamente
+- Testa que todas as imagens carregam (incluindo WebP com fallback)
+- Testa que as fontes carregam corretamente
+- Verifica que não há erros na consola do browser
+
+### 3.2 Gera Relatório de Mudanças
+Cria um ficheiro PERFORMANCE_CHANGELOG.md com:
+
 ```markdown
-# Website Speed Optimization Report
+# Performance Changelog — pata.care
+## Data: [data]
 
-## 🎯 Executive Summary
-- Current total page weight: XXX KB
-- Total HTTP requests: XX
-- Estimated load time (3G): X.Xs
-- Estimated load time (4G): X.Xs
-- **Optimization potential: -XX% page weight, -XX% load time**
+### Métricas Antes
+| Métrica | Valor |
+|---------|-------|
+| Score | 42 |
+| FCP | 1.6s |
+| LCP | 6.1s |
+| TBT | 13s |
+| CLS | 0 |
 
----
-
-## 📊 Current State Analysis
-
-### Asset Breakdown
-| Asset Type | Count | Total Size | % of Total |
-|------------|-------|------------|------------|
-| HTML       | 1     | XX KB      | X%         |
-| CSS        | X     | XX KB      | X%         |
-| JavaScript | X     | XX KB      | X%         |
-| Images     | X     | XX KB      | X%         |
-| Fonts      | X     | XX KB      | X%         |
-| **TOTAL**  | **X** | **XXX KB** | **100%**   |
-
-### Largest Files (Top 10)
-1. `/images/hero-banner.jpg` - 250KB ⚠️ High priority
-2. `/js/main.js` - 120KB ⚠️ Not minified
-3. `/css/styles.css` - 85KB ⚠️ Not minified
+### Otimizações Aplicadas
+1. [Otimização] — Impacto estimado: [X]
+2. [Otimização] — Impacto estimado: [X]
 ...
 
----
+### Ficheiros Modificados
+- [ficheiro] — [o que mudou]
+- [ficheiro] — [o que mudou]
+...
 
-## 🚀 PRIORITY 1: Quick Wins (Impact: High, Effort: Low)
+### Peso Total Antes vs Depois
+- Imagens: [X KB] → [Y KB] (redução de Z%)
+- JavaScript: [X KB] → [Y KB] (redução de Z%)
+- CSS: [X KB] → [Y KB] (redução de Z%)
+- Total: [X KB] → [Y KB] (redução de Z%)
 
-### 1.1 Minify CSS & JavaScript
-**Current Impact:** +205KB
-**Savings:** ~60KB (29% reduction)
-**Effort:** 15 minutes
-
-**Action Items:**
-- [ ] Minify `/css/styles.css` (85KB → ~50KB)
-- [ ] Minify `/js/main.js` (120KB → ~75KB)
-
-**Implementation:**
-```bash
-# Use online tool or build process
-npx terser js/main.js -o js/main.min.js
-npx csso css/styles.css -o css/styles.min.css
+### Próximos Passos
+- Re-testar no PageSpeed Insights
+- Verificar métricas no Cloudflare Analytics
+- Configurar Cloudflare settings (Brotli, Polish, Auto Minify)
 ```
 
-### 1.2 Optimize Uncompressed Images
-**Current Impact:** +XXX KB
-**Savings:** ~XXX KB
-**Effort:** 30 minutes
+### 3.3 Checklist Final
+Confirma que:
+- [ ] Todas as imagens convertidas para WebP com fallback
+- [ ] width/height em todas as <img>
+- [ ] Lazy loading implementado
+- [ ] Hero image com preload
+- [ ] reCAPTCHA com lazy loading
+- [ ] Analytics diferido
+- [ ] Cookie consent diferido
+- [ ] CSS crítico inline
+- [ ] CSS não-crítico async
+- [ ] Fontes com font-display: swap
+- [ ] Fontes em WOFF2
+- [ ] Preconnect para domínios externos
+- [ ] HTML minificado
+- [ ] Todos os scripts com defer/async
+- [ ] Zero erros na consola
+- [ ] Formulário funcional
+- [ ] Site visualmente idêntico ao original
 
-**Images to optimize:**
-- `/images/hero-banner.jpg` (250KB → ~80KB with compression)
-- `/images/gallery-1.jpg` (180KB → ~60KB)
-
-**Note:** You've already compressed some images ✅ - great work!
-**Remaining opportunities identified above.**
-
-**Tools:**
-- TinyPNG/TinyJPG for lossless compression
-- ImageOptim (Mac) / Squoosh (Web)
-
----
-
-## 🎯 PRIORITY 2: Medium Impact (Impact: Medium, Effort: Medium)
-
-### 2.1 Implement Modern Image Formats
-**Savings:** ~30-40% on image weight
-
-**Action:**
-```html
-<picture>
-  <source srcset="hero.avif" type="image/avif">
-  <source srcset="hero.webp" type="image/webp">
-  <img src="hero.jpg" alt="Hero">
-</picture>
-```
-
-### 2.2 Lazy Load Below-the-Fold Images
-**Savings:** Faster initial page load
-
-**Action:**
-```html
-<img src="image.jpg" loading="lazy" alt="Description">
-```
-
-### 2.3 Font Loading Optimization
-**Current:** [Describe current font loading]
-**Improvement:** font-display: swap
-
-```css
-@font-face {
-  font-family: 'YourFont';
-  src: url('font.woff2') format('woff2');
-  font-display: swap; /* Add this */
-}
+## NOTAS IMPORTANTES
+- O site é hospedado no GitHub Pages — não temos controlo sobre server-side headers diretamente, mas o Cloudflare pode ajudar
+- O Cloudflare está configurado como CDN — podemos usar as features de otimização dele
+- Manter TODOS os ficheiros originais como backup antes de modificar
+- O domínio é pata.care e os emails ola@pata.care e privacidade@pata.care devem continuar a funcionar
+- Não alterar conteúdo textual ou visual — apenas otimizar performance
+- Testar em mobile E desktop após otimizações
 ```
 
 ---
 
-## 🔧 PRIORITY 3: Advanced Optimizations (Impact: Medium, Effort: High)
+## ⚙️ CONFIGURAÇÕES CLOUDFLARE RECOMENDADAS (Manual)
 
-### 3.1 Critical CSS Extraction
-**Benefit:** Eliminate render-blocking CSS
+Após o Claude Code fazer as otimizações no código, aplica estas configurações manualmente no painel Cloudflare:
 
-**Process:**
-1. Extract above-the-fold CSS
-2. Inline critical CSS in `<head>`
-3. Async load full stylesheet
+### Speed > Optimization
+- **Auto Minify**: Ativar para HTML, CSS, JS
+- **Brotli**: Ativar
+- **Early Hints**: Ativar
+- **Rocket Loader**: Testar (pode conflitar com alguns scripts — se causar problemas, desativar)
 
-### 3.2 Code Splitting
-**Benefit:** Reduce initial JavaScript bundle
+### Speed > Image Optimization (se disponível no teu plano)
+- **Polish**: Ativar com "Lossy" para máxima compressão
+- **WebP**: Ativar conversão automática
 
-### 3.3 HTTP/2 Server Push
-**Benefit:** Preload critical resources
+### Caching > Configuration
+- **Browser Cache TTL**: Respeitar headers existentes
+- **Caching Level**: Standard
 
----
-
-## 📈 Performance Metrics Target
-
-| Metric | Current | Target | Improvement |
-|--------|---------|--------|-------------|
-| Page Weight | XXX KB | YYY KB | -ZZ% |
-| HTTP Requests | XX | YY | -Z |
-| Load Time (3G) | X.Xs | Y.Ys | -Z.Zs |
-| First Contentful Paint | X.Xs | Y.Ys | -Z.Zs |
+### Rules > Page Rules (se necessário)
+- `pata.care/assets/*` → Cache Level: Cache Everything, Edge Cache TTL: 1 month
 
 ---
 
-## ✅ Implementation Checklist
+## 📈 METAS DE PERFORMANCE PÓS-OTIMIZAÇÃO
 
-### Phase 1: Immediate (This week)
-- [ ] Minify all CSS files
-- [ ] Minify all JavaScript files  
-- [ ] Compress remaining unoptimized images
-- [ ] Add lazy loading to images
+| Métrica | Antes | Meta Realista | Meta Ideal |
+|---------|-------|---------------|------------|
+| **Score** | 42 | ≥ 75 | ≥ 90 |
+| **FCP** | 1.6s | ≤ 1.5s | ≤ 1.0s |
+| **LCP** | 6.1s | ≤ 3.0s | ≤ 2.5s |
+| **TBT** | 13s | ≤ 500ms | ≤ 200ms |
+| **CLS** | 0 | 0 | 0 |
+| **onLoad** | 11.4s | ≤ 5s | ≤ 3s |
+| **Network** | 17s | ≤ 8s | ≤ 5s |
 
-**Expected Impact:** -XX% page weight, -X.Xs load time
-
-### Phase 2: Short-term (Next 2 weeks)
-- [ ] Convert images to WebP with fallbacks
-- [ ] Implement font-display: swap
-- [ ] Review and remove unused CSS
-- [ ] Concatenate small CSS/JS files
-
-**Expected Impact:** Additional -XX% page weight
-
-### Phase 3: Long-term (Next month)
-- [ ] Extract critical CSS
-- [ ] Implement JavaScript code splitting
-- [ ] Set up build process for automation
-- [ ] Consider CDN for static assets
-
-**Expected Impact:** -X.Xs load time
+A maior vitória será no **TBT** (de 13s para <500ms) através do lazy loading de scripts de terceiros, e no **LCP** (de 6.1s para <3s) através da otimização de imagens e CSS crítico.
 
 ---
 
-## 🛠 Recommended Tools
-
-### Free Tools:
-- **PageSpeed Insights** - Overall performance score
-- **WebPageTest** - Detailed loading waterfall
-- **Lighthouse** (Chrome DevTools) - Comprehensive audit
-
-### Image Optimization:
-- **Squoosh** (web) - Image compression/conversion
-- **TinyPNG** - PNG/JPG compression
-- **ImageOptim** (Mac) - Batch optimization
-
-### Code Optimization:
-- **csso** - CSS minification
-- **terser** - JavaScript minification
-- **PurgeCSS** - Remove unused CSS
-
----
-
-## 📝 Notes
-- Already compressed assets noted ✅
-- Preserve originals before optimization
-- Test functionality after each optimization
-- Monitor Core Web Vitals post-deployment
-
-**Next Steps:** Start with Priority 1 quick wins for immediate impact!
-```
-
----
-
-## 🔄 IMPLEMENTATION INSTRUCTIONS FOR CLAUDE CODE
-
-### **Step 1: Locate Project Files**
-```bash
-# First, ask Diogo for the website directory path
-# Expected structure:
-# /path/to/website/
-#   ├── index.html
-#   ├── css/
-#   ├── js/
-#   ├── images/
-#   ├── fonts/
-#   └── ...
-```
-
-### **Step 2: Parse index.html**
-Create a Python script to:
-1. Read index.html
-2. Extract all file references using regex/HTML parser
-3. Recursively scan referenced CSS/JS files for additional dependencies
-4. Build complete dependency tree
-
-### **Step 3: Scan File System**
-```python
-import os
-import re
-from pathlib import Path
-
-def scan_website_directory(root_path):
-    """
-    Scan entire website directory and return all files
-    """
-    all_files = []
-    for root, dirs, files in os.walk(root_path):
-        for file in files:
-            file_path = os.path.join(root, file)
-            file_size = os.path.getsize(file_path)
-            all_files.append({
-                'path': file_path,
-                'size': file_size,
-                'extension': Path(file).suffix
-            })
-    return all_files
-
-def parse_html_references(html_file):
-    """
-    Extract all file references from HTML
-    """
-    with open(html_file, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    references = set()
-    
-    # CSS files
-    css_pattern = r'<link[^>]+href=["\']([^"\']+\.css)["\']'
-    references.update(re.findall(css_pattern, content))
-    
-    # JS files
-    js_pattern = r'<script[^>]+src=["\']([^"\']+\.js)["\']'
-    references.update(re.findall(js_pattern, content))
-    
-    # Images in HTML
-    img_pattern = r'<img[^>]+src=["\']([^"\']+)["\']'
-    references.update(re.findall(img_pattern, content))
-    
-    # Favicon and other links
-    link_pattern = r'<link[^>]+href=["\']([^"\']+)["\']'
-    references.update(re.findall(link_pattern, content))
-    
-    return references
-
-def parse_css_references(css_file):
-    """
-    Extract file references from CSS (images, fonts, imports)
-    """
-    with open(css_file, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    references = set()
-    
-    # url() references
-    url_pattern = r'url\(["\']?([^"\'()]+)["\']?\)'
-    references.update(re.findall(url_pattern, content))
-    
-    # @import
-    import_pattern = r'@import\s+["\']([^"\']+)["\']'
-    references.update(re.findall(import_pattern, content))
-    
-    return references
-
-def parse_js_references(js_file):
-    """
-    Extract file references from JavaScript
-    """
-    with open(js_file, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    references = set()
-    
-    # import statements
-    import_pattern = r'import\s+.*?from\s+["\']([^"\']+)["\']'
-    references.update(re.findall(import_pattern, content))
-    
-    # require statements
-    require_pattern = r'require\(["\']([^"\']+)["\']\)'
-    references.update(re.findall(require_pattern, content))
-    
-    # Dynamic imports or asset loading (common patterns)
-    asset_pattern = r'["\']([^"\']+\.(jpg|jpeg|png|gif|svg|webp))["\']'
-    references.update([match[0] for match in re.findall(asset_pattern, content)])
-    
-    return references
-```
-
-### **Step 4: Generate UNUSED_FILES_REPORT.md**
-```python
-def generate_unused_files_report(used_files, all_files, uncertain_files):
-    """
-    Generate markdown report of unused files
-    """
-    unused_files = [f for f in all_files if f['path'] not in used_files and f['path'] not in uncertain_files]
-    
-    report = "# Unused Files Analysis Report\n\n"
-    report += "## Summary\n"
-    report += f"- Total files scanned: {len(all_files)}\n"
-    report += f"- Used files: {len(used_files)}\n"
-    report += f"- Unused files: {len(unused_files)}\n"
-    report += f"- Uncertain files: {len(uncertain_files)}\n\n"
-    
-    # Group by file type
-    unused_by_type = {}
-    total_space = 0
-    
-    for file in unused_files:
-        ext = file['extension']
-        if ext not in unused_by_type:
-            unused_by_type[ext] = []
-        unused_by_type[ext].append(file)
-        total_space += file['size']
-    
-    report += "## ❌ UNUSED FILES (Safe to delete)\n\n"
-    
-    for ext, files in sorted(unused_by_type.items()):
-        report += f"### {ext} files\n"
-        for file in files:
-            size_kb = file['size'] / 1024
-            report += f"- {file['path']} ({size_kb:.1f}KB)\n"
-        report += "\n"
-    
-    report += f"**Total space to recover: {total_space/1024:.1f} KB**\n\n"
-    
-    # Write to file
-    with open('UNUSED_FILES_REPORT.md', 'w') as f:
-        f.write(report)
-```
-
-### **Step 5: Calculate File Sizes for Speed Report**
-```python
-def calculate_asset_breakdown(used_files):
-    """
-    Calculate total size and breakdown by asset type
-    """
-    breakdown = {
-        'HTML': {'count': 0, 'size': 0},
-        'CSS': {'count': 0, 'size': 0},
-        'JavaScript': {'count': 0, 'size': 0},
-        'Images': {'count': 0, 'size': 0},
-        'Fonts': {'count': 0, 'size': 0},
-        'Other': {'count': 0, 'size': 0}
-    }
-    
-    extension_map = {
-        '.html': 'HTML',
-        '.css': 'CSS',
-        '.js': 'JavaScript',
-        '.jpg': 'Images', '.jpeg': 'Images', '.png': 'Images', 
-        '.gif': 'Images', '.svg': 'Images', '.webp': 'Images',
-        '.woff': 'Fonts', '.woff2': 'Fonts', '.ttf': 'Fonts', 
-        '.eot': 'Fonts', '.otf': 'Fonts'
-    }
-    
-    for file in used_files:
-        ext = Path(file['path']).suffix.lower()
-        category = extension_map.get(ext, 'Other')
-        breakdown[category]['count'] += 1
-        breakdown[category]['size'] += file['size']
-    
-    return breakdown
-```
-
-### **Step 6: Generate SPEED_OPTIMIZATION_REPORT.md**
-Complete implementation of speed analysis with:
-- File size calculations
-- Identification of large files
-- Minification detection (check for .min.js/.min.css)
-- Image compression opportunities
-- Loading strategy analysis
-
----
-
-## ⚠️ IMPORTANT CONSIDERATIONS
-
-1. **Backup First:** Always create backup before deletion
-2. **Test After Cleanup:** Verify website works after file removal
-3. **Conditional Loading:** Some files may be loaded conditionally (JS feature flags, A/B tests)
-4. **Future Assets:** Keep files intended for upcoming features (document these separately)
-5. **Version Control:** If using Git, commit before and after cleanup
-
----
-
-## 📊 SUCCESS METRICS
-
-- [ ] All unused files identified
-- [ ] Safe cleanup executed without breaking functionality
-- [ ] Speed report generated with actionable items
-- [ ] Prioritized optimization roadmap created
-- [ ] No 404 errors or broken functionality
-- [ ] Clear understanding of optimization opportunities
-
----
-
-## 🎓 LEARNING OBJECTIVES
-
-**Diogo will learn:**
-- How to perform dependency analysis
-- Web performance optimization fundamentals
-- Image optimization best practices
-- CSS/JS minification importance
-- Critical rendering path concepts
-
-**CTO Claude will teach:**
-- Why certain optimizations matter
-- Trade-offs between quality and performance
-- How to prioritize optimization efforts
-- Build process automation basics
-
----
-
-## 📞 EXECUTION WORKFLOW
-
-**Phase 1: Analysis**
-1. Claude Code scans website directory
-2. Parses index.html and all referenced files
-3. Generates UNUSED_FILES_REPORT.md
-4. Diogo reviews uncertain files
-
-**Phase 2: Cleanup**
-1. Diogo confirms files to delete
-2. Claude Code creates backup
-3. Claude Code deletes approved files
-4. Generates DELETION_LOG.md
-5. Diogo verifies functionality
-
-**Phase 3: Speed Analysis**
-1. Claude Code analyzes remaining files
-2. Calculates sizes and metrics
-3. Generates SPEED_OPTIMIZATION_REPORT.md
-4. Diogo reviews recommendations with CTO Claude
-
----
-
-## ✅ DELIVERABLES
-
-1. **UNUSED_FILES_REPORT.md** - Complete analysis of orphaned files
-2. **DELETION_LOG.md** - Record of deleted files
-3. **SPEED_OPTIMIZATION_REPORT.md** - Comprehensive performance audit with prioritized action items
-4. **Cleaned project directory** - Removed unused files
-5. **Backup archive** - Safety copy before changes
-
----
-
-## 🚀 NEXT STEPS
-
-**To execute this specification:**
-
-1. Provide Claude Code with the website directory path
-2. Confirm location of index.html
-3. Verify backup exists or will be created
-4. Run the analysis scripts
-5. Review reports together
-6. Execute cleanup with approval
-7. Plan optimization implementation
-
----
-
-*This specification is ready for Claude Code implementation. All analysis logic, report formats, and execution steps are defined. Let's make this website faster and cleaner!* 💪
+*Documento criado para o projeto PATA — pata.care*
+*Versão 1.0 — Fevereiro 2026*
