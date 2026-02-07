@@ -8,4 +8,24 @@ Opção A (recomendada): CSS gradient animado como placeholder. Crias um backgro
 Opção B: Screenshot estático do primeiro frame do shader como imagem de fundo. Carrega quase instantaneamente (especialmente se inline como base64 no CSS ou preloaded), e depois o shader substitui quando ready. Visualmente perfeito mas sem movimento.
 Opção C: Combinação — imagem estática do shader como fundo imediato, com um CSS gradient overlay animado subtil para dar sensação de vida, e depois transição suave para o shader real.
 Eu recomendo a Opção A ou C porque evitam completamente a tela preta e dão sensação de responsividade imediata. A implementação seria basicamente: definir o background do container do shader com o fallback CSS, e quando o shader inicializa, fazer um crossfade.
-Queres que eu comece por qual frente? Posso gerar o código do placeholder CSS primeiro (que resolve o problema visível para o utilizador), ou preferir começar pela compressão dos assets?
+Queres que eu comece por qual frente? Posso gerar o código do placehol
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+der CSS primeiro (que resolve o problema visível para o utilizador), ou preferir começar pela compressão dos assets?
