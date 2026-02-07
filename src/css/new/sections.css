@@ -631,31 +631,48 @@
 
 /* ============================================
    RESPONSIVE - MOBILE (max-width: 768px)
+   Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4124
    ============================================ */
 
 @media (max-width: 768px) {
   .header-section {
-    min-height: 100vh;
+    height: 95vh;
+    min-height: 0;
     padding-top: 80px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
+    justify-content: center;
+  }
+
+  .header-container {
+    gap: 8px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .header-content {
+    gap: 12px;
   }
 
   .header-launch {
-    font-size: 18px;
-    line-height: 24px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 28px;
   }
 
   .header-title-white,
   .header-title-orange {
     font-size: 32px;
+    font-weight: 700;
     line-height: 36px;
   }
 
   .header-visual-container {
     flex-direction: column;
-    padding-left: 24px;
-    padding-right: 24px;
-    gap: 24px;
+    padding-left: 0;
+    padding-right: 0;
+    gap: 0;
+    flex: 1;
+    max-height: 50vh;
   }
 
   .visual-pills-left,
@@ -666,14 +683,20 @@
   .mockup-center {
     width: 100%;
     min-width: auto;
-    height: auto;
-    padding: 20px;
+    height: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .mockup-image {
-    width: 100%;
-    height: auto;
-    max-width: 480px;
+    width: auto;
+    height: 100%;
+    max-width: 400px;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
   }
 
   /* Mouse Highlight - Desativado em mobile */
