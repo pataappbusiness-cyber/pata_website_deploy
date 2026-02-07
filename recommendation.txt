@@ -1,0 +1,11 @@
+Plano de Ataque em 2 Frentes
+Frente 1 — Compressão de assets
+Para os SVGs, o melhor approach é usar SVGO (SVG Optimizer) que remove metadata desnecessário, simplifica paths, e reduz tamanhos tipicamente 20-40% sem qualquer perda visual. Para as imagens .webp que já tens (como mockup_no_bg.webp com 130kB, ou cao.webp com 83kB), podes comprimir com ferramentas como Squoosh com quality 80-85 — visualmente indistinguível mas significativamente mais leve. As imagens de poster dos vídeos (40kB cada) também beneficiam de resize se estão a ser servidas maiores do que o display size.
+Uma técnica adicional: para imagens abaixo do fold, garantir que têm loading="lazy" para não bloquear o carregamento inicial.
+Frente 2 — Placeholder para o liquid shader
+Esta é a questão mais importante para a experiência do utilizador. Tens 3 opções viáveis, da mais simples à mais sofisticada:
+Opção A (recomendada): CSS gradient animado como placeholder. Crias um background com um gradiente que simula vagamente as cores do teu shader (os tons quentes/escuros que vejo no site), com uma animação CSS suave de movimento. É instantâneo, zero JavaScript, e quando o shader carrega, faz um fade-in por cima. O utilizador nunca vê tela preta.
+Opção B: Screenshot estático do primeiro frame do shader como imagem de fundo. Carrega quase instantaneamente (especialmente se inline como base64 no CSS ou preloaded), e depois o shader substitui quando ready. Visualmente perfeito mas sem movimento.
+Opção C: Combinação — imagem estática do shader como fundo imediato, com um CSS gradient overlay animado subtil para dar sensação de vida, e depois transição suave para o shader real.
+Eu recomendo a Opção A ou C porque evitam completamente a tela preta e dão sensação de responsividade imediata. A implementação seria basicamente: definir o background do container do shader com o fallback CSS, e quando o shader inicializa, fazer um crossfade.
+Queres que eu comece por qual frente? Posso gerar o código do placeholder CSS primeiro (que resolve o problema visível para o utilizador), ou preferir começar pela compressão dos assets?
