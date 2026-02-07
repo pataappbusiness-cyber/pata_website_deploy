@@ -1,8 +1,4 @@
-/**
- * PATA Liquid Shader Background
- * Adapted from GLSL shader with brand color integration
- * Performance optimized for web deployment
- */
+
 
 class LiquidShader {
   constructor(canvasId) {

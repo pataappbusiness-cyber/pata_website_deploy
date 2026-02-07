@@ -4,20 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
-    <!-- Preconnect para domínios críticos -->
     <link rel="preconnect" href="https://media.pata.care" crossorigin>
     <link rel="preconnect" href="https://fonts.bunny.net" crossorigin>
 
-    <!-- DNS Prefetch (fallback for preconnect) -->
     <link rel="dns-prefetch" href="https://media.pata.care">
     <link rel="dns-prefetch" href="https://fonts.bunny.net">
     <link rel="dns-prefetch" href="https://cdn.consentmanager.net">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
 
-    <!-- LCP Image Preload -->
     <link rel="preload" href="./src/img/new_images/mockup_no_bg.webp" as="image" type="image/webp">
 
-    <!-- Partytown Configuration - Moves third-party scripts to Web Worker -->
     <script>
       partytown = {
         lib: "/~partytown/",
@@ -27,7 +23,6 @@
     </script>
     <script src="/~partytown/partytown.js"></script>
 
-    <!-- Google Tag Manager - Executed in Web Worker via Partytown -->
     <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
@@ -36,17 +31,12 @@
       gtag('config', 'G-JD85N7J78Y');
     </script>
 
-
-
-
-<!-- Primary Meta Tags -->
     <title>PATA - Veterinária Online 24/7 | Telemedicina Veterinária em Portugal</title>
     <meta name="title" content="PATA - Veterinária Online 24/7 | Telemedicina Veterinária em Portugal">
     <meta name="description" content="Acesso a veterinários licenciados em menos de 60 segundos. Consultas online, IA inteligente, farmácia veterinária. Cuide do seu cão ou gato 24/7 sem sair de casa.">
     <meta name="keywords" content="veterinário online, telemedicina veterinária, consulta veterinária, cuidados animais, vet online portugal">
     <link rel="canonical" href="https://pata.care/">
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pata.care/">
     <meta property="og:title" content="PATA - Veterinária Online 24/7 | Telemedicina Veterinária">
@@ -55,21 +45,18 @@
     <meta property="og:locale" content="pt_PT">
     <meta property="og:site_name" content="PATA">
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://pata.care/">
     <meta property="twitter:title" content="PATA - Veterinária Online 24/7">
     <meta property="twitter:description" content="Acesso a veterinários licenciados em menos de 60 segundos.">
     <meta property="twitter:image" content="https://pata.care/metadata/twitter/twitter-min.jpg">
 
-    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="./src/img/icons/logo.svg">
     <link rel="icon" type="image/png" sizes="32x32" href="./src/img/icons/32_logo.svg">
     <link rel="icon" type="image/png" sizes="16x16" href="/src/img/icons/16_logo.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/src/img/icons/apple-touch-pata.png">
     <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -99,7 +86,6 @@
     }
     </script>
 
-    <!-- Mona Sans Font via Bunny.net (Privacy-friendly CDN) -->
     <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* Mona Sans Regular (400) */
@@ -130,10 +116,8 @@
         }
     </style>
 
-    <!-- Combined and Minified Stylesheet (19 files → 1) -->
     <link rel="stylesheet" href="./src/css/dist/styles.min.css">
 
-    <!-- Critical CSS Inline (Navbar) -->
     <style>
         /* Navbar Critical CSS */
         :root {
@@ -449,33 +433,29 @@
 </head>
 <body>
 
-    <!-- NAVBAR (Preserved from existing site) -->
     <header class="navbar" data-name="navigation-bar">
         <div class="navbar-menu-container">
-            <!-- Logo -->
+            
             <a href="#hero" class="navbar-logo-link">
                 <img src="src/img/icons/logo_signature.svg" alt="PATA Logo" class="navbar-logo" width="95" height="32">
             </a>
 
-            <!-- Desktop Navigation Links -->
             <nav class="navbar-links" id="navbar-links">
                 <a href="#problem1" class="navbar-link">Problema</a>
                 <a href="#solution1" class="navbar-link">Solução</a>
                 <a href="#joinus1" class="navbar-link">Junte-se a nós</a>
-                <!-- Mobile CTA Button -->
+                
                 <button class="navbar-cta-button navbar-cta-mobile">
                     <span>Reservar</span>
                 </button>
             </nav>
 
-            <!-- CTA Button -->
             <div class="navbar-buttons">
                 <button class="navbar-cta-button">
                     <span>Reservar</span>
                 </button>
             </div>
 
-            <!-- Mobile Hamburger Toggle -->
             <button class="navbar-toggle" id="navbarToggle">
                 <span></span>
                 <span></span>
@@ -484,25 +464,16 @@
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
     <main>
 
-        <!-- ============================================
-             SECTION 1: HEADER (HOME) - 100vh
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2915
-             ============================================ -->
         <section id="hero" class="header-section">
 
-            <!-- Liquid Shader Canvas Background -->
             <canvas id="liquid-shader-canvas" class="liquid-shader-canvas" aria-hidden="true"></canvas>
 
-            <!-- 🆕 NOVO: Mouse Highlight Layer -->
             <div class="mouse-highlight" aria-hidden="true"></div>
 
-            <!-- Main Container -->
             <div class="header-container">
 
-                <!-- 1. TÍTULO NO TOPO (Primeiro Elemento) -->
                 <div class="header-content">
                     <div class="header-launch">Lançamento: 2026</div>
                     <h1 class="header-title">
@@ -514,12 +485,10 @@
                     </h1>
                 </div>
 
-                <!-- 2. VISUAL CONTAINER (Segundo Elemento) -->
                 <div class="header-visual-container">
 
-                    <!-- Pills Esquerda -->
                     <div class="visual-pills-left">
-                        <!-- Pill 1 - Superior Esquerda (Cão com médico) -->
+                        
                         <div class="image-pill pill-left-top" data-parallax="0.3">
                             <picture>
                                 <source srcset="./src/img/new_images/cao_medico.webp" type="image/webp">
@@ -534,7 +503,6 @@
                             <div class="pill-inner-shadow"></div>
                         </div>
 
-                        <!-- Pill 2 - Inferior Esquerda (Veterinário) -->
                         <div class="image-pill pill-left-bottom" data-parallax="0.5">
                             <picture>
                                 <source srcset="./src/img/new_images/vet.webp" type="image/webp">
@@ -550,7 +518,6 @@
                         </div>
                     </div>
 
-                    <!-- Mockup Central -->
                     <div class="mockup-center" data-parallax="0.2">
                         <picture>
                             <source srcset="./src/img/new_images/mockup_no_bg.webp" type="image/webp">
@@ -565,9 +532,8 @@
                         </picture>
                     </div>
 
-                    <!-- Pills Direita -->
                     <div class="visual-pills-right">
-                        <!-- Pill 3 - Superior Direita (Cão feliz) -->
+                        
                         <div class="image-pill pill-right-top" data-parallax="0.4">
                             <picture>
                                 <source srcset="./src/img/new_images/cao.webp" type="image/webp">
@@ -582,7 +548,6 @@
                             <div class="pill-inner-shadow"></div>
                         </div>
 
-                        <!-- Pill 4 - Inferior Direita (Gatinho) -->
                         <div class="image-pill pill-right-bottom" data-parallax="0.6">
                             <picture>
                                 <source srcset="./src/img/new_images/gatinho.webp" type="image/webp">
@@ -604,15 +569,10 @@
 
         </section>
 
-        <!-- ============================================
-             SECTION 2: PROBLEM1 (PROBLEMA) - Two Panel Comparison
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2936&m=dev
-             ============================================ -->
         <section id="problem1" class="problem1-section">
 
-            <!-- LEFT PANEL - Traditional Vet (Grey/Dark) -->
             <div class="left-panel">
-                <!-- Background Video + Overlays -->
+                
                 <div class="background-container">
                     <video
                         class="background-video"
@@ -628,7 +588,6 @@
                     <div class="overlay-dark"></div>
                 </div>
 
-                <!-- Price Card -->
                 <div class="price-card-grey">
                     <div class="card-content">
                         <h3>Neste momento, uma urgência veterinária noturna custa:</h3>
@@ -646,9 +605,8 @@
                 </div>
             </div>
 
-            <!-- RIGHT PANEL - PATA Solution (Orange/Warm) -->
             <div class="right-panel">
-                <!-- Background Video + Orange Overlay -->
+                
                 <div class="background-container">
                     <video
                         class="background-video"
@@ -663,7 +621,6 @@
                     <div class="overlay-orange"></div>
                 </div>
 
-                <!-- Price Card -->
                 <div class="price-card-orange">
                     <div class="card-content">
                         <h3>Com PATA</h3>
@@ -677,39 +634,28 @@
                         <p>Sem instalações físicas. Sem rececionistas. Sem salas de espera. Só pagamos veterinários — e eles recebem mais do que em clínica.</p>
                     </div>
 
-                    <!-- Inner Shadows -->
                     <div class="inner-shadows"></div>
                 </div>
             </div>
 
         </section>
 
-        <!-- ============================================
-             SECTION 3: PROBLEM2 - 85vh
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2953&m=dev
-             ============================================ -->
         <section id="problem2" class="section-wrapper">
 
-            <!-- Container Principal -->
             <div class="problem2-container">
 
-                <!-- Left Column: Content -->
                 <div class="problem2-content">
 
-                    <!-- Título Principal -->
                     <h4 class="problem2-title">Imagine isto:</h4>
 
-                    <!-- Text Group -->
                     <div class="problem2-text-group">
-                        <!-- História Narrativa -->
+                        
                         <p class="problem2-story">São 3h da manhã. O Max vomitou duas vezes. Abre a app PATA.
 
 Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz perguntas, acalma-o: "É indigestão. Vou receitar um protetor gástrico.  Amanhã estará bem." A receita chega ao email em segundos. A app mostra a farmácia  mais próxima que abre às 9h. De manhã, avias em 2 minutos.</p>
 
-                        <!-- Conclusão -->
                         <h3 class="problem2-conclusion">Volta a dormir. O Max também.</h3>
 
-                        <!-- Cartão de Custo -->
                         <div class="problem2-cost">
                             <h4 class="problem2-cost-label">Custo total:</h4>
                             <div class="problem2-cost-box">
@@ -721,9 +667,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 </div>
 
-                <!-- Right Column: Animation -->
                 <div class="problem2-animation">
-                    <!-- PATA App Image -->
+                    
                     <picture>
                         <source srcset="src/img/images/PATA_APP.webp" type="image/webp">
                         <img src="src/img/images/PATA_APP.png"
@@ -738,23 +683,17 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================= -->
-        <!--                  Problem 3                    -->
-        <!-- ============================================= -->
-
         <section id="problem3" class="section-wrapper">
             <div class="problem3-container">
 
-                <!-- Left Column: Header Content -->
                 <div class="problem3-header">
-                    <!-- Cat Icon + Title -->
+                    
                     <div class="problem3-title-wrapper">
-                        <!-- Animated Cat Icon -->
+                        
                         <div class="problem3-cat-icon">
                             <img src="src/img/icons/gato_animado1.svg" alt="Cat Icon" width="54" height="54">
                         </div>
 
-                        <!-- Title Text -->
                         <div class="problem3-title-text">
                             <h2 class="problem3-title-main">
                                 <span class="problem3-title-orange">2 milhões</span>
@@ -764,7 +703,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Subtitle & Description -->
                     <div class="problem3-text-group">
                         <h4 class="problem3-subtitle">Mas amar não paga consultas. E quando a emergência acontece  às 3h da manhã, o amor não responde ao telefone.</h4>
 
@@ -776,12 +714,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     </div>
                 </div>
 
-                <!-- Right Column: Statistics Cards -->
                 <div class="problem3-stats">
 
-                    <!-- Card 1: Custo Urgência -->
                     <div class="problem3-stat-card">
-                        <!-- Clock Animation -->
+                        
                         <div class="problem3-stat-icon">
                             <img src="src/img/icons/tutores_adiam_consultas_animado.svg"
                                  alt="Clock Icon" width="54" height="54">
@@ -801,9 +737,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Card 2: Custo Emergência -->
                     <div class="problem3-stat-card">
-                        <!-- Notes Icon -->
+                        
                         <div class="problem3-stat-icon">
                             <img src="src/img/icons/custo medio de uma consulta veterinaria 1.svg" alt="Medical notes icon" width="54" height="54">
                         </div>
@@ -822,9 +757,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Card 3: Lares com Animais -->
                     <div class="problem3-stat-card">
-                        <!-- Lares Portugueses Animation -->
+                        
                         <div class="problem3-stat-icon">
                             <img src="src/img/icons/100 beneficios depois 1.svg"
                                  alt="Portuguese Homes Icon" width="54" height="54">
@@ -844,7 +778,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Bottom Text (Mobile/Tablet) -->
                     <h4 class="problem3-stats-footer">
                         Estes números não são estatísticas.<br>
                         São noites mal dormidas. São decisões impossíveis.<br>
@@ -855,13 +788,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             </div>
         </section>
 
-        <!-- ============================================
-             SECTION 5: PROBLEM4 - Validation Section (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2998&m=dev
-             ============================================ -->
         <section id="problem4" class="problem4-section animated-gradient">
 
-            <!-- Background Video with Overlays -->
             <div class="problem4-background" aria-hidden="true">
                 <video
                     class="problem4-background-video"
@@ -877,10 +805,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                 <div class="problem4-overlay-saturation"></div>
             </div>
 
-            <!-- Main Container -->
             <div class="problem4-container">
 
-                <!-- Header -->
                 <div class="problem4-header">
                     <h2 class="problem4-title">Não estamos a inventar isto.</h2>
                     <h3 class="problem4-subtitle">
@@ -888,22 +814,18 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     </h3>
                 </div>
 
-                <!-- Validation Statistics Grid -->
                 <div class="validation-stats">
 
-                    <!-- Stat 1: 500+ Tutores -->
                     <div class="validation-stat">
                         <h2 class="validation-number">500+</h2>
                         <h4 class="validation-label">Tutores portugueses<br>inquiridos</h4>
                     </div>
 
-                    <!-- Stat 2: 87% Videoconsulta -->
                     <div class="validation-stat">
                         <h2 class="validation-number">87%</h2>
                         <h4 class="validation-label">Usariam videoconsulta<br>veterinária</h4>
                     </div>
 
-                    <!-- Stat 3: 92% Adiaram -->
                     <div class="validation-stat">
                         <h2 class="validation-number">92%</h2>
                         <h4 class="validation-label">Já adiaram consulta<br>por causa do custo</h4>
@@ -911,7 +833,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 </div>
 
-                <!-- Footer -->
                 <div class="problem4-footer">
                     <h4 class="survey-info">
                         Inquéritos de validação PATA · Agosto-Setembro 2025 · Amostra nacional
@@ -925,40 +846,30 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 6: PROBLEM5 - Testimonials Section (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3017&m=dev
-             ============================================ -->
         <section id="problem5" class="problem5-section animated-gradient">
 
-            <!-- Header -->
             <div class="problem5-header">
                 <h2 class="problem5-title">Histórias que acontecem todos os dias</h2>
             </div>
 
-            <!-- Content Container -->
             <div class="problem5-content">
 
-                <!-- Testimonials Grid -->
                 <ul class="testimonials-grid">
 
-                    <!-- Testimonial 1: Rita -->
                     <li class="testimonial-item">
                         <div class="testimonial-card">
-                            <!-- Quote Content -->
+                            
                             <div class="testimonial-quote-wrapper">
                                 <h5 class="testimonial-quote-mark">"</h5>
                                 <p class="testimonial-quote-text">Eram duas da manhã quando a Luna começou a vomitar. Não parava. Liguei para as urgências — <span class="highlight">€70,90 só para entrar.</span> Mais a gasolina, mais o stress de meter a cadela no carro com as crianças a dormir. Chegámos esgotados, esperámos hora e meia, e o diagnóstico? <span class="normal">"Indigestão. Vai passar."</span> Custou-me <span class="highlight">€150</span> no total. Se pudesse ter feito uma videochamada com um veterinário naquele momento... tudo teria sido diferente.</p>
                             </div>
 
-                            <!-- Author Info -->
                             <div class="testimonial-author">
                                 <h5 class="testimonial-author-name">Rita, 34 anos, tutora de Border Collie</h5>
                                 <h6 class="testimonial-author-location">Porto · Inquérito de Validação PATA, Setembro 2025</h6>
                             </div>
                         </div>
 
-                        <!-- Dog Icon -->
                         <div class="pet-icon">
                             <picture>
                                 <source srcset="src/img/new_images/border_collie.webp" type="image/webp">
@@ -971,23 +882,20 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </li>
 
-                    <!-- Testimonial 2: Manuel -->
                     <li class="testimonial-item">
                         <div class="testimonial-card">
-                            <!-- Quote Content -->
+                            
                             <div class="testimonial-quote-wrapper">
                                 <h5 class="testimonial-quote-mark">"</h5>
                                 <p class="testimonial-quote-text">Vivo no Alentejo. O veterinário mais próximo fica a 35 quilómetros. Para uma consulta de 15 minutos, perco meio dia: viagem, espera, consulta, regresso. O meu rafeiro fica stressado na viagem. Eu perco um turno de trabalho. E muitas vezes é para ouvir <span class="highlight">"está tudo bem, não era nada".</span> Sabe quantas consultas já adiei por isto? Quantas vezes disse "vamos esperar para ver"? Demasiadas. Isso assusta-me.</p>
                             </div>
 
-                            <!-- Author Info -->
                             <div class="testimonial-author">
                                 <h5 class="testimonial-author-name">Manuel, 52 anos, tutor de Rafeiro Alentejano</h5>
                                 <h6 class="testimonial-author-location">Beja · Inquérito de Validação PATA, Setembro 2025</h6>
                             </div>
                         </div>
 
-                        <!-- Rafeiro Alentejano Icon -->
                         <div class="pet-icon">
                             <picture>
                                 <source srcset="src/img/new_images/rafeiro_alentejano.webp" type="image/webp">
@@ -1000,23 +908,20 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </li>
 
-                    <!-- Testimonial 3: Mariana -->
                     <li class="testimonial-item">
                         <div class="testimonial-card">
-                            <!-- Quote Content -->
+                            
                             <div class="testimonial-quote-wrapper">
                                 <h5 class="testimonial-quote-mark">"</h5>
                                 <p class="testimonial-quote-text">O pior não é o dinheiro. O pior é a angústia de procurar no Google às quatro da manhã. <span class="highlight">"Gato a respirar rápido"</span> — um site diz que é normal, outro diz que pode ser fatal. Entro em pânico total. E não tenho ninguém a quem recorrer até ao dia seguinte. Pagaria — e pagaria bem — por ter acesso a um veterinário de verdade, 24/7, que me pudesse dizer: "Calma, isto é normal" ou "Sim, deve ir já às urgências". <span class="highlight">Essa tranquilidade não tem preço.</span></p>
                             </div>
 
-                            <!-- Author Info -->
                             <div class="testimonial-author">
                                 <h5 class="testimonial-author-name">Mariana, 29 anos, tutora de Persa</h5>
                                 <h6 class="testimonial-author-location">Lisboa · Inquérito de Validação PATA, Agosto 2025</h6>
                             </div>
                         </div>
 
-                        <!-- Persa Icon -->
                         <div class="pet-icon">
                             <picture>
                                 <source srcset="src/img/new_images/gato_persa.webp" type="image/webp">
@@ -1031,7 +936,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 </ul>
 
-                <!-- Footer CTA -->
                 <div class="problem5-footer">
                     <h2 class="problem5-footer-main">
                         Estas histórias não precisam de continuar.<br>
@@ -1048,22 +952,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 7: SOLUTION1 - Faça as contas (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3081&m=dev
-             ============================================ -->
         <section id="solution1" class="solution1-section">
 
-            <!-- Main Title -->
             <h1 class="solution1-title">Faça as contas</h1>
 
-            <!-- Cards Container -->
             <div class="solution1-cards-container">
 
-                <!-- LEFT CARD - Sem PATA (Grey) -->
                 <div class="solution1-card-left">
 
-                    <!-- Background Video + Overlays -->
                     <div class="card-background-container">
                         <video
                             class="card-background-video"
@@ -1079,25 +975,20 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="card-overlay-multiply"></div>
                     </div>
 
-                    <!-- Card Content -->
                     <div class="card-content">
 
-                        <!-- Pet Icons -->
                         <div class="solution1-icons">
-                            <!-- Sick Dog Icon -->
+                            
                             <img src="src/img/icons/cao_doente.svg" alt="Cão doente" class="solution1-icon" width="64" height="64">
 
-                            <!-- Sick Cat Icon -->
                             <img src="src/img/icons/gato_doente.svg" alt="Gato doente" class="solution1-icon" width="64" height="64">
                         </div>
 
-                        <!-- Card Info -->
                         <div class="solution1-card-info">
                             <h4 class="solution1-card-label">Sem PATA</h4>
                             <h2 class="solution1-card-price">€180+</h2>
                         </div>
 
-                        <!-- Source -->
                         <p class="solution1-card-source">
                             Preço urgência noturna:<br>
                             <a href="https://www.veterinaria-atual.pt/destaques/quais-os-precos-medios-dos-servicos-veterinarios-em-portugal/" target="_blank" rel="noopener noreferrer">
@@ -1109,10 +1000,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 </div>
 
-                <!-- RIGHT CARD - Com PATA (Orange) -->
                 <div class="solution1-card-right">
 
-                    <!-- Background Video + Overlays -->
                     <div class="card-background-container">
                         <video
                             class="card-background-video"
@@ -1128,22 +1017,17 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="card-overlay-orange"></div>
                     </div>
 
-                    <!-- Card Content -->
                     <div class="card-content">
 
-                        <!-- Pet Icons with Hearts -->
                         <div class="solution1-icons">
-                            <!-- Happy Cat Icon -->
+                            
                             <img src="src/img/icons/gato_feliz22.svg" alt="Gato feliz" class="solution1-icon" width="44" height="44">
 
-                            <!-- Happy Dog Icon -->
                             <img src="src/img/icons/cao_feliz_2.svg" alt="Cão feliz" class="solution1-icon" width="44" height="44">
                         </div>
 
-                        <!-- Two Column Layout -->
                         <div class="solution1-card-columns">
 
-                            <!-- Left Column -->
                             <div class="solution1-card-column">
                                 <h4>Com PATA Premium Anual</h4>
                                 <h2>€95,88</h2>
@@ -1153,7 +1037,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 </p>
                             </div>
 
-                            <!-- Right Column -->
                             <div class="solution1-card-column">
                                 <h4>Poupança anual mínima:</h4>
                                 <h2>€84+</h2>
@@ -1161,7 +1044,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                         </div>
 
-                        <!-- Disclaimer -->
                         <p class="solution1-card-disclaimer">
                             * Plano anual com pagamento único. Também disponível: trimestral <em>(€23,97) ou mensal (€7,99/mês por 3 meses, depois €9,99/mês).</em>
                         </p>
@@ -1174,25 +1056,17 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 8: SOLUTION2 - Compare as suas opções (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3108&m=dev
-             ============================================ -->
         <section id="solution2" class="solution2-section animated-gradient">
 
-            <!-- Header -->
             <div class="solution2-header">
                 <h2 class="solution2-title">Compare as suas opções</h2>
                 <h4 class="solution2-subtitle">Cada solução tem o seu lugar. Veja qual faz sentido para si.</h4>
             </div>
 
-            <!-- Comparison Table Container -->
             <div class="solution2-table-container">
 
-                <!-- Comparison Table -->
                 <div class="comparison-table">
 
-                    <!-- Table Header Row -->
                     <div class="table-row table-header">
                         <div class="table-cell header-cell-criteria">
                             <p>Critérios</p>
@@ -1209,7 +1083,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 1: Disponibilidade -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <h6>Disponibilidade</h6>
@@ -1225,7 +1098,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 2: Tempo de resposta -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <h6>Tempo de resposta</h6>
@@ -1241,7 +1113,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 3: Custo por consulta -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <h6>Custo por consulta</h6>
@@ -1257,7 +1128,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 4: Orientação profissional -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <h6>Orientação profissional</h6>
@@ -1273,7 +1143,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 5: Exame físico -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <h6>Exame físico</h6>
@@ -1289,7 +1158,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 6: Receita + Medicação -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <h6>Receita + Medicação</h6>
@@ -1305,7 +1173,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 7: Stress do animal -->
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
                             <p>Stress do animal</p>
@@ -1321,7 +1188,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Row 8: Ideal para -->
                     <div class="table-row table-row-last">
                         <div class="table-cell criteria-cell">
                             <p>Ideal para</p>
@@ -1341,7 +1207,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
             </div>
 
-            <!-- Footer Disclaimer -->
             <div class="solution2-footer">
                 <p class="footer-title">A nossa posição:</p>
                 <p class="footer-text">A PATA não substitui a clínica veterinária — complementa-a. Para 70% das situações, uma videoconsulta resolve ou encaminha corretamente. Para os outros 30%, enviamos relatório completo para a clínica da sua área.</p>
@@ -1349,13 +1214,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 9: SOLUTION3 - Só a PATA faz isto (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3205&m=dev
-             ============================================ -->
         <section id="solution3" class="solution3-section animated-gradient">
 
-            <!-- Background Video with Overlay -->
             <div class="solution3-background" aria-hidden="true">
                 <video
                     class="solution3-background-video"
@@ -1370,32 +1230,24 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                 <div class="solution3-overlay-dark"></div>
             </div>
 
-            <!-- Main Container -->
             <div class="solution3-container">
 
-                <!-- Title -->
                 <h1 class="solution3-title">Só a PATA faz isto</h1>
 
-                <!-- Cards Container -->
                 <div class="solution3-cards-container">
 
-                    <!-- CARD 1 - Se não precisar, não perde -->
                     <div class="solution3-card">
                         <div class="solution3-card-content">
 
-                            <!-- Card Title -->
                             <h4 class="solution3-card-title">Se não precisar, não perde.</h4>
 
-                            <!-- Card Body -->
                             <div class="solution3-card-body">
 
-                                <!-- Top Text -->
                                 <div class="solution3-text-group">
                                     <h6 class="solution3-text-regular">Passou 6 meses sem realizar consultas?</h6>
                                     <h5 class="solution3-text-bold">Significa que o seu patudo está saudável.</h5>
                                 </div>
 
-                                <!-- Credit Box -->
                                 <div class="solution3-credit-box">
                                     <h5 class="solution3-credit-intro">Nós celebramos isso. Por isso convertemos</h5>
                                     <div class="solution3-credit-badge">
@@ -1409,17 +1261,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- CARD 2 - Porque acreditamos -->
                     <div class="solution3-card">
                         <div class="solution3-card-content">
 
-                            <!-- Card Title -->
                             <h5 class="solution3-card-title-alt">Porque acreditamos que uma subscrição deve recompensar quem fica, não castigar quem não usa.</h5>
 
-                            <!-- Comparison Boxes -->
                             <div class="solution3-comparison-container">
 
-                                <!-- Left Box - Others -->
                                 <div class="solution3-comparison-box">
                                     <h5 class="solution3-comparison-title">Ginásios, telecoms, seguros:</h5>
                                     <p class="solution3-comparison-quote">
@@ -1429,7 +1277,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                     </p>
                                 </div>
 
-                                <!-- Right Box - PATA -->
                                 <div class="solution3-comparison-box">
                                     <h5 class="solution3-comparison-title">PATA:</h5>
                                     <p class="solution3-comparison-quote">
@@ -1441,7 +1288,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                             </div>
 
-                            <!-- Footer Text -->
                             <h6 class="solution3-card-footer">
                                 Crédito válido por 6 meses após emissão. Aplicável em compras a preço de tabela.
                             </h6>
@@ -1455,32 +1301,23 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 10: SOLUTION4 - E se existisse uma forma diferente? (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3230&m=dev
-             ============================================ -->
         <section id="solution4" class="solution4-section">
 
-            <!-- Main Container -->
             <div class="solution4-container">
 
-                <!-- Header -->
                 <div class="solution4-header">
                     <h6 class="solution4-label">Solução</h6>
                     <h2 class="solution4-title">E se existisse uma forma diferente?</h2>
                     <p class="solution4-subtitle">A PATA não é apenas uma app. É a tranquilidade de saber que, aconteça o que acontecer, tem ajuda imediata. Sempre.</p>
                 </div>
 
-                <!-- Cards Container -->
                 <div class="solution4-cards">
 
-                    <!-- Main Card - Clínica PATA + 3 Small Cards -->
                     <div class="solution4-main-card">
 
-                        <!-- Left Side - Clínica PATA -->
                         <div class="clinica-pata-side">
                             <div class="clinica-icon-bubble">
-                                <!-- Hospital Icon -->
+                                
                                 <img src="./src/img/icons/hospital 1.svg" alt="Hospital" width="54" height="54">
                             </div>
                             <h4 class="clinica-title">Clínica PATA</h4>
@@ -1500,33 +1337,29 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             </picture>
                         </div>
 
-                        <!-- Right Side - 3 Small Cards -->
                         <div class="small-cards-grid">
 
-                            <!-- Card 1 - PATA AI -->
                             <div class="small-card">
                                 <div class="small-card-icon">
-                                    <!-- AI Icon -->
+                                    
                                     <img src="./src/img/icons/AI.svg" alt="AI" width="54" height="54">
                                 </div>
                                 <h6 class="small-card-title">PATA AI</h6>
                                 <p class="small-card-text">Assistente que ajuda a descrever sintomas antes da consulta. Mais eficiência. Menos ansiedade.</p>
                             </div>
 
-                            <!-- Card 2 - Videoconsultas 24/7 -->
                             <div class="small-card">
                                 <div class="small-card-icon">
-                                    <!-- 24/7 Icon -->
+                                    
                                     <img src="./src/img/icons/24_7.svg" alt="24/7" width="54" height="54">
                                 </div>
                                 <h6 class="small-card-title">Videoconsultas 24/7</h6>
                                 <p class="small-card-text">Acompanhamento regular, check-ups, segunda opinião. Marque quando quiser, de onde estiver.</p>
                             </div>
 
-                            <!-- Card 3 - Urgências -->
                             <div class="small-card">
                                 <div class="small-card-icon">
-                                    <!-- Hospital Icon -->
+                                    
                                     <img src="./src/img/icons/hospital 1.svg" alt="Hospital" width="54" height="54">
                                 </div>
                                 <h6 class="small-card-title">Urgências</h6>
@@ -1537,14 +1370,12 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     </div>
 
-                    <!-- Bottom Cards Container -->
                     <div class="solution4-bottom-cards">
 
-                        <!-- Card - Receita Digital -->
                         <div class="bottom-card">
                             <div class="bottom-card-header">
                                 <div class="bottom-card-icon">
-                                    <!-- Pharmacy Icon -->
+                                    
                                     <img src="./src/img/icons/farmacia.svg" alt="Farmacia" width="54" height="54">
                                 </div>
                                 <h4 class="bottom-card-title">Receita Digital — Válida em Qualquer Farmácia</h4>
@@ -1561,11 +1392,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             </picture>
                         </div>
 
-                        <!-- Card - Loja PATA -->
                         <div class="bottom-card">
                             <div class="bottom-card-header">
                                 <div class="bottom-card-icon">
-                                    <!-- Marketplace Icon -->
+                                    
                                     <img src="./src/img/icons/marketplace.svg" alt="Marketplace" width="54" height="54">
                                 </div>
                                 <h4 class="bottom-card-title">Loja PATA — Produtos Veterinários em Casa</h4>
@@ -1590,27 +1420,19 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 11: JOINUS1 - Os primeiros 500 (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3270&m=dev
-             ============================================ -->
         <section id="joinus1" class="joinus1-section">
 
-            <!-- Main Container -->
             <div class="joinus1-container">
 
-                <!-- Header -->
                 <div class="joinus1-header">
                     <h1 class="joinus1-title">Os primeiros 500</h1>
                     <h4 class="joinus1-subtitle">Não são clientes. São co-criadores.</h4>
                 </div>
 
-                <!-- Top Cards Container -->
                 <div class="joinus1-top-cards">
 
-                    <!-- Card 1 - Uma única urgência (with image background) -->
                     <div class="joinus1-card joinus1-card-1">
-                        <!-- Background Image with Overlays -->
+                        
                         <div class="card-background-container">
                             <picture>
                                 <source srcset="./src/img/new_images/primeiros_500_1.webp" type="image/webp">
@@ -1625,9 +1447,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="card-overlay-multiply"></div>
                         </div>
 
-                        <!-- Card Content -->
                         <div class="card-content-inner">
-                            <!-- Icon Bubble -->
+                            
                             <div class="icon-bubble">
                                 <img src="src/img/icons/noturna.svg" alt="Urgência noturna" width="22" height="22">
                             </div>
@@ -1642,9 +1463,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Card 2 - Com PATA (with image background) -->
                     <div class="joinus1-card joinus1-card-2">
-                        <!-- Background Image with Overlays -->
+                        
                         <div class="card-background-container">
                             <picture>
                                 <source srcset="./src/img/new_images/primeiros_500_2.webp" type="image/webp">
@@ -1654,9 +1474,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="card-overlay-orange"></div>
                         </div>
 
-                        <!-- Card Content -->
                         <div class="card-content-inner">
-                            <!-- Icon Bubble -->
+                            
                             <div class="icon-bubble">
                                 <img src="src/img/icons/pata solucao.svg" alt="PATA solução" width="26" height="26">
                             </div>
@@ -1672,10 +1491,9 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Card 3 - Primeiros 3 meses (orange gradient) -->
                     <div class="joinus1-card joinus1-card-3">
                         <div class="card-content-inner">
-                            <!-- Top Section -->
+                            
                             <div class="card-section">
                                 <h3 class="card-section-title">Primeiros 3 meses</h3>
 
@@ -1687,10 +1505,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 </div>
                             </div>
 
-                            <!-- Divider -->
                             <div class="card-divider"></div>
 
-                            <!-- Bottom Section -->
                             <div class="card-section">
                                 <h3 class="card-section-title">Depois:</h3>
 
@@ -1708,13 +1524,10 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 </div>
 
-                <!-- Middle Section Title -->
                 <h6 class="joinus1-middle-title">Como funciona o acesso às consultas:</h6>
 
-                <!-- Bottom Cards Container -->
                 <div class="joinus1-bottom-cards">
 
-                    <!-- Card 1 - Subscrição Trimestral -->
                     <div class="bottom-plan-card bottom-plan-card-1">
                         <div class="plan-card-content">
                             <div class="plan-badge">
@@ -1731,9 +1544,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Card 2 - Subscrição Anual (MELHOR VALOR) -->
                     <div class="bottom-plan-card-wrapper">
-                        <!-- Best Value Badge -->
+                        
                         <div class="best-value-badge">
                             <img src="src/img/icons/gato_feliz22.svg" alt="Gato feliz" class="best-value-icon" width="30" height="30">
                             <h3 class="best-value-text">MELHOR VALOR</h3>
@@ -1759,7 +1571,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Card 3 - Subscrição Mensal -->
                     <div class="bottom-plan-card bottom-plan-card-3">
                         <div class="plan-card-content">
                             <div class="plan-badge">
@@ -1783,24 +1594,16 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 12: JOINUS2 - Benefícios dos Primeiros 500 (Altura AUTO)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3354&m=dev
-             ============================================ -->
         <section id="joinus2" class="joinus2-section animated-gradient">
 
-            <!-- Liquid Shader Canvas Background -->
             <canvas id="liquid-shader-canvas-joinus2" class="liquid-shader-canvas" aria-hidden="true"></canvas>
 
-            <!-- Main Container -->
             <div class="joinus2-container">
 
-                <!-- Benefits Cards Grid -->
                 <div class="joinus2-cards-grid">
 
-                    <!-- Card 1 - 1 consulta/mês incluída -->
                     <div class="benefit-card">
-                        <!-- Background Image with Overlays -->
+                        
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
                             <picture>
@@ -1810,19 +1613,16 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="benefit-card-gradient"></div>
                         </div>
 
-                        <!-- Card Content -->
                         <div class="benefit-card-content">
                             <h5 class="benefit-card-title">1 consulta/mês incluída</h5>
                             <p class="benefit-card-text">Urgência ou agendada, decide quando usar</p>
                         </div>
 
-                        <!-- Inner Shadows -->
                         <div class="benefit-card-shadows"></div>
                     </div>
 
-                    <!-- Card 2 - Preço bloqueado vitalício -->
                     <div class="benefit-card">
-                        <!-- Background Image with Overlays -->
+                        
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
                             <picture>
@@ -1832,19 +1632,16 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="benefit-card-gradient"></div>
                         </div>
 
-                        <!-- Card Content -->
                         <div class="benefit-card-content">
                             <h5 class="benefit-card-title">Preço bloqueado vitalício</h5>
                             <p class="benefit-card-text">Nunca mais paga aumento</p>
                         </div>
 
-                        <!-- Inner Shadows -->
                         <div class="benefit-card-shadows"></div>
                     </div>
 
-                    <!-- Card 3 - Acesso prioritário -->
                     <div class="benefit-card">
-                        <!-- Background Image with Overlays -->
+                        
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
                             <picture>
@@ -1854,19 +1651,16 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="benefit-card-gradient"></div>
                         </div>
 
-                        <!-- Card Content -->
                         <div class="benefit-card-content">
                             <h5 class="benefit-card-title">Acesso prioritário</h5>
                             <p class="benefit-card-text">A sua opinião molda o produto</p>
                         </div>
 
-                        <!-- Inner Shadows -->
                         <div class="benefit-card-shadows"></div>
                     </div>
 
-                    <!-- Card 4 - Badge "Founder Member" -->
                     <div class="benefit-card">
-                        <!-- Background Image with Overlays -->
+                        
                         <div class="benefit-card-background">
                             <div class="benefit-card-bg-color"></div>
                             <picture>
@@ -1876,41 +1670,35 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="benefit-card-gradient"></div>
                         </div>
 
-                        <!-- Card Content -->
                         <div class="benefit-card-content">
                             <h5 class="benefit-card-title">Badge "Founder Member"</h5>
                             <p class="benefit-card-text">Identificação exclusiva</p>
                         </div>
 
-                        <!-- Inner Shadows -->
                         <div class="benefit-card-shadows"></div>
                     </div>
 
                 </div>
 
-                <!-- Bottom Text Section -->
                 <div class="joinus2-bottom-text">
                     <h3 class="joinus2-bottom-statement">
                         Não é escassez artificial. Queremos construir a PATA consigo, não apenas para si. O seu feedback será essencial.
                     </h3>
                 </div>
 
-                <!-- Warning Card -->
                 <div class="joinus2-warning-card">
-                    <!-- Icon Bubble -->
+                    
                     <div class="warning-card-header">
                         <div class="warning-icon-bubble">
-                            <!-- Alarm Clock Icon -->
+                            
                             <img src="src/img/icons/adiar.svg" alt="Clock alarm icon" width="24" height="24">
                         </div>
                         <h6 class="warning-card-title">Se esperar:</h6>
                     </div>
 
-                    <!-- Warning Text List -->
                     <div class="warning-card-content">
                         <p class="warning-card-text">
                             Perde o preço de fundador (€7,99 → €14,99 preço normal).<br>
-
 
                             Perde as 12 consultas desbloqueadas de imediato.<br>
                             Perde a garantia vitalícia de preço.<br>
@@ -1918,7 +1706,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </p>
                     </div>
 
-                    <!-- Inner Shadows -->
                     <div class="warning-card-shadows"></div>
                 </div>
 
@@ -1926,26 +1713,18 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 13: FAQ - Perguntas Frequentes (85vh)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3380&m=dev
-             ============================================ -->
         <section id="faq" class="faq-section animated-gradient">
 
-            <!-- FAQ Title -->
             <h2 class="faq-title">Perguntas frequentes sobre consultas veterinárias online</h2>
 
-            <!-- SVG Symbol Definition -->
             <svg style="display:none">
                 <symbol id="faq-arrow" viewBox="0 0 16 16" fill="none">
                     <path d="M6 12L10 8L6 4" stroke="#FFB477" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </symbol>
             </svg>
 
-            <!-- FAQ Accordion Container -->
             <div class="faq-container">
 
-                <!-- FAQ Item 1 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">A PATA substitui o veterinário presencial?</span>
@@ -1962,7 +1741,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 2 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Os veterinários da PATA são licenciados?</span>
@@ -1979,7 +1757,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 3 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Quais animais a PATA atende?</span>
@@ -1996,7 +1773,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 4 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Como funciona a receita digital?</span>
@@ -2013,7 +1789,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 5 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Posso usar a PATA para emergências reais?</span>
@@ -2030,7 +1805,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 6 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">O que acontece se o veterinário não conseguir diagnosticar por vídeo?</span>
@@ -2047,7 +1821,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 7 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Posso cancelar a subscrição quando quiser?</span>
@@ -2064,7 +1837,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 8 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Quando posso usar a minha primeira consulta?</span>
@@ -2081,7 +1853,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 <hr class="faq-separator" aria-hidden="true">
 
-                <!-- FAQ Item 9 -->
                 <div class="faq-item">
                     <button class="faq-question-button" type="button">
                         <span class="faq-question-text">Os meus dados estão seguros?</span>
@@ -2100,25 +1871,20 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         </section>
 
-        <!-- ============================================
-             SECTION 14: RESERVAR O LUGAR (Reserve Your Place)
-             Laptop: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-3019
-             ============================================ -->
         <section id="reservar" class="reservar-section animated-gradient" data-name="reservar o lugar" data-node-id="296:3019">
             <div class="reservar-container">
-                <!-- Left Column: Form -->
+                
                 <div class="reservar-form-column">
                     <form id="reservarForm" class="reservar-form-card">
-                        <!-- Form Header -->
+                        
                         <div class="reservar-form-header">
                             <h2 class="reservar-form-title">Reserve o seu lugar</h2>
                             <p class="reservar-form-subtitle">Sem pagamento. Sem compromisso. Apenas acesso prioritário.</p>
                             <p class="reservar-counter" style="opacity: 0; transition: opacity 0.4s ease;"><span id="remainingSpots">500</span> lugares restantes</p>
                         </div>
 
-                        <!-- Form Fields -->
                         <div class="reservar-form-fields">
-                            <!-- Nome -->
+                            
                             <div class="reservar-form-group">
                                 <label for="reservarNome" class="reservar-form-label">Nome</label>
                                 <input
@@ -2133,7 +1899,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <span class="reservar-error-message" id="reservarNomeError" role="alert"></span>
                             </div>
 
-                            <!-- Email -->
                             <div class="reservar-form-group">
                                 <label for="reservarEmail" class="reservar-form-label">Email</label>
                                 <input
@@ -2148,7 +1913,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <span class="reservar-error-message" id="reservarEmailError" role="alert"></span>
                             </div>
 
-                            <!-- Distrito -->
                             <div class="reservar-form-group">
                                 <label for="reservarDistrito" class="reservar-form-label">Distrito</label>
                                 <select
@@ -2183,7 +1947,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <span class="reservar-error-message" id="reservarDistritoError" role="alert"></span>
                             </div>
 
-                            <!-- Tipo de Animal -->
                             <div class="reservar-form-group">
                                 <label for="reservarAnimal" class="reservar-form-label">O seu melhor amigo é...</label>
                                 <select
@@ -2200,7 +1963,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <span class="reservar-error-message" id="reservarAnimalError" role="alert"></span>
                             </div>
 
-                            <!-- Checkboxes -->
                             <div class="reservar-form-checkboxes">
                                 <div class="reservar-checkbox-group">
                                     <input
@@ -2228,17 +1990,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 </div>
                             </div>
 
-                            <!-- Submit Button -->
                             <button type="submit" class="reservar-submit-button" id="reservarSubmitBtn">
                                 Garantir Preço de Fundador (€7,99/mês)
                             </button>
 
-                            <!-- reCAPTCHA Attribution -->
                             <p style="font-size: 11px; color: #A9A9A9; text-align: center; margin-top: 8px; margin-bottom: 0;">
                                 Este site é protegido pelo reCAPTCHA
                             </p>
 
-                            <!-- Footer Info -->
                             <div class="reservar-form-footer">
                                 <p class="reservar-footer-text">Veterinários licenciados OMV &nbsp; Dados protegidos RGPD &nbsp; Projeto apoiado IAPMEI</p>
                             </div>
@@ -2246,9 +2005,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     </form>
                 </div>
 
-                <!-- Right Column: Image Carousel & Info Cards -->
                 <div class="reservar-right-column">
-                    <!-- Image Carousel -->
+                    
                     <div class="reservar-image-carousel">
                         <div class="reservar-carousel-container">
                             <picture>
@@ -2305,9 +2063,8 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
                     </div>
 
-                    <!-- Info Cards -->
                     <div class="reservar-info-cards">
-                        <!-- Card 1: O que acontece depois -->
+                        
                         <div class="reservar-info-card">
                             <h4 class="reservar-card-title">O que acontece depois:</h4>
                             <ol class="reservar-card-list">
@@ -2318,7 +2075,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             </ol>
                         </div>
 
-                        <!-- Card 2: Problemas com o formulário -->
                         <div class="reservar-info-card">
                             <h4 class="reservar-card-title">Problemas com o formulário?</h4>
                             <p class="reservar-card-text">
@@ -2332,7 +2088,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             </div>
         </section>
 
-        <!-- Success Modal -->
         <div id="reservarSuccessModal" class="reservar-modal" role="dialog" aria-modal="true" aria-hidden="true">
             <div class="reservar-modal-overlay"></div>
             <div class="reservar-modal-content">
@@ -2343,19 +2098,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             </div>
         </div>
 
-        <!-- ============================================
-             SECTION 15: JOINUS3 - Final CTA (Ele confia em si)
-             Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-3057&m=dev
-             ============================================ -->
         <section id="joinus3" class="joinus3-section animated-gradient" data-name="CTA" data-node-id="296:3057">
-            <!-- Liquid Shader Canvas Background -->
+            
             <canvas id="liquid-shader-canvas-joinus3" class="liquid-shader-canvas" aria-hidden="true"></canvas>
 
-            <!-- Main Container -->
             <div class="joinus3-container" data-node-id="296:3058">
-                <!-- Header Section -->
+                
                 <div class="joinus3-header" data-node-id="296:3059">
-                    <!-- Icon -->
+                    
                     <div class="joinus3-icon" data-name="junte-se a nos2" data-node-id="296:3060">
                         <img src="src/img/icons/junte-se a nos2.svg"
                              alt="Pets unidos com coração"
@@ -2365,7 +2115,6 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                              height="80">
                     </div>
 
-                    <!-- Title and Subtitle -->
                     <div class="joinus3-text-container" data-node-id="296:3061">
                         <h2 class="joinus3-title" data-node-id="296:3062">Ele confia em si.
 Agora pode confiar em nós.</h2>
@@ -2373,9 +2122,8 @@ Agora pode confiar em nós.</h2>
                     </div>
                 </div>
 
-                <!-- Statistics Cards -->
                 <div class="joinus3-stats-container" data-node-id="296:3064">
-                    <!-- Stat 1: Zero Risco -->
+                    
                     <div class="joinus3-stat-card" data-node-id="296:3065">
                         <div class="joinus3-stat-icon" data-name="zero risco" data-node-id="296:3066">
                             <img src="src/img/icons/zero risco_branco.svg"
@@ -2391,7 +2139,6 @@ Agora pode confiar em nós.</h2>
                         <p class="joinus3-stat-label" data-node-id="296:3068">Risco</p>
                     </div>
 
-                    <!-- Stat 2: Zero custo agora -->
                     <div class="joinus3-stat-card" data-node-id="296:3069">
                         <div class="joinus3-stat-icon" data-name="zero custo" data-node-id="296:3070">
                             <img src="src/img/icons/zero custo_branco.svg"
@@ -2407,7 +2154,6 @@ Agora pode confiar em nós.</h2>
                         <p class="joinus3-stat-label" data-node-id="296:3072">custo agora</p>
                     </div>
 
-                    <!-- Stat 3: 100% de benefícios depois -->
                     <div class="joinus3-stat-card" data-node-id="296:3073">
                         <div class="joinus3-stat-icon" data-name="100 beneficios depois 1" data-node-id="296:3074">
                             <img src="src/img/icons/100 beneficios depois 1_branco.svg"
@@ -2424,15 +2170,12 @@ Agora pode confiar em nós.</h2>
                     </div>
                 </div>
 
-                <!-- CTA Button -->
                 <a href="#reservar" class="joinus3-cta-button" data-name="Button_pata" data-node-id="296:3077">
                     <span class="joinus3-cta-text" data-node-id="296:3079">Reservar lugar agora</span>
                 </a>
 
-                <!-- PS Text -->
                 <p class="joinus3-ps-text" data-node-id="296:3081">P.S. Lembra-se daquele momento às três da manhã quando  o seu patudo não estava bem e não sabia o que fazer? Quando o Google  só aumentava a ansiedade? Nunca mais. A PATA está quase pronta.</p>
 
-                <!-- Pricing Card -->
                 <div class="joinus3-pricing-card" data-name="statistics hover" data-node-id="296:3082">
                     <p class="joinus3-pricing-text" data-node-id="296:3083">Imagine: daqui a 6 meses, às 3h da manhã, o mesmo acontece.  Mas desta vez, abre a app, vê o veterinário, recebe a resposta.  Volta a dormir. </p>
                     <p class="joinus3-pricing-highlight" data-node-id="296:3084">Isso vale €7,99/mês?</p>
@@ -2442,22 +2185,15 @@ Agora pode confiar em nós.</h2>
 
     </main>
 
-    <!-- ============================================
-         FOOTER COMPONENT
-         Figma Desktop: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3466
-         Figma Tablet: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4071
-         Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4698
-         ============================================ -->
     <footer class="footer" data-name="footer" data-node-id="337:3466">
         <div class="footer-container" data-node-id="337:3467">
-            <!-- Left Section: Brand -->
+            
             <div class="footer-brand" data-node-id="337:3468">
                 <a href="#hero" class="footer-logo-wrapper" data-node-id="337:3469">
                     <img src="src/img/icons/logo_signature_branco.svg" alt="PATA Logo" class="footer-logo" width="142" height="48" loading="lazy">
                 </a>
                 <p class="footer-tagline" data-node-id="337:3470">Porque o amor não tem horários</p>
 
-                <!-- Social Links -->
                 <div class="footer-social" data-name="Social Icons" data-node-id="337:3471">
                     <a href="https://www.instagram.com/pata_care/" class="footer-social-link" aria-label="Instagram" data-name="instagram" data-node-id="337:3472" target="_blank" rel="noopener noreferrer">
                         <img src="src/img/icons/instagram.svg" alt="Instagram" width="32" height="32" loading="lazy">
@@ -2475,13 +2211,11 @@ Agora pode confiar em nós.</h2>
                 </div>
             </div>
 
-            <!-- Right Section: Quick Links -->
             <div class="footer-links-section" data-node-id="337:3481">
                 <p class="footer-links-title" data-node-id="337:3482">Quick Links</p>
                 <div class="footer-links" data-node-id="337:3483">
                     <a href="#problem1" class="footer-link" data-node-id="337:3484">Problema</a>
 
-                    
                     <a href="#solution1" class="footer-link" data-node-id="337:3485">Solução</a>
                     <a href="#joinus1" class="footer-link" data-node-id="337:3486">Junte-se a nós</a>
                     <a href="#reservar" class="footer-link" data-node-id="337:3487">Reservar</a>
@@ -2489,7 +2223,6 @@ Agora pode confiar em nós.</h2>
             </div>
         </div>
 
-        <!-- Footer Bottom -->
         <div class="footer-bottom" data-node-id="337:3488">
             <div class="footer-copyright-section" data-node-id="337:3489">
                 <p class="footer-copyright" data-node-id="337:3490">© 2025 PATA. Feito em Portugal para patudos de todo o mundo.</p>
@@ -2499,28 +2232,20 @@ Agora pode confiar em nós.</h2>
         </div>
     </footer>
 
-    <!-- ============================================
-         DRAGGABLE ELEMENT (Fixed during scroll)
-         Reference: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2626&m=dev
-         ============================================ -->
     <div class="draggable-element" id="draggableElement">
         <img src="src/img/icons/BONE.svg" alt="Brinca comigo" width="64" height="64" loading="lazy">
     </div>
 
-    <!-- ============================================
-         SCROLL TO TOP BUTTON
-         Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=456-3256
-         ============================================ -->
     <button
       id="scroll-to-top-button"
       class="scroll-to-top-btn"
       aria-label="Scroll to top"
       hidden
     >
-      <!-- SVG Circle Progress -->
+      
       <svg class="progress-ring" width="42" height="42" viewBox="0 0 42 42">
         <defs>
-          <!-- Animated Liquid shader gradient for progress stroke -->
+          
           <linearGradient id="liquid-gradient-progress" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" style="stop-color:#FF9B4A;stop-opacity:1">
               <animate attributeName="stop-color" values="#FF9B4A;#DF6E39;#DB5D23;#387BB2;#4A9BD2;#FF9B4A" dur="2.5s" repeatCount="indefinite" />
@@ -2540,7 +2265,6 @@ Agora pode confiar em nós.</h2>
             <animateTransform attributeName="gradientTransform" type="rotate" from="0 21 21" to="360 21 21" dur="3s" repeatCount="indefinite" />
           </linearGradient>
 
-          <!-- Radial gradient for more liquid effect -->
           <radialGradient id="liquid-gradient-radial" cx="50%" cy="50%" r="50%">
             <stop offset="0%" style="stop-color:#FF9B4A;stop-opacity:1">
               <animate attributeName="stop-color" values="#FF9B4A;#DF6E39;#387BB2;#4A9BD2;#FF9B4A" dur="2.5s" repeatCount="indefinite" />
@@ -2558,13 +2282,11 @@ Agora pode confiar em nós.</h2>
             <animateTransform attributeName="gradientTransform" type="scale" values="1;1.2;1" dur="2s" repeatCount="indefinite" additive="sum" />
           </radialGradient>
 
-          <!-- Mask for liquid shader canvas -->
           <mask id="button-mask">
             <circle cx="21" cy="21" r="19" fill="white"/>
           </mask>
         </defs>
 
-        <!-- Background circle (always visible when button shown) -->
         <circle
           class="progress-ring-bg"
           stroke="url(#liquid-gradient-progress)"
@@ -2576,7 +2298,6 @@ Agora pode confiar em nós.</h2>
           stroke-opacity="0.25"
         />
 
-        <!-- Progress circle (fills clockwise) -->
         <circle
           class="progress-ring-circle"
           stroke="url(#liquid-gradient-progress)"
@@ -2591,7 +2312,6 @@ Agora pode confiar em nós.</h2>
           transform="rotate(-90 21 21)"
         />
 
-        <!-- Fill circle for hover state (hidden by default) -->
         <circle
           class="progress-ring-fill"
           fill="url(#liquid-gradient-radial)"
@@ -2602,10 +2322,8 @@ Agora pode confiar em nós.</h2>
         />
       </svg>
 
-      <!-- Liquid shader canvas for hover effect -->
       <canvas id="scroll-button-shader-canvas" class="button-shader-canvas"></canvas>
 
-      <!-- Arrow Icon -->
       <svg class="arrow-icon" width="26" height="26" viewBox="0 0 26 26" fill="none">
         <path
           d="M13 20.5833V5.41667M13 5.41667L6.5 11.9167M13 5.41667L19.5 11.9167"
@@ -2617,12 +2335,8 @@ Agora pode confiar em nós.</h2>
       </svg>
     </button>
 
-    <!-- JavaScript -->
-    <!-- reCAPTCHA: Lazy loaded on form interaction (see inline script below) -->
-    <!-- Combined and Minified JavaScript (6 files → 1) -->
     <script defer src="./src/js/dist/scripts.min.js"></script>
 
-    <!-- reCAPTCHA Lazy Loading: Only load when user interacts with form -->
     <script>
       let recaptchaLoaded = false;
       function loadRecaptcha() {
@@ -2643,7 +2357,6 @@ Agora pode confiar em nós.</h2>
       });
     </script>
 
-    <!-- Consent Manager - Executed in Web Worker via Partytown -->
     <script type="text/partytown" src="https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js" data-cmp-ab="1" data-cmp-host="b.delivery.consentmanager.net" data-cmp-cdn="cdn.consentmanager.net" data-cmp-codesrc="1"></script>
     <script type="text/partytown" src="https://cdn.consentmanager.net/delivery/9f87e56a620e6.js"></script>
 </body>

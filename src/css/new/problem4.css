@@ -1,7 +1,4 @@
-/* ============================================
-   SECÇÃO 5: PROBLEM4 - Validation Section (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2998&m=dev
-   ============================================ */
+
 
 .problem4-section {
   position: relative;
@@ -16,7 +13,7 @@
   overflow: hidden;
 }
 
-/* Background Video with Overlays */
+
 .problem4-background {
   position: absolute;
   inset: 0;
@@ -46,7 +43,7 @@
   mix-blend-mode: saturation;
 }
 
-/* Main Container */
+
 .problem4-container {
   width: 100%;
   max-width: 1440px;
@@ -58,7 +55,7 @@
   z-index: 1;
 }
 
-/* Header */
+
 .problem4-header {
   display: flex;
   flex-direction: column;
@@ -88,7 +85,7 @@
   margin: 0;
 }
 
-/* Validation Statistics Grid */
+
 .validation-stats {
   display: flex;
   flex-wrap: wrap;
@@ -114,13 +111,13 @@
   transition: transform 0.3s ease, background 0.3s ease;
   cursor: pointer;
 
-  /* Default animation state */
+  
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, background 0.3s ease, box-shadow 0.3s ease;
   pointer-events: none;
 }
 
-/* First stat - Reveal from left */
+
 .validation-stat:nth-child(1) {
   transform: translateX(-100%);
 }
@@ -131,7 +128,7 @@
   pointer-events: auto;
 }
 
-/* Second stat - Reveal from bottom */
+
 .validation-stat:nth-child(2) {
   transform: translateY(100%);
 }
@@ -142,7 +139,7 @@
   pointer-events: auto;
 }
 
-/* Third stat - Reveal from right */
+
 .validation-stat:nth-child(3) {
   transform: translateX(100%);
 }
@@ -153,7 +150,7 @@
   pointer-events: auto;
 }
 
-/* Circling halo animation */
+
 @keyframes circling-halo-dark {
     0% {
         box-shadow:
@@ -218,7 +215,7 @@
   white-space: pre-wrap;
 }
 
-/* Footer */
+
 .problem4-footer {
   display: flex;
   flex-direction: column;
@@ -248,9 +245,7 @@
   opacity: 0.8;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 @media (max-width: 1024px) {
   .problem4-container {
     padding: 0 40px;
@@ -296,9 +291,7 @@
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 @media (max-width: 768px) {
   .problem4-section {
     height: auto;

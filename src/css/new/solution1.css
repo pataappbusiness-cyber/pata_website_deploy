@@ -1,7 +1,4 @@
-/* ============================================
-   SECTION 7: SOLUTION1 - Faça as contas (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3081&m=dev
-   ============================================ */
+
 
 .solution1-section {
     position: relative;
@@ -16,7 +13,7 @@
     overflow: hidden;
 }
 
-/* Main Title */
+
 .solution1-title {
     font-family: 'Mona Sans', sans-serif;
     font-size: 52px;
@@ -28,7 +25,7 @@
     z-index: 10;
 }
 
-/* Cards Container */
+
 .solution1-cards-container {
     display: flex;
     width: 100%;
@@ -38,9 +35,7 @@
     justify-content: stretch;
 }
 
-/* ============================================
-   LEFT CARD - Sem PATA (Grey)
-   ============================================ */
+
 
 .solution1-card-left {
     position: relative;
@@ -57,7 +52,7 @@
     border-radius: 0;
 }
 
-/* Left Card Background Video - Covers entire panel */
+
 .solution1-card-left .card-background-container {
     position: absolute;
     inset: 0;
@@ -92,7 +87,7 @@
     border-radius: 0;
 }
 
-/* Left Card Content Box - Centered on top of video */
+
 .solution1-card-left .card-content {
     position: relative;
     z-index: 2;
@@ -117,7 +112,7 @@
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 
-    /* Animation */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -130,7 +125,7 @@
     pointer-events: auto;
 }
 
-/* Pet Icons Container */
+
 .solution1-icons {
     display: flex;
     gap: 16px;
@@ -143,7 +138,7 @@
     flex-shrink: 0;
 }
 
-/* Card Title and Price */
+
 .solution1-card-info {
     display: flex;
     flex-direction: column;
@@ -170,7 +165,7 @@
     margin: 0;
 }
 
-/* Card Source */
+
 .solution1-card-source {
     font-family: 'Mona Sans', sans-serif;
     font-size: 18px;
@@ -196,9 +191,7 @@
     color: #3D3D3D;
 }
 
-/* ============================================
-   RIGHT CARD - Com PATA (Orange)
-   ============================================ */
+
 
 .solution1-card-right {
     position: relative;
@@ -213,7 +206,7 @@
     border-radius: 0;
 }
 
-/* Right Card Background Video - Covers entire panel */
+
 .solution1-card-right .card-background-container {
     position: absolute;
     inset: 0;
@@ -246,7 +239,7 @@
     border-radius: 0;
 }
 
-/* Right Card Content Box - Centered on top of video */
+
 .solution1-card-right .card-content {
     position: relative;
     z-index: 2;
@@ -265,7 +258,7 @@
     overflow: hidden;
     cursor: pointer;
 
-    /* Animation */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -278,7 +271,7 @@
     pointer-events: auto;
 }
 
-/* Inner Backgrounds */
+
 .solution1-card-right .card-content::before {
     content: '';
     position: absolute;
@@ -302,7 +295,7 @@
     pointer-events: none;
 }
 
-/* Right Card Icons (with hearts) */
+
 .solution1-card-right .solution1-icons {
     position: relative;
     z-index: 3;
@@ -314,7 +307,7 @@
     height: 44px;
 }
 
-/* Right Card Two-Column Layout */
+
 .solution1-card-columns {
     position: relative;
     z-index: 3;
@@ -354,7 +347,7 @@
     text-align: center;
 }
 
-/* Subscription Details */
+
 .solution1-subscription-details {
     font-family: 'Mona Sans', sans-serif;
     font-size: 14px;
@@ -365,7 +358,7 @@
     margin: 0;
 }
 
-/* Card Disclaimer */
+
 .solution1-card-disclaimer {
     position: relative;
     z-index: 3;
@@ -385,11 +378,9 @@
     font-style: italic;
 }
 
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
 
-/* Tablet */
+
+
 @media (max-width: 1024px) {
     .solution1-section {
         padding: 32px 0 0 0;
@@ -440,7 +431,7 @@
     }
 }
 
-/* Mobile */
+
 @media (max-width: 768px) {
     .solution1-section {
         padding: 20px 0 0 0;
@@ -576,7 +567,7 @@
     }
 }
 
-/* Small Mobile - Extra responsive adjustments */
+
 @media (max-width: 480px) {
     .solution1-card-right {
         padding: 32px 12px;
@@ -614,11 +605,9 @@
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for grey card */
+
+
 @keyframes circling-halo-solution1-grey {
     0% {
         box-shadow:
@@ -652,7 +641,7 @@
     }
 }
 
-/* Circling halo animation for orange card */
+
 @keyframes circling-halo-solution1-orange {
     0% {
         box-shadow:

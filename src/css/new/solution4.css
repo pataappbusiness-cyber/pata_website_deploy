@@ -1,11 +1,6 @@
-/* ============================================
-   SECTION 10: SOLUTION4 - E se existisse uma forma diferente?
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3230&m=dev
-   ============================================ */
 
-/* ============================================
-   MAIN SECTION
-   ============================================ */
+
+
 
 .solution4-section {
     position: relative;
@@ -19,9 +14,7 @@
     overflow: hidden;
 }
 
-/* ============================================
-   CONTAINER
-   ============================================ */
+
 
 .solution4-container {
     display: flex;
@@ -33,9 +26,7 @@
     margin: 0 auto;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+
 
 .solution4-header {
     display: flex;
@@ -74,9 +65,7 @@
     margin: 0;
 }
 
-/* ============================================
-   CARDS CONTAINER
-   ============================================ */
+
 
 .solution4-cards {
     display: flex;
@@ -85,9 +74,7 @@
     width: 100%;
 }
 
-/* ============================================
-   MAIN CARD - Clínica PATA + Small Cards
-   ============================================ */
+
 
 .solution4-main-card {
     display: flex;
@@ -111,23 +98,21 @@
     overflow: visible;
     cursor: pointer;
 
-    /* Animation */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
-/* Visible state */
+
 .solution4-main-card.visible {
     transform: translateX(0);
     opacity: 1;
     pointer-events: auto;
 }
 
-/* ============================================
-   CLÍNICA PATA - Left Side
-   ============================================ */
+
 
 .clinica-pata-side {
     display: flex;
@@ -223,9 +208,7 @@
     z-index: 0;
 }
 
-/* ============================================
-   SMALL CARDS GRID - Right Side
-   ============================================ */
+
 
 .small-cards-grid {
     display: flex;
@@ -305,9 +288,7 @@
     margin: 0;
 }
 
-/* ============================================
-   BOTTOM CARDS CONTAINER
-   ============================================ */
+
 
 .solution4-bottom-cards {
     display: flex;
@@ -338,23 +319,23 @@
     text-align: center;
     cursor: pointer;
 
-    /* Animation */
+    
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
-/* First bottom card - slides from left */
+
 .bottom-card:nth-child(1) {
     transform: translateX(-100%);
 }
 
-/* Second bottom card - slides from right */
+
 .bottom-card:nth-child(2) {
     transform: translateX(100%);
 }
 
-/* Visible state */
+
 .bottom-card.visible {
     transform: translateX(0);
     opacity: 1;
@@ -428,7 +409,7 @@
     z-index: 1;
 }
 
-/* First bottom card - Receita Digital - Position image lower for text readability */
+
 .solution4-bottom-cards .bottom-card:first-child .bottom-card-image {
     top: 60px;
     bottom: auto;
@@ -436,14 +417,12 @@
     max-height: calc(100% - 60px);
 }
 
-/* Second bottom card - Loja PATA */
+
 .solution4-bottom-cards .bottom-card:last-child .bottom-card-image {
-    /* Keep default positioning at bottom */
+    
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .solution4-section {
@@ -482,7 +461,7 @@
         overflow: visible;
     }
 
-    /* Hide image in Clínica PATA on tablet */
+    
     .clinica-image {
         display: none !important;
     }
@@ -529,15 +508,13 @@
         max-width: 600px;
     }
 
-    /* Hide images in both bottom cards on tablet */
+    
     .bottom-card-image {
         display: none;
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .solution4-section {
@@ -594,7 +571,7 @@
         flex: none;
     }
 
-    /* Hide image in Clínica PATA on mobile */
+    
     .clinica-image {
         display: none !important;
         visibility: hidden;
@@ -690,17 +667,15 @@
         line-height: 14px;
     }
 
-    /* Hide images in both bottom cards on mobile */
+    
     .bottom-card-image {
         display: none;
     }
 }
 
-/* ============================================
-   ANIMATIONS & INTERACTIONS
-   ============================================ */
 
-/* Circling halo glow animation - smaller, sharper, more opaque */
+
+
 @keyframes circling-halo {
     0% {
         box-shadow:

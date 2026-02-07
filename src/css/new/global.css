@@ -1,55 +1,50 @@
-/* ============================================
-   PATA WEBSITE - GLOBAL DESIGN SYSTEM
-   Version: 4.0 (PREVC)
-   ============================================ */
 
-/* ============================================
-   CSS VARIABLES - DESIGN TOKENS
-   ============================================ */
+
+
 
 :root {
-  /* Font Family */
+  
   --font-family: "Mona Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Liquid Gradient Colors (Hero, Joinus2, Joinus3) */
-  --gradient-color-1: rgba(223, 110, 57, 0.39);  /* #DF6E39 - 39% */
-  --gradient-color-2: rgba(198, 84, 32, 0.61);   /* #C65420 - 61% */
-  --gradient-color-3: rgba(6, 41, 70, 0.28);     /* #062946 - 28% */
-  --gradient-color-4: rgba(255, 255, 255, 0.25); /* #FFFFFF - 25% */
-  --gradient-color-5: rgba(77, 34, 0, 0.39);     /* #4D2200 - 39% */
-  --gradient-color-6: rgba(56, 123, 178, 1.0);   /* #387BB2 - 100% */
-  --gradient-color-7: rgba(219, 93, 35, 0.20);   /* #DB5D23 - 20% */
-  --gradient-color-8: rgba(18, 40, 58, 1.0);     /* #12283A - 100% */
+  
+  --gradient-color-1: rgba(223, 110, 57, 0.39);  
+  --gradient-color-2: rgba(198, 84, 32, 0.61);   
+  --gradient-color-3: rgba(6, 41, 70, 0.28);     
+  --gradient-color-4: rgba(255, 255, 255, 0.25); 
+  --gradient-color-5: rgba(77, 34, 0, 0.39);     
+  --gradient-color-6: rgba(56, 123, 178, 1.0);   
+  --gradient-color-7: rgba(219, 93, 35, 0.20);   
+  --gradient-color-8: rgba(18, 40, 58, 1.0);     
 
-  /* Background Base */
+  
   --bg-black: #000000;
   --bg-white: #FFFFFF;
 
 
-  /* Primary Colors (PATA Orange) */
+  
   --color-primary-500: #DF6E39;
   --color-primary-700: #C65420;
 
-  /* Neutral Colors */
+  
   --color-neutral-700: #4A5568;
   --color-neutral-900: #1A202C;
 
-  /* Z-Index Layers */
+  
   --z-sticky: 1000;
   --z-modal: 2000;
 
-  /* Transitions */
+  
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
 
-  /* Border Radius */
+  
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
 
-  /* Spacing */
+  
   --spacing-xs: 8px;
   --spacing-sm: 16px;
   --spacing-md: 24px;
@@ -59,9 +54,7 @@
   --spacing-3xl: 80px;
 }
 
-/* ============================================
-   GLOBAL RESETS & BASE STYLES
-   ============================================ */
+
 
 * {
   margin: 0;
@@ -74,14 +67,14 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth; /* Native browser smooth scroll */
+  scroll-behavior: smooth; 
 
-  /* Custom cursor - black version for light backgrounds */
+  
   cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto;
 }
 
-/* Remove all drag/move/grab cursors and replace with custom cursors */
-/* Default state for draggable elements and move/grab cursors */
+
+
 img,
 [draggable="true"],
 .draggable,
@@ -95,7 +88,7 @@ img[src*="bone.svg"],
   user-select: none;
 }
 
-/* Active/dragging state - use hover cursor (with 65% opacity) */
+
 *:active,
 img:active,
 img[src*="BONE.svg"]:active,
@@ -112,7 +105,7 @@ img[src*="bone.svg"]:active,
   user-select: none;
 }
 
-/* Force cursor on BONE.svg and draggable-element specifically */
+
 img[src$="BONE.svg"],
 img[src$="bone.svg"],
 .draggable-element {
@@ -125,16 +118,14 @@ img[src$="bone.svg"]:active,
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, move !important;
 }
 
-/* Ensure draggable-element image doesn't interfere */
+
 .draggable-element img {
   pointer-events: none !important;
 }
 
-/* ============================================
-   WHITE CURSOR FOR SPECIFIC SECTIONS
-   ============================================ */
 
-/* White cursor for hero, problem1, problem3, problem4, solution1, joinus2, and joinus3 sections */
+
+
 #hero,
 #hero *,
 #problem1,
@@ -152,7 +143,7 @@ img[src$="bone.svg"]:active,
   cursor: url('/src/img/icons/rato_pata_branco.svg') 16 14, auto !important;
 }
 
-/* White cursor with 65% opacity on hover for interactive elements in these sections */
+
 #hero a:hover,
 #hero button:hover,
 #hero [class*="card"]:hover,
@@ -179,7 +170,7 @@ img[src$="bone.svg"]:active,
   cursor: url('/src/img/icons/rato_pata_branco_hover.svg') 16 14, pointer !important;
 }
 
-/* Fallback for browsers with JS disabled */
+
 html.no-js {
   scroll-behavior: smooth;
 }
@@ -196,12 +187,10 @@ body {
   line-height: 1.6;
 }
 
-/* ============================================
-   TYPOGRAPHY - FIGMA SPECIFICATIONS
-   ============================================ */
 
-/* H1 - Hero Titles */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-3 */
+
+
+
 h1 {
   font-family: var(--font-family);
   font-size: 72px;
@@ -219,8 +208,8 @@ h1 {
   h1 { font-size: 40px; }
 }
 
-/* H2 - Section Titles */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-6 */
+
+
 h2 {
   font-family: var(--font-family);
   font-size: 56px;
@@ -238,8 +227,8 @@ h2 {
   h2 { font-size: 32px; }
 }
 
-/* H3 - Subsection Titles */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-35 */
+
+
 h3 {
   font-family: var(--font-family);
   font-size: 40px;
@@ -256,8 +245,8 @@ h3 {
   h3 { font-size: 24px; }
 }
 
-/* H4 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-37 */
+
+
 h4 {
   font-family: var(--font-family);
   font-size: 32px;
@@ -274,8 +263,8 @@ h4 {
   h4 { font-size: 20px; }
 }
 
-/* H5 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-38 */
+
+
 h5 {
   font-family: var(--font-family);
   font-size: 24px;
@@ -292,8 +281,8 @@ h5 {
   h5 { font-size: 18px; }
 }
 
-/* H6 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-41 */
+
+
 h6 {
   font-family: var(--font-family);
   font-size: 20px;
@@ -310,8 +299,8 @@ h6 {
   h6 { font-size: 16px; }
 }
 
-/* Paragraph */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-528 */
+
+
 p {
   font-family: var(--font-family);
   font-size: 18px;
@@ -329,8 +318,8 @@ p {
   p { font-size: 14px; }
 }
 
-/* Links */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-530 */
+
+
 a {
   font-family: var(--font-family);
   font-size: 16px;
@@ -344,8 +333,8 @@ a:hover {
   color: var(--color-primary-700);
 }
 
-/* Quote */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=344-3228 */
+
+
 blockquote {
   font-family: var(--font-family);
   font-size: 20px;
@@ -362,17 +351,13 @@ blockquote {
   blockquote { font-size: 16px; }
 }
 
-/* ============================================
-   NAVBAR - SCROLLED STATE
-   ============================================ */
+
 
 .navbar.scrolled .navbar-menu-container {
   box-shadow: 0px 4px 20px 0px rgba(255, 155, 74, 0.2);
 }
 
-/* ============================================
-   UTILITY CLASSES
-   ============================================ */
+
 
 .container {
   width: 100%;
@@ -393,7 +378,7 @@ blockquote {
   }
 }
 
-/* Screen Reader Only */
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -406,11 +391,9 @@ blockquote {
   border-width: 0;
 }
 
-/* ============================================
-   ANIMATIONS & KEYFRAMES
-   ============================================ */
 
-/* Liquid Gradient Animation */
+
+
 @keyframes liquid-gradient-animation {
   0%, 100% {
     background-position: 0% 0%, 0% 0%, 100% 0%, 50% 100%, 0% 100%, 100% 0%, 0% 100%;
@@ -426,7 +409,7 @@ blockquote {
   }
 }
 
-/* Fade In */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -436,7 +419,7 @@ blockquote {
   }
 }
 
-/* Slide Up */
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -448,11 +431,9 @@ blockquote {
   }
 }
 
-/* ============================================
-   CUSTOM CURSOR FOR INTERACTIVE ELEMENTS
-   ============================================ */
 
-/* White cursor on hover for all interactive elements */
+
+
 a:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -461,7 +442,7 @@ input[type="button"]:hover,
 [role="button"]:hover,
 [onclick]:hover,
 .scroll-to-top-btn:hover,
-/* Cards */
+
 [class*="card"]:hover,
 .price-card-grey:hover,
 .price-card-orange:hover,
@@ -469,20 +450,20 @@ input[type="button"]:hover,
 .testimonial-card:hover,
 .solution1-card-left:hover,
 .solution1-card-right:hover,
-/* FAQ items */
+
 .faq-item:hover,
 .faq-question:hover,
-/* Navbar items */
+
 .navbar-link:hover,
 .navbar-cta:hover,
 .mobile-menu-link:hover,
-/* Footer links */
+
 footer a:hover,
 .footer-link:hover {
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
 
-/* White cursor for scroll-to-top button when it has white-arrow class (on dark backgrounds) */
+
 .scroll-to-top-btn.white-arrow {
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
@@ -495,11 +476,9 @@ footer a:hover,
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
 
-/* ============================================
-   DISABLE CUSTOM CURSORS ON MOBILE/TOUCH DEVICES
-   ============================================ */
 
-/* Remove custom cursor overhead on touch devices where it has no effect */
+
+
 @media (hover: none), (pointer: coarse) {
   *, *::before, *::after,
   html, body,

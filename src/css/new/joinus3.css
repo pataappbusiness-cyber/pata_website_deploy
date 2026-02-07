@@ -1,11 +1,6 @@
-/* ============================================
-   SECTION 15: JOINUS3 - Final CTA Section
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-3057&m=dev
-   ============================================ */
 
-/* ============================================
-   JOINUS3 SECTION - BASE STYLES
-   ============================================ */
+
+
 
 .joinus3-section {
   position: relative;
@@ -19,7 +14,7 @@
   background: #000000;
 }
 
-/* Liquid Shader Canvas Styling (same as header) */
+
 .joinus3-section .liquid-shader-canvas {
   position: absolute;
   top: 0;
@@ -27,11 +22,11 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Allow clicks to pass through to content */
+  pointer-events: none; 
   filter: blur(125px) contrast(1.80);
 }
 
-/* Black overlay on top of shader (20% opacity) */
+
 .joinus3-section::after {
   content: '';
   position: absolute;
@@ -44,7 +39,7 @@
   pointer-events: none;
 }
 
-/* Fallback gradient for browsers without WebGL or with reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .joinus3-section .liquid-shader-canvas {
     display: none;
@@ -102,16 +97,14 @@
   }
 }
 
-/* Performance optimization for mobile */
+
 @media (max-width: 768px) {
   .joinus3-section .liquid-shader-canvas {
-    opacity: 0.8; /* Slightly reduce complexity visual impact */
+    opacity: 0.8; 
   }
 }
 
-/* ============================================
-   MAIN CONTAINER
-   ============================================ */
+
 
 .joinus3-container {
   position: relative;
@@ -124,9 +117,7 @@
   align-items: center;
 }
 
-/* ============================================
-   HEADER SECTION
-   ============================================ */
+
 
 .joinus3-header {
   display: flex;
@@ -137,7 +128,7 @@
   width: 100%;
 }
 
-/* Icon Container */
+
 .joinus3-icon {
   position: relative;
   width: 106px;
@@ -154,7 +145,7 @@
   object-fit: contain;
 }
 
-/* Title and Subtitle */
+
 .joinus3-text-container {
   display: flex;
   flex-direction: column;
@@ -185,9 +176,7 @@
   white-space: pre-wrap;
 }
 
-/* ============================================
-   STATISTICS CARDS
-   ============================================ */
+
 
 .joinus3-stats-container {
   display: flex;
@@ -198,7 +187,7 @@
   width: 100%;
 }
 
-/* Individual Stat Card */
+
 .joinus3-stat-card {
   display: flex;
   flex-direction: column;
@@ -208,7 +197,7 @@
   flex-shrink: 0;
 }
 
-/* Icon Container for Stats */
+
 .joinus3-stat-icon {
   position: relative;
   width: 54px;
@@ -219,14 +208,14 @@
   flex-shrink: 0;
 }
 
-/* SVG Icon Styling */
+
 .joinus3-stat-icon .icon-svg {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* Stat Badge */
+
 .joinus3-stat-badge {
   display: flex;
   flex-direction: column;
@@ -253,7 +242,7 @@
   z-index: 2;
 }
 
-/* Badge Shadow */
+
 .joinus3-stat-badge::after {
   content: '';
   position: absolute;
@@ -265,7 +254,7 @@
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* Stat Label */
+
 .joinus3-stat-label {
   font-family: 'Mona Sans', sans-serif;
   font-size: 20px;
@@ -279,11 +268,9 @@
   min-width: min-content;
 }
 
-/* ============================================
-   STAT CARDS REVEAL ANIMATIONS
-   ============================================ */
 
-/* Stat Card 1 */
+
+
 .joinus3-stat-card:nth-child(1) {
   opacity: 0;
   transform: translateY(50px);
@@ -295,7 +282,7 @@
   transform: translateY(0);
 }
 
-/* Stat Card 2 */
+
 .joinus3-stat-card:nth-child(2) {
   opacity: 0;
   transform: translateY(50px);
@@ -307,7 +294,7 @@
   transform: translateY(0);
 }
 
-/* Stat Card 3 */
+
 .joinus3-stat-card:nth-child(3) {
   opacity: 0;
   transform: translateY(50px);
@@ -319,9 +306,7 @@
   transform: translateY(0);
 }
 
-/* ============================================
-   CTA BUTTON
-   ============================================ */
+
 
 .joinus3-cta-button {
   display: flex;
@@ -364,7 +349,7 @@
   flex: 1;
 }
 
-/* Button Shadow */
+
 .joinus3-cta-button::after {
   content: '';
   position: absolute;
@@ -376,9 +361,7 @@
     inset 0px 0px 2px 2px rgba(254, 254, 255, 0.25);
 }
 
-/* ============================================
-   PS TEXT
-   ============================================ */
+
 
 .joinus3-ps-text {
   font-family: 'Mona Sans', sans-serif;
@@ -394,9 +377,7 @@
   flex-shrink: 0;
 }
 
-/* ============================================
-   PRICING CARD
-   ============================================ */
+
 
 .joinus3-pricing-card {
   display: flex;
@@ -438,7 +419,7 @@
   white-space: nowrap;
 }
 
-/* Pricing Card Shadow */
+
 .joinus3-pricing-card::after {
   content: '';
   position: absolute;
@@ -450,9 +431,7 @@
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 
 @media (max-width: 1024px) {
   .joinus3-section {
@@ -504,9 +483,7 @@
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .joinus3-section {

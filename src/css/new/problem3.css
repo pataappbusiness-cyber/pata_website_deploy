@@ -1,7 +1,7 @@
-/* ============================================= */
-/*              Problem3 Section                 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-2633&m=dev */
-/* ============================================= */
+
+
+
+
 
 #problem3 {
     background-color: #FFF8F2;
@@ -25,7 +25,7 @@
     width: 100%;
 }
 
-/* Left Column: Header Content */
+
 .problem3-header {
     display: flex;
     flex-direction: column;
@@ -37,7 +37,7 @@
     z-index: 10;
     position: relative;
 
-    /* Animation - Reveal from left */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -50,7 +50,7 @@
     pointer-events: auto;
 }
 
-/* Cat Icon + Title Wrapper */
+
 .problem3-title-wrapper {
     display: flex;
     gap: 20px;
@@ -100,7 +100,7 @@
     line-height: 36px;
 }
 
-/* Subtitle & Description */
+
 .problem3-text-group {
     display: flex;
     flex-direction: column;
@@ -132,7 +132,7 @@
     overflow-wrap: break-word;
 }
 
-/* Right Column: Statistics Cards */
+
 .problem3-stats {
     display: flex;
     flex-wrap: wrap;
@@ -144,7 +144,7 @@
     min-width: 0;
     overflow: visible;
 
-    /* Animation - Reveal from right */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -157,7 +157,7 @@
     pointer-events: auto;
 }
 
-/* Statistics Card */
+
 .problem3-stat-card {
     background: var(--color-neutral-950, #FEFEFF);
     border: 0.5px solid var(--color-neutral-800, #D4D4D4);
@@ -170,7 +170,7 @@
     flex: 1 0 0;
     max-width: 300px;
     min-width: 210px;
-    /* Drop shadow */
+    
     box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
     position: relative;
     z-index: 1;
@@ -194,7 +194,7 @@
     box-shadow: 0px 8px 16px rgba(255, 180, 119, 0.25);
 }
 
-/* Icon */
+
 .problem3-stat-icon {
     width: 54px;
     height: 54px;
@@ -219,7 +219,7 @@
     flex-shrink: 0;
 }
 
-/* Value Box */
+
 .problem3-stat-value-box {
     background: var(--color-complementary-800, #FFF4E6);
     padding: 4px 12px;
@@ -250,7 +250,7 @@
     margin: 0;
 }
 
-/* Info */
+
 .problem3-stat-info {
     display: flex;
     flex-direction: column;
@@ -289,7 +289,7 @@
     opacity: 0.7;
 }
 
-/* Footer Text (Mobile/Tablet Only) */
+
 .problem3-stats-footer {
     display: none;
     color: var(--color-neutral-200, #525252);
@@ -305,9 +305,9 @@
     overflow-wrap: break-word;
 }
 
-/* ===== HOVER & CLICK INTERACTIONS ===== */
 
-/* Circling halo animation for problem3 cards */
+
+
 @keyframes circling-halo-orange {
     0% {
         box-shadow:
@@ -341,22 +341,22 @@
     }
 }
 
-/* Hover effect - lift and glow */
+
 .problem3-stat-card:hover {
     transform: scale(1.02) translateY(-10px);
     animation: circling-halo-orange 2s ease-in-out infinite;
 }
 
-/* Active/click effect - press down */
+
 .problem3-stat-card:active {
     transform: scale(0.98) translateY(5px);
     animation: none;
     box-shadow: 0px 2px 4px 0px rgba(255, 180, 119, 0.2);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 
-/* Tablets (768px - 1024px) */
+
+
 @media (max-width: 1024px) {
     #problem3 {
         padding: 40px 48px;
@@ -371,7 +371,7 @@
         align-items: center;
     }
 
-    /* Disable horizontal animations on tablet to prevent overflow */
+    
     .problem3-header {
         transform: none;
         align-items: center !important;
@@ -391,7 +391,7 @@
         opacity: 1;
     }
 
-    /* Cat icon + title - center everything */
+    
     .problem3-title-wrapper {
         flex-direction: column;
         align-items: center !important;
@@ -454,7 +454,7 @@
         text-align: center;
     }
 
-    /* Subtitle section */
+    
     .problem3-text-group {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -484,7 +484,7 @@
         display: none;
     }
 
-    /* Override stats container animation to prevent horizontal overflow */
+    
     .problem3-stats {
         transform: none;
         flex-direction: row;
@@ -513,12 +513,12 @@
         position: static;
     }
 
-    /* Ensure third card stays in the grid */
+    
     .problem3-stat-card:nth-child(3) {
         flex: 0 1 calc(33.33% - 12px);
     }
 
-    /* Override individual card animations to prevent overflow on tablet */
+    
     .problem3-stat-card:nth-child(1),
     .problem3-stat-card:nth-child(2),
     .problem3-stat-card:nth-child(3) {
@@ -531,7 +531,7 @@
         transform: none !important;
     }
 
-    /* Show footer text on tablet */
+    
     .problem3-stats-footer {
         display: block;
         font-size: 14px;
@@ -544,7 +544,7 @@
     }
 }
 
-/* Mobile (< 768px) */
+
 @media (max-width: 768px) {
     #problem3 {
         padding: 40px 15px;
@@ -716,7 +716,7 @@
         width: 100%;
     }
 
-    /* Override individual card animations to prevent overflow */
+    
     .problem3-stat-card:nth-child(1),
     .problem3-stat-card:nth-child(2),
     .problem3-stat-card:nth-child(3) {
@@ -745,7 +745,7 @@
     }
 }
 
-/* Mobile Small (< 480px) */
+
 @media (max-width: 480px) {
     #problem3 {
         padding: 40px 15px;

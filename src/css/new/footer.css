@@ -1,9 +1,4 @@
-/* ============================================
-   FOOTER COMPONENT
-   Figma Desktop: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3466
-   Figma Tablet: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4071
-   Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4698
-   ============================================ */
+
 
 .footer {
     background: #272727;
@@ -14,7 +9,7 @@
     width: 100%;
 }
 
-/* Main Container - Two Column Layout */
+
 .footer-container {
     display: flex;
     flex-wrap: wrap;
@@ -23,7 +18,7 @@
     width: 100%;
 }
 
-/* Left Section - Brand */
+
 .footer-brand {
     display: flex;
     flex-direction: column;
@@ -63,7 +58,7 @@
     margin: 0;
 }
 
-/* Social Links */
+
 .footer-social {
     display: flex;
     gap: 16px;
@@ -105,7 +100,7 @@
     opacity: 0.8;
 }
 
-/* Right Section - Quick Links */
+
 .footer-links-section {
     display: flex;
     flex-direction: column;
@@ -143,7 +138,7 @@
     opacity: 0.7;
 }
 
-/* Footer Bottom Section */
+
 .footer-bottom {
     display: flex;
     flex-direction: column;
@@ -178,7 +173,7 @@
     margin: 0;
 }
 
-/* Tablet Breakpoint (max-width: 1024px) */
+
 @media (max-width: 1024px) {
     .footer {
         padding: 56px 32px;
@@ -220,7 +215,7 @@
     }
 }
 
-/* Mobile Breakpoint (max-width: 768px) */
+
 @media (max-width: 768px) {
     .footer {
         padding: 40px 24px;

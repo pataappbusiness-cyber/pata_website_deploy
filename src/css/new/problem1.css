@@ -1,30 +1,22 @@
-/* ============================================
-   PROBLEM 1 SECTION - ESPECIFICAÇÕES TÉCNICAS FIGMA
-   Node ID: 337:2936
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2936&m=dev
-   ============================================ */
 
-/* ============================================
-   DESIGN TOKENS
-   ============================================ */
+
+
 
 :root {
-  /* Neutrals */
+  
   --color-neutral-100: #3D3D3D;
   --color-neutral-200: #525252;
   --color-neutral-800: #D4D4D4;
   --color-neutral-950: #FEFEFF;
 
-  /* Accent */
+  
   --dark-orange: #FF943D;
 
-  /* Price Display */
+  
   --price-dark-grey: #272727;
 }
 
-/* ============================================
-   MAIN SECTION
-   ============================================ */
+
 
 .problem1-section {
   display: flex;
@@ -36,9 +28,7 @@
   min-height: 800px;
 }
 
-/* ============================================
-   LEFT PANEL - Traditional Vet (Grey/Dark)
-   ============================================ */
+
 
 .left-panel {
   flex: 1 0 0;
@@ -57,7 +47,7 @@
   min-width: 1px;
 }
 
-/* Background Container - Fills entire panel */
+
 .background-container {
   position: absolute;
   top: 0;
@@ -80,7 +70,7 @@
   z-index: 0;
 }
 
-/* Overlays - Left Panel */
+
 .overlay-saturation {
   position: absolute;
   top: 0;
@@ -109,37 +99,37 @@
   pointer-events: none;
 }
 
-/* Price Card Grey */
+
 .price-card-grey {
-  /* Container */
+  
   width: 100%;
   max-width: 400px;
   min-width: 280px;
   min-height: 142px;
 
-  /* Styling */
+  
   background: rgba(212, 212, 212, 0.9);
   border: 0.5px solid #D4D4D4;
   border-radius: 16px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 
-  /* Layout */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 16px 24px;
 
-  /* Overflow */
+  
   overflow: hidden;
 
-  /* Position */
+  
   position: relative;
   flex-shrink: 0;
   z-index: 2;
   cursor: pointer;
 
-  /* Animation */
+  
   transform: translateX(-100%);
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -152,7 +142,7 @@
   pointer-events: auto;
 }
 
-/* Card Content Container */
+
 .price-card-grey .card-content {
   display: flex;
   flex-direction: column;
@@ -161,43 +151,43 @@
   width: 100%;
 }
 
-/* Typography - Left Panel */
+
 .left-panel h3 {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 36px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #3D3D3D; /* color-neutral/100 */
+  
+  color: #3D3D3D; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
 
-  /* Display */
+  
   white-space: pre-wrap;
   margin: 0;
 }
 
 .left-panel .price {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 52px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 38px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #272727; /* Darker grey for emphasis */
+  
+  color: #272727; 
 
-  /* Layout */
+  
   text-align: center;
   width: 230px;
 
-  /* Display */
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -212,46 +202,44 @@
 }
 
 .left-panel .source p {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 18px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 20px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #525252; /* color-neutral/200 */
+  
+  color: #525252; 
 
-  /* Layout */
+  
   text-align: center;
   margin: 0;
 }
 
 .left-panel .source a {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 14px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 16px;
   letter-spacing: 0;
 
-  /* Color */
+  
   color: #525252;
 
-  /* Decoration - Thin underline */
+  
   text-decoration: underline;
   text-decoration-thickness: 0.5px;
   text-decoration-skip-ink: none;
 
-  /* Display */
+  
   display: block;
   cursor: pointer;
   text-align: center;
 }
 
-/* ============================================
-   RIGHT PANEL - PATA Solution (Orange/Warm)
-   ============================================ */
+
 
 .right-panel {
   flex: 1 0 0;
@@ -270,7 +258,7 @@
   min-width: 1px;
 }
 
-/* Background Overlay - Orange */
+
 .right-panel .overlay-orange {
   position: absolute;
   top: 0;
@@ -288,15 +276,15 @@
   z-index: 1;
 }
 
-/* Price Card Orange */
+
 .price-card-orange {
-  /* Container */
+  
   width: 100%;
   max-width: 443px;
   min-width: 440px;
   min-height: 142px;
 
-  /* Complex Background Gradient */
+  
   background-image:
     linear-gradient(180deg,
       rgba(255, 180, 119, 0.2) 0%,
@@ -305,30 +293,30 @@
       rgba(255, 210, 173, 0.9) 0%,
       rgba(255, 210, 173, 0.9) 100%);
 
-  /* Border */
+  
   border-top: 1px solid rgba(254, 254, 255, 0.5);
   border-radius: 16px;
 
-  /* Shadow */
+  
   box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
 
-  /* Layout */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 22px 24px;
 
-  /* Overflow */
+  
   overflow: hidden;
 
-  /* Position */
+  
   position: relative;
   flex-shrink: 0;
   z-index: 2;
   cursor: pointer;
 
-  /* Animation */
+  
   transform: translateX(100%);
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -341,7 +329,7 @@
   pointer-events: auto;
 }
 
-/* Inner Shadows (Button-Solid/Active Effect) */
+
 .price-card-orange .inner-shadows {
   position: absolute;
   inset: 0;
@@ -353,7 +341,7 @@
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
 }
 
-/* Card Content Container */
+
 .price-card-orange .card-content {
   display: flex;
   flex-direction: column;
@@ -362,101 +350,101 @@
   width: 100%;
 }
 
-/* Typography - Right Panel */
+
 .right-panel h3 {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 36px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #3D3D3D; /* color-neutral/100 */
+  
+  color: #3D3D3D; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
   margin: 0;
 }
 
 .right-panel .price {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 52px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 38px;
   letter-spacing: 0;
 
-  /* Color */
+  
   color: #3D3D3D;
 
-  /* Layout */
+  
   text-align: center;
   width: 230px;
 }
 
 .right-panel .benefits {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 18px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 20px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #525252; /* color-neutral/200 */
+  
+  color: #525252; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
   white-space: pre-wrap;
   margin: 0;
 }
 
-/* Info Box (White Card Inside Orange Card) */
+
 .info-box {
-  /* Container */
+  
   width: 100%;
   max-width: 400px;
   min-width: 280px;
 
-  /* Styling */
-  background: #FEFEFF; /* color-neutral/950 */
+  
+  background: #FEFEFF; 
   border: 0.5px solid #D4D4D4;
   border-radius: 8px;
 
-  /* Layout */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   padding: 16px 12px;
 
-  /* Overflow */
+  
   overflow: hidden;
 
-  /* Position */
+  
   position: relative;
   flex-shrink: 0;
 }
 
 .info-box h4 {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 24px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 28px;
   letter-spacing: 0;
 
-  /* Color */
+  
   color: var(--dark-orange, #FF943D);
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
 
-  /* Display */
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -464,28 +452,26 @@
 }
 
 .info-box p {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 14px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 16px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #525252; /* color-neutral/200 */
+  
+  color: #525252; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
   white-space: pre-wrap;
   margin: 0;
 }
 
-/* ============================================
-   RESPONSIVE BEHAVIOR
-   ============================================ */
 
-/* Desktop: Side-by-side (default - already defined above) */
+
+
 @media (min-width: 768px) {
   .problem1-section {
     flex-direction: row;
@@ -497,7 +483,7 @@
   }
 }
 
-/* Tablet Adjustments */
+
 @media (max-width: 1024px) {
   .left-panel h3,
   .right-panel h3 {
@@ -516,11 +502,11 @@
   }
 }
 
-/* Mobile: Stacked */
+
 @media (max-width: 767px) {
   .problem1-section {
     flex-direction: column;
-    min-height: 120vh; /* 60vh x 2 panels */
+    min-height: 120vh; 
   }
 
   .left-panel,
@@ -528,22 +514,22 @@
     flex: none;
     width: 100%;
     min-height: 60vh;
-    padding: 8px; /* Reduced padding for mobile */
+    padding: 8px; 
   }
 
-  /* Adjust card widths for mobile */
+  
   .price-card-grey,
   .price-card-orange {
     max-width: 90%;
-    min-width: 180px; /* Reduced for smaller screens */
+    min-width: 180px; 
   }
 
-  /* Allow orange card to be flexible on mobile */
+  
   .price-card-orange {
-    min-width: 180px; /* Override 440px desktop min-width */
+    min-width: 180px; 
   }
 
-  /* Typography Responsive */
+  
   .left-panel h3,
   .right-panel h3 {
     font-size: 24px;
@@ -563,7 +549,7 @@
   }
 
   .info-box {
-    min-width: unset; /* Remove min-width constraint on mobile */
+    min-width: unset; 
   }
 
   .info-box h4 {
@@ -577,21 +563,13 @@
   }
 }
 
-/* ============================================
-   Z-INDEX LAYERS
-   ============================================ */
 
-/* Ensure proper layering:
-   z-index: 0 → Video background
-   z-index: 1 → Overlays
-   z-index: 2 → Price cards
-*/
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for grey card */
+
+
+
+
 @keyframes circling-halo-grey {
     0% {
         box-shadow:
@@ -625,7 +603,7 @@
     }
 }
 
-/* Circling halo animation for orange card */
+
 @keyframes circling-halo-orange {
     0% {
         box-shadow:

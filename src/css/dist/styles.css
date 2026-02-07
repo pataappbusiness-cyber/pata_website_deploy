@@ -1,55 +1,50 @@
-/* ============================================
-   PATA WEBSITE - GLOBAL DESIGN SYSTEM
-   Version: 4.0 (PREVC)
-   ============================================ */
 
-/* ============================================
-   CSS VARIABLES - DESIGN TOKENS
-   ============================================ */
+
+
 
 :root {
-  /* Font Family */
+  
   --font-family: "Mona Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
-  /* Liquid Gradient Colors (Hero, Joinus2, Joinus3) */
-  --gradient-color-1: rgba(223, 110, 57, 0.39);  /* #DF6E39 - 39% */
-  --gradient-color-2: rgba(198, 84, 32, 0.61);   /* #C65420 - 61% */
-  --gradient-color-3: rgba(6, 41, 70, 0.28);     /* #062946 - 28% */
-  --gradient-color-4: rgba(255, 255, 255, 0.25); /* #FFFFFF - 25% */
-  --gradient-color-5: rgba(77, 34, 0, 0.39);     /* #4D2200 - 39% */
-  --gradient-color-6: rgba(56, 123, 178, 1.0);   /* #387BB2 - 100% */
-  --gradient-color-7: rgba(219, 93, 35, 0.20);   /* #DB5D23 - 20% */
-  --gradient-color-8: rgba(18, 40, 58, 1.0);     /* #12283A - 100% */
+  
+  --gradient-color-1: rgba(223, 110, 57, 0.39);  
+  --gradient-color-2: rgba(198, 84, 32, 0.61);   
+  --gradient-color-3: rgba(6, 41, 70, 0.28);     
+  --gradient-color-4: rgba(255, 255, 255, 0.25); 
+  --gradient-color-5: rgba(77, 34, 0, 0.39);     
+  --gradient-color-6: rgba(56, 123, 178, 1.0);   
+  --gradient-color-7: rgba(219, 93, 35, 0.20);   
+  --gradient-color-8: rgba(18, 40, 58, 1.0);     
 
-  /* Background Base */
+  
   --bg-black: #000000;
   --bg-white: #FFFFFF;
 
 
-  /* Primary Colors (PATA Orange) */
+  
   --color-primary-500: #DF6E39;
   --color-primary-700: #C65420;
 
-  /* Neutral Colors */
+  
   --color-neutral-700: #4A5568;
   --color-neutral-900: #1A202C;
 
-  /* Z-Index Layers */
+  
   --z-sticky: 1000;
   --z-modal: 2000;
 
-  /* Transitions */
+  
   --transition-fast: 0.2s ease;
   --transition-normal: 0.3s ease;
   --transition-slow: 0.5s ease;
 
-  /* Border Radius */
+  
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
   --radius-xl: 16px;
 
-  /* Spacing */
+  
   --spacing-xs: 8px;
   --spacing-sm: 16px;
   --spacing-md: 24px;
@@ -59,9 +54,7 @@
   --spacing-3xl: 80px;
 }
 
-/* ============================================
-   GLOBAL RESETS & BASE STYLES
-   ============================================ */
+
 
 * {
   margin: 0;
@@ -74,14 +67,14 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  scroll-behavior: smooth; /* Native browser smooth scroll */
+  scroll-behavior: smooth; 
 
-  /* Custom cursor - black version for light backgrounds */
+  
   cursor: url('/src/img/icons/rato_pata.svg') 16 14, auto;
 }
 
-/* Remove all drag/move/grab cursors and replace with custom cursors */
-/* Default state for draggable elements and move/grab cursors */
+
+
 img,
 [draggable="true"],
 .draggable,
@@ -95,7 +88,7 @@ img[src*="bone.svg"],
   user-select: none;
 }
 
-/* Active/dragging state - use hover cursor (with 65% opacity) */
+
 *:active,
 img:active,
 img[src*="BONE.svg"]:active,
@@ -112,7 +105,7 @@ img[src*="bone.svg"]:active,
   user-select: none;
 }
 
-/* Force cursor on BONE.svg and draggable-element specifically */
+
 img[src$="BONE.svg"],
 img[src$="bone.svg"],
 .draggable-element {
@@ -125,16 +118,14 @@ img[src$="bone.svg"]:active,
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, move !important;
 }
 
-/* Ensure draggable-element image doesn't interfere */
+
 .draggable-element img {
   pointer-events: none !important;
 }
 
-/* ============================================
-   WHITE CURSOR FOR SPECIFIC SECTIONS
-   ============================================ */
 
-/* White cursor for hero, problem1, problem3, problem4, solution1, joinus2, and joinus3 sections */
+
+
 #hero,
 #hero *,
 #problem1,
@@ -152,7 +143,7 @@ img[src$="bone.svg"]:active,
   cursor: url('/src/img/icons/rato_pata_branco.svg') 16 14, auto !important;
 }
 
-/* White cursor with 65% opacity on hover for interactive elements in these sections */
+
 #hero a:hover,
 #hero button:hover,
 #hero [class*="card"]:hover,
@@ -179,7 +170,7 @@ img[src$="bone.svg"]:active,
   cursor: url('/src/img/icons/rato_pata_branco_hover.svg') 16 14, pointer !important;
 }
 
-/* Fallback for browsers with JS disabled */
+
 html.no-js {
   scroll-behavior: smooth;
 }
@@ -196,12 +187,10 @@ body {
   line-height: 1.6;
 }
 
-/* ============================================
-   TYPOGRAPHY - FIGMA SPECIFICATIONS
-   ============================================ */
 
-/* H1 - Hero Titles */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-3 */
+
+
+
 h1 {
   font-family: var(--font-family);
   font-size: 72px;
@@ -219,8 +208,8 @@ h1 {
   h1 { font-size: 40px; }
 }
 
-/* H2 - Section Titles */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-6 */
+
+
 h2 {
   font-family: var(--font-family);
   font-size: 56px;
@@ -238,8 +227,8 @@ h2 {
   h2 { font-size: 32px; }
 }
 
-/* H3 - Subsection Titles */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-35 */
+
+
 h3 {
   font-family: var(--font-family);
   font-size: 40px;
@@ -256,8 +245,8 @@ h3 {
   h3 { font-size: 24px; }
 }
 
-/* H4 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-37 */
+
+
 h4 {
   font-family: var(--font-family);
   font-size: 32px;
@@ -274,8 +263,8 @@ h4 {
   h4 { font-size: 20px; }
 }
 
-/* H5 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-38 */
+
+
 h5 {
   font-family: var(--font-family);
   font-size: 24px;
@@ -292,8 +281,8 @@ h5 {
   h5 { font-size: 18px; }
 }
 
-/* H6 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-41 */
+
+
 h6 {
   font-family: var(--font-family);
   font-size: 20px;
@@ -310,8 +299,8 @@ h6 {
   h6 { font-size: 16px; }
 }
 
-/* Paragraph */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-528 */
+
+
 p {
   font-family: var(--font-family);
   font-size: 18px;
@@ -329,8 +318,8 @@ p {
   p { font-size: 14px; }
 }
 
-/* Links */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=2-530 */
+
+
 a {
   font-family: var(--font-family);
   font-size: 16px;
@@ -344,8 +333,8 @@ a:hover {
   color: var(--color-primary-700);
 }
 
-/* Quote */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=344-3228 */
+
+
 blockquote {
   font-family: var(--font-family);
   font-size: 20px;
@@ -362,17 +351,13 @@ blockquote {
   blockquote { font-size: 16px; }
 }
 
-/* ============================================
-   NAVBAR - SCROLLED STATE
-   ============================================ */
+
 
 .navbar.scrolled .navbar-menu-container {
   box-shadow: 0px 4px 20px 0px rgba(255, 155, 74, 0.2);
 }
 
-/* ============================================
-   UTILITY CLASSES
-   ============================================ */
+
 
 .container {
   width: 100%;
@@ -393,7 +378,7 @@ blockquote {
   }
 }
 
-/* Screen Reader Only */
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -406,11 +391,9 @@ blockquote {
   border-width: 0;
 }
 
-/* ============================================
-   ANIMATIONS & KEYFRAMES
-   ============================================ */
 
-/* Liquid Gradient Animation */
+
+
 @keyframes liquid-gradient-animation {
   0%, 100% {
     background-position: 0% 0%, 0% 0%, 100% 0%, 50% 100%, 0% 100%, 100% 0%, 0% 100%;
@@ -426,7 +409,7 @@ blockquote {
   }
 }
 
-/* Fade In */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -436,7 +419,7 @@ blockquote {
   }
 }
 
-/* Slide Up */
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -448,11 +431,9 @@ blockquote {
   }
 }
 
-/* ============================================
-   CUSTOM CURSOR FOR INTERACTIVE ELEMENTS
-   ============================================ */
 
-/* White cursor on hover for all interactive elements */
+
+
 a:hover,
 button:hover,
 input[type="submit"]:hover,
@@ -461,7 +442,7 @@ input[type="button"]:hover,
 [role="button"]:hover,
 [onclick]:hover,
 .scroll-to-top-btn:hover,
-/* Cards */
+
 [class*="card"]:hover,
 .price-card-grey:hover,
 .price-card-orange:hover,
@@ -469,20 +450,20 @@ input[type="button"]:hover,
 .testimonial-card:hover,
 .solution1-card-left:hover,
 .solution1-card-right:hover,
-/* FAQ items */
+
 .faq-item:hover,
 .faq-question:hover,
-/* Navbar items */
+
 .navbar-link:hover,
 .navbar-cta:hover,
 .mobile-menu-link:hover,
-/* Footer links */
+
 footer a:hover,
 .footer-link:hover {
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
 
-/* White cursor for scroll-to-top button when it has white-arrow class (on dark backgrounds) */
+
 .scroll-to-top-btn.white-arrow {
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
@@ -495,11 +476,9 @@ footer a:hover,
   cursor: url('/src/img/icons/rato_pata_hover.svg') 16 14, pointer !important;
 }
 
-/* ============================================
-   DISABLE CUSTOM CURSORS ON MOBILE/TOUCH DEVICES
-   ============================================ */
 
-/* Remove custom cursor overhead on touch devices where it has no effect */
+
+
 @media (hover: none), (pointer: coarse) {
   *, *::before, *::after,
   html, body,
@@ -521,10 +500,7 @@ footer a:hover,
     cursor: auto !important;
   }
 }
-/* ============================================
-   ANIMATED GRADIENT BACKGROUND
-   Global background animation for sections
-   ============================================ */
+
 
 .animated-gradient {
     background: linear-gradient(90deg, #FFF8F2 0%, #ffe5d0 100%);
@@ -533,7 +509,7 @@ footer a:hover,
     position: relative;
 }
 
-/* White overlay to soften the gradient */
+
 .animated-gradient::before {
     content: '';
     position: absolute;
@@ -546,7 +522,7 @@ footer a:hover,
     z-index: 0;
 }
 
-/* Ensure content appears above the overlay */
+
 .animated-gradient > * {
     position: relative;
     z-index: 1;
@@ -564,24 +540,10 @@ footer a:hover,
     }
 }
 
-/*
-   NOTE: Sections with videos or custom gradients should NOT have
-   the "animated-gradient" class applied in the HTML:
-   - header-section (has liquid shader)
-   - problem1-section (has video backgrounds)
-   - solution1-section (has video backgrounds)
-   - solution4-section (has custom gradient/background)
-   - joinus1-section (has custom gradient/background)
-*/
-/* ============================================
-   PATA WEBSITE - SECTIONS STYLES
-   Version: 4.0 (PREVC)
-   ============================================ */
 
-/* ============================================
-   SECTION 1: HEADER (HOME) - 100vh
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2915
-   ============================================ */
+
+
+
 
 .header-section {
   position: relative;
@@ -598,7 +560,7 @@ footer a:hover,
   background: var(--bg-black);
 }
 
-/* Liquid Shader Canvas Styling */
+
 .liquid-shader-canvas {
   position: absolute;
   top: 0;
@@ -606,11 +568,11 @@ footer a:hover,
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Allow clicks to pass through to content */
+  pointer-events: none; 
   filter: blur(125px) contrast(1.80);
 }
 
-/* Fallback gradient for browsers without WebGL or with reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .liquid-shader-canvas {
     display: none;
@@ -668,7 +630,7 @@ footer a:hover,
   }
 }
 
-/* Black overlay on top of shader (20% opacity) */
+
 .header-section::after {
   content: '';
   position: absolute;
@@ -681,54 +643,52 @@ footer a:hover,
   pointer-events: none;
 }
 
-/* Performance optimization for mobile */
+
 @media (max-width: 768px) {
   .liquid-shader-canvas {
-    opacity: 0.8; /* Slightly reduce complexity visual impact */
+    opacity: 0.8; 
   }
 }
 
-/* ============================================
-   MOUSE HIGHLIGHT EFFECT - SPOTLIGHT INTERATIVO
-   ============================================ */
+
 
 .mouse-highlight {
-  /* Positioning */
+  
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Não bloqueia interações */
-  z-index: 2; /* Acima do liquid-gradient (z-index: 1), abaixo do conteúdo (z-index: 10+) */
+  pointer-events: none; 
+  z-index: 2; 
 
-  /* Initial state - invisível até o mouse entrar */
+  
   opacity: 0;
   transition: opacity 0.4s ease;
 
-  /* Gradiente radial usando CSS variables para performance */
+  
   background: radial-gradient(
     circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 180, 119, 0.25) 0%,   /* Centro brilhante laranja */
-    rgba(255, 148, 61, 0.15) 20%,   /* Transição 1 */
-    rgba(255, 148, 61, 0.08) 40%,   /* Transição 2 */
-    rgba(255, 148, 61, 0) 70%       /* Fade total */
+    rgba(255, 180, 119, 0.25) 0%,   
+    rgba(255, 148, 61, 0.15) 20%,   
+    rgba(255, 148, 61, 0.08) 40%,   
+    rgba(255, 148, 61, 0) 70%       
   );
 
-  /* Performance optimization */
+  
   will-change: transform;
-  transform: translateZ(0); /* Force GPU layer */
+  transform: translateZ(0); 
   backface-visibility: hidden;
 
-  /* Blend mode para integração suave com o gradiente líquido */
-  mix-blend-mode: screen; /* Torna o efeito aditivo (mais luz) */
+  
+  mix-blend-mode: screen; 
 }
 
-/* Estado ativo quando mouse está sobre a secção */
+
 .header-section:hover .mouse-highlight {
   opacity: 1;
 }
 
-/* Main Container */
+
 .header-container {
   align-self: stretch;
   display: flex;
@@ -740,7 +700,7 @@ footer a:hover,
   z-index: 2;
 }
 
-/* TÍTULO - SEMPRE NO TOPO */
+
 .header-content {
   align-self: stretch;
   display: flex;
@@ -791,7 +751,7 @@ footer a:hover,
   line-height: 44px;
 }
 
-/* VISUAL CONTAINER - ABAIXO DO TÍTULO */
+
 .header-visual-container {
   align-self: stretch;
   padding-left: 80px;
@@ -802,11 +762,9 @@ footer a:hover,
   gap: 12px;
 }
 
-/* ============================================
-   IMAGE PILLS - CAPSULAS ARREDONDADAS
-   ============================================ */
 
-/* Container das Pills */
+
+
 .visual-pills-left,
 .visual-pills-right {
   align-self: stretch;
@@ -824,7 +782,7 @@ footer a:hover,
   align-items: flex-start;
 }
 
-/* Base Pill Styling */
+
 .image-pill {
   width: 151px;
   position: relative;
@@ -853,10 +811,7 @@ footer a:hover,
   display: block;
 }
 
-/* ============================================
-   PILL 1 - ESQUERDA SUPERIOR (Cão pequeno)
-   Figma: 296-2581
-   ============================================ */
+
 .pill-left-top {
   height: 176px;
   max-height: 176px;
@@ -908,10 +863,7 @@ footer a:hover,
   z-index: 10;
 }
 
-/* ============================================
-   PILL 2 - ESQUERDA INFERIOR (Médico veterinário)
-   Figma: 296-2580
-   ============================================ */
+
 .pill-left-bottom {
   height: 302px;
   flex: 1 1 0;
@@ -962,10 +914,7 @@ footer a:hover,
   z-index: 10;
 }
 
-/* ============================================
-   PILL 3 - DIREITA SUPERIOR
-   Figma: 296-2592
-   ============================================ */
+
 .pill-right-top {
   height: 322px;
   flex: 1 1 0;
@@ -1020,10 +969,7 @@ footer a:hover,
   z-index: 10;
 }
 
-/* ============================================
-   PILL 4 - DIREITA INFERIOR
-   Figma: 296-2593
-   ============================================ */
+
 .pill-right-bottom {
   height: 156px;
   max-height: 156px;
@@ -1078,9 +1024,7 @@ footer a:hover,
   z-index: 10;
 }
 
-/* ============================================
-   MOCKUP CENTRAL
-   ============================================ */
+
 
 .mockup-center {
   width: 620px;
@@ -1104,11 +1048,9 @@ footer a:hover,
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4));
 }
 
-/* ============================================
-   HEADER REVEAL ANIMATIONS
-   ============================================ */
 
-/* Header content - fade in */
+
+
 .header-content {
   opacity: 0;
   transform: translateY(30px);
@@ -1120,7 +1062,7 @@ footer a:hover,
   transform: translateY(0);
 }
 
-/* Left pills - fade in (no transform to avoid parallax conflict) */
+
 .pill-left-top {
   opacity: 0;
   transition: opacity 0.6s ease 0.2s;
@@ -1139,7 +1081,7 @@ footer a:hover,
   opacity: 1;
 }
 
-/* Right pills - fade in (no transform to avoid parallax conflict) */
+
 .pill-right-top {
   opacity: 0;
   transition: opacity 0.6s ease 0.2s;
@@ -1158,7 +1100,7 @@ footer a:hover,
   opacity: 1;
 }
 
-/* Center mockup - fade in */
+
 .mockup-center {
   opacity: 0;
   transition: opacity 0.6s ease 0.4s;
@@ -1168,9 +1110,7 @@ footer a:hover,
   opacity: 1;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (769px - 1024px)
-   ============================================ */
+
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .header-visual-container {
@@ -1193,10 +1133,10 @@ footer a:hover,
     height: auto;
   }
 
-  /* Mouse Highlight - Raio reduzido em tablet */
+  
   .mouse-highlight {
     background: radial-gradient(
-      circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), /* Raio menor com CSS vars */
+      circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
       rgba(255, 180, 119, 0.20) 0%,
       rgba(255, 148, 61, 0.10) 20%,
       rgba(255, 148, 61, 0) 70%
@@ -1204,10 +1144,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4124
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .header-section {
@@ -1274,23 +1211,20 @@ footer a:hover,
     filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
   }
 
-  /* Mouse Highlight - Desativado em mobile */
+  
   .mouse-highlight {
     display: none;
   }
 }
 
-/* Mouse Highlight - Detecção de hover capability (remove em touch devices) */
+
 @media (hover: none) {
   .mouse-highlight {
     display: none;
   }
 }
 
-/* ============================================
-   DRAGGABLE ELEMENT - Interactive Bone
-   Reference: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2626&m=dev
-   ============================================ */
+
 
 .draggable-element {
   position: fixed;
@@ -1320,7 +1254,7 @@ footer a:hover,
   -webkit-user-drag: none;
 }
 
-/* Responsive - Mobile */
+
 @media (max-width: 768px) {
   .draggable-element {
     bottom: 20px;
@@ -1329,33 +1263,25 @@ footer a:hover,
     height: 124px;
   }
 }
-/* ============================================
-   PROBLEM 1 SECTION - ESPECIFICAÇÕES TÉCNICAS FIGMA
-   Node ID: 337:2936
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2936&m=dev
-   ============================================ */
 
-/* ============================================
-   DESIGN TOKENS
-   ============================================ */
+
+
 
 :root {
-  /* Neutrals */
+  
   --color-neutral-100: #3D3D3D;
   --color-neutral-200: #525252;
   --color-neutral-800: #D4D4D4;
   --color-neutral-950: #FEFEFF;
 
-  /* Accent */
+  
   --dark-orange: #FF943D;
 
-  /* Price Display */
+  
   --price-dark-grey: #272727;
 }
 
-/* ============================================
-   MAIN SECTION
-   ============================================ */
+
 
 .problem1-section {
   display: flex;
@@ -1367,9 +1293,7 @@ footer a:hover,
   min-height: 800px;
 }
 
-/* ============================================
-   LEFT PANEL - Traditional Vet (Grey/Dark)
-   ============================================ */
+
 
 .left-panel {
   flex: 1 0 0;
@@ -1388,7 +1312,7 @@ footer a:hover,
   min-width: 1px;
 }
 
-/* Background Container - Fills entire panel */
+
 .background-container {
   position: absolute;
   top: 0;
@@ -1411,7 +1335,7 @@ footer a:hover,
   z-index: 0;
 }
 
-/* Overlays - Left Panel */
+
 .overlay-saturation {
   position: absolute;
   top: 0;
@@ -1440,37 +1364,37 @@ footer a:hover,
   pointer-events: none;
 }
 
-/* Price Card Grey */
+
 .price-card-grey {
-  /* Container */
+  
   width: 100%;
   max-width: 400px;
   min-width: 280px;
   min-height: 142px;
 
-  /* Styling */
+  
   background: rgba(212, 212, 212, 0.9);
   border: 0.5px solid #D4D4D4;
   border-radius: 16px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
 
-  /* Layout */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 16px 24px;
 
-  /* Overflow */
+  
   overflow: hidden;
 
-  /* Position */
+  
   position: relative;
   flex-shrink: 0;
   z-index: 2;
   cursor: pointer;
 
-  /* Animation */
+  
   transform: translateX(-100%);
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -1483,7 +1407,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Card Content Container */
+
 .price-card-grey .card-content {
   display: flex;
   flex-direction: column;
@@ -1492,43 +1416,43 @@ footer a:hover,
   width: 100%;
 }
 
-/* Typography - Left Panel */
+
 .left-panel h3 {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 36px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #3D3D3D; /* color-neutral/100 */
+  
+  color: #3D3D3D; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
 
-  /* Display */
+  
   white-space: pre-wrap;
   margin: 0;
 }
 
 .left-panel .price {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 52px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 38px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #272727; /* Darker grey for emphasis */
+  
+  color: #272727; 
 
-  /* Layout */
+  
   text-align: center;
   width: 230px;
 
-  /* Display */
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1543,46 +1467,44 @@ footer a:hover,
 }
 
 .left-panel .source p {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 18px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 20px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #525252; /* color-neutral/200 */
+  
+  color: #525252; 
 
-  /* Layout */
+  
   text-align: center;
   margin: 0;
 }
 
 .left-panel .source a {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 14px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 16px;
   letter-spacing: 0;
 
-  /* Color */
+  
   color: #525252;
 
-  /* Decoration - Thin underline */
+  
   text-decoration: underline;
   text-decoration-thickness: 0.5px;
   text-decoration-skip-ink: none;
 
-  /* Display */
+  
   display: block;
   cursor: pointer;
   text-align: center;
 }
 
-/* ============================================
-   RIGHT PANEL - PATA Solution (Orange/Warm)
-   ============================================ */
+
 
 .right-panel {
   flex: 1 0 0;
@@ -1601,7 +1523,7 @@ footer a:hover,
   min-width: 1px;
 }
 
-/* Background Overlay - Orange */
+
 .right-panel .overlay-orange {
   position: absolute;
   top: 0;
@@ -1619,15 +1541,15 @@ footer a:hover,
   z-index: 1;
 }
 
-/* Price Card Orange */
+
 .price-card-orange {
-  /* Container */
+  
   width: 100%;
   max-width: 443px;
   min-width: 440px;
   min-height: 142px;
 
-  /* Complex Background Gradient */
+  
   background-image:
     linear-gradient(180deg,
       rgba(255, 180, 119, 0.2) 0%,
@@ -1636,30 +1558,30 @@ footer a:hover,
       rgba(255, 210, 173, 0.9) 0%,
       rgba(255, 210, 173, 0.9) 100%);
 
-  /* Border */
+  
   border-top: 1px solid rgba(254, 254, 255, 0.5);
   border-radius: 16px;
 
-  /* Shadow */
+  
   box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
 
-  /* Layout */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   padding: 22px 24px;
 
-  /* Overflow */
+  
   overflow: hidden;
 
-  /* Position */
+  
   position: relative;
   flex-shrink: 0;
   z-index: 2;
   cursor: pointer;
 
-  /* Animation */
+  
   transform: translateX(100%);
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -1672,7 +1594,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Inner Shadows (Button-Solid/Active Effect) */
+
 .price-card-orange .inner-shadows {
   position: absolute;
   inset: 0;
@@ -1684,7 +1606,7 @@ footer a:hover,
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
 }
 
-/* Card Content Container */
+
 .price-card-orange .card-content {
   display: flex;
   flex-direction: column;
@@ -1693,101 +1615,101 @@ footer a:hover,
   width: 100%;
 }
 
-/* Typography - Right Panel */
+
 .right-panel h3 {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 36px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #3D3D3D; /* color-neutral/100 */
+  
+  color: #3D3D3D; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
   margin: 0;
 }
 
 .right-panel .price {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 52px;
-  font-weight: 700; /* Bold */
+  font-weight: 700; 
   line-height: 38px;
   letter-spacing: 0;
 
-  /* Color */
+  
   color: #3D3D3D;
 
-  /* Layout */
+  
   text-align: center;
   width: 230px;
 }
 
 .right-panel .benefits {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 18px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 20px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #525252; /* color-neutral/200 */
+  
+  color: #525252; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
   white-space: pre-wrap;
   margin: 0;
 }
 
-/* Info Box (White Card Inside Orange Card) */
+
 .info-box {
-  /* Container */
+  
   width: 100%;
   max-width: 400px;
   min-width: 280px;
 
-  /* Styling */
-  background: #FEFEFF; /* color-neutral/950 */
+  
+  background: #FEFEFF; 
   border: 0.5px solid #D4D4D4;
   border-radius: 8px;
 
-  /* Layout */
+  
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
   padding: 16px 12px;
 
-  /* Overflow */
+  
   overflow: hidden;
 
-  /* Position */
+  
   position: relative;
   flex-shrink: 0;
 }
 
 .info-box h4 {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 24px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 28px;
   letter-spacing: 0;
 
-  /* Color */
+  
   color: var(--dark-orange, #FF943D);
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
 
-  /* Display */
+  
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1795,28 +1717,26 @@ footer a:hover,
 }
 
 .info-box p {
-  /* Font */
+  
   font-family: 'Mona Sans', sans-serif;
   font-size: 14px;
-  font-weight: 600; /* SemiBold */
+  font-weight: 600; 
   line-height: 16px;
   letter-spacing: 0;
 
-  /* Color */
-  color: #525252; /* color-neutral/200 */
+  
+  color: #525252; 
 
-  /* Layout */
+  
   text-align: center;
   width: 100%;
   white-space: pre-wrap;
   margin: 0;
 }
 
-/* ============================================
-   RESPONSIVE BEHAVIOR
-   ============================================ */
 
-/* Desktop: Side-by-side (default - already defined above) */
+
+
 @media (min-width: 768px) {
   .problem1-section {
     flex-direction: row;
@@ -1828,7 +1748,7 @@ footer a:hover,
   }
 }
 
-/* Tablet Adjustments */
+
 @media (max-width: 1024px) {
   .left-panel h3,
   .right-panel h3 {
@@ -1847,11 +1767,11 @@ footer a:hover,
   }
 }
 
-/* Mobile: Stacked */
+
 @media (max-width: 767px) {
   .problem1-section {
     flex-direction: column;
-    min-height: 120vh; /* 60vh x 2 panels */
+    min-height: 120vh; 
   }
 
   .left-panel,
@@ -1859,22 +1779,22 @@ footer a:hover,
     flex: none;
     width: 100%;
     min-height: 60vh;
-    padding: 8px; /* Reduced padding for mobile */
+    padding: 8px; 
   }
 
-  /* Adjust card widths for mobile */
+  
   .price-card-grey,
   .price-card-orange {
     max-width: 90%;
-    min-width: 180px; /* Reduced for smaller screens */
+    min-width: 180px; 
   }
 
-  /* Allow orange card to be flexible on mobile */
+  
   .price-card-orange {
-    min-width: 180px; /* Override 440px desktop min-width */
+    min-width: 180px; 
   }
 
-  /* Typography Responsive */
+  
   .left-panel h3,
   .right-panel h3 {
     font-size: 24px;
@@ -1894,7 +1814,7 @@ footer a:hover,
   }
 
   .info-box {
-    min-width: unset; /* Remove min-width constraint on mobile */
+    min-width: unset; 
   }
 
   .info-box h4 {
@@ -1908,21 +1828,13 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   Z-INDEX LAYERS
-   ============================================ */
 
-/* Ensure proper layering:
-   z-index: 0 → Video background
-   z-index: 1 → Overlays
-   z-index: 2 → Price cards
-*/
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for grey card */
+
+
+
+
 @keyframes circling-halo-grey {
     0% {
         box-shadow:
@@ -1956,7 +1868,7 @@ footer a:hover,
     }
 }
 
-/* Circling halo animation for orange card */
+
 @keyframes circling-halo-orange {
     0% {
         box-shadow:
@@ -2009,10 +1921,10 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================= */
-/*              Problem2 Section                 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-2618&m=dev */
-/* ============================================= */
+
+
+
+
 
 #problem2 {
     background-color: #FFF8F2;
@@ -2035,7 +1947,7 @@ footer a:hover,
     overflow: hidden;
 }
 
-/* Left Column: Content */
+
 .problem2-content {
     width: 570px;
     max-width: 100%;
@@ -2045,7 +1957,7 @@ footer a:hover,
     gap: 32px;
     flex: 1 0 0;
 
-    /* Animation - Reveal from left */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -2098,7 +2010,7 @@ footer a:hover,
     overflow-wrap: break-word;
 }
 
-/* Cost Display - Figma Design */
+
 .problem2-cost {
     display: flex;
     flex-direction: column;
@@ -2124,9 +2036,9 @@ footer a:hover,
     background: var(--color-complementary-800, #FFF4E6);
     padding: 8px 12px;
     border-radius: 8px;
-    /* Drop shadow */
+    
     box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.25);
-    /* Inset shadows */
+    
     position: relative;
     display: flex;
     justify-content: center;
@@ -2159,7 +2071,7 @@ footer a:hover,
     padding: 0;
 }
 
-/* Right Column: Image */
+
 .problem2-animation {
     width: 570px;
     height: 481px;
@@ -2168,7 +2080,7 @@ footer a:hover,
     justify-content: center;
     align-items: center;
 
-    /* Animation - Reveal from right */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -2189,7 +2101,7 @@ footer a:hover,
     aspect-ratio: 570 / 481;
 }
 
-/* Responsive Design */
+
 @media (max-width: 1200px) {
     #problem2 {
         height: auto;
@@ -2220,7 +2132,7 @@ footer a:hover,
         aspect-ratio: 570 / 481;
     }
 
-    /* Disable horizontal animations on tablet to prevent overflow */
+    
     .problem2-content {
         transform: translateY(50%);
     }
@@ -2292,7 +2204,7 @@ footer a:hover,
         aspect-ratio: 570 / 481;
     }
 
-    /* Disable horizontal animations on mobile to prevent overflow */
+    
     .problem2-content {
         transform: translateY(50%);
     }
@@ -2327,11 +2239,9 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation */
+
+
 @keyframes circling-halo {
     0% {
         box-shadow:
@@ -2384,10 +2294,10 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================= */
-/*              Problem3 Section                 */
-/* Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-2633&m=dev */
-/* ============================================= */
+
+
+
+
 
 #problem3 {
     background-color: #FFF8F2;
@@ -2411,7 +2321,7 @@ footer a:hover,
     width: 100%;
 }
 
-/* Left Column: Header Content */
+
 .problem3-header {
     display: flex;
     flex-direction: column;
@@ -2423,7 +2333,7 @@ footer a:hover,
     z-index: 10;
     position: relative;
 
-    /* Animation - Reveal from left */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -2436,7 +2346,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* Cat Icon + Title Wrapper */
+
 .problem3-title-wrapper {
     display: flex;
     gap: 20px;
@@ -2486,7 +2396,7 @@ footer a:hover,
     line-height: 36px;
 }
 
-/* Subtitle & Description */
+
 .problem3-text-group {
     display: flex;
     flex-direction: column;
@@ -2518,7 +2428,7 @@ footer a:hover,
     overflow-wrap: break-word;
 }
 
-/* Right Column: Statistics Cards */
+
 .problem3-stats {
     display: flex;
     flex-wrap: wrap;
@@ -2530,7 +2440,7 @@ footer a:hover,
     min-width: 0;
     overflow: visible;
 
-    /* Animation - Reveal from right */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -2543,7 +2453,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* Statistics Card */
+
 .problem3-stat-card {
     background: var(--color-neutral-950, #FEFEFF);
     border: 0.5px solid var(--color-neutral-800, #D4D4D4);
@@ -2556,7 +2466,7 @@ footer a:hover,
     flex: 1 0 0;
     max-width: 300px;
     min-width: 210px;
-    /* Drop shadow */
+    
     box-shadow: 0px 4px 8px 0px rgba(255, 180, 119, 0.15);
     position: relative;
     z-index: 1;
@@ -2580,7 +2490,7 @@ footer a:hover,
     box-shadow: 0px 8px 16px rgba(255, 180, 119, 0.25);
 }
 
-/* Icon */
+
 .problem3-stat-icon {
     width: 54px;
     height: 54px;
@@ -2605,7 +2515,7 @@ footer a:hover,
     flex-shrink: 0;
 }
 
-/* Value Box */
+
 .problem3-stat-value-box {
     background: var(--color-complementary-800, #FFF4E6);
     padding: 4px 12px;
@@ -2636,7 +2546,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* Info */
+
 .problem3-stat-info {
     display: flex;
     flex-direction: column;
@@ -2675,7 +2585,7 @@ footer a:hover,
     opacity: 0.7;
 }
 
-/* Footer Text (Mobile/Tablet Only) */
+
 .problem3-stats-footer {
     display: none;
     color: var(--color-neutral-200, #525252);
@@ -2691,9 +2601,9 @@ footer a:hover,
     overflow-wrap: break-word;
 }
 
-/* ===== HOVER & CLICK INTERACTIONS ===== */
 
-/* Circling halo animation for problem3 cards */
+
+
 @keyframes circling-halo-orange {
     0% {
         box-shadow:
@@ -2727,22 +2637,22 @@ footer a:hover,
     }
 }
 
-/* Hover effect - lift and glow */
+
 .problem3-stat-card:hover {
     transform: scale(1.02) translateY(-10px);
     animation: circling-halo-orange 2s ease-in-out infinite;
 }
 
-/* Active/click effect - press down */
+
 .problem3-stat-card:active {
     transform: scale(0.98) translateY(5px);
     animation: none;
     box-shadow: 0px 2px 4px 0px rgba(255, 180, 119, 0.2);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
 
-/* Tablets (768px - 1024px) */
+
+
 @media (max-width: 1024px) {
     #problem3 {
         padding: 40px 48px;
@@ -2757,7 +2667,7 @@ footer a:hover,
         align-items: center;
     }
 
-    /* Disable horizontal animations on tablet to prevent overflow */
+    
     .problem3-header {
         transform: none;
         align-items: center !important;
@@ -2777,7 +2687,7 @@ footer a:hover,
         opacity: 1;
     }
 
-    /* Cat icon + title - center everything */
+    
     .problem3-title-wrapper {
         flex-direction: column;
         align-items: center !important;
@@ -2840,7 +2750,7 @@ footer a:hover,
         text-align: center;
     }
 
-    /* Subtitle section */
+    
     .problem3-text-group {
         padding-left: 0 !important;
         padding-right: 0 !important;
@@ -2870,7 +2780,7 @@ footer a:hover,
         display: none;
     }
 
-    /* Override stats container animation to prevent horizontal overflow */
+    
     .problem3-stats {
         transform: none;
         flex-direction: row;
@@ -2899,12 +2809,12 @@ footer a:hover,
         position: static;
     }
 
-    /* Ensure third card stays in the grid */
+    
     .problem3-stat-card:nth-child(3) {
         flex: 0 1 calc(33.33% - 12px);
     }
 
-    /* Override individual card animations to prevent overflow on tablet */
+    
     .problem3-stat-card:nth-child(1),
     .problem3-stat-card:nth-child(2),
     .problem3-stat-card:nth-child(3) {
@@ -2917,7 +2827,7 @@ footer a:hover,
         transform: none !important;
     }
 
-    /* Show footer text on tablet */
+    
     .problem3-stats-footer {
         display: block;
         font-size: 14px;
@@ -2930,7 +2840,7 @@ footer a:hover,
     }
 }
 
-/* Mobile (< 768px) */
+
 @media (max-width: 768px) {
     #problem3 {
         padding: 40px 15px;
@@ -3102,7 +3012,7 @@ footer a:hover,
         width: 100%;
     }
 
-    /* Override individual card animations to prevent overflow */
+    
     .problem3-stat-card:nth-child(1),
     .problem3-stat-card:nth-child(2),
     .problem3-stat-card:nth-child(3) {
@@ -3131,7 +3041,7 @@ footer a:hover,
     }
 }
 
-/* Mobile Small (< 480px) */
+
 @media (max-width: 480px) {
     #problem3 {
         padding: 40px 15px;
@@ -3226,10 +3136,7 @@ footer a:hover,
         min-width: unset;
     }
 }
-/* ============================================
-   SECÇÃO 5: PROBLEM4 - Validation Section (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2998&m=dev
-   ============================================ */
+
 
 .problem4-section {
   position: relative;
@@ -3244,7 +3151,7 @@ footer a:hover,
   overflow: hidden;
 }
 
-/* Background Video with Overlays */
+
 .problem4-background {
   position: absolute;
   inset: 0;
@@ -3274,7 +3181,7 @@ footer a:hover,
   mix-blend-mode: saturation;
 }
 
-/* Main Container */
+
 .problem4-container {
   width: 100%;
   max-width: 1440px;
@@ -3286,7 +3193,7 @@ footer a:hover,
   z-index: 1;
 }
 
-/* Header */
+
 .problem4-header {
   display: flex;
   flex-direction: column;
@@ -3316,7 +3223,7 @@ footer a:hover,
   margin: 0;
 }
 
-/* Validation Statistics Grid */
+
 .validation-stats {
   display: flex;
   flex-wrap: wrap;
@@ -3342,13 +3249,13 @@ footer a:hover,
   transition: transform 0.3s ease, background 0.3s ease;
   cursor: pointer;
 
-  /* Default animation state */
+  
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, background 0.3s ease, box-shadow 0.3s ease;
   pointer-events: none;
 }
 
-/* First stat - Reveal from left */
+
 .validation-stat:nth-child(1) {
   transform: translateX(-100%);
 }
@@ -3359,7 +3266,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Second stat - Reveal from bottom */
+
 .validation-stat:nth-child(2) {
   transform: translateY(100%);
 }
@@ -3370,7 +3277,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Third stat - Reveal from right */
+
 .validation-stat:nth-child(3) {
   transform: translateX(100%);
 }
@@ -3381,7 +3288,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Circling halo animation */
+
 @keyframes circling-halo-dark {
     0% {
         box-shadow:
@@ -3446,7 +3353,7 @@ footer a:hover,
   white-space: pre-wrap;
 }
 
-/* Footer */
+
 .problem4-footer {
   display: flex;
   flex-direction: column;
@@ -3476,9 +3383,7 @@ footer a:hover,
   opacity: 0.8;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 @media (max-width: 1024px) {
   .problem4-container {
     padding: 0 40px;
@@ -3524,9 +3429,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 @media (max-width: 768px) {
   .problem4-section {
     height: auto;
@@ -3581,11 +3484,7 @@ footer a:hover,
     line-height: 18px;
   }
 }
-/* ============================================
-   PROBLEM5 SECTION - Testimonials
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3017&m=dev
-   Height: 85vh
-   ============================================ */
+
 
 .problem5-section {
     position: relative;
@@ -3600,9 +3499,7 @@ footer a:hover,
     overflow: hidden;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+
 
 .problem5-header {
     width: 100%;
@@ -3622,9 +3519,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ============================================
-   TESTIMONIALS CONTAINER
-   ============================================ */
+
 
 .problem5-content {
     width: 100%;
@@ -3635,9 +3530,7 @@ footer a:hover,
     gap: 24px;
 }
 
-/* ============================================
-   TESTIMONIAL CARDS GRID
-   ============================================ */
+
 
 .testimonials-grid {
     display: flex;
@@ -3658,13 +3551,13 @@ footer a:hover,
     max-width: 340px;
     min-width: 250px;
 
-    /* Default animation state */
+    
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
     pointer-events: none;
 }
 
-/* First testimonial - Reveal from left */
+
 .testimonial-item:nth-child(1) {
     transform: translateX(-100%);
 }
@@ -3675,7 +3568,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* Second testimonial - Reveal from bottom */
+
 .testimonial-item:nth-child(2) {
     transform: translateY(100%);
 }
@@ -3686,7 +3579,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* Third testimonial - Reveal from right */
+
 .testimonial-item:nth-child(3) {
     transform: translateX(100%);
 }
@@ -3697,9 +3590,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* ============================================
-   TESTIMONIAL CARD
-   ============================================ */
+
 
 .testimonial-card {
     position: relative;
@@ -3720,11 +3611,9 @@ footer a:hover,
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Inner shadows overlay - Removed as they're now in the circling halo animation */
 
-/* ============================================
-   QUOTE CONTENT
-   ============================================ */
+
+
 
 .testimonial-quote-wrapper {
     display: flex;
@@ -3768,9 +3657,7 @@ footer a:hover,
     color: #525252;
 }
 
-/* ============================================
-   AUTHOR INFO
-   ============================================ */
+
 
 .testimonial-author {
     display: flex;
@@ -3798,9 +3685,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ============================================
-   PET ICONS
-   ============================================ */
+
 
 .pet-icon {
     width: 70px;
@@ -3835,9 +3720,7 @@ footer a:hover,
     display: block;
 }
 
-/* ============================================
-   FOOTER CTA
-   ============================================ */
+
 
 .problem5-footer {
     display: flex;
@@ -3884,9 +3767,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ============================================
-   RESPONSIVE - MEDIUM SCREENS (max-width: 900px)
-   ============================================ */
+
 
 @media (max-width: 900px) {
     .testimonial-item {
@@ -3895,9 +3776,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (max-width: 1024px)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .problem5-section {
@@ -3935,9 +3814,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .problem5-section {
@@ -4008,9 +3885,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - SMALL MOBILE (max-width: 480px)
-   ============================================ */
+
 
 @media (max-width: 480px) {
     .problem5-section {
@@ -4057,11 +3932,9 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation */
+
+
 @keyframes circling-halo-testimonial {
     0% {
         box-shadow:
@@ -4114,10 +3987,7 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================
-   SECTION 7: SOLUTION1 - Faça as contas (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3081&m=dev
-   ============================================ */
+
 
 .solution1-section {
     position: relative;
@@ -4132,7 +4002,7 @@ footer a:hover,
     overflow: hidden;
 }
 
-/* Main Title */
+
 .solution1-title {
     font-family: 'Mona Sans', sans-serif;
     font-size: 52px;
@@ -4144,7 +4014,7 @@ footer a:hover,
     z-index: 10;
 }
 
-/* Cards Container */
+
 .solution1-cards-container {
     display: flex;
     width: 100%;
@@ -4154,9 +4024,7 @@ footer a:hover,
     justify-content: stretch;
 }
 
-/* ============================================
-   LEFT CARD - Sem PATA (Grey)
-   ============================================ */
+
 
 .solution1-card-left {
     position: relative;
@@ -4173,7 +4041,7 @@ footer a:hover,
     border-radius: 0;
 }
 
-/* Left Card Background Video - Covers entire panel */
+
 .solution1-card-left .card-background-container {
     position: absolute;
     inset: 0;
@@ -4208,7 +4076,7 @@ footer a:hover,
     border-radius: 0;
 }
 
-/* Left Card Content Box - Centered on top of video */
+
 .solution1-card-left .card-content {
     position: relative;
     z-index: 2;
@@ -4233,7 +4101,7 @@ footer a:hover,
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     cursor: pointer;
 
-    /* Animation */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -4246,7 +4114,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* Pet Icons Container */
+
 .solution1-icons {
     display: flex;
     gap: 16px;
@@ -4259,7 +4127,7 @@ footer a:hover,
     flex-shrink: 0;
 }
 
-/* Card Title and Price */
+
 .solution1-card-info {
     display: flex;
     flex-direction: column;
@@ -4286,7 +4154,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* Card Source */
+
 .solution1-card-source {
     font-family: 'Mona Sans', sans-serif;
     font-size: 18px;
@@ -4312,9 +4180,7 @@ footer a:hover,
     color: #3D3D3D;
 }
 
-/* ============================================
-   RIGHT CARD - Com PATA (Orange)
-   ============================================ */
+
 
 .solution1-card-right {
     position: relative;
@@ -4329,7 +4195,7 @@ footer a:hover,
     border-radius: 0;
 }
 
-/* Right Card Background Video - Covers entire panel */
+
 .solution1-card-right .card-background-container {
     position: absolute;
     inset: 0;
@@ -4362,7 +4228,7 @@ footer a:hover,
     border-radius: 0;
 }
 
-/* Right Card Content Box - Centered on top of video */
+
 .solution1-card-right .card-content {
     position: relative;
     z-index: 2;
@@ -4381,7 +4247,7 @@ footer a:hover,
     overflow: hidden;
     cursor: pointer;
 
-    /* Animation */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
@@ -4394,7 +4260,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* Inner Backgrounds */
+
 .solution1-card-right .card-content::before {
     content: '';
     position: absolute;
@@ -4418,7 +4284,7 @@ footer a:hover,
     pointer-events: none;
 }
 
-/* Right Card Icons (with hearts) */
+
 .solution1-card-right .solution1-icons {
     position: relative;
     z-index: 3;
@@ -4430,7 +4296,7 @@ footer a:hover,
     height: 44px;
 }
 
-/* Right Card Two-Column Layout */
+
 .solution1-card-columns {
     position: relative;
     z-index: 3;
@@ -4470,7 +4336,7 @@ footer a:hover,
     text-align: center;
 }
 
-/* Subscription Details */
+
 .solution1-subscription-details {
     font-family: 'Mona Sans', sans-serif;
     font-size: 14px;
@@ -4481,7 +4347,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* Card Disclaimer */
+
 .solution1-card-disclaimer {
     position: relative;
     z-index: 3;
@@ -4501,11 +4367,9 @@ footer a:hover,
     font-style: italic;
 }
 
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
 
-/* Tablet */
+
+
 @media (max-width: 1024px) {
     .solution1-section {
         padding: 32px 0 0 0;
@@ -4556,7 +4420,7 @@ footer a:hover,
     }
 }
 
-/* Mobile */
+
 @media (max-width: 768px) {
     .solution1-section {
         padding: 20px 0 0 0;
@@ -4692,7 +4556,7 @@ footer a:hover,
     }
 }
 
-/* Small Mobile - Extra responsive adjustments */
+
 @media (max-width: 480px) {
     .solution1-card-right {
         padding: 32px 12px;
@@ -4730,11 +4594,9 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for grey card */
+
+
 @keyframes circling-halo-solution1-grey {
     0% {
         box-shadow:
@@ -4768,7 +4630,7 @@ footer a:hover,
     }
 }
 
-/* Circling halo animation for orange card */
+
 @keyframes circling-halo-solution1-orange {
     0% {
         box-shadow:
@@ -4821,10 +4683,7 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================
-   SECTION 8: SOLUTION2 - Compare as suas opções (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3108&m=dev
-   ============================================ */
+
 
 .solution2-section {
     position: relative;
@@ -4839,7 +4698,7 @@ footer a:hover,
     overflow-x: hidden;
 }
 
-/* ===== HEADER ===== */
+
 
 .solution2-header {
     display: flex;
@@ -4876,7 +4735,7 @@ footer a:hover,
     word-wrap: break-word;
 }
 
-/* ===== TABLE CONTAINER ===== */
+
 
 .solution2-table-container {
     display: flex;
@@ -4888,7 +4747,7 @@ footer a:hover,
     box-sizing: border-box;
 }
 
-/* ===== COMPARISON TABLE ===== */
+
 
 .comparison-table {
     display: flex;
@@ -4900,7 +4759,7 @@ footer a:hover,
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.16);
     box-sizing: border-box;
 
-    /* Animation - Reveal from left */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -4913,7 +4772,7 @@ footer a:hover,
     pointer-events: auto;
 }
 
-/* ===== TABLE ROWS ===== */
+
 
 .table-row {
     display: flex;
@@ -4924,10 +4783,10 @@ footer a:hover,
 }
 
 .table-row-last {
-    /* Last row might need specific styling */
+    
 }
 
-/* ===== TABLE CELLS ===== */
+
 
 .table-cell {
     flex: 1 1 0;
@@ -4944,12 +4803,12 @@ footer a:hover,
     overflow: hidden;
 }
 
-/* Remove border from last row cells */
+
 .table-row-last .table-cell {
     border-bottom: 1px solid #FEFEFF;
 }
 
-/* ===== HEADER CELLS ===== */
+
 
 .table-header .table-cell {
     background: #272727;
@@ -5023,7 +4882,7 @@ footer a:hover,
     white-space: normal;
 }
 
-/* ===== CRITERIA CELLS ===== */
+
 
 .criteria-cell {
     background: #FEFEFF;
@@ -5060,7 +4919,7 @@ footer a:hover,
     white-space: normal;
 }
 
-/* ===== PATA CELLS (ORANGE) ===== */
+
 
 .pata-cell {
     background: linear-gradient(180deg, #FFB477 0%, #FFC392 100%);
@@ -5087,7 +4946,7 @@ footer a:hover,
     border-bottom: 0 !important;
 }
 
-/* ===== REGULAR CELLS (WHITE) ===== */
+
 
 .regular-cell {
     background: #FEFEFF;
@@ -5109,7 +4968,7 @@ footer a:hover,
     white-space: normal;
 }
 
-/* ===== SMALL TEXT (Last row) ===== */
+
 
 .small-text {
     font-size: 14px !important;
@@ -5118,7 +4977,7 @@ footer a:hover,
     max-width: 100% !important;
 }
 
-/* ===== FOOTER DISCLAIMER ===== */
+
 
 .solution2-footer {
     display: flex;
@@ -5155,9 +5014,7 @@ footer a:hover,
     word-wrap: break-word;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (max-width: 1024px)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .solution2-section {
@@ -5224,9 +5081,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .solution2-section {
@@ -5328,9 +5183,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - SMALL MOBILE (max-width: 480px)
-   ============================================ */
+
 
 @media (max-width: 480px) {
     .solution2-section {
@@ -5420,9 +5273,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - EXTRA SMALL MOBILE (max-width: 375px)
-   ============================================ */
+
 
 @media (max-width: 375px) {
     .solution2-section {
@@ -5498,10 +5349,7 @@ footer a:hover,
         line-height: 10px !important;
     }
 }
-/* ============================================
-   SECTION 9: SOLUTION3 - Só a PATA faz isto (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3205&m=dev
-   ============================================ */
+
 
 .solution3-section {
     position: relative;
@@ -5515,7 +5363,7 @@ footer a:hover,
     overflow: hidden;
 }
 
-/* ===== BACKGROUND VIDEO + OVERLAY ===== */
+
 
 .solution3-background {
     position: absolute;
@@ -5549,7 +5397,7 @@ footer a:hover,
     z-index: 1;
 }
 
-/* ===== MAIN CONTAINER ===== */
+
 
 .solution3-container {
     position: relative;
@@ -5563,7 +5411,7 @@ footer a:hover,
     max-width: 1280px;
 }
 
-/* ===== TITLE ===== */
+
 
 .solution3-title {
     font-family: 'Mona Sans', sans-serif;
@@ -5575,7 +5423,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ===== CARDS CONTAINER ===== */
+
 
 .solution3-cards-container {
     display: flex;
@@ -5586,7 +5434,7 @@ footer a:hover,
     justify-content: center;
 }
 
-/* ===== CARD BASE ===== */
+
 
 .solution3-card {
     flex: 1 1 300px;
@@ -5603,23 +5451,23 @@ footer a:hover,
     overflow: hidden;
     cursor: pointer;
 
-    /* Animation */
+    
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
-/* First card - slides from left */
+
 .solution3-card:nth-child(1) {
     transform: translateX(-100%);
 }
 
-/* Second card - slides from right */
+
 .solution3-card:nth-child(2) {
     transform: translateX(100%);
 }
 
-/* Visible state */
+
 .solution3-card.visible {
     transform: translateX(0);
     opacity: 1;
@@ -5635,7 +5483,7 @@ footer a:hover,
     height: 100%;
 }
 
-/* ===== CARD 1 ELEMENTS ===== */
+
 
 .solution3-card-title {
     font-family: 'Mona Sans', sans-serif;
@@ -5738,7 +5586,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ===== CARD 2 ELEMENTS ===== */
+
 
 .solution3-card-title-alt {
     font-family: 'Mona Sans', sans-serif;
@@ -5815,9 +5663,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (max-width: 1024px)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .solution3-section {
@@ -5864,9 +5710,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .solution3-section {
@@ -5943,9 +5787,7 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   RESPONSIVE - SMALL MOBILE (max-width: 480px)
-   ============================================ */
+
 
 @media (max-width: 480px) {
     .solution3-section {
@@ -6016,11 +5858,9 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation */
+
+
 @keyframes circling-halo-solution3 {
     0% {
         box-shadow:
@@ -6063,14 +5903,9 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================
-   SECTION 10: SOLUTION4 - E se existisse uma forma diferente?
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3230&m=dev
-   ============================================ */
 
-/* ============================================
-   MAIN SECTION
-   ============================================ */
+
+
 
 .solution4-section {
     position: relative;
@@ -6084,9 +5919,7 @@ footer a:hover,
     overflow: hidden;
 }
 
-/* ============================================
-   CONTAINER
-   ============================================ */
+
 
 .solution4-container {
     display: flex;
@@ -6098,9 +5931,7 @@ footer a:hover,
     margin: 0 auto;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+
 
 .solution4-header {
     display: flex;
@@ -6139,9 +5970,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ============================================
-   CARDS CONTAINER
-   ============================================ */
+
 
 .solution4-cards {
     display: flex;
@@ -6150,9 +5979,7 @@ footer a:hover,
     width: 100%;
 }
 
-/* ============================================
-   MAIN CARD - Clínica PATA + Small Cards
-   ============================================ */
+
 
 .solution4-main-card {
     display: flex;
@@ -6176,23 +6003,21 @@ footer a:hover,
     overflow: visible;
     cursor: pointer;
 
-    /* Animation */
+    
     transform: translateX(100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
-/* Visible state */
+
 .solution4-main-card.visible {
     transform: translateX(0);
     opacity: 1;
     pointer-events: auto;
 }
 
-/* ============================================
-   CLÍNICA PATA - Left Side
-   ============================================ */
+
 
 .clinica-pata-side {
     display: flex;
@@ -6288,9 +6113,7 @@ footer a:hover,
     z-index: 0;
 }
 
-/* ============================================
-   SMALL CARDS GRID - Right Side
-   ============================================ */
+
 
 .small-cards-grid {
     display: flex;
@@ -6370,9 +6193,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ============================================
-   BOTTOM CARDS CONTAINER
-   ============================================ */
+
 
 .solution4-bottom-cards {
     display: flex;
@@ -6403,23 +6224,23 @@ footer a:hover,
     text-align: center;
     cursor: pointer;
 
-    /* Animation */
+    
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
-/* First bottom card - slides from left */
+
 .bottom-card:nth-child(1) {
     transform: translateX(-100%);
 }
 
-/* Second bottom card - slides from right */
+
 .bottom-card:nth-child(2) {
     transform: translateX(100%);
 }
 
-/* Visible state */
+
 .bottom-card.visible {
     transform: translateX(0);
     opacity: 1;
@@ -6493,7 +6314,7 @@ footer a:hover,
     z-index: 1;
 }
 
-/* First bottom card - Receita Digital - Position image lower for text readability */
+
 .solution4-bottom-cards .bottom-card:first-child .bottom-card-image {
     top: 60px;
     bottom: auto;
@@ -6501,14 +6322,12 @@ footer a:hover,
     max-height: calc(100% - 60px);
 }
 
-/* Second bottom card - Loja PATA */
+
 .solution4-bottom-cards .bottom-card:last-child .bottom-card-image {
-    /* Keep default positioning at bottom */
+    
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .solution4-section {
@@ -6547,7 +6366,7 @@ footer a:hover,
         overflow: visible;
     }
 
-    /* Hide image in Clínica PATA on tablet */
+    
     .clinica-image {
         display: none !important;
     }
@@ -6594,15 +6413,13 @@ footer a:hover,
         max-width: 600px;
     }
 
-    /* Hide images in both bottom cards on tablet */
+    
     .bottom-card-image {
         display: none;
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .solution4-section {
@@ -6659,7 +6476,7 @@ footer a:hover,
         flex: none;
     }
 
-    /* Hide image in Clínica PATA on mobile */
+    
     .clinica-image {
         display: none !important;
         visibility: hidden;
@@ -6755,17 +6572,15 @@ footer a:hover,
         line-height: 14px;
     }
 
-    /* Hide images in both bottom cards on mobile */
+    
     .bottom-card-image {
         display: none;
     }
 }
 
-/* ============================================
-   ANIMATIONS & INTERACTIONS
-   ============================================ */
 
-/* Circling halo glow animation - smaller, sharper, more opaque */
+
+
 @keyframes circling-halo {
     0% {
         box-shadow:
@@ -6833,10 +6648,7 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================
-   SECTION 11: JOINUS1 - Os primeiros 500 (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3270&m=dev
-   ============================================ */
+
 
 .joinus1-section {
     position: relative;
@@ -6859,7 +6671,7 @@ footer a:hover,
     align-items: center;
 }
 
-/* ==================== HEADER ==================== */
+
 
 .joinus1-header {
     display: flex;
@@ -6887,7 +6699,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* ==================== TOP CARDS ==================== */
+
 
 .joinus1-top-cards {
     display: grid;
@@ -6912,9 +6724,9 @@ footer a:hover,
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===== CARD REVEAL ANIMATIONS ===== */
 
-/* Card 1 - Slide from left */
+
+
 .joinus1-card-1 {
     opacity: 0;
     transform: translateX(-150px);
@@ -6926,7 +6738,7 @@ footer a:hover,
     transform: translateX(0);
 }
 
-/* Card 2 - Slide from bottom */
+
 .joinus1-card-2 {
     opacity: 0;
     transform: translateY(150px);
@@ -6938,7 +6750,7 @@ footer a:hover,
     transform: translateY(0);
 }
 
-/* Card 3 - Slide from right */
+
 .joinus1-card-3 {
     opacity: 0;
     transform: translateX(150px);
@@ -6950,7 +6762,7 @@ footer a:hover,
     transform: translateX(0);
 }
 
-/* Overlay fade-in for Card 1 and 2 - happens AFTER card slides in */
+
 .joinus1-card-1 .card-overlay-saturation,
 .joinus1-card-1 .card-overlay-multiply,
 .joinus1-card-2 .card-overlay-dark,
@@ -6975,7 +6787,7 @@ footer a:hover,
     transition-delay: 0.25s;
 }
 
-/* Text fade-in for Card 1 and 2 - happens AFTER overlays */
+
 .joinus1-card-1 .card-content-inner,
 .joinus1-card-2 .card-content-inner {
     opacity: 0;
@@ -6992,7 +6804,7 @@ footer a:hover,
     transition-delay: 0.45s;
 }
 
-/* Card 1 & 2 - With Background Images */
+
 .joinus1-card-1,
 .joinus1-card-2 {
     background: transparent;
@@ -7019,7 +6831,7 @@ footer a:hover,
     z-index: 1;
 }
 
-/* Card 1 Overlays - primeiros_500_1.png */
+
 .joinus1-card-1 .card-overlay-saturation {
     position: absolute;
     top: 0;
@@ -7044,7 +6856,7 @@ footer a:hover,
     border-radius: 16px;
 }
 
-/* Card 2 Overlays - primeiros_500_2.png */
+
 .joinus1-card-2 .card-overlay-dark {
     position: absolute;
     top: 0;
@@ -7068,12 +6880,12 @@ footer a:hover,
     border-radius: 16px;
 }
 
-/* Card 3 - Orange Gradient */
+
 .joinus1-card-3 {
     background: linear-gradient(180deg, rgba(255, 180, 119, 0.92) 0%, rgba(255, 148, 61, 0.92) 100%);
 }
 
-/* Card Content */
+
 .card-content-inner {
     position: relative;
     z-index: 4;
@@ -7123,7 +6935,7 @@ footer a:hover,
     color: #3D3D3D;
 }
 
-/* Price Badge */
+
 .price-badge {
     background: #FFF4E6;
     border-radius: 8px;
@@ -7177,7 +6989,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* Card 3 Sections */
+
 .card-section {
     display: flex;
     flex-direction: column;
@@ -7213,7 +7025,7 @@ footer a:hover,
     text-align: center;
 }
 
-/* ==================== MIDDLE TITLE ==================== */
+
 
 .joinus1-middle-title {
     font-family: var(--font-family);
@@ -7225,7 +7037,7 @@ footer a:hover,
     text-align: center;
 }
 
-/* ==================== BOTTOM CARDS (Subscription Plans) ==================== */
+
 
 .joinus1-bottom-cards {
     display: grid;
@@ -7242,7 +7054,7 @@ footer a:hover,
     align-items: center;
 }
 
-/* Best Value Badge */
+
 .best-value-badge {
     background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
     border: 0.5px solid #FFB477;
@@ -7275,7 +7087,7 @@ footer a:hover,
     white-space: nowrap;
 }
 
-/* Plan Cards */
+
 .bottom-plan-card {
     border-radius: 16px;
     padding: 12px 16px;
@@ -7291,9 +7103,9 @@ footer a:hover,
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===== BOTTOM PLAN CARDS REVEAL ANIMATIONS ===== */
 
-/* Plan Card 1 - Slide from left */
+
+
 .bottom-plan-card-1 {
     opacity: 0;
     transform: translateX(-150px);
@@ -7305,7 +7117,7 @@ footer a:hover,
     transform: translateX(0);
 }
 
-/* Plan Card 2 - Slide from bottom */
+
 .bottom-plan-card-2 {
     opacity: 0;
     transform: translateY(150px);
@@ -7317,7 +7129,7 @@ footer a:hover,
     transform: translateY(0);
 }
 
-/* Plan Card 3 - Slide from right */
+
 .bottom-plan-card-3 {
     opacity: 0;
     transform: translateX(150px);
@@ -7329,7 +7141,7 @@ footer a:hover,
     transform: translateX(0);
 }
 
-/* Plan Card 1 */
+
 .bottom-plan-card-1 {
     background: linear-gradient(180deg, #FFE1C9 0%, #FFC392 100%);
     border: 0.5px solid #FFC392;
@@ -7348,7 +7160,7 @@ footer a:hover,
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
 }
 
-/* Plan Card 2 */
+
 .bottom-plan-card-2 {
     background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
     border: 1px solid rgba(255, 210, 173, 0.8);
@@ -7384,7 +7196,7 @@ footer a:hover,
     z-index: 3;
 }
 
-/* Plan Card 3 */
+
 .bottom-plan-card-3 {
     background: linear-gradient(180deg, rgba(255, 225, 201, 0.92) 0%, rgba(255, 195, 146, 0.92) 100%);
     border: 0.5px solid #FFC392;
@@ -7402,7 +7214,7 @@ footer a:hover,
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
 }
 
-/* Plan Card Content */
+
 .plan-card-content {
     display: flex;
     flex-direction: column;
@@ -7508,7 +7320,7 @@ footer a:hover,
     text-align: center;
 }
 
-/* ==================== RESPONSIVE - TABLET ==================== */
+
 
 @media (max-width: 1024px) {
     .joinus1-container {
@@ -7525,7 +7337,7 @@ footer a:hover,
         line-height: 28px;
     }
 
-    /* Top cards - stack vertically */
+    
     .joinus1-top-cards {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -7548,7 +7360,7 @@ footer a:hover,
         min-height: 280px;
     }
 
-    /* Card 3 - Single column */
+    
     .joinus1-card-3 {
         min-height: auto;
         padding: 22px 20px;
@@ -7615,7 +7427,7 @@ footer a:hover,
         line-height: 24px;
     }
 
-    /* Bottom cards - keep in row */
+    
     .joinus1-bottom-cards {
         grid-template-columns: repeat(3, 1fr);
         gap: 16px;
@@ -7662,7 +7474,7 @@ footer a:hover,
         padding: 14px 12px;
     }
 
-    /* Adjust font sizes for bottom cards */
+    
     .plan-badge {
         padding: 6px 8px;
     }
@@ -7735,7 +7547,7 @@ footer a:hover,
     }
 }
 
-/* ==================== RESPONSIVE - MOBILE ==================== */
+
 
 @media (max-width: 768px) {
     .joinus1-section {
@@ -7758,7 +7570,7 @@ footer a:hover,
         line-height: 20px;
     }
 
-    /* Top cards - stack vertically */
+    
     .joinus1-top-cards {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -7829,7 +7641,7 @@ footer a:hover,
         line-height: 24px;
     }
 
-    /* Bottom cards - stack vertically */
+    
     .joinus1-bottom-cards {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -7974,7 +7786,7 @@ footer a:hover,
         word-break: break-word;
     }
 
-    /* Extra specific rules to force centering on mobile */
+    
     .bottom-plan-card-1 .plan-card-content *,
     .bottom-plan-card-2 .plan-card-content *,
     .bottom-plan-card-3 .plan-card-content * {
@@ -7992,11 +7804,9 @@ footer a:hover,
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for joinus1 cards */
+
+
 @keyframes circling-halo-joinus1 {
     0% {
         box-shadow:
@@ -8030,7 +7840,7 @@ footer a:hover,
     }
 }
 
-/* Top cards hover and click effects */
+
 .joinus1-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus1 2s ease-in-out infinite;
@@ -8041,7 +7851,7 @@ footer a:hover,
     animation: none;
 }
 
-/* Bottom plan cards hover and click effects */
+
 .bottom-plan-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus1 2s ease-in-out infinite;
@@ -8051,14 +7861,9 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================
-   SECTION 12: JOINUS2 - Benefícios dos Primeiros 500
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3354&m=dev
-   ============================================ */
 
-/* ============================================
-   JOINUS2 SECTION - BASE STYLES
-   ============================================ */
+
+
 
 .joinus2-section {
   position: relative;
@@ -8072,7 +7877,7 @@ footer a:hover,
   background: #000000;
 }
 
-/* Liquid Shader Canvas Styling (same as header) */
+
 .joinus2-section .liquid-shader-canvas {
   position: absolute;
   top: 0;
@@ -8080,11 +7885,11 @@ footer a:hover,
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Allow clicks to pass through to content */
+  pointer-events: none; 
   filter: blur(125px) contrast(1.80);
 }
 
-/* Black overlay on top of shader (20% opacity) */
+
 .joinus2-section::after {
   content: '';
   position: absolute;
@@ -8097,7 +7902,7 @@ footer a:hover,
   pointer-events: none;
 }
 
-/* Fallback gradient for browsers without WebGL or with reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .joinus2-section .liquid-shader-canvas {
     display: none;
@@ -8155,16 +7960,14 @@ footer a:hover,
   }
 }
 
-/* Performance optimization for mobile */
+
 @media (max-width: 768px) {
   .joinus2-section .liquid-shader-canvas {
-    opacity: 0.8; /* Slightly reduce complexity visual impact */
+    opacity: 0.8; 
   }
 }
 
-/* ============================================
-   MAIN CONTAINER
-   ============================================ */
+
 
 .joinus2-container {
   position: relative;
@@ -8177,9 +7980,7 @@ footer a:hover,
   align-items: center;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+
 
 .joinus2-header {
   display: flex;
@@ -8198,9 +7999,7 @@ footer a:hover,
   margin: 0;
 }
 
-/* ============================================
-   BENEFITS CARDS GRID
-   ============================================ */
+
 
 .joinus2-cards-grid {
   display: grid;
@@ -8210,9 +8009,7 @@ footer a:hover,
   max-width: 1280px;
 }
 
-/* ============================================
-   BENEFIT CARD
-   ============================================ */
+
 
 .benefit-card {
   position: relative;
@@ -8232,7 +8029,7 @@ footer a:hover,
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Card reveal animations - First two cards from left */
+
 .benefit-card:nth-child(1),
 .benefit-card:nth-child(2) {
   transform: translateX(-100%);
@@ -8248,7 +8045,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Card reveal animations - Last two cards from right */
+
 .benefit-card:nth-child(3),
 .benefit-card:nth-child(4) {
   transform: translateX(100%);
@@ -8265,7 +8062,7 @@ footer a:hover,
 }
 
 
-/* Warning card reveal animation - Slide from bottom */
+
 .joinus2-warning-card {
   transform: translateY(50px);
   opacity: 0;
@@ -8279,7 +8076,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Background Layers */
+
 .benefit-card-background {
   position: absolute;
   top: 0;
@@ -8326,7 +8123,7 @@ footer a:hover,
   z-index: 3;
 }
 
-/* Card Content */
+
 .benefit-card-content {
   position: relative;
   z-index: 4;
@@ -8359,7 +8156,7 @@ footer a:hover,
   white-space: pre-wrap;
 }
 
-/* Inner Shadows */
+
 .benefit-card-shadows {
   position: absolute;
   top: 0;
@@ -8374,9 +8171,7 @@ footer a:hover,
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* ============================================
-   BOTTOM TEXT SECTION
-   ============================================ */
+
 
 .joinus2-bottom-text {
   display: flex;
@@ -8398,9 +8193,7 @@ footer a:hover,
   white-space: pre-wrap;
 }
 
-/* ============================================
-   WARNING CARD
-   ============================================ */
+
 
 .joinus2-warning-card {
   position: relative;
@@ -8499,9 +8292,7 @@ footer a:hover,
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 
 @media (max-width: 1024px) {
   .joinus2-section {
@@ -8554,9 +8345,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .joinus2-section {
@@ -8602,7 +8391,7 @@ footer a:hover,
     line-height: 20px;
   }
 
-  /* Move image down on second card for better text visibility */
+  
   .benefit-card:nth-child(2) .benefit-card-image {
     top: 32px;
   }
@@ -8696,11 +8485,9 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for benefit cards */
+
+
 @keyframes circling-halo-joinus2 {
     0% {
         box-shadow:
@@ -8744,7 +8531,7 @@ footer a:hover,
     }
 }
 
-/* Benefit cards hover and click effects */
+
 .benefit-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus2 2s ease-in-out infinite;
@@ -8755,7 +8542,7 @@ footer a:hover,
     animation: none;
 }
 
-/* Warning card hover and click effects */
+
 .joinus2-warning-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus2 2s ease-in-out infinite;
@@ -8765,14 +8552,9 @@ footer a:hover,
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
-/* ============================================
-   SECTION 15: JOINUS3 - Final CTA Section
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-3057&m=dev
-   ============================================ */
 
-/* ============================================
-   JOINUS3 SECTION - BASE STYLES
-   ============================================ */
+
+
 
 .joinus3-section {
   position: relative;
@@ -8786,7 +8568,7 @@ footer a:hover,
   background: #000000;
 }
 
-/* Liquid Shader Canvas Styling (same as header) */
+
 .joinus3-section .liquid-shader-canvas {
   position: absolute;
   top: 0;
@@ -8794,11 +8576,11 @@ footer a:hover,
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Allow clicks to pass through to content */
+  pointer-events: none; 
   filter: blur(125px) contrast(1.80);
 }
 
-/* Black overlay on top of shader (20% opacity) */
+
 .joinus3-section::after {
   content: '';
   position: absolute;
@@ -8811,7 +8593,7 @@ footer a:hover,
   pointer-events: none;
 }
 
-/* Fallback gradient for browsers without WebGL or with reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .joinus3-section .liquid-shader-canvas {
     display: none;
@@ -8869,16 +8651,14 @@ footer a:hover,
   }
 }
 
-/* Performance optimization for mobile */
+
 @media (max-width: 768px) {
   .joinus3-section .liquid-shader-canvas {
-    opacity: 0.8; /* Slightly reduce complexity visual impact */
+    opacity: 0.8; 
   }
 }
 
-/* ============================================
-   MAIN CONTAINER
-   ============================================ */
+
 
 .joinus3-container {
   position: relative;
@@ -8891,9 +8671,7 @@ footer a:hover,
   align-items: center;
 }
 
-/* ============================================
-   HEADER SECTION
-   ============================================ */
+
 
 .joinus3-header {
   display: flex;
@@ -8904,7 +8682,7 @@ footer a:hover,
   width: 100%;
 }
 
-/* Icon Container */
+
 .joinus3-icon {
   position: relative;
   width: 106px;
@@ -8921,7 +8699,7 @@ footer a:hover,
   object-fit: contain;
 }
 
-/* Title and Subtitle */
+
 .joinus3-text-container {
   display: flex;
   flex-direction: column;
@@ -8952,9 +8730,7 @@ footer a:hover,
   white-space: pre-wrap;
 }
 
-/* ============================================
-   STATISTICS CARDS
-   ============================================ */
+
 
 .joinus3-stats-container {
   display: flex;
@@ -8965,7 +8741,7 @@ footer a:hover,
   width: 100%;
 }
 
-/* Individual Stat Card */
+
 .joinus3-stat-card {
   display: flex;
   flex-direction: column;
@@ -8975,7 +8751,7 @@ footer a:hover,
   flex-shrink: 0;
 }
 
-/* Icon Container for Stats */
+
 .joinus3-stat-icon {
   position: relative;
   width: 54px;
@@ -8986,14 +8762,14 @@ footer a:hover,
   flex-shrink: 0;
 }
 
-/* SVG Icon Styling */
+
 .joinus3-stat-icon .icon-svg {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-/* Stat Badge */
+
 .joinus3-stat-badge {
   display: flex;
   flex-direction: column;
@@ -9020,7 +8796,7 @@ footer a:hover,
   z-index: 2;
 }
 
-/* Badge Shadow */
+
 .joinus3-stat-badge::after {
   content: '';
   position: absolute;
@@ -9032,7 +8808,7 @@ footer a:hover,
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* Stat Label */
+
 .joinus3-stat-label {
   font-family: 'Mona Sans', sans-serif;
   font-size: 20px;
@@ -9046,11 +8822,9 @@ footer a:hover,
   min-width: min-content;
 }
 
-/* ============================================
-   STAT CARDS REVEAL ANIMATIONS
-   ============================================ */
 
-/* Stat Card 1 */
+
+
 .joinus3-stat-card:nth-child(1) {
   opacity: 0;
   transform: translateY(50px);
@@ -9062,7 +8836,7 @@ footer a:hover,
   transform: translateY(0);
 }
 
-/* Stat Card 2 */
+
 .joinus3-stat-card:nth-child(2) {
   opacity: 0;
   transform: translateY(50px);
@@ -9074,7 +8848,7 @@ footer a:hover,
   transform: translateY(0);
 }
 
-/* Stat Card 3 */
+
 .joinus3-stat-card:nth-child(3) {
   opacity: 0;
   transform: translateY(50px);
@@ -9086,9 +8860,7 @@ footer a:hover,
   transform: translateY(0);
 }
 
-/* ============================================
-   CTA BUTTON
-   ============================================ */
+
 
 .joinus3-cta-button {
   display: flex;
@@ -9131,7 +8903,7 @@ footer a:hover,
   flex: 1;
 }
 
-/* Button Shadow */
+
 .joinus3-cta-button::after {
   content: '';
   position: absolute;
@@ -9143,9 +8915,7 @@ footer a:hover,
     inset 0px 0px 2px 2px rgba(254, 254, 255, 0.25);
 }
 
-/* ============================================
-   PS TEXT
-   ============================================ */
+
 
 .joinus3-ps-text {
   font-family: 'Mona Sans', sans-serif;
@@ -9161,9 +8931,7 @@ footer a:hover,
   flex-shrink: 0;
 }
 
-/* ============================================
-   PRICING CARD
-   ============================================ */
+
 
 .joinus3-pricing-card {
   display: flex;
@@ -9205,7 +8973,7 @@ footer a:hover,
   white-space: nowrap;
 }
 
-/* Pricing Card Shadow */
+
 .joinus3-pricing-card::after {
   content: '';
   position: absolute;
@@ -9217,9 +8985,7 @@ footer a:hover,
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 
 @media (max-width: 1024px) {
   .joinus3-section {
@@ -9271,9 +9037,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .joinus3-section {
@@ -9418,10 +9182,7 @@ footer a:hover,
     line-height: 20px;
   }
 }
-/* ============================================
-   SECTION 14: RESERVAR O LUGAR (Reserve Your Place)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=296-3019
-   ============================================ */
+
 
 .reservar-section {
   padding: 80px 24px;
@@ -9441,9 +9202,7 @@ footer a:hover,
   justify-content: center;
 }
 
-/* ============================================
-   LEFT COLUMN: FORM
-   ============================================ */
+
 
 .reservar-form-column {
   flex: 0 0 480px;
@@ -9459,7 +9218,7 @@ footer a:hover,
   display: flex;
   flex-direction: column;
   gap: 16px;
-  /* Reveal animation - from left */
+  
   transform: translateX(-100%);
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -9472,7 +9231,7 @@ footer a:hover,
   pointer-events: auto;
 }
 
-/* Form Header */
+
 .reservar-form-header {
   display: flex;
   flex-direction: column;
@@ -9507,7 +9266,7 @@ footer a:hover,
   margin: 0;
 }
 
-/* Form Fields */
+
 .reservar-form-fields {
   display: flex;
   flex-direction: column;
@@ -9564,7 +9323,7 @@ footer a:hover,
   padding-right: 48px;
 }
 
-/* Error State */
+
 .reservar-form-input.error,
 .reservar-form-select.error {
   border-color: #DC2626;
@@ -9583,7 +9342,7 @@ footer a:hover,
   display: block;
 }
 
-/* Checkboxes */
+
 .reservar-form-checkboxes {
   display: flex;
   flex-direction: column;
@@ -9633,14 +9392,14 @@ footer a:hover,
   color: #2C5F8C;
 }
 
-/* reCAPTCHA */
+
 .reservar-captcha-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Submit Button */
+
 .reservar-submit-button {
   background: var(--color-primary-50, #FFB477);
   border: 0.5px solid #FFA45B;
@@ -9682,7 +9441,7 @@ footer a:hover,
   cursor: not-allowed;
 }
 
-/* Form Footer */
+
 .reservar-form-footer {
   display: flex;
   justify-content: center;
@@ -9700,9 +9459,7 @@ footer a:hover,
   margin: 0;
 }
 
-/* ============================================
-   RIGHT COLUMN: IMAGE CAROUSEL & INFO CARDS
-   ============================================ */
+
 
 .reservar-right-column {
   flex: 1;
@@ -9712,7 +9469,7 @@ footer a:hover,
   gap: 48px;
 }
 
-/* Image Carousel */
+
 .reservar-image-carousel {
   width: 100%;
   height: 505px;
@@ -9720,7 +9477,7 @@ footer a:hover,
   overflow: hidden;
   position: relative;
   background: var(--color-complementary-800, #FFF4E6);
-  /* Reveal animation - from right */
+  
   transform: translateX(100%);
   opacity: 0.25;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -9756,7 +9513,7 @@ footer a:hover,
   z-index: 1;
 }
 
-/* Info Cards */
+
 .reservar-info-cards {
   display: flex;
   gap: 24px;
@@ -9783,7 +9540,7 @@ footer a:hover,
   word-break: break-word;
   box-sizing: border-box;
   white-space: normal;
-  /* Reveal animation - from bottom */
+  
   transform: translateY(50px);
   opacity: 0;
   transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -9853,9 +9610,7 @@ footer a:hover,
   white-space: normal;
 }
 
-/* ============================================
-   SUCCESS MODAL
-   ============================================ */
+
 
 .reservar-modal {
   display: none;
@@ -9943,9 +9698,7 @@ footer a:hover,
   box-shadow: 0px 6px 12px 0px rgba(255, 180, 119, 0.25);
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (768px and below)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
   .reservar-container {
@@ -9972,9 +9725,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (480px and below)
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .reservar-section {
@@ -10120,22 +9871,15 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   RECAPTCHA V3 BADGE
-   ============================================ */
 
-/* Hide the floating reCAPTCHA v3 badge */
+
+
 .grecaptcha-badge {
   visibility: hidden !important;
 }
-/* ============================================
-   FAQ SECTION - SECÇÃO 13
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3380&m=dev
-   ============================================ */
 
-/* ============================================
-   FAQ SECTION CONTAINER
-   ============================================ */
+
+
 
 .faq-section {
   position: relative;
@@ -10148,9 +9892,7 @@ footer a:hover,
   overflow: hidden;
 }
 
-/* ============================================
-   FAQ TITLE
-   ============================================ */
+
 
 .faq-title {
   font-family: 'Mona Sans', sans-serif;
@@ -10163,9 +9905,7 @@ footer a:hover,
   max-width: 900px;
 }
 
-/* ============================================
-   FAQ ACCORDION CONTAINER
-   ============================================ */
+
 
 .faq-container {
   width: 100%;
@@ -10175,16 +9915,14 @@ footer a:hover,
   gap: 24px;
 }
 
-/* ============================================
-   FAQ ITEM (Accordion Item)
-   ============================================ */
+
 
 .faq-item {
   position: relative;
   width: 100%;
 }
 
-/* FAQ Question Button */
+
 .faq-question-button {
   display: flex;
   align-items: center;
@@ -10208,7 +9946,7 @@ footer a:hover,
   background-color: #FFF5ED;
 }
 
-/* Question Text */
+
 .faq-question-text {
   font-family: 'Mona Sans', sans-serif;
   font-size: 24px;
@@ -10219,7 +9957,7 @@ footer a:hover,
   transition: color 0.3s ease;
 }
 
-/* Toggle Button (Circle with Arrow) */
+
 .faq-toggle-button {
   position: relative;
   width: 40px;
@@ -10234,7 +9972,7 @@ footer a:hover,
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Arrow Icon */
+
 .faq-arrow-icon {
   width: 16px;
   height: 16px;
@@ -10242,12 +9980,12 @@ footer a:hover,
   transform: rotate(90deg);
 }
 
-/* Rotated Arrow when expanded */
+
 .faq-item.active .faq-arrow-icon {
   transform: rotate(-90deg);
 }
 
-/* FAQ Answer Container */
+
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -10258,7 +9996,7 @@ footer a:hover,
   padding: 0;
 }
 
-/* Expanded Answer */
+
 .faq-item.active .faq-answer {
   max-height: 800px;
   opacity: 1;
@@ -10266,7 +10004,7 @@ footer a:hover,
   overflow: visible;
 }
 
-/* Answer Text */
+
 .faq-answer-text {
   font-family: 'Mona Sans', sans-serif;
   font-size: 18px;
@@ -10279,7 +10017,7 @@ footer a:hover,
   overflow-wrap: break-word;
 }
 
-/* FAQ Separator Line */
+
 .faq-separator {
   width: 100%;
   height: 1px;
@@ -10288,11 +10026,9 @@ footer a:hover,
   border: none;
 }
 
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
 
-/* Tablet (768px - 1024px) */
+
+
 @media (max-width: 1024px) {
   .faq-section {
     padding: 40px 48px;
@@ -10320,7 +10056,7 @@ footer a:hover,
   }
 }
 
-/* Mobile (max 767px) */
+
 @media (max-width: 767px) {
   .faq-section {
     padding: 32px 24px;
@@ -10367,7 +10103,7 @@ footer a:hover,
   }
 }
 
-/* Small Mobile (max 480px) */
+
 @media (max-width: 480px) {
   .faq-section {
     padding: 24px 16px;
@@ -10400,18 +10136,16 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   ACCESSIBILITY
-   ============================================ */
 
-/* Focus States */
+
+
 .faq-question-button:focus-visible {
   outline: 2px solid #FFB477;
   outline-offset: 4px;
   border-radius: 4px;
 }
 
-/* Reduced Motion */
+
 @media (prefers-reduced-motion: reduce) {
   .faq-arrow-icon,
   .faq-answer,
@@ -10421,7 +10155,7 @@ footer a:hover,
   }
 }
 
-/* High Contrast Mode */
+
 @media (prefers-contrast: high) {
   .faq-toggle-button {
     border-width: 3px;
@@ -10431,12 +10165,7 @@ footer a:hover,
     font-weight: 700;
   }
 }
-/* ============================================
-   FOOTER COMPONENT
-   Figma Desktop: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3466
-   Figma Tablet: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4071
-   Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4698
-   ============================================ */
+
 
 .footer {
     background: #272727;
@@ -10447,7 +10176,7 @@ footer a:hover,
     width: 100%;
 }
 
-/* Main Container - Two Column Layout */
+
 .footer-container {
     display: flex;
     flex-wrap: wrap;
@@ -10456,7 +10185,7 @@ footer a:hover,
     width: 100%;
 }
 
-/* Left Section - Brand */
+
 .footer-brand {
     display: flex;
     flex-direction: column;
@@ -10496,7 +10225,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* Social Links */
+
 .footer-social {
     display: flex;
     gap: 16px;
@@ -10538,7 +10267,7 @@ footer a:hover,
     opacity: 0.8;
 }
 
-/* Right Section - Quick Links */
+
 .footer-links-section {
     display: flex;
     flex-direction: column;
@@ -10576,7 +10305,7 @@ footer a:hover,
     opacity: 0.7;
 }
 
-/* Footer Bottom Section */
+
 .footer-bottom {
     display: flex;
     flex-direction: column;
@@ -10611,7 +10340,7 @@ footer a:hover,
     margin: 0;
 }
 
-/* Tablet Breakpoint (max-width: 1024px) */
+
 @media (max-width: 1024px) {
     .footer {
         padding: 56px 32px;
@@ -10653,7 +10382,7 @@ footer a:hover,
     }
 }
 
-/* Mobile Breakpoint (max-width: 768px) */
+
 @media (max-width: 768px) {
     .footer {
         padding: 40px 24px;
@@ -10716,43 +10445,41 @@ footer a:hover,
         line-height: 15px;
     }
 }
-/* ============================================
-   SCROLL TO TOP BUTTON STYLES
-   ============================================ */
+
 
 .scroll-to-top-btn {
-  /* Positioning */
+  
   position: fixed;
   bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10000;
 
-  /* Size */
+  
   width: 40px;
   height: 40px;
   min-width: 40px;
   min-height: 40px;
 
-  /* Layout */
+  
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* Style */
+  
   background: transparent;
   border: none;
   border-radius: 50%;
   cursor: pointer;
 
-  /* Transitions */
+  
   transition: transform 0.2s ease-out, opacity 0.3s ease, filter 0.3s ease;
 
-  /* Visibility */
+  
   opacity: 0;
   pointer-events: none;
 
-  /* Remove default button styles */
+  
   padding: 0;
   margin: 0;
   outline: none;
@@ -10760,31 +10487,29 @@ footer a:hover,
   -webkit-appearance: none;
   appearance: none;
 
-  /* Visibility on all backgrounds */
+  
   isolation: isolate;
 
-  /* Ensure button is above everything */
+  
   will-change: transform, opacity, filter;
 
-  /* Subtle base glow */
+  
   filter: drop-shadow(0 0 3px rgba(255, 155, 74, 0.2))
           drop-shadow(0 0 6px rgba(223, 110, 57, 0.1));
 }
 
-/* Button visible state */
+
 .scroll-to-top-btn.visible {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Remove hidden attribute styling */
+
 .scroll-to-top-btn[hidden] {
   display: none;
 }
 
-/* ============================================
-   PROGRESS RING (SVG)
-   ============================================ */
+
 
 .progress-ring {
   position: absolute;
@@ -10804,32 +10529,28 @@ footer a:hover,
 }
 
 .progress-ring-bg {
-  /* Inherits filter from parent */
+  
 }
 
-/* ============================================
-   LIQUID SHADER CANVAS (HOVER BACKGROUND)
-   ============================================ */
+
 
 .button-shader-canvas {
-  display: none; /* Using SVG gradient instead */
+  display: none; 
 }
 
-/* Ensure no blur effects (but allow saturation/brightness) */
+
 .scroll-to-top-btn {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* No blur on arrow */
+
 .arrow-icon {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
 
-/* ============================================
-   ARROW ICON
-   ============================================ */
+
 
 .arrow-icon {
   position: relative;
@@ -10843,7 +10564,7 @@ footer a:hover,
   filter: invert(1) grayscale(1) contrast(9);
 }
 
-/* White arrow for dark backgrounds and gradients */
+
 .scroll-to-top-btn.white-arrow .arrow-icon {
   color: #FFFFFF;
   mix-blend-mode: normal;
@@ -10851,9 +10572,7 @@ footer a:hover,
   opacity: 1;
 }
 
-/* ============================================
-   HOVER STATE
-   ============================================ */
+
 
 .scroll-to-top-btn:hover {
   transform: translateX(-50%) scale(1.15);
@@ -10876,7 +10595,7 @@ footer a:hover,
           saturate(1.5) brightness(1.2);
 }
 
-/* Hide progress ring strokes on hover */
+
 .scroll-to-top-btn:hover .progress-ring-circle {
   stroke: none;
   opacity: 0;
@@ -10887,7 +10606,7 @@ footer a:hover,
   opacity: 0;
 }
 
-/* Show fill circle on hover */
+
 .scroll-to-top-btn:hover .progress-ring-fill {
   opacity: 1;
   transition: opacity 0.3s ease;
@@ -10897,9 +10616,7 @@ footer a:hover,
   transition: opacity 0.3s ease;
 }
 
-/* ============================================
-   ACTIVE/PRESSED STATE
-   ============================================ */
+
 
 .scroll-to-top-btn:active {
   transform: translateX(-50%) scale(0.95);
@@ -10926,18 +10643,14 @@ footer a:hover,
           drop-shadow(0 0 12px rgba(255, 155, 74, 0.8));
 }
 
-/* ============================================
-   FOCUS STATE (ACCESSIBILITY)
-   ============================================ */
+
 
 .scroll-to-top-btn:focus-visible {
   outline: 2px solid #DF6E39;
   outline-offset: 4px;
 }
 
-/* ============================================
-   REDUCED MOTION SUPPORT
-   ============================================ */
+
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-to-top-btn,
@@ -10956,7 +10669,7 @@ footer a:hover,
     display: none;
   }
 
-  /* Show simple background on hover instead */
+  
   .scroll-to-top-btn:hover::before {
     content: '';
     position: absolute;
@@ -10971,9 +10684,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   MOBILE OPTIMIZATION
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .scroll-to-top-btn {
@@ -10997,7 +10708,7 @@ footer a:hover,
     height: 28px;
   }
 
-  /* Larger touch target */
+  
   .scroll-to-top-btn::before {
     content: '';
     position: absolute;
@@ -11008,9 +10719,7 @@ footer a:hover,
   }
 }
 
-/* ============================================
-   HIGH CONTRAST MODE
-   ============================================ */
+
 
 @media (prefers-contrast: high) {
   .scroll-to-top-btn {

@@ -1,7 +1,4 @@
-/* ============================================
-   SECTION 8: SOLUTION2 - Compare as suas opções (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3108&m=dev
-   ============================================ */
+
 
 .solution2-section {
     position: relative;
@@ -16,7 +13,7 @@
     overflow-x: hidden;
 }
 
-/* ===== HEADER ===== */
+
 
 .solution2-header {
     display: flex;
@@ -53,7 +50,7 @@
     word-wrap: break-word;
 }
 
-/* ===== TABLE CONTAINER ===== */
+
 
 .solution2-table-container {
     display: flex;
@@ -65,7 +62,7 @@
     box-sizing: border-box;
 }
 
-/* ===== COMPARISON TABLE ===== */
+
 
 .comparison-table {
     display: flex;
@@ -77,7 +74,7 @@
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.16);
     box-sizing: border-box;
 
-    /* Animation - Reveal from left */
+    
     transform: translateX(-100%);
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
@@ -90,7 +87,7 @@
     pointer-events: auto;
 }
 
-/* ===== TABLE ROWS ===== */
+
 
 .table-row {
     display: flex;
@@ -101,10 +98,10 @@
 }
 
 .table-row-last {
-    /* Last row might need specific styling */
+    
 }
 
-/* ===== TABLE CELLS ===== */
+
 
 .table-cell {
     flex: 1 1 0;
@@ -121,12 +118,12 @@
     overflow: hidden;
 }
 
-/* Remove border from last row cells */
+
 .table-row-last .table-cell {
     border-bottom: 1px solid #FEFEFF;
 }
 
-/* ===== HEADER CELLS ===== */
+
 
 .table-header .table-cell {
     background: #272727;
@@ -200,7 +197,7 @@
     white-space: normal;
 }
 
-/* ===== CRITERIA CELLS ===== */
+
 
 .criteria-cell {
     background: #FEFEFF;
@@ -237,7 +234,7 @@
     white-space: normal;
 }
 
-/* ===== PATA CELLS (ORANGE) ===== */
+
 
 .pata-cell {
     background: linear-gradient(180deg, #FFB477 0%, #FFC392 100%);
@@ -264,7 +261,7 @@
     border-bottom: 0 !important;
 }
 
-/* ===== REGULAR CELLS (WHITE) ===== */
+
 
 .regular-cell {
     background: #FEFEFF;
@@ -286,7 +283,7 @@
     white-space: normal;
 }
 
-/* ===== SMALL TEXT (Last row) ===== */
+
 
 .small-text {
     font-size: 14px !important;
@@ -295,7 +292,7 @@
     max-width: 100% !important;
 }
 
-/* ===== FOOTER DISCLAIMER ===== */
+
 
 .solution2-footer {
     display: flex;
@@ -332,9 +329,7 @@
     word-wrap: break-word;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (max-width: 1024px)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .solution2-section {
@@ -401,9 +396,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .solution2-section {
@@ -505,9 +498,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - SMALL MOBILE (max-width: 480px)
-   ============================================ */
+
 
 @media (max-width: 480px) {
     .solution2-section {
@@ -597,9 +588,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - EXTRA SMALL MOBILE (max-width: 375px)
-   ============================================ */
+
 
 @media (max-width: 375px) {
     .solution2-section {

@@ -1,7 +1,4 @@
-/* ============================================
-   SECTION 11: JOINUS1 - Os primeiros 500 (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3270&m=dev
-   ============================================ */
+
 
 .joinus1-section {
     position: relative;
@@ -24,7 +21,7 @@
     align-items: center;
 }
 
-/* ==================== HEADER ==================== */
+
 
 .joinus1-header {
     display: flex;
@@ -52,7 +49,7 @@
     margin: 0;
 }
 
-/* ==================== TOP CARDS ==================== */
+
 
 .joinus1-top-cards {
     display: grid;
@@ -77,9 +74,9 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===== CARD REVEAL ANIMATIONS ===== */
 
-/* Card 1 - Slide from left */
+
+
 .joinus1-card-1 {
     opacity: 0;
     transform: translateX(-150px);
@@ -91,7 +88,7 @@
     transform: translateX(0);
 }
 
-/* Card 2 - Slide from bottom */
+
 .joinus1-card-2 {
     opacity: 0;
     transform: translateY(150px);
@@ -103,7 +100,7 @@
     transform: translateY(0);
 }
 
-/* Card 3 - Slide from right */
+
 .joinus1-card-3 {
     opacity: 0;
     transform: translateX(150px);
@@ -115,7 +112,7 @@
     transform: translateX(0);
 }
 
-/* Overlay fade-in for Card 1 and 2 - happens AFTER card slides in */
+
 .joinus1-card-1 .card-overlay-saturation,
 .joinus1-card-1 .card-overlay-multiply,
 .joinus1-card-2 .card-overlay-dark,
@@ -140,7 +137,7 @@
     transition-delay: 0.25s;
 }
 
-/* Text fade-in for Card 1 and 2 - happens AFTER overlays */
+
 .joinus1-card-1 .card-content-inner,
 .joinus1-card-2 .card-content-inner {
     opacity: 0;
@@ -157,7 +154,7 @@
     transition-delay: 0.45s;
 }
 
-/* Card 1 & 2 - With Background Images */
+
 .joinus1-card-1,
 .joinus1-card-2 {
     background: transparent;
@@ -184,7 +181,7 @@
     z-index: 1;
 }
 
-/* Card 1 Overlays - primeiros_500_1.png */
+
 .joinus1-card-1 .card-overlay-saturation {
     position: absolute;
     top: 0;
@@ -209,7 +206,7 @@
     border-radius: 16px;
 }
 
-/* Card 2 Overlays - primeiros_500_2.png */
+
 .joinus1-card-2 .card-overlay-dark {
     position: absolute;
     top: 0;
@@ -233,12 +230,12 @@
     border-radius: 16px;
 }
 
-/* Card 3 - Orange Gradient */
+
 .joinus1-card-3 {
     background: linear-gradient(180deg, rgba(255, 180, 119, 0.92) 0%, rgba(255, 148, 61, 0.92) 100%);
 }
 
-/* Card Content */
+
 .card-content-inner {
     position: relative;
     z-index: 4;
@@ -288,7 +285,7 @@
     color: #3D3D3D;
 }
 
-/* Price Badge */
+
 .price-badge {
     background: #FFF4E6;
     border-radius: 8px;
@@ -342,7 +339,7 @@
     margin: 0;
 }
 
-/* Card 3 Sections */
+
 .card-section {
     display: flex;
     flex-direction: column;
@@ -378,7 +375,7 @@
     text-align: center;
 }
 
-/* ==================== MIDDLE TITLE ==================== */
+
 
 .joinus1-middle-title {
     font-family: var(--font-family);
@@ -390,7 +387,7 @@
     text-align: center;
 }
 
-/* ==================== BOTTOM CARDS (Subscription Plans) ==================== */
+
 
 .joinus1-bottom-cards {
     display: grid;
@@ -407,7 +404,7 @@
     align-items: center;
 }
 
-/* Best Value Badge */
+
 .best-value-badge {
     background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
     border: 0.5px solid #FFB477;
@@ -440,7 +437,7 @@
     white-space: nowrap;
 }
 
-/* Plan Cards */
+
 .bottom-plan-card {
     border-radius: 16px;
     padding: 12px 16px;
@@ -456,9 +453,9 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===== BOTTOM PLAN CARDS REVEAL ANIMATIONS ===== */
 
-/* Plan Card 1 - Slide from left */
+
+
 .bottom-plan-card-1 {
     opacity: 0;
     transform: translateX(-150px);
@@ -470,7 +467,7 @@
     transform: translateX(0);
 }
 
-/* Plan Card 2 - Slide from bottom */
+
 .bottom-plan-card-2 {
     opacity: 0;
     transform: translateY(150px);
@@ -482,7 +479,7 @@
     transform: translateY(0);
 }
 
-/* Plan Card 3 - Slide from right */
+
 .bottom-plan-card-3 {
     opacity: 0;
     transform: translateX(150px);
@@ -494,7 +491,7 @@
     transform: translateX(0);
 }
 
-/* Plan Card 1 */
+
 .bottom-plan-card-1 {
     background: linear-gradient(180deg, #FFE1C9 0%, #FFC392 100%);
     border: 0.5px solid #FFC392;
@@ -513,7 +510,7 @@
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
 }
 
-/* Plan Card 2 */
+
 .bottom-plan-card-2 {
     background: linear-gradient(180deg, #FFB477 0%, #FF943D 100%);
     border: 1px solid rgba(255, 210, 173, 0.8);
@@ -549,7 +546,7 @@
     z-index: 3;
 }
 
-/* Plan Card 3 */
+
 .bottom-plan-card-3 {
     background: linear-gradient(180deg, rgba(255, 225, 201, 0.92) 0%, rgba(255, 195, 146, 0.92) 100%);
     border: 0.5px solid #FFC392;
@@ -567,7 +564,7 @@
         inset 0px 0px 2px 2px rgba(255, 213, 179, 0.6);
 }
 
-/* Plan Card Content */
+
 .plan-card-content {
     display: flex;
     flex-direction: column;
@@ -673,7 +670,7 @@
     text-align: center;
 }
 
-/* ==================== RESPONSIVE - TABLET ==================== */
+
 
 @media (max-width: 1024px) {
     .joinus1-container {
@@ -690,7 +687,7 @@
         line-height: 28px;
     }
 
-    /* Top cards - stack vertically */
+    
     .joinus1-top-cards {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -713,7 +710,7 @@
         min-height: 280px;
     }
 
-    /* Card 3 - Single column */
+    
     .joinus1-card-3 {
         min-height: auto;
         padding: 22px 20px;
@@ -780,7 +777,7 @@
         line-height: 24px;
     }
 
-    /* Bottom cards - keep in row */
+    
     .joinus1-bottom-cards {
         grid-template-columns: repeat(3, 1fr);
         gap: 16px;
@@ -827,7 +824,7 @@
         padding: 14px 12px;
     }
 
-    /* Adjust font sizes for bottom cards */
+    
     .plan-badge {
         padding: 6px 8px;
     }
@@ -900,7 +897,7 @@
     }
 }
 
-/* ==================== RESPONSIVE - MOBILE ==================== */
+
 
 @media (max-width: 768px) {
     .joinus1-section {
@@ -923,7 +920,7 @@
         line-height: 20px;
     }
 
-    /* Top cards - stack vertically */
+    
     .joinus1-top-cards {
         grid-template-columns: 1fr;
         gap: 16px;
@@ -994,7 +991,7 @@
         line-height: 24px;
     }
 
-    /* Bottom cards - stack vertically */
+    
     .joinus1-bottom-cards {
         grid-template-columns: 1fr;
         gap: 24px;
@@ -1139,7 +1136,7 @@
         word-break: break-word;
     }
 
-    /* Extra specific rules to force centering on mobile */
+    
     .bottom-plan-card-1 .plan-card-content *,
     .bottom-plan-card-2 .plan-card-content *,
     .bottom-plan-card-3 .plan-card-content * {
@@ -1157,11 +1154,9 @@
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for joinus1 cards */
+
+
 @keyframes circling-halo-joinus1 {
     0% {
         box-shadow:
@@ -1195,7 +1190,7 @@
     }
 }
 
-/* Top cards hover and click effects */
+
 .joinus1-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus1 2s ease-in-out infinite;
@@ -1206,7 +1201,7 @@
     animation: none;
 }
 
-/* Bottom plan cards hover and click effects */
+
 .bottom-plan-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus1 2s ease-in-out infinite;

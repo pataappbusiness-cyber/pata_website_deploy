@@ -1,8 +1,4 @@
-/* ============================================
-   PROBLEM5 SECTION - Testimonials
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3017&m=dev
-   Height: 85vh
-   ============================================ */
+
 
 .problem5-section {
     position: relative;
@@ -17,9 +13,7 @@
     overflow: hidden;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+
 
 .problem5-header {
     width: 100%;
@@ -39,9 +33,7 @@
     margin: 0;
 }
 
-/* ============================================
-   TESTIMONIALS CONTAINER
-   ============================================ */
+
 
 .problem5-content {
     width: 100%;
@@ -52,9 +44,7 @@
     gap: 24px;
 }
 
-/* ============================================
-   TESTIMONIAL CARDS GRID
-   ============================================ */
+
 
 .testimonials-grid {
     display: flex;
@@ -75,13 +65,13 @@
     max-width: 340px;
     min-width: 250px;
 
-    /* Default animation state */
+    
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out;
     pointer-events: none;
 }
 
-/* First testimonial - Reveal from left */
+
 .testimonial-item:nth-child(1) {
     transform: translateX(-100%);
 }
@@ -92,7 +82,7 @@
     pointer-events: auto;
 }
 
-/* Second testimonial - Reveal from bottom */
+
 .testimonial-item:nth-child(2) {
     transform: translateY(100%);
 }
@@ -103,7 +93,7 @@
     pointer-events: auto;
 }
 
-/* Third testimonial - Reveal from right */
+
 .testimonial-item:nth-child(3) {
     transform: translateX(100%);
 }
@@ -114,9 +104,7 @@
     pointer-events: auto;
 }
 
-/* ============================================
-   TESTIMONIAL CARD
-   ============================================ */
+
 
 .testimonial-card {
     position: relative;
@@ -137,11 +125,9 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Inner shadows overlay - Removed as they're now in the circling halo animation */
 
-/* ============================================
-   QUOTE CONTENT
-   ============================================ */
+
+
 
 .testimonial-quote-wrapper {
     display: flex;
@@ -185,9 +171,7 @@
     color: #525252;
 }
 
-/* ============================================
-   AUTHOR INFO
-   ============================================ */
+
 
 .testimonial-author {
     display: flex;
@@ -215,9 +199,7 @@
     margin: 0;
 }
 
-/* ============================================
-   PET ICONS
-   ============================================ */
+
 
 .pet-icon {
     width: 70px;
@@ -252,9 +234,7 @@
     display: block;
 }
 
-/* ============================================
-   FOOTER CTA
-   ============================================ */
+
 
 .problem5-footer {
     display: flex;
@@ -301,9 +281,7 @@
     margin: 0;
 }
 
-/* ============================================
-   RESPONSIVE - MEDIUM SCREENS (max-width: 900px)
-   ============================================ */
+
 
 @media (max-width: 900px) {
     .testimonial-item {
@@ -312,9 +290,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (max-width: 1024px)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .problem5-section {
@@ -352,9 +328,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .problem5-section {
@@ -425,9 +399,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - SMALL MOBILE (max-width: 480px)
-   ============================================ */
+
 
 @media (max-width: 480px) {
     .problem5-section {
@@ -474,11 +446,9 @@
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation */
+
+
 @keyframes circling-halo-testimonial {
     0% {
         box-shadow:

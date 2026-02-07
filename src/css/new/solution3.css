@@ -1,7 +1,4 @@
-/* ============================================
-   SECTION 9: SOLUTION3 - Só a PATA faz isto (85vh)
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3205&m=dev
-   ============================================ */
+
 
 .solution3-section {
     position: relative;
@@ -15,7 +12,7 @@
     overflow: hidden;
 }
 
-/* ===== BACKGROUND VIDEO + OVERLAY ===== */
+
 
 .solution3-background {
     position: absolute;
@@ -49,7 +46,7 @@
     z-index: 1;
 }
 
-/* ===== MAIN CONTAINER ===== */
+
 
 .solution3-container {
     position: relative;
@@ -63,7 +60,7 @@
     max-width: 1280px;
 }
 
-/* ===== TITLE ===== */
+
 
 .solution3-title {
     font-family: 'Mona Sans', sans-serif;
@@ -75,7 +72,7 @@
     margin: 0;
 }
 
-/* ===== CARDS CONTAINER ===== */
+
 
 .solution3-cards-container {
     display: flex;
@@ -86,7 +83,7 @@
     justify-content: center;
 }
 
-/* ===== CARD BASE ===== */
+
 
 .solution3-card {
     flex: 1 1 300px;
@@ -103,23 +100,23 @@
     overflow: hidden;
     cursor: pointer;
 
-    /* Animation */
+    
     opacity: 0.25;
     transition: transform 600ms ease-in-out, opacity 600ms ease-in-out, box-shadow 0.3s ease;
     pointer-events: none;
 }
 
-/* First card - slides from left */
+
 .solution3-card:nth-child(1) {
     transform: translateX(-100%);
 }
 
-/* Second card - slides from right */
+
 .solution3-card:nth-child(2) {
     transform: translateX(100%);
 }
 
-/* Visible state */
+
 .solution3-card.visible {
     transform: translateX(0);
     opacity: 1;
@@ -135,7 +132,7 @@
     height: 100%;
 }
 
-/* ===== CARD 1 ELEMENTS ===== */
+
 
 .solution3-card-title {
     font-family: 'Mona Sans', sans-serif;
@@ -238,7 +235,7 @@
     margin: 0;
 }
 
-/* ===== CARD 2 ELEMENTS ===== */
+
 
 .solution3-card-title-alt {
     font-family: 'Mona Sans', sans-serif;
@@ -315,9 +312,7 @@
     margin: 0;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (max-width: 1024px)
-   ============================================ */
+
 
 @media (max-width: 1024px) {
     .solution3-section {
@@ -364,9 +359,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   ============================================ */
+
 
 @media (max-width: 768px) {
     .solution3-section {
@@ -443,9 +436,7 @@
     }
 }
 
-/* ============================================
-   RESPONSIVE - SMALL MOBILE (max-width: 480px)
-   ============================================ */
+
 
 @media (max-width: 480px) {
     .solution3-section {
@@ -516,11 +507,9 @@
     }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation */
+
+
 @keyframes circling-halo-solution3 {
     0% {
         box-shadow:

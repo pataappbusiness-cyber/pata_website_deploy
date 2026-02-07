@@ -1,11 +1,6 @@
-/* ============================================
-   SECTION 12: JOINUS2 - Benefícios dos Primeiros 500
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-3354&m=dev
-   ============================================ */
 
-/* ============================================
-   JOINUS2 SECTION - BASE STYLES
-   ============================================ */
+
+
 
 .joinus2-section {
   position: relative;
@@ -19,7 +14,7 @@
   background: #000000;
 }
 
-/* Liquid Shader Canvas Styling (same as header) */
+
 .joinus2-section .liquid-shader-canvas {
   position: absolute;
   top: 0;
@@ -27,11 +22,11 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Allow clicks to pass through to content */
+  pointer-events: none; 
   filter: blur(125px) contrast(1.80);
 }
 
-/* Black overlay on top of shader (20% opacity) */
+
 .joinus2-section::after {
   content: '';
   position: absolute;
@@ -44,7 +39,7 @@
   pointer-events: none;
 }
 
-/* Fallback gradient for browsers without WebGL or with reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .joinus2-section .liquid-shader-canvas {
     display: none;
@@ -102,16 +97,14 @@
   }
 }
 
-/* Performance optimization for mobile */
+
 @media (max-width: 768px) {
   .joinus2-section .liquid-shader-canvas {
-    opacity: 0.8; /* Slightly reduce complexity visual impact */
+    opacity: 0.8; 
   }
 }
 
-/* ============================================
-   MAIN CONTAINER
-   ============================================ */
+
 
 .joinus2-container {
   position: relative;
@@ -124,9 +117,7 @@
   align-items: center;
 }
 
-/* ============================================
-   HEADER
-   ============================================ */
+
 
 .joinus2-header {
   display: flex;
@@ -145,9 +136,7 @@
   margin: 0;
 }
 
-/* ============================================
-   BENEFITS CARDS GRID
-   ============================================ */
+
 
 .joinus2-cards-grid {
   display: grid;
@@ -157,9 +146,7 @@
   max-width: 1280px;
 }
 
-/* ============================================
-   BENEFIT CARD
-   ============================================ */
+
 
 .benefit-card {
   position: relative;
@@ -179,7 +166,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Card reveal animations - First two cards from left */
+
 .benefit-card:nth-child(1),
 .benefit-card:nth-child(2) {
   transform: translateX(-100%);
@@ -195,7 +182,7 @@
   pointer-events: auto;
 }
 
-/* Card reveal animations - Last two cards from right */
+
 .benefit-card:nth-child(3),
 .benefit-card:nth-child(4) {
   transform: translateX(100%);
@@ -212,7 +199,7 @@
 }
 
 
-/* Warning card reveal animation - Slide from bottom */
+
 .joinus2-warning-card {
   transform: translateY(50px);
   opacity: 0;
@@ -226,7 +213,7 @@
   pointer-events: auto;
 }
 
-/* Background Layers */
+
 .benefit-card-background {
   position: absolute;
   top: 0;
@@ -273,7 +260,7 @@
   z-index: 3;
 }
 
-/* Card Content */
+
 .benefit-card-content {
   position: relative;
   z-index: 4;
@@ -306,7 +293,7 @@
   white-space: pre-wrap;
 }
 
-/* Inner Shadows */
+
 .benefit-card-shadows {
   position: absolute;
   top: 0;
@@ -321,9 +308,7 @@
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* ============================================
-   BOTTOM TEXT SECTION
-   ============================================ */
+
 
 .joinus2-bottom-text {
   display: flex;
@@ -345,9 +330,7 @@
   white-space: pre-wrap;
 }
 
-/* ============================================
-   WARNING CARD
-   ============================================ */
+
 
 .joinus2-warning-card {
   position: relative;
@@ -446,9 +429,7 @@
     inset 0px 0px 2px 2px rgba(255, 213, 179, 0.2);
 }
 
-/* ============================================
-   RESPONSIVE - TABLET
-   ============================================ */
+
 
 @media (max-width: 1024px) {
   .joinus2-section {
@@ -501,9 +482,7 @@
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .joinus2-section {
@@ -549,7 +528,7 @@
     line-height: 20px;
   }
 
-  /* Move image down on second card for better text visibility */
+  
   .benefit-card:nth-child(2) .benefit-card-image {
     top: 32px;
   }
@@ -643,11 +622,9 @@
   }
 }
 
-/* ============================================
-   HOVER & CLICK INTERACTIONS
-   ============================================ */
 
-/* Circling halo animation for benefit cards */
+
+
 @keyframes circling-halo-joinus2 {
     0% {
         box-shadow:
@@ -691,7 +668,7 @@
     }
 }
 
-/* Benefit cards hover and click effects */
+
 .benefit-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus2 2s ease-in-out infinite;
@@ -702,7 +679,7 @@
     animation: none;
 }
 
-/* Warning card hover and click effects */
+
 .joinus2-warning-card.visible:hover {
     transform: scale(1.02) translateY(-10px) !important;
     animation: circling-halo-joinus2 2s ease-in-out infinite;

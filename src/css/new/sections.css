@@ -1,12 +1,6 @@
-/* ============================================
-   PATA WEBSITE - SECTIONS STYLES
-   Version: 4.0 (PREVC)
-   ============================================ */
 
-/* ============================================
-   SECTION 1: HEADER (HOME) - 100vh
-   Figma: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-2915
-   ============================================ */
+
+
 
 .header-section {
   position: relative;
@@ -23,7 +17,7 @@
   background: var(--bg-black);
 }
 
-/* Liquid Shader Canvas Styling */
+
 .liquid-shader-canvas {
   position: absolute;
   top: 0;
@@ -31,11 +25,11 @@
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; /* Allow clicks to pass through to content */
+  pointer-events: none; 
   filter: blur(125px) contrast(1.80);
 }
 
-/* Fallback gradient for browsers without WebGL or with reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .liquid-shader-canvas {
     display: none;
@@ -93,7 +87,7 @@
   }
 }
 
-/* Black overlay on top of shader (20% opacity) */
+
 .header-section::after {
   content: '';
   position: absolute;
@@ -106,54 +100,52 @@
   pointer-events: none;
 }
 
-/* Performance optimization for mobile */
+
 @media (max-width: 768px) {
   .liquid-shader-canvas {
-    opacity: 0.8; /* Slightly reduce complexity visual impact */
+    opacity: 0.8; 
   }
 }
 
-/* ============================================
-   MOUSE HIGHLIGHT EFFECT - SPOTLIGHT INTERATIVO
-   ============================================ */
+
 
 .mouse-highlight {
-  /* Positioning */
+  
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none; /* Não bloqueia interações */
-  z-index: 2; /* Acima do liquid-gradient (z-index: 1), abaixo do conteúdo (z-index: 10+) */
+  pointer-events: none; 
+  z-index: 2; 
 
-  /* Initial state - invisível até o mouse entrar */
+  
   opacity: 0;
   transition: opacity 0.4s ease;
 
-  /* Gradiente radial usando CSS variables para performance */
+  
   background: radial-gradient(
     circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 180, 119, 0.25) 0%,   /* Centro brilhante laranja */
-    rgba(255, 148, 61, 0.15) 20%,   /* Transição 1 */
-    rgba(255, 148, 61, 0.08) 40%,   /* Transição 2 */
-    rgba(255, 148, 61, 0) 70%       /* Fade total */
+    rgba(255, 180, 119, 0.25) 0%,   
+    rgba(255, 148, 61, 0.15) 20%,   
+    rgba(255, 148, 61, 0.08) 40%,   
+    rgba(255, 148, 61, 0) 70%       
   );
 
-  /* Performance optimization */
+  
   will-change: transform;
-  transform: translateZ(0); /* Force GPU layer */
+  transform: translateZ(0); 
   backface-visibility: hidden;
 
-  /* Blend mode para integração suave com o gradiente líquido */
-  mix-blend-mode: screen; /* Torna o efeito aditivo (mais luz) */
+  
+  mix-blend-mode: screen; 
 }
 
-/* Estado ativo quando mouse está sobre a secção */
+
 .header-section:hover .mouse-highlight {
   opacity: 1;
 }
 
-/* Main Container */
+
 .header-container {
   align-self: stretch;
   display: flex;
@@ -165,7 +157,7 @@
   z-index: 2;
 }
 
-/* TÍTULO - SEMPRE NO TOPO */
+
 .header-content {
   align-self: stretch;
   display: flex;
@@ -216,7 +208,7 @@
   line-height: 44px;
 }
 
-/* VISUAL CONTAINER - ABAIXO DO TÍTULO */
+
 .header-visual-container {
   align-self: stretch;
   padding-left: 80px;
@@ -227,11 +219,9 @@
   gap: 12px;
 }
 
-/* ============================================
-   IMAGE PILLS - CAPSULAS ARREDONDADAS
-   ============================================ */
 
-/* Container das Pills */
+
+
 .visual-pills-left,
 .visual-pills-right {
   align-self: stretch;
@@ -249,7 +239,7 @@
   align-items: flex-start;
 }
 
-/* Base Pill Styling */
+
 .image-pill {
   width: 151px;
   position: relative;
@@ -278,10 +268,7 @@
   display: block;
 }
 
-/* ============================================
-   PILL 1 - ESQUERDA SUPERIOR (Cão pequeno)
-   Figma: 296-2581
-   ============================================ */
+
 .pill-left-top {
   height: 176px;
   max-height: 176px;
@@ -333,10 +320,7 @@
   z-index: 10;
 }
 
-/* ============================================
-   PILL 2 - ESQUERDA INFERIOR (Médico veterinário)
-   Figma: 296-2580
-   ============================================ */
+
 .pill-left-bottom {
   height: 302px;
   flex: 1 1 0;
@@ -387,10 +371,7 @@
   z-index: 10;
 }
 
-/* ============================================
-   PILL 3 - DIREITA SUPERIOR
-   Figma: 296-2592
-   ============================================ */
+
 .pill-right-top {
   height: 322px;
   flex: 1 1 0;
@@ -445,10 +426,7 @@
   z-index: 10;
 }
 
-/* ============================================
-   PILL 4 - DIREITA INFERIOR
-   Figma: 296-2593
-   ============================================ */
+
 .pill-right-bottom {
   height: 156px;
   max-height: 156px;
@@ -503,9 +481,7 @@
   z-index: 10;
 }
 
-/* ============================================
-   MOCKUP CENTRAL
-   ============================================ */
+
 
 .mockup-center {
   width: 620px;
@@ -529,11 +505,9 @@
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4));
 }
 
-/* ============================================
-   HEADER REVEAL ANIMATIONS
-   ============================================ */
 
-/* Header content - fade in */
+
+
 .header-content {
   opacity: 0;
   transform: translateY(30px);
@@ -545,7 +519,7 @@
   transform: translateY(0);
 }
 
-/* Left pills - fade in (no transform to avoid parallax conflict) */
+
 .pill-left-top {
   opacity: 0;
   transition: opacity 0.6s ease 0.2s;
@@ -564,7 +538,7 @@
   opacity: 1;
 }
 
-/* Right pills - fade in (no transform to avoid parallax conflict) */
+
 .pill-right-top {
   opacity: 0;
   transition: opacity 0.6s ease 0.2s;
@@ -583,7 +557,7 @@
   opacity: 1;
 }
 
-/* Center mockup - fade in */
+
 .mockup-center {
   opacity: 0;
   transition: opacity 0.6s ease 0.4s;
@@ -593,9 +567,7 @@
   opacity: 1;
 }
 
-/* ============================================
-   RESPONSIVE - TABLET (769px - 1024px)
-   ============================================ */
+
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .header-visual-container {
@@ -618,10 +590,10 @@
     height: auto;
   }
 
-  /* Mouse Highlight - Raio reduzido em tablet */
+  
   .mouse-highlight {
     background: radial-gradient(
-      circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), /* Raio menor com CSS vars */
+      circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
       rgba(255, 180, 119, 0.20) 0%,
       rgba(255, 148, 61, 0.10) 20%,
       rgba(255, 148, 61, 0) 70%
@@ -629,10 +601,7 @@
   }
 }
 
-/* ============================================
-   RESPONSIVE - MOBILE (max-width: 768px)
-   Figma Mobile: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=337-4124
-   ============================================ */
+
 
 @media (max-width: 768px) {
   .header-section {
@@ -699,23 +668,20 @@
     filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
   }
 
-  /* Mouse Highlight - Desativado em mobile */
+  
   .mouse-highlight {
     display: none;
   }
 }
 
-/* Mouse Highlight - Detecção de hover capability (remove em touch devices) */
+
 @media (hover: none) {
   .mouse-highlight {
     display: none;
   }
 }
 
-/* ============================================
-   DRAGGABLE ELEMENT - Interactive Bone
-   Reference: https://www.figma.com/design/foywvD3Djh1yzshKk4Fwft/PATA-WEBSITE?node-id=135-2626&m=dev
-   ============================================ */
+
 
 .draggable-element {
   position: fixed;
@@ -745,7 +711,7 @@
   -webkit-user-drag: none;
 }
 
-/* Responsive - Mobile */
+
 @media (max-width: 768px) {
   .draggable-element {
     bottom: 20px;
