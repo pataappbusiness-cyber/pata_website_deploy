@@ -26,7 +26,7 @@
           gtag('js', new Date());
           gtag('config', 'G-JD85N7J78Y');
         };
-      }, 3000); // 3s delay após load
+      }, 10000); // 10s delay após load - optimized for TBT
     });
     </script>
 
@@ -2318,7 +2318,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <h4 class="reservar-card-title">Problemas com o formulário?</h4>
                             <p class="reservar-card-text">
                                 Problemas com o formulário? Envie email para
-                                <a href="mailto:ola@pata.pt" class="reservar-link">ola@pata.pt</a>
+                                <a href="/cdn-cgi/l/email-protection#6f00030e2f1f0e1b0e411f1b" class="reservar-link"><span class="__cf_email__" data-cfemail="640b080524140510054a1410">[email&#160;protected]</span></a>
                                 com o assunto "Lista de Espera" e incluiremos manualmente.
                             </p>
                         </div>
@@ -2466,7 +2466,7 @@ Agora pode confiar em nós.</h2>
                     <a href="https://www.tiktok.com/@pata_care?_r=1&_t=ZG-93NL9YfWR2e" class="footer-social-link" aria-label="TikTok" data-name="tik_tok" data-node-id="337:3478" target="_blank" rel="noopener noreferrer">
                         <img src="src/img/icons/tiktok.svg" alt="TikTok" width="32" height="32" loading="lazy">
                     </a>
-                    <a href="mailto:ola@pata.pt" class="footer-social-link footer-email" aria-label="Email" data-node-id="337:3480">ola@pata.pt</a>
+                    <a href="/cdn-cgi/l/email-protection#0b64676a4b7b6a7f6a257b7f" class="footer-social-link footer-email" aria-label="Email" data-node-id="337:3480"><span class="__cf_email__" data-cfemail="3a55565b7a4a5b4e5b144a4e">[email&#160;protected]</span></a>
                 </div>
             </div>
 
@@ -2615,7 +2615,7 @@ Agora pode confiar em nós.</h2>
     <!-- JavaScript -->
     <!-- reCAPTCHA: Lazy loaded on form interaction (see inline script below) -->
     <!-- Combined and Minified JavaScript (6 files → 1) -->
-    <script defer src="./src/js/dist/scripts.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script defer src="./src/js/dist/scripts.min.js"></script>
 
     <!-- reCAPTCHA Lazy Loading: Only load when user interacts with form -->
     <script>
@@ -2638,8 +2638,7 @@ Agora pode confiar em nós.</h2>
       });
     </script>
 
-    <!-- Consent Manager - Delayed Loading (1.5s after page load) -->
-    <!-- Consent Manager - Delayed Loading (5s after page load) -->
+    <!-- Consent Manager - Delayed Loading (10s after page load) -->
     <script data-cfasync="false">
     // data-cfasync="false" prevents Rocket Loader from interfering
     window.addEventListener('load', function() {
@@ -2649,13 +2648,18 @@ Agora pode confiar em nós.</h2>
         s.setAttribute('data-cfasync', 'false');
         s.src = 'https://cdn.consentmanager.net/delivery/autoblocking/9f87e56a620e6.js';
         s.setAttribute('data-cmp-ab', '1');
-        s.setAttribute('data-cmp-host', 'c.delivery.consentmanager.net');
+        s.setAttribute('data-cmp-host', 'b.delivery.consentmanager.net');
         s.setAttribute('data-cmp-cdn', 'cdn.consentmanager.net');
-        s.setAttribute('data-cmp-codesrc', '16');
-        document.body.appendChild(s); // append to body instead of head
-      }, 5000); // 5s instead of 1.5s
+        s.setAttribute('data-cmp-codesrc', '1');
+        document.head.appendChild(s);
+
+        var s2 = document.createElement('script');
+        s2.type = 'text/javascript';
+        s2.setAttribute('data-cfasync', 'false');
+        s2.src = 'https://cdn.consentmanager.net/delivery/9f87e56a620e6.js';
+        document.head.appendChild(s2);
+      }, 10000); // 10s delay - optimized for TBT
     });
     </script>
-
 </body>
 </html>
