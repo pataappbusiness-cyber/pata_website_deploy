@@ -935,9 +935,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Performance monitoring
 window.addEventListener('load', () => {
-  if (window.performance && window.performance.timing) {
-    const perfData = window.performance.timing;
-    const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-    console.log(`⚡ Page Load: ${pageLoadTime}ms`);
-  }
+  // Use setTimeout to ensure loadEventEnd is populated
+  setTimeout(() => {
+    if (window.performance) {
+      // Use modern Performance API if available
+      const entries = performance.getEntriesByType('navigation');
+      if (entries.length > 0) {
+        const navEntry = entries[0];
+        console.log(`⚡ Page Load: ${Math.round(navEntry.loadEventEnd)}ms`);
+      } else if (window.performance.timing) {
+        // Fallback to deprecated API
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        if (pageLoadTime > 0) {
+          console.log(`⚡ Page Load: ${pageLoadTime}ms`);
+        }
+      }
+    }
+  }, 0);
 });

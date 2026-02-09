@@ -1555,15 +1555,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Log performance metrics
 window.addEventListener('load', () => {
-  if (window.performance && window.performance.timing) {
-    const perfData = window.performance.timing;
-    const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-    const connectTime = perfData.responseEnd - perfData.requestStart;
-    const renderTime = perfData.domComplete - perfData.domLoading;
-
-    console.log('⚡ Performance Metrics:');
-    console.log(`  Page Load: ${pageLoadTime}ms`);
-    console.log(`  Connect: ${connectTime}ms`);
-    console.log(`  Render: ${renderTime}ms`);
-  }
+  // Use setTimeout to ensure loadEventEnd is populated
+  setTimeout(() => {
+    if (window.performance) {
+      // Use modern Performance API if available
+      const entries = performance.getEntriesByType('navigation');
+      if (entries.length > 0) {
+        const navEntry = entries[0];
+        console.log('⚡ Performance Metrics:');
+        console.log(`  Page Load: ${Math.round(navEntry.loadEventEnd)}ms`);
+        console.log(`  Connect: ${Math.round(navEntry.responseEnd - navEntry.requestStart)}ms`);
+        console.log(`  Render: ${Math.round(navEntry.domComplete - navEntry.domContentLoadedEventStart)}ms`);
+      } else if (window.performance.timing) {
+        // Fallback to deprecated API
+        const perfData = window.performance.timing;
+        const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+        if (pageLoadTime > 0) {
+          console.log('⚡ Performance Metrics:');
+          console.log(`  Page Load: ${pageLoadTime}ms`);
+          console.log(`  Connect: ${perfData.responseEnd - perfData.requestStart}ms`);
+          console.log(`  Render: ${perfData.domComplete - perfData.domLoading}ms`);
+        }
+      }
+    }
+  }, 0);
 });
