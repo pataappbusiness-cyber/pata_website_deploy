@@ -306,7 +306,10 @@ class Navbar {
   toggleMobileMenu() {
     this.navbarToggle.classList.toggle('active');
     this.navbarLinks.classList.toggle('active');
-    if (this.navbarLinks.classList.contains('active')) {
+    const isExpanded = this.navbarLinks.classList.contains('active');
+    this.navbarToggle.setAttribute('aria-expanded', isExpanded);
+    this.navbarToggle.setAttribute('aria-label', isExpanded ? 'Fechar menu de navegacao' : 'Abrir menu de navegacao');
+    if (isExpanded) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -316,6 +319,8 @@ class Navbar {
   closeMobileMenu() {
     this.navbarToggle.classList.remove('active');
     this.navbarLinks.classList.remove('active');
+    this.navbarToggle.setAttribute('aria-expanded', 'false');
+    this.navbarToggle.setAttribute('aria-label', 'Abrir menu de navegacao');
     document.body.style.overflow = '';
   }
 }

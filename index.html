@@ -20,13 +20,22 @@
     <link rel="prefetch" href="./src/js/dist/scripts-deferred.min.js" as="script">
     <link rel="prefetch" href="./src/js/dist/scripts-lazy.min.js" as="script">
 
-    <!-- Google Analytics - loaded directly (Partytown removed due to CORS issues) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y"></script>
+    <!-- Google Analytics - deferred to improve LCP/FCP -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-JD85N7J78Y');
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          var script = document.createElement('script');
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y';
+          script.async = true;
+          document.head.appendChild(script);
+          script.onload = function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JD85N7J78Y');
+          };
+        }, 2000);
+      });
     </script>
 
     <title>PATA - Veterinária Online 24/7 | Telemedicina Veterinária em Portugal</title>
@@ -43,6 +52,7 @@
     <meta property="og:locale" content="pt_PT">
     <meta property="og:site_name" content="PATA">
 
+    
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://pata.care/">
     <meta property="twitter:title" content="PATA - Veterinária Online 24/7">
@@ -85,6 +95,8 @@
     </script>
 
     <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* Mona Sans Regular (400) */
         @font-face {
@@ -535,6 +547,8 @@
 
 </head>
 <body>
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Saltar para conteúdo principal</a>
 
     <header class="navbar" data-name="navigation-bar">
         <div class="navbar-menu-container">
@@ -559,7 +573,10 @@
                 </button>
             </div>
 
-            <button class="navbar-toggle" id="navbarToggle">
+            <button class="navbar-toggle" id="navbarToggle"
+                    aria-label="Abrir menu de navegacao"
+                    aria-expanded="false"
+                    aria-controls="navbar-links">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -567,7 +584,7 @@
         </div>
     </header>
 
-    <main>
+    <main id="main-content">
 
         <section id="hero" class="header-section">
 
@@ -684,8 +701,11 @@
                         playsinline
                         preload="none"
                         poster="https://media.pata.care/videos/problem1_video1_poster.jpg"
-                        data-lazy-video>
+                        data-lazy-video
+                        aria-hidden="true"
+                        role="presentation">
                         <source src="https://media.pata.care/videos/problem1_video1.mp4" type="video/mp4">
+                        <track kind="captions" src="" label="Sem legendas (video decorativo)" default>
                     </video>
                     <div class="overlay-saturation"></div>
                     <div class="overlay-dark"></div>
@@ -718,8 +738,11 @@
                         playsinline
                         preload="none"
                         poster="https://media.pata.care/videos/problem1_video2_poster.jpg"
-                        data-lazy-video>
+                        data-lazy-video
+                        aria-hidden="true"
+                        role="presentation">
                         <source src="https://media.pata.care/videos/problem1_video2.mp4" type="video/mp4">
+                        <track kind="captions" src="" label="Sem legendas (video decorativo)" default>
                     </video>
                     <div class="overlay-orange"></div>
                 </div>
@@ -831,7 +854,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
 
                         <div class="problem3-stat-info">
-                            <h6 class="problem3-stat-label">Custo médio de urgência veterinária noturna</h6>
+                            <p class="problem3-stat-label">Custo médio de urgência veterinária noturna</p>
                             <a href="https://www.veterinaria-atual.pt/destaques/quais-os-precos-medios-dos-servicos-veterinarios-em-portugal/"
                                target="_blank"
                                class="problem3-stat-source">
@@ -851,7 +874,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
 
                         <div class="problem3-stat-info">
-                            <h6 class="problem3-stat-label">Custo médio de um caso de emergência completo</h6>
+                            <p class="problem3-stat-label">Custo médio de um caso de emergência completo</p>
                             <a href="https://www.generalitranquilidade.pt/blog/familia/preco-consulta-veterinario"
                                target="_blank"
                                class="problem3-stat-source">
@@ -872,7 +895,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         </div>
 
                         <div class="problem3-stat-info">
-                            <h6 class="problem3-stat-label">Dos lares portugueses têm animais — 6,7 milhões de patudos</h6>
+                            <p class="problem3-stat-label">Dos lares portugueses têm animais — 6,7 milhões de patudos</p>
                             <a href="https://www.veterinaria-atual.pt/na-clinica/portugal-tem-67-milhoes-de-animais-de-estimacao/"
                                target="_blank"
                                class="problem3-stat-source">
@@ -901,8 +924,11 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     playsinline
                     preload="none"
                     poster="https://media.pata.care/videos/2849936-hd_1280_720_24fps_poster.jpg"
-                    data-lazy-video>
+                    data-lazy-video
+                    aria-hidden="true"
+                    role="presentation">
                     <source src="https://media.pata.care/videos/2849936-hd_1280_720_24fps.mp4" type="video/mp4">
+                    <track kind="captions" src="" label="Sem legendas (video decorativo)" default>
                 </video>
                 <div class="problem4-overlay-dark"></div>
                 <div class="problem4-overlay-saturation"></div>
@@ -963,13 +989,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="testimonial-card">
                             
                             <div class="testimonial-quote-wrapper">
-                                <h5 class="testimonial-quote-mark">"</h5>
+                                <span class="testimonial-quote-mark" aria-hidden="true">"</span>
                                 <p class="testimonial-quote-text">Eram duas da manhã quando a Luna começou a vomitar. Não parava. Liguei para as urgências — <span class="highlight">€70,90 só para entrar.</span> Mais a gasolina, mais o stress de meter a cadela no carro com as crianças a dormir. Chegámos esgotados, esperámos hora e meia, e o diagnóstico? <span class="normal">"Indigestão. Vai passar."</span> Custou-me <span class="highlight">€150</span> no total. Se pudesse ter feito uma videochamada com um veterinário naquele momento... tudo teria sido diferente.</p>
                             </div>
 
                             <div class="testimonial-author">
                                 <h5 class="testimonial-author-name">Rita, 34 anos, tutora de Border Collie</h5>
-                                <h6 class="testimonial-author-location">Porto · Inquérito de Validação PATA, Setembro 2025</h6>
+                                <p class="testimonial-author-location">Porto · Inquérito de Validação PATA, Setembro 2025</p>
                             </div>
                         </div>
 
@@ -989,13 +1015,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="testimonial-card">
                             
                             <div class="testimonial-quote-wrapper">
-                                <h5 class="testimonial-quote-mark">"</h5>
+                                <span class="testimonial-quote-mark" aria-hidden="true">"</span>
                                 <p class="testimonial-quote-text">Vivo no Alentejo. O veterinário mais próximo fica a 35 quilómetros. Para uma consulta de 15 minutos, perco meio dia: viagem, espera, consulta, regresso. O meu rafeiro fica stressado na viagem. Eu perco um turno de trabalho. E muitas vezes é para ouvir <span class="highlight">"está tudo bem, não era nada".</span> Sabe quantas consultas já adiei por isto? Quantas vezes disse "vamos esperar para ver"? Demasiadas. Isso assusta-me.</p>
                             </div>
 
                             <div class="testimonial-author">
                                 <h5 class="testimonial-author-name">Manuel, 52 anos, tutor de Rafeiro Alentejano</h5>
-                                <h6 class="testimonial-author-location">Beja · Inquérito de Validação PATA, Setembro 2025</h6>
+                                <p class="testimonial-author-location">Beja · Inquérito de Validação PATA, Setembro 2025</p>
                             </div>
                         </div>
 
@@ -1015,13 +1041,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="testimonial-card">
                             
                             <div class="testimonial-quote-wrapper">
-                                <h5 class="testimonial-quote-mark">"</h5>
+                                <span class="testimonial-quote-mark" aria-hidden="true">"</span>
                                 <p class="testimonial-quote-text">O pior não é o dinheiro. O pior é a angústia de procurar no Google às quatro da manhã. <span class="highlight">"Gato a respirar rápido"</span> — um site diz que é normal, outro diz que pode ser fatal. Entro em pânico total. E não tenho ninguém a quem recorrer até ao dia seguinte. Pagaria — e pagaria bem — por ter acesso a um veterinário de verdade, 24/7, que me pudesse dizer: "Calma, isto é normal" ou "Sim, deve ir já às urgências". <span class="highlight">Essa tranquilidade não tem preço.</span></p>
                             </div>
 
                             <div class="testimonial-author">
                                 <h5 class="testimonial-author-name">Mariana, 29 anos, tutora de Persa</h5>
-                                <h6 class="testimonial-author-location">Lisboa · Inquérito de Validação PATA, Agosto 2025</h6>
+                                <p class="testimonial-author-location">Lisboa · Inquérito de Validação PATA, Agosto 2025</p>
                             </div>
                         </div>
 
@@ -1057,7 +1083,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         <section id="solution1" class="solution1-section">
 
-            <h1 class="solution1-title">Faça as contas</h1>
+            <h2 class="solution1-title">Faça as contas</h2>
 
             <div class="solution1-cards-container">
 
@@ -1071,8 +1097,11 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             playsinline
                             preload="none"
                             poster="https://media.pata.care/videos/1851002-hd_1280_720_24fps_poster.jpg"
-                            data-lazy-video>
+                            data-lazy-video
+                            aria-hidden="true"
+                            role="presentation">
                             <source src="https://media.pata.care/videos/1851002-hd_1280_720_24fps.mp4" type="video/mp4">
+                            <track kind="captions" src="" label="Sem legendas (video decorativo)" default>
                         </video>
                         <div class="card-overlay-saturation"></div>
                         <div class="card-overlay-multiply"></div>
@@ -1113,8 +1142,11 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             playsinline
                             preload="none"
                             poster="https://media.pata.care/videos/3939111-hd_1280_720_24fps_poster.jpg"
-                            data-lazy-video>
+                            data-lazy-video
+                            aria-hidden="true"
+                            role="presentation">
                             <source src="https://media.pata.care/videos/3939111-hd_1280_720_24fps.mp4" type="video/mp4">
+                            <track kind="captions" src="" label="Sem legendas (video decorativo)" default>
                         </video>
                         <div class="card-overlay-dark"></div>
                         <div class="card-overlay-orange"></div>
@@ -1188,7 +1220,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
-                            <h6>Disponibilidade</h6>
+                            <p class="comparison-label">Disponibilidade</p>
                         </div>
                         <div class="table-cell pata-cell">
                             <p>24/7/365</p>
@@ -1203,7 +1235,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
-                            <h6>Tempo de resposta</h6>
+                            <p class="comparison-label">Tempo de resposta</p>
                         </div>
                         <div class="table-cell pata-cell">
                             <p>&lt; 60 segundos</p>
@@ -1218,7 +1250,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
-                            <h6>Custo por consulta</h6>
+                            <p class="comparison-label">Custo por consulta</p>
                         </div>
                         <div class="table-cell pata-cell">
                             <p>€9.99</p>
@@ -1233,7 +1265,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
-                            <h6>Orientação profissional</h6>
+                            <p class="comparison-label">Orientação profissional</p>
                         </div>
                         <div class="table-cell pata-cell">
                             <p>✓Veterinário licenciado</p>
@@ -1248,7 +1280,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
-                            <h6>Exame físico</h6>
+                            <p class="comparison-label">Exame físico</p>
                         </div>
                         <div class="table-cell pata-cell">
                             <p>— Encaminha se necessário</p>
@@ -1263,7 +1295,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                     <div class="table-row">
                         <div class="table-cell criteria-cell">
-                            <h6>Receita + Medicação</h6>
+                            <p class="comparison-label">Receita + Medicação</p>
                         </div>
                         <div class="table-cell pata-cell">
                             <p>✓ Digital + Farmácia próxima</p>
@@ -1327,15 +1359,18 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     playsinline
                     preload="none"
                     poster="https://media.pata.care/videos/6865078-hd_1366_720_25fps_poster.jpg"
-                    data-lazy-video>
+                    data-lazy-video
+                    aria-hidden="true"
+                    role="presentation">
                     <source src="https://media.pata.care/videos/6865078-hd_1366_720_25fps.mp4" type="video/mp4">
+                    <track kind="captions" src="" label="Sem legendas (video decorativo)" default>
                 </video>
                 <div class="solution3-overlay-dark"></div>
             </div>
 
             <div class="solution3-container">
 
-                <h1 class="solution3-title">Só a PATA faz isto</h1>
+                <h2 class="solution3-title">Só a PATA faz isto</h2>
 
                 <div class="solution3-cards-container">
 
@@ -1347,7 +1382,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             <div class="solution3-card-body">
 
                                 <div class="solution3-text-group">
-                                    <h6 class="solution3-text-regular">Passou 6 meses sem realizar consultas?</h6>
+                                    <p class="solution3-text-regular">Passou 6 meses sem realizar consultas?</p>
                                     <h5 class="solution3-text-bold">Significa que o seu patudo está saudável.</h5>
                                 </div>
 
@@ -1391,9 +1426,9 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                             </div>
 
-                            <h6 class="solution3-card-footer">
+                            <p class="solution3-card-footer">
                                 Crédito válido por 6 meses após emissão. Aplicável em compras a preço de tabela.
-                            </h6>
+                            </p>
 
                         </div>
                     </div>
@@ -1409,7 +1444,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             <div class="solution4-container">
 
                 <div class="solution4-header">
-                    <h6 class="solution4-label">Solução</h6>
+                    <p class="solution4-label">Solução</p>
                     <h2 class="solution4-title">E se existisse uma forma diferente?</h2>
                     <p class="solution4-subtitle">A PATA não é apenas uma app. É a tranquilidade de saber que, aconteça o que acontecer, tem ajuda imediata. Sempre.</p>
                 </div>
@@ -1447,7 +1482,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                     
                                     <img src="./src/img/icons/AI.svg" alt="AI" width="54" height="54">
                                 </div>
-                                <h6 class="small-card-title">PATA AI</h6>
+                                <p class="small-card-title">PATA AI</p>
                                 <p class="small-card-text">Assistente que ajuda a descrever sintomas antes da consulta. Mais eficiência. Menos ansiedade.</p>
                             </div>
 
@@ -1456,7 +1491,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                     
                                     <img src="./src/img/icons/24_7.svg" alt="24/7" width="54" height="54">
                                 </div>
-                                <h6 class="small-card-title">Videoconsultas 24/7</h6>
+                                <p class="small-card-title">Videoconsultas 24/7</p>
                                 <p class="small-card-text">Acompanhamento regular, check-ups, segunda opinião. Marque quando quiser, de onde estiver.</p>
                             </div>
 
@@ -1465,7 +1500,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                     
                                     <img src="./src/img/icons/hospital 1.svg" alt="Hospital" width="54" height="54">
                                 </div>
-                                <h6 class="small-card-title">Urgências</h6>
+                                <p class="small-card-title">Urgências</p>
                                 <p class="small-card-text">O seu patudo não está bem? Videochamada com veterinário licenciado em menos de 60 segundos. Às três da manhã. Ao domingo. No feriado. Sempre.</p>
                             </div>
 
@@ -1528,7 +1563,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
             <div class="joinus1-container">
 
                 <div class="joinus1-header">
-                    <h1 class="joinus1-title">Os primeiros 500</h1>
+                    <h2 class="joinus1-title">Os primeiros 500</h2>
                     <h4 class="joinus1-subtitle">Não são clientes. São co-criadores.</h4>
                 </div>
 
@@ -1557,7 +1592,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             </div>
 
                             <div class="card-text-group">
-                                <h6 class="card-label">Uma única urgência veterinária noturna</h6>
+                                <p class="card-label">Uma única urgência veterinária noturna</p>
 
                                 <div class="price-badge">
                                     <h2 class="price-value">€70,90</h2>
@@ -1584,11 +1619,11 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             </div>
 
                             <div class="card-text-group">
-                                <h6 class="card-label">Com PATA, esse valor paga</h6>
+                                <p class="card-label">Com PATA, esse valor paga</p>
 
                                 <div class="price-badge">
                                     <h2 class="price-value price-value-orange">7 meses</h2>
-                                    <h6 class="price-subtitle">meses de subscrição</h6>
+                                    <span class="price-subtitle">meses de subscrição</span>
                                 </div>
                             </div>
                         </div>
@@ -1603,7 +1638,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <div class="price-badge">
                                     <div class="price-inline">
                                         <h2 class="price-value">€7,99</h2>
-                                        <h6 class="price-suffix">/mês</h6>
+                                        <span class="price-suffix">/mês</span>
                                     </div>
                                 </div>
                             </div>
@@ -1616,7 +1651,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                                 <div class="price-badge">
                                     <div class="price-inline">
                                         <h2 class="price-value">€9,99</h2>
-                                        <h6 class="price-suffix">/mês</h6>
+                                        <span class="price-suffix">/mês</span>
                                     </div>
                                 </div>
 
@@ -1627,14 +1662,14 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
                 </div>
 
-                <h6 class="joinus1-middle-title">Como funciona o acesso às consultas:</h6>
+                <h3 class="joinus1-middle-title">Como funciona o acesso às consultas:</h3>
 
                 <div class="joinus1-bottom-cards">
 
                     <div class="bottom-plan-card bottom-plan-card-1">
                         <div class="plan-card-content">
                             <div class="plan-badge">
-                                <h6 class="plan-badge-text">Subscrição Trimestral</h6>
+                                <span class="plan-badge-text">Subscrição Trimestral</span>
                             </div>
 
                             <div class="plan-info">
@@ -1658,7 +1693,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <div class="bottom-plan-card bottom-plan-card-2">
                             <div class="plan-card-content">
                                 <div class="plan-badge">
-                                    <h6 class="plan-badge-text">Subscrição Anual</h6>
+                                    <span class="plan-badge-text">Subscrição Anual</span>
                                 </div>
 
                                 <div class="plan-info">
@@ -1677,11 +1712,11 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     <div class="bottom-plan-card bottom-plan-card-3">
                         <div class="plan-card-content">
                             <div class="plan-badge">
-                                <h6 class="plan-badge-text">Subscrição Mensal</h6>
+                                <span class="plan-badge-text">Subscrição Mensal</span>
                             </div>
 
                             <div class="plan-info">
-                                <h6 class="plan-subtitle">3ª mensalidade</h6>
+                                <p class="plan-subtitle">3ª mensalidade</p>
                                 <h5 class="plan-title">Desbloqueia</h5>
                                 <h2 class="plan-number">1ª</h2>
                                 <h5 class="plan-title">consulta</h5>
@@ -1796,7 +1831,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             
                             <img src="src/img/icons/adiar.svg" alt="Clock alarm icon" width="24" height="24">
                         </div>
-                        <h6 class="warning-card-title">Se esperar:</h6>
+                        <h4 class="warning-card-title">Se esperar:</h4>
                     </div>
 
                     <div class="warning-card-content">

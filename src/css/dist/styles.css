@@ -391,7 +391,51 @@ blockquote {
   border-width: 0;
 }
 
+/* Skip Navigation Link - hidden until focused */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-primary-500, #DF6E39);
+  color: #FFFFFF;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-md, 8px);
+  z-index: 9999;
+  transition: top 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
+.skip-link:focus {
+  top: 16px;
+  outline: 3px solid var(--color-primary-700, #C65420);
+  outline-offset: 2px;
+}
+
+/* Global Focus Visible Styling */
+:focus-visible {
+  outline: 2px solid var(--color-primary-500, #DF6E39);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-primary-500, #DF6E39);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
 
 
 @keyframes liquid-gradient-animation {

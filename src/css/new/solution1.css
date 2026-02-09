@@ -19,7 +19,7 @@
     font-size: 52px;
     font-weight: 700;
     line-height: 38px;
-    color: #FF943D;
+    color: #C96920; /* Darkened from #FF943D for WCAG AA contrast (3.5:1 on #FFF8F2) */
     text-align: center;
     margin: 0 0 40px 0;
     z-index: 10;
