@@ -678,12 +678,7 @@ class VideoLazyLoader {
   }
 
   loadVideo(video) {
-    const sources = video.querySelectorAll('source[data-src]');
-
-    sources.forEach(source => {
-      source.src = source.dataset.src;
-    });
-
+    // src is already set in HTML, just trigger load and play
     video.load();
     video.play();
 

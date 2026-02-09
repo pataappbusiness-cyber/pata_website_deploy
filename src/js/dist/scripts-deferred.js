@@ -32,10 +32,6 @@ class VideoLazyLoader {
   }
 
   loadVideo(video) {
-    const sources = video.querySelectorAll('source[data-src]');
-    sources.forEach(source => {
-      source.src = source.dataset.src;
-    });
     video.load();
     video.play();
     video.removeAttribute('data-lazy-video');
