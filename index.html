@@ -11,8 +11,14 @@
     <link rel="dns-prefetch" href="https://fonts.bunny.net">
     <link rel="dns-prefetch" href="https://cdn.consentmanager.net">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google.com">
+    <link rel="dns-prefetch" href="https://script.google.com">
 
     <link rel="preload" href="./src/img/new_images/mockup_no_bg.webp" as="image" type="image/webp">
+
+    <!-- Prefetch deferred scripts while browser is idle -->
+    <link rel="prefetch" href="./src/js/dist/scripts-deferred.min.js" as="script">
+    <link rel="prefetch" href="./src/js/dist/scripts-lazy.min.js" as="script">
 
     <script>
       partytown = {
@@ -116,7 +122,9 @@
         }
     </style>
 
-    <link rel="stylesheet" href="./src/css/dist/styles.min.css">
+    <!-- Non-critical CSS - loads async, doesn't block render -->
+    <link rel="preload" href="./src/css/dist/styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="./src/css/dist/styles.min.css"></noscript>
 
     <style>
         /* Navbar Critical CSS */
@@ -387,17 +395,30 @@
             position: relative;
             z-index: 2;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
         }
 
         .header-title {
             font-family: 'Mona Sans', sans-serif;
-            font-size: 72px;
-            font-weight: 800;
-            line-height: 1.1;
+            font-size: 38px;
+            font-weight: 700;
+            line-height: 1;
+            margin: 0;
         }
 
-        .header-title-white { color: #FEFEFF; }
-        .header-title-orange { color: #FF943D; }
+        .header-title-white {
+            color: #FEFEFF;
+            display: block;
+            line-height: 32px;
+        }
+        .header-title-orange {
+            color: #FF943D;
+            display: block;
+            line-height: 36px;
+        }
 
         body {
             font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -406,8 +427,16 @@
         }
 
         @media (max-width: 768px) {
-            .header-title { font-size: 40px; }
-            .header-section { min-height: auto; padding-top: 80px; }
+            .header-title { font-size: 32px; }
+            .header-title-white, .header-title-orange { line-height: 36px; }
+            .header-launch { font-size: 24px; line-height: 28px; }
+            .header-content { gap: 12px; }
+            .header-section {
+                min-height: auto;
+                height: 95vh;
+                padding-top: 80px;
+                padding-bottom: 20px;
+            }
         }
 
         /* CLS Prevention - Image & Video Sizing */
@@ -427,6 +456,83 @@
         /* CRITICAL FIX: Force mockup to be visible immediately for LCP */
         .mockup-center {
             opacity: 1 !important;
+        }
+
+        /* Critical: Header visual container layout */
+        .header-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header-visual-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        /* Critical: Shader canvas positioning */
+        .liquid-shader-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        /* Critical: Mouse highlight effect */
+        .mouse-highlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            background: radial-gradient(circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 148, 61, 0.15), transparent);
+        }
+
+        /* Critical: Pills container layout */
+        .visual-pills-left, .visual-pills-right {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .image-pill {
+            border-radius: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Critical: Header launch tag - matches Figma H4 style */
+        .header-launch {
+            font-family: 'Mona Sans', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: #FF943D;
+            line-height: 18px;
+            text-align: center;
+        }
+
+        @media (max-width: 1024px) {
+            .header-visual-container { gap: 16px; }
+        }
+
+        @media (max-width: 768px) {
+            .header-visual-container { flex-direction: column; gap: 0; }
+            /* Hide pills on mobile - only show mockup */
+            .visual-pills-left, .visual-pills-right { display: none !important; }
         }
     </style>
 
@@ -2335,9 +2441,42 @@ Agora pode confiar em nós.</h2>
       </svg>
     </button>
 
-    <script defer src="./src/js/dist/scripts.min.js"></script>
+    <!-- Critical JS - loads and executes immediately for above-the-fold -->
+    <script src="./src/js/dist/scripts-critical.min.js"></script>
+
+    <!-- Deferred JS - downloads in parallel, executes after HTML parsed -->
+    <script defer src="./src/js/dist/scripts-deferred.min.js"></script>
+
+    <!-- Lazy JS - only loads when reservar section approaches -->
+    <script>
+      (function() {
+        let lazyScriptLoaded = false;
+        function loadLazyScript() {
+          if (lazyScriptLoaded) return;
+          lazyScriptLoaded = true;
+          const s = document.createElement('script');
+          s.src = './src/js/dist/scripts-lazy.min.js';
+          document.body.appendChild(s);
+        }
+
+        const reservarObserver = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              loadLazyScript();
+              reservarObserver.disconnect();
+            }
+          });
+        }, { rootMargin: '500px' });
+
+        window.addEventListener('DOMContentLoaded', function() {
+          const reservarEl = document.querySelector('.reservar-section') || document.querySelector('#reservar');
+          if (reservarEl) reservarObserver.observe(reservarEl);
+        });
+      })();
+    </script>
 
     <script>
+      // Lazy load reCAPTCHA using IntersectionObserver (800px before visible)
       let recaptchaLoaded = false;
       function loadRecaptcha() {
         if (recaptchaLoaded) return;
@@ -2346,10 +2485,23 @@ Agora pode confiar em nós.</h2>
         script.src = 'https://www.google.com/recaptcha/api.js?render=6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb';
         script.async = true;
         document.head.appendChild(script);
+        console.log('📧 reCAPTCHA loaded lazily');
       }
 
-      // Load reCAPTCHA when form receives focus
+      // Use IntersectionObserver for preloading when reservar section approaches
       window.addEventListener('DOMContentLoaded', function() {
+        const reservarSection = document.querySelector('.reservar-section') || document.querySelector('#reservar');
+        if (reservarSection) {
+          const recaptchaObserver = new IntersectionObserver(function(entries) {
+            if (entries[0].isIntersecting) {
+              loadRecaptcha();
+              recaptchaObserver.disconnect();
+            }
+          }, { rootMargin: '800px' });
+          recaptchaObserver.observe(reservarSection);
+        }
+
+        // Fallback: also load on form focus for safety
         const formInputs = document.querySelectorAll('#reservar input, #reservar textarea, #reservar select');
         formInputs.forEach(function(input) {
           input.addEventListener('focus', loadRecaptcha, { once: true });

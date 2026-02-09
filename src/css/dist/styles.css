@@ -242,7 +242,7 @@ h3 {
 }
 
 @media (max-width: 768px) {
-  h3 { font-size: 24px; }
+  h3 { font-size: 14px; }
 }
 
 
@@ -267,7 +267,7 @@ h4 {
 
 h5 {
   font-family: var(--font-family);
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.4;
   margin: 0;
@@ -666,7 +666,7 @@ footer a:hover,
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   z-index: 10;
 }
 
@@ -675,11 +675,11 @@ footer a:hover,
   justify-content: center;
   flex-direction: column;
   color: #FF943D;
-  font-size: 24px;
+  font-size: 14px;
   font-family: 'Mona Sans', sans-serif;
   font-weight: 600;
   font-variation-settings: "wght" 600;
-  line-height: 28px;
+  line-height: 18px;
   text-align: center;
 }
 
@@ -694,20 +694,20 @@ footer a:hover,
 
 .header-title-white {
   color: #FEFEFF;
-  font-size: 48px;
+  font-size: 38px;
   font-family: 'Mona Sans', sans-serif;
   font-weight: 700;
   font-variation-settings: "wght" 700;
-  line-height: 40px;
+  line-height: 32px;
 }
 
 .header-title-orange {
   color: #FF943D;
-  font-size: 48px;
+  font-size: 38px;
   font-family: 'Mona Sans', sans-serif;
   font-weight: 700;
   font-variation-settings: "wght" 700;
-  line-height: 44px;
+  line-height: 36px;
 }
 
 
@@ -1125,9 +1125,9 @@ footer a:hover,
   }
 
   .header-launch {
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
   }
 
   .header-title-white,
@@ -1656,9 +1656,9 @@ footer a:hover,
 .info-box h4 {
   
   font-family: 'Mona Sans', sans-serif;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600; 
-  line-height: 28px;
+  line-height: 18px;
   letter-spacing: 0;
 
   
@@ -1717,7 +1717,7 @@ footer a:hover,
 
   .left-panel .price,
   .right-panel .price {
-    font-size: 48px;
+    font-size: 38px;
     line-height: 36px;
   }
 
@@ -1756,8 +1756,8 @@ footer a:hover,
   
   .left-panel h3,
   .right-panel h3 {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .left-panel .price,
@@ -1943,7 +1943,7 @@ footer a:hover,
 .problem2-text-group {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
 }
 
 .problem2-story {
@@ -1982,10 +1982,10 @@ footer a:hover,
 .problem2-cost-label {
     color: var(--color-neutral-100, #3D3D3D);
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -2021,7 +2021,7 @@ footer a:hover,
 .problem2-cost-value {
     color: var(--color-neutral-200, #525252);
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-style: normal;
     font-weight: 700;
     line-height: 53px;
@@ -2123,7 +2123,7 @@ footer a:hover,
 
     .problem2-title {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
         text-align: center;
     }
 
@@ -2134,8 +2134,8 @@ footer a:hover,
     }
 
     .problem2-conclusion {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
         text-align: center;
     }
 
@@ -2146,7 +2146,7 @@ footer a:hover,
 
     .problem2-cost-value {
         font-size: 36px;
-        line-height: 40px;
+        line-height: 32px;
     }
 
     .problem2-animation {
@@ -2366,9 +2366,9 @@ footer a:hover,
 .problem3-subtitle {
     color: var(--color-neutral-200, #525252);
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     margin: 0;
     max-width: 478px;
     white-space: pre-wrap;
@@ -2621,7 +2621,7 @@ footer a:hover,
 
     .problem3-container {
         flex-direction: column;
-        gap: 24px;
+        gap: 16px;
         max-width: 100%;
         align-items: center;
     }
@@ -2690,7 +2690,7 @@ footer a:hover,
     }
 
     .problem3-title-main {
-        font-size: 48px;
+        font-size: 38px;
         line-height: 53px;
         text-align: center;
         width: 100%;
@@ -2702,8 +2702,8 @@ footer a:hover,
     }
 
     .problem3-title-regular {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
         display: block;
         font-weight: 600;
         text-align: center;
@@ -2856,7 +2856,7 @@ footer a:hover,
     }
 
     .problem3-title-main {
-        font-size: 48px;
+        font-size: 38px;
         line-height: 53px;
         text-align: center;
     }
@@ -2867,8 +2867,8 @@ footer a:hover,
     }
 
     .problem3-title-regular {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
         display: block;
         font-weight: 600;
         text-align: center;
@@ -3020,7 +3020,7 @@ footer a:hover,
 
     .problem3-title-main {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
     }
 
     .problem3-title-regular {
@@ -3165,7 +3165,7 @@ footer a:hover,
 
 .problem4-title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 53px;
   color: #FF943D;
@@ -3294,7 +3294,7 @@ footer a:hover,
 
 .validation-number {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 53px;
   color: #FF943D;
@@ -3304,9 +3304,9 @@ footer a:hover,
 
 .validation-label {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 18px;
   color: #FEFEFF;
   margin: 0;
   white-space: pre-wrap;
@@ -3325,9 +3325,9 @@ footer a:hover,
 
 .survey-info {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 18px;
   color: #FEFEFF;
   margin: 0;
 }
@@ -3351,7 +3351,7 @@ footer a:hover,
 
   .problem4-title {
     font-size: 40px;
-    line-height: 44px;
+    line-height: 36px;
   }
 
   .problem4-subtitle {
@@ -3360,7 +3360,7 @@ footer a:hover,
   }
 
   .validation-stats {
-    gap: 24px;
+    gap: 16px;
   }
 
   .validation-stat {
@@ -3369,7 +3369,7 @@ footer a:hover,
 
   .validation-number {
     font-size: 40px;
-    line-height: 44px;
+    line-height: 36px;
   }
 
   .validation-label {
@@ -3407,13 +3407,13 @@ footer a:hover,
   }
 
   .problem4-subtitle {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .validation-stats {
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     align-items: stretch;
   }
 
@@ -3425,7 +3425,7 @@ footer a:hover,
 
   .validation-number {
     font-size: 36px;
-    line-height: 40px;
+    line-height: 32px;
   }
 
   .validation-label {
@@ -3470,7 +3470,7 @@ footer a:hover,
 
 .problem5-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -3486,7 +3486,7 @@ footer a:hover,
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 }
 
 
@@ -3684,7 +3684,7 @@ footer a:hover,
 .problem5-footer {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     align-items: center;
     width: 100%;
     text-align: center;
@@ -3710,9 +3710,9 @@ footer a:hover,
 
 .problem5-footer-subtext {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -3745,11 +3745,11 @@ footer a:hover,
 
     .problem5-title {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
     }
 
     .testimonials-grid {
-        gap: 24px;
+        gap: 16px;
     }
 
     .testimonial-item {
@@ -3779,7 +3779,7 @@ footer a:hover,
     .problem5-section {
         padding: 40px 24px;
         min-height: auto;
-        gap: 24px;
+        gap: 16px;
     }
 
     .problem5-title {
@@ -3829,8 +3829,8 @@ footer a:hover,
     }
 
     .problem5-footer-main {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
     }
 
     .problem5-footer-subtext {
@@ -3839,8 +3839,8 @@ footer a:hover,
     }
 
     .problem5-footer-question {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
     }
 }
 
@@ -4099,15 +4099,15 @@ footer a:hover,
 
 .solution1-card-label {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     margin: 0;
 }
 
 .solution1-card-price {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     margin: 0;
@@ -4279,16 +4279,16 @@ footer a:hover,
 
 .solution1-card-column h4 {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     margin: 0;
     text-align: center;
 }
 
 .solution1-card-column h2 {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     margin: 0;
@@ -4370,12 +4370,12 @@ footer a:hover,
 
     .solution1-card-price {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
     }
 
     .solution1-card-column h2 {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
     }
 }
 
@@ -4383,7 +4383,7 @@ footer a:hover,
 @media (max-width: 768px) {
     .solution1-section {
         padding: 20px 0 0 0;
-        gap: 24px;
+        gap: 16px;
         height: auto;
     }
 
@@ -4672,7 +4672,7 @@ footer a:hover,
 
 .solution2-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -4684,9 +4684,9 @@ footer a:hover,
 
 .solution2-subtitle {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #525252;
     margin: 0;
     width: 100%;
@@ -5147,7 +5147,7 @@ footer a:hover,
 @media (max-width: 480px) {
     .solution2-section {
         padding: 24px 6px;
-        gap: 24px;
+        gap: 16px;
         box-sizing: border-box;
     }
 
@@ -5387,7 +5387,7 @@ footer a:hover,
 .solution3-cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
     align-items: stretch;
     justify-content: center;
@@ -5446,9 +5446,9 @@ footer a:hover,
 
 .solution3-card-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #272727;
     text-align: center;
     margin: 0;
@@ -5457,7 +5457,7 @@ footer a:hover,
 .solution3-card-body {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
 }
 
@@ -5525,7 +5525,7 @@ footer a:hover,
 
 .solution3-credit-value {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -5537,9 +5537,9 @@ footer a:hover,
 
 .solution3-credit-outro {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     text-align: center;
     margin: 0;
@@ -5549,9 +5549,9 @@ footer a:hover,
 
 .solution3-card-title-alt {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #272727;
     text-align: center;
     margin: 0;
@@ -5895,7 +5895,7 @@ footer a:hover,
 .solution4-header {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     align-items: center;
     text-align: center;
     width: 100%;
@@ -5912,7 +5912,7 @@ footer a:hover,
 
 .solution4-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -5921,9 +5921,9 @@ footer a:hover,
 
 .solution4-subtitle {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #525252;
     max-width: 786px;
     margin: 0;
@@ -5934,7 +5934,7 @@ footer a:hover,
 .solution4-cards {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
 }
 
@@ -6020,9 +6020,9 @@ footer a:hover,
 
 .clinica-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
     text-align: center;
@@ -6054,9 +6054,9 @@ footer a:hover,
 
 .clinica-plus {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
     text-align: center;
@@ -6156,7 +6156,7 @@ footer a:hover,
 
 .solution4-bottom-cards {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
     min-height: 400px;
 }
@@ -6241,9 +6241,9 @@ footer a:hover,
 
 .bottom-card-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -6296,7 +6296,7 @@ footer a:hover,
 
     .solution4-title {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
     }
 
     .solution4-subtitle {
@@ -6651,9 +6651,9 @@ footer a:hover,
 
 .joinus1-subtitle {
     font-family: var(--font-family);
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -6880,9 +6880,9 @@ footer a:hover,
 
 .card-label {
     font-family: var(--font-family);
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #FEFEFF;
     text-align: center;
     margin: 0;
@@ -6911,7 +6911,7 @@ footer a:hover,
 
 .price-value {
     font-family: var(--font-family);
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -6941,9 +6941,9 @@ footer a:hover,
 
 .price-suffix {
     font-family: var(--font-family);
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -6988,9 +6988,9 @@ footer a:hover,
 
 .joinus1-middle-title {
     font-family: var(--font-family);
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #000000;
     margin: 0;
     text-align: center;
@@ -7196,9 +7196,9 @@ footer a:hover,
 
 .plan-badge-text {
     font-family: var(--font-family);
-    font-size: 24px;
+    font-size: 14px;
     font-weight: 600;
-    line-height: 28px;
+    line-height: 18px;
     color: #3D3D3D;
     margin: 0;
     text-align: center;
@@ -7243,7 +7243,7 @@ footer a:hover,
 
 .plan-number {
     font-family: var(--font-family);
-    font-size: 48px;
+    font-size: 38px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -7292,8 +7292,8 @@ footer a:hover,
     }
 
     .joinus1-subtitle {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
     }
 
     
@@ -7346,8 +7346,8 @@ footer a:hover,
     }
 
     .joinus1-card-3 .card-section-title {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
         word-break: break-word;
     }
 
@@ -7372,7 +7372,7 @@ footer a:hover,
 
     .price-value {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
     }
 
     .price-subtitle {
@@ -7521,7 +7521,7 @@ footer a:hover,
 
     .joinus1-title {
         font-size: 32px;
-        line-height: 28px;
+        line-height: 18px;
     }
 
     .joinus1-subtitle {
@@ -7576,13 +7576,13 @@ footer a:hover,
     }
 
     .price-value {
-        font-size: 48px;
+        font-size: 38px;
         line-height: 53px;
     }
 
     .price-suffix {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
     }
 
     .card-section-title {
@@ -7603,7 +7603,7 @@ footer a:hover,
     
     .joinus1-bottom-cards {
         grid-template-columns: 1fr;
-        gap: 24px;
+        gap: 16px;
         justify-items: center;
     }
 
@@ -7707,8 +7707,8 @@ footer a:hover,
     }
 
     .plan-highlight {
-        font-size: 24px;
-        line-height: 28px;
+        font-size: 14px;
+        line-height: 18px;
         text-align: center;
         width: 100%;
         margin: 0 auto;
@@ -7717,7 +7717,7 @@ footer a:hover,
 
     .plan-number {
         font-size: 40px;
-        line-height: 44px;
+        line-height: 36px;
         text-align: center;
         width: 100%;
         margin: 0 auto;
@@ -7951,7 +7951,7 @@ footer a:hover,
 
 .joinus2-title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 56px;
   color: #3D3D3D;
@@ -7963,7 +7963,7 @@ footer a:hover,
 .joinus2-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 16px;
   width: 100%;
   max-width: 1280px;
 }
@@ -8318,7 +8318,7 @@ footer a:hover,
 
   .joinus2-title {
     font-size: 32px;
-    line-height: 40px;
+    line-height: 32px;
   }
 
   .joinus2-cards-grid {
@@ -8671,7 +8671,7 @@ footer a:hover,
 
 .joinus3-title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 700;
   line-height: 53px;
   color: #FEFEFF;
@@ -8681,9 +8681,9 @@ footer a:hover,
 
 .joinus3-subtitle {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 18px;
   color: #FEFEFF;
   margin: 0;
   white-space: pre-wrap;
@@ -9004,7 +9004,7 @@ footer a:hover,
   }
 
   .joinus3-container {
-    gap: 24px;
+    gap: 16px;
   }
 
   .joinus3-icon {
@@ -9036,8 +9036,8 @@ footer a:hover,
   }
 
   .joinus3-stat-badge-text {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 14px;
+    line-height: 18px;
   }
 
   .joinus3-stat-label {
@@ -9154,7 +9154,7 @@ footer a:hover,
 
 .reservar-container {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   max-width: 1200px;
   width: 100%;
   align-items: flex-start;
@@ -9475,7 +9475,7 @@ footer a:hover,
 
 .reservar-info-cards {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   flex-wrap: wrap;
   width: 100%;
 }
@@ -9603,7 +9603,7 @@ footer a:hover,
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   text-align: center;
 }
 
@@ -9616,15 +9616,15 @@ footer a:hover,
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 38px;
   font-weight: bold;
 }
 
 .reservar-modal-title {
   font-family: 'Mona Sans', sans-serif;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 28px;
+  font-size: 14px;
+  line-height: 18px;
   color: var(--color-neutral-50, #272727);
   margin: 0;
 }
@@ -9719,7 +9719,7 @@ footer a:hover,
   }
 
   .reservar-right-column {
-    gap: 24px;
+    gap: 16px;
     max-width: 100%;
     width: 100%;
   }
@@ -9871,7 +9871,7 @@ footer a:hover,
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 
@@ -9908,9 +9908,9 @@ footer a:hover,
 
 .faq-question-text {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 18px;
   color: #3D3D3D;
   flex: 1;
   transition: color 0.3s ease;
@@ -10023,8 +10023,8 @@ footer a:hover,
   }
 
   .faq-title {
-    font-size: 24px;
-    line-height: 28px;
+    font-size: 14px;
+    line-height: 18px;
     margin-bottom: 32px;
   }
 
@@ -10345,7 +10345,7 @@ footer a:hover,
 @media (max-width: 768px) {
     .footer {
         padding: 40px 24px;
-        gap: 24px;
+        gap: 16px;
     }
 
     .footer-container {
