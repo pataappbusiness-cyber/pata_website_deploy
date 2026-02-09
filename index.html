@@ -24,7 +24,15 @@
       partytown = {
         lib: "/_partytown/",
         forward: ["dataLayer.push", "gtag"],
-        debug: false
+        debug: false,
+        // Handle network errors gracefully
+        resolveUrl: function(url) {
+          // Block disabled consent manager requests
+          if (url.href.includes('consentmanager.net')) {
+            return undefined;
+          }
+          return url;
+        }
       };
     </script>
     <script src="/_partytown/partytown.js"></script>
@@ -131,6 +139,11 @@
         :root {
             --z-sticky: 1000;
             --transition-fast: 0.2s ease;
+        }
+
+        /* Apply font immediately to use preloaded font */
+        body {
+            font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .navbar {
