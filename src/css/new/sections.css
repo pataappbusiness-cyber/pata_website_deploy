@@ -15,6 +15,7 @@
   padding-top: 120px;
   padding-bottom: 60px;
   background: var(--bg-black);
+  contain: layout;
 }
 
 

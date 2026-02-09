@@ -548,3 +548,49 @@ footer a:hover,
     cursor: auto !important;
   }
 }
+
+
+/* ========================================
+   PERFORMANCE OPTIMIZATIONS
+   ======================================== */
+
+/* Content Visibility - Defer rendering of off-screen sections */
+#problem2,
+#problem3,
+#problem4,
+#problem5,
+#solution1,
+#solution2,
+#solution3,
+#solution4,
+#joinus1,
+#joinus2,
+#joinus3,
+#reservar,
+#faq,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 500px;
+}
+
+/* GPU Acceleration for animated elements */
+.price-card-grey,
+.price-card-orange,
+.problem3-stat-card,
+.testimonial-card,
+.solution1-card-left,
+.solution1-card-right,
+.faq-item,
+.navbar-cta-button,
+.scroll-to-top-btn {
+  will-change: transform, opacity;
+}
+
+/* Optimize background videos for compositing */
+.background-video,
+.problem4-background-video,
+.card-background-video,
+.solution3-background-video {
+  will-change: transform;
+  transform: translateZ(0);
+}
