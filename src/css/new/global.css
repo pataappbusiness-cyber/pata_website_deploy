@@ -566,7 +566,10 @@ footer a:hover,
 .testimonial-card,
 .price-card-grey,
 .price-card-orange,
+.problem3-stat-card,
 .faq-item,
+.navbar-cta-button,
+.scroll-to-top-btn,
 [data-parallax] {
   will-change: transform, opacity;
 }
@@ -579,6 +582,15 @@ footer a:hover,
 .pill-right-bottom.visible,
 .mockup-center.visible {
   will-change: auto;
+}
+
+/* Optimize background videos for compositing */
+.background-video,
+.problem4-background-video,
+.card-background-video,
+.solution3-background-video {
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ============================================

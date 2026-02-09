@@ -402,6 +402,7 @@
             padding-top: 120px;
             padding-bottom: 60px;
             background: #000;
+            contain: layout;
         }
 
         .header-content {
@@ -456,6 +457,14 @@
         img, video {
             max-width: 100%;
             height: auto;
+        }
+
+        /* Background video aspect ratio for CLS prevention */
+        .background-video,
+        .problem4-background-video,
+        .card-background-video,
+        .solution3-background-video {
+            aspect-ratio: 16 / 9;
         }
 
         .pill-image {
