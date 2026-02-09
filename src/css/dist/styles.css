@@ -545,6 +545,72 @@ footer a:hover,
   }
 }
 
+/* ============================================
+   PERFORMANCE: will-change for animated elements
+   ============================================ */
+
+/* Elements that animate transform/opacity */
+.header-content,
+.pill-left-top,
+.pill-left-bottom,
+.pill-right-top,
+.pill-right-bottom,
+.mockup-center,
+.problem2-animation,
+.solution1-card-left,
+.solution1-card-right,
+.testimonial-card,
+.price-card-grey,
+.price-card-orange,
+.faq-item,
+[data-parallax] {
+  will-change: transform, opacity;
+}
+
+/* Remove will-change after animation completes to free GPU memory */
+.header-content.visible,
+.pill-left-top.visible,
+.pill-left-bottom.visible,
+.pill-right-top.visible,
+.pill-right-bottom.visible,
+.mockup-center.visible {
+  will-change: auto;
+}
+
+/* ============================================
+   PERFORMANCE: content-visibility for off-screen sections
+   Improves initial render by skipping off-screen content
+   ============================================ */
+
+/* Apply to sections below the fold */
+#problem1,
+#problem2,
+#problem3,
+#problem4,
+#problem5,
+#solution1,
+#solution2,
+#solution3,
+#solution4,
+#joinus1,
+#joinus2,
+#joinus3,
+#reservar,
+#faq,
+footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
+}
+
+/* Smaller intrinsic size for FAQ and footer */
+#faq {
+  contain-intrinsic-size: auto 600px;
+}
+
+footer {
+  contain-intrinsic-size: auto 400px;
+}
+
 
 .animated-gradient {
     background: linear-gradient(90deg, #FFF8F2 0%, #ffe5d0 100%);

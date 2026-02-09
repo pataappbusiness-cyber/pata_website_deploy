@@ -10,11 +10,15 @@
     <link rel="dns-prefetch" href="https://media.pata.care">
     <link rel="dns-prefetch" href="https://fonts.bunny.net">
     <!-- <link rel="dns-prefetch" href="https://cdn.consentmanager.net"> -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
     <link rel="dns-prefetch" href="https://www.google.com">
     <link rel="dns-prefetch" href="https://script.google.com">
 
     <link rel="preload" href="./src/img/new_images/mockup_no_bg.webp" as="image" type="image/webp">
+
+    <!-- Preload critical script for faster LCP -->
+    <link rel="preload" href="./src/js/dist/scripts-critical.min.js" as="script">
 
     <!-- Prefetch deferred scripts while browser is idle -->
     <link rel="prefetch" href="./src/js/dist/scripts-deferred.min.js" as="script">
@@ -700,7 +704,7 @@
                         muted
                         playsinline
                         preload="none"
-                        poster="https://media.pata.care/videos/problem1_video1_poster.jpg"
+                        poster="https://media.pata.care/videos/problem1_video1_poster.webp"
                         data-lazy-video
                         aria-hidden="true"
                         role="presentation">
@@ -737,7 +741,7 @@
                         muted
                         playsinline
                         preload="none"
-                        poster="https://media.pata.care/videos/problem1_video2_poster.jpg"
+                        poster="https://media.pata.care/videos/problem1_video2_poster.webp"
                         data-lazy-video
                         aria-hidden="true"
                         role="presentation">
@@ -794,13 +798,17 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                 </div>
 
                 <div class="problem2-animation">
-                    
+
                     <picture>
-                        <source srcset="src/img/images/PATA_APP.webp" type="image/webp">
+                        <source srcset="src/img/images/PATA_APP.webp 1031w, src/img/images/PATA_APP.webp 613w"
+                                sizes="(max-width: 768px) 100vw, 613px"
+                                type="image/webp">
                         <img src="src/img/images/PATA_APP.png"
+                             srcset="src/img/images/PATA_APP.png 1031w"
+                             sizes="(max-width: 768px) 100vw, 613px"
                              alt="PATA App"
-                             width="1031"
-                             height="861"
+                             width="613"
+                             height="511"
                              loading="lazy">
                     </picture>
                 </div>
@@ -923,7 +931,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     muted
                     playsinline
                     preload="none"
-                    poster="https://media.pata.care/videos/2849936-hd_1280_720_24fps_poster.jpg"
+                    poster="https://media.pata.care/videos/2849936-hd_1280_720_24fps_poster.webp"
                     data-lazy-video
                     aria-hidden="true"
                     role="presentation">
@@ -1096,7 +1104,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             muted
                             playsinline
                             preload="none"
-                            poster="https://media.pata.care/videos/1851002-hd_1280_720_24fps_poster.jpg"
+                            poster="https://media.pata.care/videos/1851002-hd_1280_720_24fps_poster.webp"
                             data-lazy-video
                             aria-hidden="true"
                             role="presentation">
@@ -1141,7 +1149,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                             muted
                             playsinline
                             preload="none"
-                            poster="https://media.pata.care/videos/3939111-hd_1280_720_24fps_poster.jpg"
+                            poster="https://media.pata.care/videos/3939111-hd_1280_720_24fps_poster.webp"
                             data-lazy-video
                             aria-hidden="true"
                             role="presentation">
@@ -1358,7 +1366,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                     muted
                     playsinline
                     preload="none"
-                    poster="https://media.pata.care/videos/6865078-hd_1366_720_25fps_poster.jpg"
+                    poster="https://media.pata.care/videos/6865078-hd_1366_720_25fps_poster.webp"
                     data-lazy-video
                     aria-hidden="true"
                     role="presentation">
