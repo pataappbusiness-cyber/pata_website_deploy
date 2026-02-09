@@ -20,27 +20,11 @@
     <link rel="prefetch" href="./src/js/dist/scripts-deferred.min.js" as="script">
     <link rel="prefetch" href="./src/js/dist/scripts-lazy.min.js" as="script">
 
+    <!-- Google Analytics - loaded directly (Partytown removed due to CORS issues) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y"></script>
     <script>
-      partytown = {
-        lib: "/_partytown/",
-        forward: ["dataLayer.push", "gtag"],
-        debug: false,
-        // Handle network errors gracefully
-        resolveUrl: function(url) {
-          // Block disabled consent manager requests
-          if (url.href.includes('consentmanager.net')) {
-            return undefined;
-          }
-          return url;
-        }
-      };
-    </script>
-    <script src="/_partytown/partytown.js"></script>
-
-    <script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=G-JD85N7J78Y"></script>
-    <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag(){dataLayer.push(arguments);}
+      function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', 'G-JD85N7J78Y');
     </script>
