@@ -269,6 +269,15 @@
   transform: scale(0.98);
 }
 
+@media (max-width: 768px) {
+  .joinus3-cta-button:hover,
+  .joinus3-cta-button:active {
+    transform: none !important;
+    box-shadow: none !important;
+    animation: none !important;
+  }
+}
+
 .joinus3-cta-text {
   font-family: 'Mona Sans', sans-serif;
   font-size: 18px;

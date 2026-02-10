@@ -114,7 +114,7 @@
             src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
-            font-display: optional;
+            font-display: swap;
         }
 
         /* Mona Sans SemiBold (600) */
@@ -123,7 +123,7 @@
             src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-600-normal.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
-            font-display: optional;
+            font-display: swap;
         }
 
         /* Mona Sans Bold (700) */
@@ -132,16 +132,16 @@
             src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-700-normal.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
-            font-display: optional;
+            font-display: swap;
         }
 
-        /* Adjusted fallback to match Mona Sans metrics */
+        /* Adjusted fallback to match Mona Sans metrics — values from GitHub blog */
         @font-face {
             font-family: 'Mona Sans Fallback';
-            src: local('Segoe UI'), local('Arial'), local('Helvetica');
-            size-adjust: 100.5%;
-            ascent-override: 96%;
-            descent-override: 25%;
+            src: local('Arial'), local('Helvetica Neue'), local('Helvetica');
+            size-adjust: 108.5%;
+            ascent-override: 82%;
+            descent-override: 22%;
             line-gap-override: 0%;
         }
     </style>
@@ -404,10 +404,11 @@
             }
         }
 
-        /* Hero Section Critical CSS */
+        /* Hero Section Critical CSS — must exactly match sections.css to prevent CLS */
         .header-section {
             position: relative;
             height: 100vh;
+            height: 100svh;
             min-height: 928px;
             width: 100%;
             overflow: hidden;
@@ -417,37 +418,8 @@
             align-items: center;
             padding-top: 120px;
             padding-bottom: 60px;
-            background: url('/src/img/shader-placeholder.webp') center/cover no-repeat, #000;
+            background: var(--bg-black, #000);
             contain: layout;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .header-title {
-            font-family: 'Mona Sans', sans-serif;
-            font-size: 38px;
-            font-weight: 700;
-            line-height: 1;
-            margin: 0;
-        }
-
-        .header-title-white {
-            color: #FEFEFF;
-            display: block;
-            line-height: 32px;
-        }
-        .header-title-orange {
-            color: #FF943D;
-            display: block;
-            line-height: 36px;
         }
 
         body {
@@ -456,29 +428,12 @@
             margin: 0;
         }
 
-        @media (max-width: 768px) {
-            .header-title { font-size: 32px; }
-            .header-title-white, .header-title-orange { line-height: 36px; }
-            .header-launch { font-size: 24px; line-height: 28px; }
-            .header-content { gap: 12px; }
-            .header-section {
-                min-height: auto;
-                height: 95vh;
-                padding-top: 80px;
-                padding-bottom: 20px;
-            }
-            .header-container {
-                min-height: 400px;
-            }
-        }
-
         /* CLS Prevention - Image & Video Sizing */
         img, video {
             max-width: 100%;
             height: auto;
         }
 
-        /* Background video aspect ratio for CLS prevention */
         .background-video,
         .problem4-background-video,
         .card-background-video,
@@ -487,88 +442,260 @@
         }
 
         .pill-image {
-            aspect-ratio: 3/4;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            position: relative;
+            z-index: 2;
         }
 
         .mockup-image {
             aspect-ratio: 476/952;
         }
 
-        /* CRITICAL FIX: Force mockup to be visible immediately for LCP */
-        .mockup-center {
-            opacity: 1 !important;
-            transition: none !important;
+        /* Hero fade-in: CSS @keyframes animations are excluded from CLS */
+        @keyframes heroFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
+
+        .header-content {
+            animation: heroFadeIn 0.6s ease both;
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            z-index: 10;
+            min-height: 120px;
+        }
+
+        .mockup-center {
+            animation: heroFadeIn 0.6s ease 0.4s both;
+            width: 620px;
+            height: 538px;
+            max-width: 820px;
+            min-width: 499px;
+            padding: 40px 83px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
         .mockup-image {
-            content-visibility: auto;
             width: 476px;
             height: auto;
+            aspect-ratio: 476 / 952;
             object-fit: contain;
             position: relative;
             z-index: 5;
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4));
         }
+
+        /* Header container — matches sections.css exactly */
+        .header-container {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header visual container — matches sections.css exactly */
+        .header-visual-container {
+            align-self: stretch;
+            flex: 1;
+            padding-left: 80px;
+            padding-right: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Header title — matches sections.css exactly */
+        .header-title {
+            align-self: stretch;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+        }
+
+        .header-title-white {
+            color: #FEFEFF;
+            font-size: 48px;
+            font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
+            font-variation-settings: "wght" 700;
+            line-height: 40px;
+        }
+
+        .header-title-orange {
+            color: #FF943D;
+            font-size: 48px;
+            font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 700;
+            font-variation-settings: "wght" 700;
+            line-height: 44px;
+        }
+
+        /* Header launch — matches sections.css exactly */
+        .header-launch {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            color: #FF943D;
+            font-size: 24px;
+            font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 600;
+            font-variation-settings: "wght" 600;
+            line-height: 28px;
+            text-align: center;
+        }
+
+        /* Pills container — matches sections.css exactly */
+        .visual-pills-left,
+        .visual-pills-right {
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .visual-pills-left {
+            align-items: flex-end;
+        }
+
+        .visual-pills-right {
+            align-items: flex-start;
+        }
+
+        .image-pill {
+            width: 151px;
+            position: relative;
+            border-radius: 550px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-pill picture {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .pill-left-top {
+            height: 176px;
+        }
+
+        .pill-left-bottom {
+            height: 302px;
+        }
+
+        .pill-right-top {
+            height: 322px;
+        }
+
+        .pill-right-bottom {
+            height: 156px;
+        }
+
+        /* Tablet breakpoint */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .header-visual-container {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .image-pill {
+                width: 130px;
+            }
+            .mockup-center {
+                width: 520px;
+                min-width: 420px;
+                height: 480px;
+                padding: 30px 40px;
+            }
+            .mockup-image {
+                width: 400px;
+                height: auto;
+            }
+        }
+
+        /* Mobile breakpoint — matches sections.css exactly */
         @media (max-width: 768px) {
+            .header-section {
+                height: 95vh;
+                height: 95svh;
+                min-height: 0;
+                padding-top: 80px;
+                padding-bottom: 20px;
+                justify-content: center;
+            }
+            .header-container {
+                gap: 32px;
+                flex: 1;
+                justify-content: center;
+            }
+            .header-content {
+                gap: 12px;
+                min-height: auto;
+            }
+            .header-launch {
+                font-size: 24px;
+                font-weight: 600;
+                line-height: 28px;
+            }
+            .header-title-white,
+            .header-title-orange {
+                font-size: 32px;
+                font-weight: 700;
+                line-height: 36px;
+            }
+            .header-visual-container {
+                flex-direction: column;
+                padding-left: 0;
+                padding-right: 0;
+                gap: 0;
+                flex: 1;
+                max-height: 55svh;
+                overflow: hidden;
+            }
+            /* Hide pills on mobile — only show mockup (matches Figma mobile) */
+            .visual-pills-left,
+            .visual-pills-right {
+                display: none;
+            }
+            .mockup-center {
+                width: 100%;
+                min-width: auto;
+                height: 100%;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+            }
             .mockup-image {
                 width: auto;
                 height: 100%;
                 max-width: 400px;
                 max-height: 100%;
+                object-fit: contain;
+                filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
             }
-        }
-
-        /* Critical: Header visual container layout */
-        .header-container {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            max-width: 1440px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 600px;
-        }
-
-        .header-visual-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 24px;
-            margin-top: 40px;
-        }
-
-
-        /* Critical: Pills container layout */
-        .visual-pills-left, .visual-pills-right {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .image-pill {
-            border-radius: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        /* Critical: Header launch tag - matches Figma H4 style */
-        .header-launch {
-            font-family: 'Mona Sans', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            color: #FF943D;
-            line-height: 18px;
-            text-align: center;
-        }
-
-        @media (max-width: 1024px) {
-            .header-visual-container { gap: 16px; }
-        }
-
-        @media (max-width: 768px) {
-            .header-visual-container { flex-direction: column; gap: 0; }
-            /* Hide pills on mobile - only show mockup */
-            .visual-pills-left, .visual-pills-right { display: none !important; }
         }
     </style>
 
@@ -615,6 +742,18 @@
 
         <section id="hero" class="header-section">
 
+            <div class="header-background-container">
+                <video class="header-background-video"
+                    autoplay loop muted playsinline preload="metadata"
+                    poster="/src/img/shader-placeholder.webp"
+                    aria-hidden="true"
+                    role="presentation"
+                    width="1280"
+                    height="600">
+                    <source src="./src/img/videos/compressed/header_shader_video3.mp4" type="video/mp4">
+                </video>
+            </div>
+
             <div class="header-container">
 
                 <div class="header-content">
@@ -639,7 +778,7 @@
                                     src="./src/img/new_images/cao_medico.png"
                                     alt="Cão com médico veterinário"
                                     class="pill-image"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                     width="300"
                                     height="400">
@@ -654,7 +793,7 @@
                                     src="./src/img/new_images/vet.png"
                                     alt="Veterinário profissional"
                                     class="pill-image"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                     width="300"
                                     height="400">
@@ -688,7 +827,7 @@
                                     src="./src/img/new_images/cao.png"
                                     alt="Cão feliz"
                                     class="pill-image"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                     width="300"
                                     height="400">
@@ -703,7 +842,7 @@
                                     src="./src/img/new_images/gatinho.png"
                                     alt="Gatinho adorável"
                                     class="pill-image"
-                                    loading="lazy"
+                                    loading="eager"
                                     decoding="async"
                                     width="300"
                                     height="400">

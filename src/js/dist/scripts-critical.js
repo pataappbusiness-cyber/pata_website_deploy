@@ -23,7 +23,16 @@ class Navbar {
   }
 
   init() {
-    window.addEventListener('scroll', () => this.handleScroll(), { passive: true });
+    this._scrollTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!this._scrollTicking) {
+        this._scrollTicking = true;
+        requestAnimationFrame(() => {
+          this.handleScroll();
+          this._scrollTicking = false;
+        });
+      }
+    }, { passive: true });
     if (this.navbarToggle && this.navbarLinks) {
       this.navbarToggle.addEventListener('click', () => this.toggleMobileMenu());
     }
@@ -69,48 +78,7 @@ class Navbar {
 
 
 
-/* ============================================
-   HEADER ANIMATIONS
-   ============================================ */
-
-class HeaderAnimations {
-  constructor() {
-    this.section = document.querySelector('.header-section');
-    this.headerContent = document.querySelector('.header-content');
-    this.pillLeftTop = document.querySelector('.pill-left-top');
-    this.pillLeftBottom = document.querySelector('.pill-left-bottom');
-    this.pillRightTop = document.querySelector('.pill-right-top');
-    this.pillRightBottom = document.querySelector('.pill-right-bottom');
-    this.mockupCenter = document.querySelector('.mockup-center');
-    this.isVisible = false;
-
-    if (this.section) {
-      this.init();
-    }
-  }
-
-  init() {
-    const options = { root: null, rootMargin: '0px', threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !this.isVisible) {
-          this.showElements();
-          this.isVisible = true;
-        }
-      });
-    }, options);
-    observer.observe(this.section);
-  }
-
-  showElements() {
-    if (this.headerContent) this.headerContent.classList.add('visible');
-    if (this.pillLeftTop) this.pillLeftTop.classList.add('visible');
-    if (this.pillLeftBottom) this.pillLeftBottom.classList.add('visible');
-    if (this.pillRightTop) this.pillRightTop.classList.add('visible');
-    if (this.pillRightBottom) this.pillRightBottom.classList.add('visible');
-    if (this.mockupCenter) this.mockupCenter.classList.add('visible');
-  }
-}
+/* Header animations now handled by CSS @keyframes (excluded from CLS) */
 
 /* ============================================
    CONTACT BUTTONS
@@ -180,7 +148,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize critical modules
   const smoothScroll = new SmoothScroll();
   new Navbar();
-  new HeaderAnimations();
   new ContactButtons(smoothScroll);
 
   // Store for deferred script access

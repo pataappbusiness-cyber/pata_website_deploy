@@ -1,10 +1,10 @@
 
-
-
+/* ===== HEADER / HERO SECTION ===== */
 
 .header-section {
   position: relative;
   height: 100vh;
+  height: 100svh;
   min-height: 928px;
   width: 100%;
   overflow: hidden;
@@ -18,8 +18,42 @@
   contain: layout;
 }
 
+/* Header background video container */
+.header-background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+}
 
-/* Static shader placeholder image replacing the removed WebGL liquid shader */
+.header-background-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  display: none;
+}
+
+/* Desktop/tablet: show video, hide static image fallback */
+@media (min-width: 769px) {
+  .header-background-video {
+    display: block;
+  }
+
+  .header-section::before {
+    display: none;
+  }
+}
+
+/* Static shader placeholder image — mobile fallback */
 .header-section::before {
   content: '';
   position: absolute;
@@ -31,7 +65,7 @@
   background: url('/src/img/shader-placeholder.webp') center/cover no-repeat;
 }
 
-
+/* Dark overlay (20%) — stays on all viewports */
 .header-section::after {
   content: '';
   position: absolute;
@@ -44,21 +78,16 @@
   pointer-events: none;
 }
 
-
-
-
-
 .header-container {
   align-self: stretch;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0;
+  gap: 32px;
   position: relative;
   z-index: 2;
 }
-
 
 .header-content {
   align-self: stretch;
@@ -66,7 +95,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   z-index: 10;
   min-height: 120px;
 }
@@ -76,11 +105,11 @@
   justify-content: center;
   flex-direction: column;
   color: #FF943D;
-  font-size: 14px;
-  font-family: 'Mona Sans', sans-serif;
+  font-size: 24px;
+  font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 600;
   font-variation-settings: "wght" 600;
-  line-height: 18px;
+  line-height: 28px;
   text-align: center;
 }
 
@@ -95,35 +124,32 @@
 
 .header-title-white {
   color: #FEFEFF;
-  font-size: 38px;
-  font-family: 'Mona Sans', sans-serif;
+  font-size: 48px;
+  font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
   font-variation-settings: "wght" 700;
-  line-height: 32px;
+  line-height: 40px;
 }
 
 .header-title-orange {
   color: #FF943D;
-  font-size: 38px;
-  font-family: 'Mona Sans', sans-serif;
+  font-size: 48px;
+  font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
   font-variation-settings: "wght" 700;
-  line-height: 36px;
+  line-height: 44px;
 }
-
 
 .header-visual-container {
   align-self: stretch;
+  flex: 1;
   padding-left: 80px;
   padding-right: 80px;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
 }
-
-
-
 
 .visual-pills-left,
 .visual-pills-right {
@@ -142,12 +168,11 @@
   align-items: flex-start;
 }
 
-
 .image-pill {
   width: 151px;
   position: relative;
   border-radius: 550px;
-  box-shadow: 0px 0px 12px rgba(255, 148.18, 61.30, 0.40);
+  box-shadow: 0px 0px 12px rgba(255, 148, 61, 0.40);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -169,7 +194,6 @@
   z-index: 2;
   display: block;
 }
-
 
 .pill-left-top {
   height: 176px;
@@ -222,7 +246,6 @@
   z-index: 10;
 }
 
-
 .pill-left-bottom {
   height: 302px;
   flex: 1 1 0;
@@ -273,7 +296,6 @@
   z-index: 10;
 }
 
-
 .pill-right-top {
   height: 322px;
   flex: 1 1 0;
@@ -301,10 +323,10 @@
   inset: 0;
   border-radius: 550px;
   background:
-    linear-gradient(0deg, rgba(255, 148.18, 61.30, 0.08) 0%, rgba(255, 148.18, 61.30, 0.08) 100%),
+    linear-gradient(0deg, rgba(255, 148, 61, 0.08) 0%, rgba(255, 148, 61, 0.08) 100%),
     linear-gradient(180deg, rgba(255, 148, 61, 0) 0%, rgba(255, 148, 61, 0.20) 100%),
     rgba(219, 93, 35, 0.20),
-    radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, rgba(179, 80, 0, 0.30) 0%, rgba(255, 245, 238, 0.30) 100%);
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(179, 80, 0, 0.30) 0%, rgba(255, 245, 238, 0.30) 100%);
   background-blend-mode: overlay, overlay, normal, normal, normal;
   mix-blend-mode: overlay;
   z-index: 2;
@@ -327,7 +349,6 @@
   pointer-events: none;
   z-index: 10;
 }
-
 
 .pill-right-bottom {
   height: 156px;
@@ -357,9 +378,9 @@
   inset: 0;
   border-radius: 550px;
   background:
-    linear-gradient(0deg, rgba(255, 148.18, 61.30, 0.08) 0%, rgba(255, 148.18, 61.30, 0.08) 100%),
+    linear-gradient(0deg, rgba(255, 148, 61, 0.08) 0%, rgba(255, 148, 61, 0.08) 100%),
     linear-gradient(180deg, rgba(255, 148, 61, 0) 0%, rgba(255, 148, 61, 0.20) 100%),
-    radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, rgba(179, 80, 0, 0.20) 0%, rgba(255, 245, 238, 0.20) 100%);
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(179, 80, 0, 0.20) 0%, rgba(255, 245, 238, 0.20) 100%);
   background-blend-mode: overlay, normal, normal, normal;
   mix-blend-mode: overlay;
   z-index: 2;
@@ -383,91 +404,60 @@
   z-index: 10;
 }
 
-
-
 .mockup-center {
   width: 620px;
-  height: 616px;
+  height: 538px;
   max-width: 820px;
-  min-width: 620px;
-  padding: 40px 60px;
+  min-width: 499px;
+  padding: 40px 83px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  flex-shrink: 0;
 }
 
 .mockup-image {
   width: 476px;
   height: auto;
+  aspect-ratio: 476 / 952;
   object-fit: contain;
   position: relative;
   z-index: 5;
   filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.4));
 }
 
-
-
+/* Hero fade-in animations */
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 .header-content {
-  opacity: 0;
-  transition: opacity 0.6s ease;
+  animation: heroFadeIn 0.6s ease both;
 }
-
-.header-content.visible {
-  opacity: 1;
-}
-
 
 .pill-left-top {
-  opacity: 0;
-  transition: opacity 0.6s ease 0.2s;
-}
-
-.pill-left-top.visible {
-  opacity: 1;
+  animation: heroFadeIn 0.6s ease 0.2s both;
 }
 
 .pill-left-bottom {
-  opacity: 0;
-  transition: opacity 0.6s ease 0.3s;
+  animation: heroFadeIn 0.6s ease 0.3s both;
 }
-
-.pill-left-bottom.visible {
-  opacity: 1;
-}
-
 
 .pill-right-top {
-  opacity: 0;
-  transition: opacity 0.6s ease 0.2s;
-}
-
-.pill-right-top.visible {
-  opacity: 1;
+  animation: heroFadeIn 0.6s ease 0.2s both;
 }
 
 .pill-right-bottom {
-  opacity: 0;
-  transition: opacity 0.6s ease 0.3s;
+  animation: heroFadeIn 0.6s ease 0.3s both;
 }
-
-.pill-right-bottom.visible {
-  opacity: 1;
-}
-
 
 .mockup-center {
-  opacity: 0;
-  transition: opacity 0.6s ease 0.4s;
+  animation: heroFadeIn 0.6s ease 0.4s both;
 }
 
-.mockup-center.visible {
-  opacity: 1;
-}
-
-
-
+/* Tablet breakpoint */
 @media (min-width: 769px) and (max-width: 1024px) {
   .header-visual-container {
     padding-left: 40px;
@@ -480,22 +470,22 @@
 
   .mockup-center {
     width: 520px;
-    min-width: 520px;
-    height: 560px;
+    min-width: 420px;
+    height: 480px;
+    padding: 30px 40px;
   }
 
   .mockup-image {
-    width: 420px;
+    width: 400px;
     height: auto;
   }
-
 }
 
-
-
+/* Mobile breakpoint */
 @media (max-width: 768px) {
   .header-section {
     height: 95vh;
+    height: 95svh;
     min-height: 0;
     padding-top: 80px;
     padding-bottom: 20px;
@@ -503,7 +493,7 @@
   }
 
   .header-container {
-    gap: 8px;
+    gap: 32px;
     flex: 1;
     justify-content: center;
   }
@@ -532,9 +522,11 @@
     padding-right: 0;
     gap: 0;
     flex: 1;
-    max-height: 50vh;
+    max-height: 55svh;
+    overflow: hidden;
   }
 
+  /* Hide pills on mobile — only show mockup (matches Figma mobile) */
   .visual-pills-left,
   .visual-pills-right {
     display: none;
@@ -548,6 +540,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
   }
 
   .mockup-image {
@@ -558,7 +551,6 @@
     object-fit: contain;
     filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
   }
-
 }
 
 

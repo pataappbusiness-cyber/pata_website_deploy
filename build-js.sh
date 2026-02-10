@@ -11,7 +11,6 @@ mkdir -p "$DIST_DIR"
 # IMPORTANTE: scroll-to-top.js e scroll-button-shader.js ANTES de main.js
 # porque main.js usa a classe ScrollToTopButton
 JS_FILES=(
-  "./src/js/liquid-shader.js"
   "./src/js/new/scroll-to-top.js"
   "./src/js/new/scroll-button-shader.js"
   "./src/js/new/faq.js"

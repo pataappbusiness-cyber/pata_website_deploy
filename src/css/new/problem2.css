@@ -371,3 +371,11 @@
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
+
+@media (max-width: 768px) {
+    .problem2-cost-box:hover,
+    .problem2-cost-box:active {
+        transform: none !important;
+        animation: none !important;
+    }
+}

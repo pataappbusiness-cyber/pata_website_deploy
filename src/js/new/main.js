@@ -21,8 +21,17 @@ class Navbar {
   }
 
   init() {
-    // Scroll effect
-    window.addEventListener('scroll', () => this.handleScroll());
+    // Scroll effect (throttled with rAF)
+    this._scrollTicking = false;
+    window.addEventListener('scroll', () => {
+      if (!this._scrollTicking) {
+        this._scrollTicking = true;
+        requestAnimationFrame(() => {
+          this.handleScroll();
+          this._scrollTicking = false;
+        });
+      }
+    }, { passive: true });
 
     // Mobile toggle
     if (this.navbarToggle && this.navbarLinks) {
@@ -874,73 +883,7 @@ class ReservarAnimations {
   }
 }
 
-/* ============================================
-   SECTION 1: HEADER - REVEAL ANIMATIONS
-   ============================================ */
-
-class HeaderAnimations {
-  constructor() {
-    this.section = document.querySelector('.header-section');
-    this.headerContent = document.querySelector('.header-content');
-    this.pillLeftTop = document.querySelector('.pill-left-top');
-    this.pillLeftBottom = document.querySelector('.pill-left-bottom');
-    this.pillRightTop = document.querySelector('.pill-right-top');
-    this.pillRightBottom = document.querySelector('.pill-right-bottom');
-    this.mockupCenter = document.querySelector('.mockup-center');
-    this.isVisible = false;
-
-    if (this.section) {
-      this.init();
-    }
-  }
-
-  init() {
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !this.isVisible) {
-          this.showElements();
-          this.isVisible = true;
-        }
-      });
-    }, options);
-
-    observer.observe(this.section);
-  }
-
-  showElements() {
-    // Show header content
-    if (this.headerContent) {
-      this.headerContent.classList.add('visible');
-    }
-
-    // Show left pills
-    if (this.pillLeftTop) {
-      this.pillLeftTop.classList.add('visible');
-    }
-    if (this.pillLeftBottom) {
-      this.pillLeftBottom.classList.add('visible');
-    }
-
-    // Show right pills
-    if (this.pillRightTop) {
-      this.pillRightTop.classList.add('visible');
-    }
-    if (this.pillRightBottom) {
-      this.pillRightBottom.classList.add('visible');
-    }
-
-    // Show center mockup
-    if (this.mockupCenter) {
-      this.mockupCenter.classList.add('visible');
-    }
-  }
-}
+/* Header reveal animations now handled by CSS @keyframes (excluded from CLS) */
 
 /* ============================================
    SECTION 15: JOINUS3 - STAT CARDS REVEAL ANIMATIONS
@@ -1476,8 +1419,7 @@ document.addEventListener('DOMContentLoaded', () => {
     headerParallax = new HeaderParallax();
   }
 
-  // Initialize Header Reveal Animations
-  new HeaderAnimations();
+  // Header reveal animations now handled by CSS @keyframes
 
   // Initialize Mouse Highlight (skip if reduced motion)
   let mouseHighlight = null;

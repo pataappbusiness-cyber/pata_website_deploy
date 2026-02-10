@@ -1212,3 +1212,13 @@
     transform: scale(0.98) translateY(10px) !important;
     animation: none;
 }
+
+@media (max-width: 768px) {
+    .joinus1-card.visible:hover,
+    .joinus1-card.visible:active,
+    .bottom-plan-card.visible:hover,
+    .bottom-plan-card.visible:active {
+        transform: none !important;
+        animation: none !important;
+    }
+}

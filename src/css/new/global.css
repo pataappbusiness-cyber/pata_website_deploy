@@ -448,22 +448,6 @@ textarea:focus-visible,
 
 
 
-@keyframes liquid-gradient-animation {
-  0%, 100% {
-    background-position: 0% 0%, 0% 0%, 100% 0%, 50% 100%, 0% 100%, 100% 0%, 0% 100%;
-  }
-  25% {
-    background-position: 100% 0%, 50% 50%, 0% 50%, 100% 50%, 50% 0%, 50% 100%, 100% 0%;
-  }
-  50% {
-    background-position: 50% 100%, 100% 0%, 50% 100%, 0% 0%, 100% 100%, 0% 0%, 50% 50%;
-  }
-  75% {
-    background-position: 0% 50%, 0% 100%, 100% 50%, 50% 0%, 50% 100%, 100% 50%, 0% 0%;
-  }
-}
-
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -559,28 +543,12 @@ footer a:hover,
    PERFORMANCE: will-change for animated elements
    ============================================ */
 
-/* will-change only for above-the-fold hero elements (reduces GPU memory) */
-.header-content,
-.pill-left-top,
-.pill-left-bottom,
-.pill-right-top,
-.pill-right-bottom,
-.mockup-center {
-  will-change: transform, opacity;
-}
-
-/* Remove will-change after animation completes to free GPU memory */
-.header-content.visible,
-.pill-left-top.visible,
-.pill-left-bottom.visible,
-.pill-right-top.visible,
-.pill-right-bottom.visible,
-.mockup-center.visible {
-  will-change: auto;
-}
+/* Hero elements use CSS @keyframes animations (excluded from CLS) */
+/* No will-change needed — browser optimizes compositing for CSS animations automatically */
 
 /* Optimize background videos for compositing */
 .background-video,
+.header-background-video,
 .problem4-background-video,
 .card-background-video,
 .solution3-background-video {
@@ -640,7 +608,15 @@ footer {
     .solution3-card.visible:hover,
     .solution4-main-card.visible:hover,
     .bottom-card.visible:hover,
-    .problem3-stat-card:hover {
+    .problem3-stat-card:hover,
+    .problem2-cost-box:hover,
+    .problem2-cost-box:active,
+    .joinus1-card.visible:hover,
+    .joinus1-card.visible:active,
+    .bottom-plan-card.visible:hover,
+    .bottom-plan-card.visible:active,
+    .joinus3-cta-button:hover,
+    .joinus3-cta-button:active {
         transform: none !important;
         animation: none !important;
     }

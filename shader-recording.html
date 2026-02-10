@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PATA Shader Recording</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+    canvas {
+      display: block;
+      width: 100vw;
+      height: 100vh;
+      filter: blur(125px) contrast(1.80);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="shader-canvas"></canvas>
+  <script>
+    class LiquidShader {
+      constructor(canvasId) {
+        this.canvas = document.getElementById(canvasId);
+        this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
+
+        if (!this.gl) {
+          console.warn('WebGL not supported');
+          return;
+        }
+
+        this.startTime = Date.now();
+        this.animationId = null;
+
+        // PATA Brand Colors (normalized to 0-1 range for WebGL)
+        this.brandColors = {
+          blue: [44/255, 101/255, 147/255],        // #2C6593
+          darkOrange: [219/255, 93/255, 35/255],   // #DB5D23
+          lightOrange: [255/255, 200/255, 129/255] // #FFC881
+        };
+
+        this.mouseX = 0.5;
+        this.mouseY = 0.5;
+
+        this.init();
+      }
+
+      init() {
+        this.resizeCanvas();
+        window.addEventListener('resize', () => this.resizeCanvas());
+        this.canvas.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+        this.canvas.addEventListener('mouseleave', () => this.handleMouseLeave());
+
+        this.createShaderProgram();
+        this.setupUniforms();
+        this.setupGeometry();
+
+        // Always animate — no IntersectionObserver, no pause
+        this.animate();
+      }
+
+      handleMouseMove(e) {
+        const rect = this.canvas.getBoundingClientRect();
+        this.mouseX = (e.clientX - rect.left) / rect.width;
+        this.mouseY = 1.0 - (e.clientY - rect.top) / rect.height;
+      }
+
+      handleMouseLeave() {
+        this.mouseX = 0.5;
+        this.mouseY = 0.5;
+      }
+
+      resizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 1);
+        const displayWidth = this.canvas.clientWidth;
+        const displayHeight = this.canvas.clientHeight;
+        this.canvas.width = displayWidth * dpr;
+        this.canvas.height = displayHeight * dpr;
+        if (this.gl) {
+          this.gl.viewport(0, 0, this.canvas.width, this.canvas.height);
+        }
+      }
+
+      createShaderProgram() {
+        const vertexShaderSource = `
+          attribute vec2 a_position;
+          void main() {
+            gl_Position = vec4(a_position, 0.0, 1.0);
+          }
+        `;
+
+        const fragmentShaderSource = `
+          precision mediump float;
+          uniform vec2 u_resolution;
+          uniform float u_time;
+          uniform vec2 u_mouse;
+          uniform vec3 u_color1;
+          uniform vec3 u_color2;
+          uniform vec3 u_color3;
+
+          void main() {
+            vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+            float mouseInfluence = distance(uv, u_mouse);
+            mouseInfluence = 1.0 - smoothstep(0.0, 0.5, mouseInfluence);
+
+            float d = -u_time * 0.5 + mouseInfluence * 2.0;
+            float a = 0.0;
+
+            for (float i = 0.0; i < 5.0; i += 1.0) {
+              a += cos(i - d - a * uv.x + mouseInfluence);
+              d += sin(uv.y * i + a);
+            }
+
+            d += u_time * 0.5;
+
+            float mix1 = sin(d + a) * 0.5 + 0.5;
+            float mix2 = cos(d - a) * 0.5 + 0.5;
+
+            vec3 brightOrange1 = u_color2 * 1.3;
+            vec3 brightOrange2 = u_color3 * 1.4;
+
+            vec3 tempColor = mix(u_color1, brightOrange1, mix1 * 0.4);
+            vec3 finalColor = mix(tempColor, brightOrange2, mix2 * 0.3);
+
+            finalColor = finalColor * 0.75;
+            gl_FragColor = vec4(finalColor, 1.0);
+          }
+        `;
+
+        const vertexShader = this.compileShader(vertexShaderSource, this.gl.VERTEX_SHADER);
+        const fragmentShader = this.compileShader(fragmentShaderSource, this.gl.FRAGMENT_SHADER);
+
+        this.program = this.gl.createProgram();
+        this.gl.attachShader(this.program, vertexShader);
+        this.gl.attachShader(this.program, fragmentShader);
+        this.gl.linkProgram(this.program);
+
+        if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {
+          console.error('Shader program failed to link:', this.gl.getProgramInfoLog(this.program));
+          return;
+        }
+
+        this.gl.useProgram(this.program);
+      }
+
+      compileShader(source, type) {
+        const shader = this.gl.createShader(type);
+        this.gl.shaderSource(shader, source);
+        this.gl.compileShader(shader);
+
+        if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+          console.error('Shader compilation error:', this.gl.getShaderInfoLog(shader));
+          this.gl.deleteShader(shader);
+          return null;
+        }
+
+        return shader;
+      }
+
+      setupUniforms() {
+        this.uniforms = {
+          resolution: this.gl.getUniformLocation(this.program, 'u_resolution'),
+          time: this.gl.getUniformLocation(this.program, 'u_time'),
+          mouse: this.gl.getUniformLocation(this.program, 'u_mouse'),
+          color1: this.gl.getUniformLocation(this.program, 'u_color1'),
+          color2: this.gl.getUniformLocation(this.program, 'u_color2'),
+          color3: this.gl.getUniformLocation(this.program, 'u_color3')
+        };
+
+        this.gl.uniform3fv(this.uniforms.color1, this.brandColors.blue);
+        this.gl.uniform3fv(this.uniforms.color2, this.brandColors.darkOrange);
+        this.gl.uniform3fv(this.uniforms.color3, this.brandColors.lightOrange);
+      }
+
+      setupGeometry() {
+        const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+        const buffer = this.gl.createBuffer();
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, buffer);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, positions, this.gl.STATIC_DRAW);
+
+        const positionLocation = this.gl.getAttribLocation(this.program, 'a_position');
+        this.gl.enableVertexAttribArray(positionLocation);
+        this.gl.vertexAttribPointer(positionLocation, 2, this.gl.FLOAT, false, 0, 0);
+      }
+
+      animate() {
+        this.animationId = requestAnimationFrame(() => this.animate());
+
+        const currentTime = (Date.now() - this.startTime) * 0.001;
+
+        this.gl.uniform2f(this.uniforms.resolution, this.canvas.width, this.canvas.height);
+        this.gl.uniform1f(this.uniforms.time, currentTime);
+        this.gl.uniform2f(this.uniforms.mouse, this.mouseX, this.mouseY);
+
+        this.gl.clearColor(0, 0, 0, 0);
+        this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+        this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+      }
+    }
+
+    new LiquidShader('shader-canvas');
+  </script>
+</body>
+</html>
