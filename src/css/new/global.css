@@ -553,23 +553,13 @@ footer a:hover,
    PERFORMANCE: will-change for animated elements
    ============================================ */
 
-/* Elements that animate transform/opacity */
+/* will-change only for above-the-fold hero elements (reduces GPU memory) */
 .header-content,
 .pill-left-top,
 .pill-left-bottom,
 .pill-right-top,
 .pill-right-bottom,
 .mockup-center,
-.problem2-animation,
-.solution1-card-left,
-.solution1-card-right,
-.testimonial-card,
-.price-card-grey,
-.price-card-orange,
-.problem3-stat-card,
-.faq-item,
-.navbar-cta-button,
-.scroll-to-top-btn,
 [data-parallax] {
   will-change: transform, opacity;
 }
@@ -625,4 +615,18 @@ footer {
 
 footer {
   contain-intrinsic-size: auto 400px;
+}
+
+/* Mobile performance: simplified shadows and disabled hover animations */
+@media (max-width: 768px) {
+    .price-card-grey,
+    .price-card-orange,
+    .problem3-stat-card,
+    .testimonial-card,
+    .solution3-card,
+    .joinus1-card,
+    .bottom-plan-card,
+    .benefit-card {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
 }

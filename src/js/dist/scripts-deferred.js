@@ -700,20 +700,50 @@ class ScrollToTopButton {
 
     this.handleScroll = this.handleScroll.bind(this);
     this.scrollToTop = this.scrollToTop.bind(this);
+
+    // Pre-compute dark section offsets for arrow color
+    this.darkSections = [];
+    this.computeDarkSections();
+
     this.init();
   }
 
-  init() {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          this.handleScroll();
-          ticking = false;
+  computeDarkSections() {
+    this.darkSections = [];
+    const darkIds = ['hero', 'problem1', 'problem4', 'solution1', 'solution3', 'joinus2', 'joinus3'];
+    darkIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        this.darkSections.push({
+          top: el.offsetTop,
+          bottom: el.offsetTop + el.offsetHeight
         });
-        ticking = true;
       }
     });
+    // Also include footer
+    const footer = document.querySelector('footer');
+    if (footer) {
+      this.darkSections.push({
+        top: footer.offsetTop,
+        bottom: footer.offsetTop + footer.offsetHeight
+      });
+    }
+  }
+
+  init() {
+    // Throttled scroll handler (100ms instead of per-frame)
+    let scrollTimeout;
+    window.addEventListener('scroll', () => {
+      if (!scrollTimeout) {
+        scrollTimeout = setTimeout(() => {
+          this.handleScroll();
+          scrollTimeout = null;
+        }, 100);
+      }
+    }, { passive: true });
+
+    // Re-compute dark sections on resize
+    window.addEventListener('resize', () => this.computeDarkSections());
 
     this.button.addEventListener('click', (e) => {
       e.preventDefault();
@@ -753,24 +783,14 @@ class ScrollToTopButton {
   }
 
   updateArrowColor() {
-    const buttonRect = this.button.getBoundingClientRect();
-    const buttonCenterY = buttonRect.top + buttonRect.height / 2;
-    const elementBelow = document.elementFromPoint(
-      buttonRect.left + buttonRect.width / 2,
-      buttonCenterY + buttonRect.height
-    );
+    // Use pre-computed offsets instead of document.elementFromPoint (avoids forced reflow)
+    const scrollY = window.scrollY + window.innerHeight - 60;
+    const isDark = this.darkSections.some(s => scrollY >= s.top && scrollY <= s.bottom);
 
-    if (!elementBelow) return;
-
-    const section = elementBelow.closest('section, footer');
-    if (section) {
-      const whiteSections = ['problem4', 'solution1', 'solution3', 'joinus2', 'joinus3'];
-      const isWhiteSection = whiteSections.includes(section.id) || section.tagName.toLowerCase() === 'footer';
-      if (isWhiteSection) {
-        this.button.classList.add('white-arrow');
-      } else {
-        this.button.classList.remove('white-arrow');
-      }
+    if (isDark) {
+      this.button.classList.add('white-arrow');
+    } else {
+      this.button.classList.remove('white-arrow');
     }
   }
 

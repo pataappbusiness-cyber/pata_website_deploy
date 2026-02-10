@@ -8,6 +8,12 @@ class LiquidShader {
       return;
     }
 
+    // Mobile: don't initialize shader, use CSS fallback
+    if (window.innerWidth < 768 && !window.matchMedia('(hover: hover)').matches) {
+      this.canvas.style.display = 'none';
+      return;
+    }
+
     this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
 
     if (!this.gl) {
@@ -18,6 +24,8 @@ class LiquidShader {
 
     this.startTime = Date.now();
     this.animationId = null;
+    this.isVisible = true;
+    this.animating = false;
 
     // PATA Brand Colors (normalized to 0-1 range for WebGL)
     this.brandColors = {
@@ -43,6 +51,20 @@ class LiquidShader {
     this.createShaderProgram();
     this.setupUniforms();
     this.setupGeometry();
+
+    // Pause shader when canvas is out of viewport
+    this.visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        this.isVisible = entry.isIntersecting;
+        if (this.isVisible && !this.animating) {
+          this.animating = true;
+          this.animate();
+        }
+      });
+    }, { threshold: 0.01 });
+    this.visibilityObserver.observe(this.canvas);
+
+    this.animating = true;
     this.animate();
   }
 
@@ -196,6 +218,11 @@ class LiquidShader {
   }
 
   animate() {
+    if (!this.isVisible) {
+      this.animating = false;
+      return;
+    }
+
     this.animationId = requestAnimationFrame(() => this.animate());
 
     const currentTime = (Date.now() - this.startTime) * 0.001; // Convert to seconds
@@ -214,6 +241,10 @@ class LiquidShader {
   destroy() {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
+    }
+
+    if (this.visibilityObserver) {
+      this.visibilityObserver.disconnect();
     }
 
     window.removeEventListener('resize', () => this.resizeCanvas());

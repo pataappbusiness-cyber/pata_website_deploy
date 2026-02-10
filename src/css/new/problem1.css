@@ -152,7 +152,7 @@
 }
 
 
-.left-panel h3 {
+.left-panel h2 {
   
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
@@ -351,7 +351,7 @@
 }
 
 
-.right-panel h3 {
+.right-panel h2 {
   
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
@@ -429,7 +429,7 @@
   flex-shrink: 0;
 }
 
-.info-box h4 {
+.info-box h3 {
   
   font-family: 'Mona Sans', sans-serif;
   font-size: 24px;
@@ -485,8 +485,8 @@
 
 
 @media (max-width: 1024px) {
-  .left-panel h3,
-  .right-panel h3 {
+  .left-panel h2,
+  .right-panel h2 {
     font-size: 28px;
     line-height: 32px;
   }
@@ -530,8 +530,8 @@
   }
 
   
-  .left-panel h3,
-  .right-panel h3 {
+  .left-panel h2,
+  .right-panel h2 {
     font-size: 24px;
     line-height: 28px;
   }
@@ -552,7 +552,7 @@
     min-width: unset; 
   }
 
-  .info-box h4 {
+  .info-box h3 {
     font-size: 20px;
     line-height: 24px;
   }

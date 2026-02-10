@@ -329,7 +329,7 @@
     justify-content: flex-start;
 }
 
-.solution1-card-column h4 {
+.solution1-card-column p:first-child {
     font-family: 'Mona Sans', sans-serif;
     font-size: 24px;
     font-weight: 600;
@@ -338,7 +338,7 @@
     text-align: center;
 }
 
-.solution1-card-column h2 {
+.solution1-card-column p:nth-child(2) {
     font-family: 'Mona Sans', sans-serif;
     font-size: 48px;
     font-weight: 700;
@@ -425,7 +425,7 @@
         line-height: 44px;
     }
 
-    .solution1-card-column h2 {
+    .solution1-card-column p:nth-child(2) {
         font-size: 40px;
         line-height: 44px;
     }
@@ -539,13 +539,13 @@
         gap: 8px;
     }
 
-    .solution1-card-column h4 {
+    .solution1-card-column p:first-child {
         font-size: 18px;
         line-height: 20px;
         width: 100%;
     }
 
-    .solution1-card-column h2 {
+    .solution1-card-column p:nth-child(2) {
         font-size: 32px;
         line-height: 36px;
         width: 100%;
@@ -580,12 +580,12 @@
         width: calc(100% - 24px);
     }
 
-    .solution1-card-column h4 {
+    .solution1-card-column p:first-child {
         font-size: 16px;
         line-height: 18px;
     }
 
-    .solution1-card-column h2 {
+    .solution1-card-column p:nth-child(2) {
         font-size: 28px;
         line-height: 32px;
     }

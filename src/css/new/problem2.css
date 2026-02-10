@@ -137,7 +137,7 @@
 }
 
 .problem2-cost-value {
-    color: var(--color-neutral-200, #525252);
+    color: var(--color-neutral-100, #3D3D3D);
     font-family: 'Mona Sans', sans-serif;
     font-size: 48px;
     font-style: normal;

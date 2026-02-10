@@ -84,6 +84,12 @@ class LiquidShader {
       return;
     }
 
+    // Mobile: don't initialize shader, use CSS fallback
+    if (window.innerWidth < 768 && !window.matchMedia('(hover: hover)').matches) {
+      this.canvas.style.display = 'none';
+      return;
+    }
+
     this.gl = this.canvas.getContext('webgl') || this.canvas.getContext('experimental-webgl');
 
     if (!this.gl) {
@@ -95,6 +101,8 @@ class LiquidShader {
     this.startTime = Date.now();
     this.animationId = null;
     this.isReady = false;
+    this.isVisible = true;
+    this.animating = false;
     this.frameCount = 0;
 
     this.brandColors = {
@@ -117,6 +125,20 @@ class LiquidShader {
     this.createShaderProgram();
     this.setupUniforms();
     this.setupGeometry();
+
+    // Pause shader when canvas is out of viewport
+    this.visibilityObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        this.isVisible = entry.isIntersecting;
+        if (this.isVisible && !this.animating) {
+          this.animating = true;
+          this.animate();
+        }
+      });
+    }, { threshold: 0.01 });
+    this.visibilityObserver.observe(this.canvas);
+
+    this.animating = true;
     this.animate();
   }
 
@@ -233,6 +255,10 @@ class LiquidShader {
   }
 
   animate() {
+    if (!this.isVisible) {
+      this.animating = false;
+      return;
+    }
     this.animationId = requestAnimationFrame(() => this.animate());
     const currentTime = (Date.now() - this.startTime) * 0.001;
     this.gl.uniform2f(this.uniforms.resolution, this.canvas.width, this.canvas.height);
@@ -259,6 +285,9 @@ class LiquidShader {
   destroy() {
     if (this.animationId) {
       cancelAnimationFrame(this.animationId);
+    }
+    if (this.visibilityObserver) {
+      this.visibilityObserver.disconnect();
     }
     if (this.gl) {
       this.gl.deleteProgram(this.program);
@@ -587,10 +616,34 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initialize critical modules
   const smoothScroll = new SmoothScroll();
   new Navbar();
-  const headerParallax = new HeaderParallax();
   new HeaderAnimations();
-  const mouseHighlight = new MouseHighlight();
   new ContactButtons(smoothScroll);
+
+  // Only initialize parallax/highlight effects when motion is allowed
+  let headerParallax = null;
+  let mouseHighlight = null;
+  if (!prefersReducedMotion) {
+    headerParallax = new HeaderParallax();
+    mouseHighlight = new MouseHighlight();
+
+    // Pause HeaderParallax when hero section is not visible
+    const heroSection = document.querySelector('#hero');
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          if (headerParallax && !headerParallax.isActive) {
+            headerParallax.isActive = true;
+            headerParallax.animate();
+          }
+        } else {
+          if (headerParallax) {
+            headerParallax.isActive = false;
+          }
+        }
+      }, { threshold: 0.01 });
+      heroObserver.observe(heroSection);
+    }
+  }
 
   // Store for deferred script access
   window._pataInstances = {
@@ -610,7 +663,11 @@ window.addEventListener('beforeunload', () => {
     });
   }
   if (window._pataInstances) {
-    if (window._pataInstances.mouseHighlight) window._pataInstances.mouseHighlight.destroy();
-    if (window._pataInstances.headerParallax) window._pataInstances.headerParallax.destroy();
+    if (window._pataInstances.mouseHighlight) {
+      window._pataInstances.mouseHighlight.destroy();
+    }
+    if (window._pataInstances.headerParallax) {
+      window._pataInstances.headerParallax.destroy();
+    }
   }
 });
