@@ -577,7 +577,7 @@
 
   .reservar-right-column {
     gap: 24px;
-    max-width: 100%;
+    max-width: 480px;
     width: 100%;
   }
 

@@ -11,22 +11,19 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #000000;
+  background: #000;
 }
 
-
-.joinus3-section .liquid-shader-canvas {
+.joinus3-section::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none;
-  filter: blur(125px) contrast(1.80);
-  contain: strict;
+  background: url('/src/img/shader-placeholder.webp') center/cover no-repeat;
 }
-
 
 .joinus3-section::after {
   content: '';
@@ -39,101 +36,6 @@
   z-index: 1;
   pointer-events: none;
 }
-
-
-@media (prefers-reduced-motion: reduce) {
-  .joinus3-section .liquid-shader-canvas {
-    display: none;
-  }
-
-  .joinus3-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background:
-      radial-gradient(
-        ellipse 80% 50% at 50% -20%,
-        var(--gradient-color-1),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 20% 30%,
-        var(--gradient-color-2),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 50% 60% at 80% 50%,
-        var(--gradient-color-3),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 70% 80% at 50% 100%,
-        var(--gradient-color-4),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 90% 70% at 10% 80%,
-        var(--gradient-color-5),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 40% 40% at 70% 20%,
-        var(--gradient-color-6),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 50% 50% at 30% 70%,
-        var(--gradient-color-7),
-        transparent
-      ),
-      var(--gradient-color-8);
-    background-size: 200% 200%;
-    animation: liquid-gradient-animation 20s ease-in-out infinite;
-    filter: blur(80px);
-    opacity: 0.9;
-  }
-}
-
-
-@media (max-width: 768px) {
-  .joinus3-section .liquid-shader-canvas {
-    display: none;
-  }
-
-  .joinus3-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background:
-      radial-gradient(
-        ellipse 80% 50% at 50% -20%,
-        var(--gradient-color-1),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 20% 30%,
-        var(--gradient-color-2),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 50% 60% at 80% 50%,
-        var(--gradient-color-3),
-        transparent
-      ),
-      var(--gradient-color-8);
-    filter: blur(80px);
-    opacity: 0.9;
-  }
-}
-
 
 
 .joinus3-container {
@@ -580,7 +482,7 @@
 
   .joinus3-pricing-card {
     padding: 16px 12px;
-    max-width: 100%;
+    max-width: 480px;
   }
 
   .joinus3-pricing-text {

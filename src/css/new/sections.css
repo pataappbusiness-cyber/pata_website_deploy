@@ -19,80 +19,16 @@
 }
 
 
-.liquid-shader-canvas {
+/* Static shader placeholder image replacing the removed WebGL liquid shader */
+.header-section::before {
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none;
-  filter: blur(125px) contrast(1.80);
-  contain: strict;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.liquid-shader-canvas.shader-ready {
-  opacity: 1;
-}
-
-
-@media (prefers-reduced-motion: reduce) {
-  .liquid-shader-canvas {
-    display: none;
-  }
-
-  .header-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background:
-      radial-gradient(
-        ellipse 80% 50% at 50% -20%,
-        var(--gradient-color-1),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 20% 30%,
-        var(--gradient-color-2),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 50% 60% at 80% 50%,
-        var(--gradient-color-3),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 70% 80% at 50% 100%,
-        var(--gradient-color-4),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 90% 70% at 10% 80%,
-        var(--gradient-color-5),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 40% 40% at 70% 20%,
-        var(--gradient-color-6),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 50% 50% at 30% 70%,
-        var(--gradient-color-7),
-        transparent
-      ),
-      var(--gradient-color-8);
-    background-size: 200% 200%;
-    animation: liquid-gradient-animation 20s ease-in-out infinite;
-    filter: blur(80px);
-    opacity: 0.9;
-  }
+  background: url('/src/img/shader-placeholder.webp') center/cover no-repeat;
 }
 
 
@@ -106,42 +42,6 @@
   background: rgba(0, 0, 0, 0.20);
   z-index: 1;
   pointer-events: none;
-}
-
-
-@media (max-width: 768px) {
-  .liquid-shader-canvas {
-    display: none;
-  }
-
-  .header-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background:
-      radial-gradient(
-        ellipse 80% 50% at 50% -20%,
-        var(--gradient-color-1),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 60% 50% at 20% 30%,
-        var(--gradient-color-2),
-        transparent
-      ),
-      radial-gradient(
-        ellipse 50% 60% at 80% 50%,
-        var(--gradient-color-3),
-        transparent
-      ),
-      var(--gradient-color-8);
-    filter: blur(80px);
-    opacity: 0.9;
-  }
 }
 
 
@@ -692,11 +592,14 @@
 }
 
 
+@media (hover: none), (pointer: coarse) {
+  .draggable-element {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .draggable-element {
-    bottom: 20px;
-    right: 20px;
-    width: 124px;
-    height: 124px;
+    display: none !important;
   }
 }

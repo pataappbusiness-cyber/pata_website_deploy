@@ -675,22 +675,24 @@
     }
 }
 
-.solution1-card-left .card-content.visible:hover {
-    transform: scale(1.02) translateY(-10px) !important;
-    animation: circling-halo-solution1-grey 2s ease-in-out infinite;
-}
+@media (hover: hover) {
+    .solution1-card-left .card-content.visible:hover {
+        transform: scale(1.02) translateY(-10px) !important;
+        animation: circling-halo-solution1-grey 2s ease-in-out infinite;
+    }
 
-.solution1-card-left .card-content.visible:active {
-    transform: scale(0.98) translateY(10px) !important;
-    animation: none;
-}
+    .solution1-card-left .card-content.visible:active {
+        transform: scale(0.98) translateY(10px) !important;
+        animation: none;
+    }
 
-.solution1-card-right .card-content.visible:hover {
-    transform: scale(1.02) translateY(-10px) !important;
-    animation: circling-halo-solution1-orange 2s ease-in-out infinite;
-}
+    .solution1-card-right .card-content.visible:hover {
+        transform: scale(1.02) translateY(-10px) !important;
+        animation: circling-halo-solution1-orange 2s ease-in-out infinite;
+    }
 
-.solution1-card-right .card-content.visible:active {
-    transform: scale(0.98) translateY(10px) !important;
-    animation: none;
+    .solution1-card-right .card-content.visible:active {
+        transform: scale(0.98) translateY(10px) !important;
+        animation: none;
+    }
 }

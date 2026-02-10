@@ -543,12 +543,14 @@
     }
 }
 
-.solution3-card.visible:hover {
-    transform: scale(1.02) translateY(-10px) !important;
-    animation: circling-halo-solution3 2s ease-in-out infinite;
-}
+@media (hover: hover) {
+    .solution3-card.visible:hover {
+        transform: scale(1.02) translateY(-10px) !important;
+        animation: circling-halo-solution3 2s ease-in-out infinite;
+    }
 
-.solution3-card.visible:active {
-    transform: scale(0.98) translateY(10px) !important;
-    animation: none;
+    .solution3-card.visible:active {
+        transform: scale(0.98) translateY(10px) !important;
+        animation: none;
+    }
 }

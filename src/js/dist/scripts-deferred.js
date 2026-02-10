@@ -933,7 +933,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize all animation modules
   new VideoLazyLoader();
-  new DraggableElement();
+  if (window.matchMedia('(hover: hover)').matches) {
+    new DraggableElement();
+  }
   new Problem1Animations();
   new Problem2Animations();
   new Problem3Animations();
@@ -950,8 +952,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Initialize scroll to top button
   window.scrollToTopButton = new ScrollToTopButton(smoothScroll);
-
-  console.log('🐾 PATA Deferred JS loaded');
 
   // Cleanup
   window.addEventListener('beforeunload', () => {
@@ -970,13 +970,11 @@ window.addEventListener('load', () => {
       const entries = performance.getEntriesByType('navigation');
       if (entries.length > 0) {
         const navEntry = entries[0];
-        console.log(`⚡ Page Load: ${Math.round(navEntry.loadEventEnd)}ms`);
       } else if (window.performance.timing) {
         // Fallback to deprecated API
         const perfData = window.performance.timing;
         const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
         if (pageLoadTime > 0) {
-          console.log(`⚡ Page Load: ${pageLoadTime}ms`);
         }
       }
     }

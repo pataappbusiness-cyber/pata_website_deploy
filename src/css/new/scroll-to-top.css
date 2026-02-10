@@ -270,6 +270,17 @@
     right: -8px;
     bottom: -8px;
   }
+
+  .scroll-to-top-btn:hover,
+  .scroll-to-top-btn:active {
+    filter: none !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .scroll-to-top-btn:hover .arrow-icon,
+  .scroll-to-top-btn:active .arrow-icon {
+    filter: none !important;
+  }
 }
 
 

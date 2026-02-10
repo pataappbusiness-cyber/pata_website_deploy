@@ -724,22 +724,24 @@
     }
 }
 
-.solution4-main-card.visible:hover {
-    transform: scale(1.02) translateY(-10px) !important;
-    animation: circling-halo 2s ease-in-out infinite;
-}
+@media (hover: hover) {
+    .solution4-main-card.visible:hover {
+        transform: scale(1.02) translateY(-10px) !important;
+        animation: circling-halo 2s ease-in-out infinite;
+    }
 
-.solution4-main-card.visible:active {
-    transform: scale(0.98) translateY(10px) !important;
-    animation: none;
-}
+    .solution4-main-card.visible:active {
+        transform: scale(0.98) translateY(10px) !important;
+        animation: none;
+    }
 
-.bottom-card.visible:hover {
-    transform: scale(1.02) translateY(-10px) !important;
-    animation: circling-halo 2s ease-in-out infinite;
-}
+    .bottom-card.visible:hover {
+        transform: scale(1.02) translateY(-10px) !important;
+        animation: circling-halo 2s ease-in-out infinite;
+    }
 
-.bottom-card.visible:active {
-    transform: scale(0.98) translateY(10px) !important;
-    animation: none;
+    .bottom-card.visible:active {
+        transform: scale(0.98) translateY(10px) !important;
+        animation: none;
+    }
 }

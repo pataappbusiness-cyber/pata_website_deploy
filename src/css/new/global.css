@@ -123,6 +123,12 @@ img[src$="bone.svg"]:active,
   pointer-events: none !important;
 }
 
+@media (hover: none), (pointer: coarse) {
+    .draggable-element {
+        display: none !important;
+    }
+}
+
 
 
 
@@ -627,5 +633,15 @@ footer {
     .bottom-plan-card,
     .benefit-card {
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .solution1-card-left .card-content.visible:hover,
+    .solution1-card-right .card-content.visible:hover,
+    .solution3-card.visible:hover,
+    .solution4-main-card.visible:hover,
+    .bottom-card.visible:hover,
+    .problem3-stat-card:hover {
+        transform: none !important;
+        animation: none !important;
     }
 }
