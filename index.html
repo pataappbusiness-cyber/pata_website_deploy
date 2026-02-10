@@ -15,7 +15,9 @@
     <link rel="dns-prefetch" href="https://www.google.com">
     <link rel="dns-prefetch" href="https://script.google.com">
 
-    <!-- Preload critical font for faster LCP -->
+    <!-- Preload ALL critical fonts for hero section -->
+    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 
     <!-- Preload critical script for faster LCP -->
@@ -112,7 +114,7 @@
             src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2') format('woff2');
             font-weight: 400;
             font-style: normal;
-            font-display: swap;
+            font-display: optional;
         }
 
         /* Mona Sans SemiBold (600) */
@@ -121,7 +123,7 @@
             src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-600-normal.woff2') format('woff2');
             font-weight: 600;
             font-style: normal;
-            font-display: swap;
+            font-display: optional;
         }
 
         /* Mona Sans Bold (700) */
@@ -130,7 +132,17 @@
             src: url('https://fonts.bunny.net/mona-sans/files/mona-sans-latin-700-normal.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
-            font-display: swap;
+            font-display: optional;
+        }
+
+        /* Adjusted fallback to match Mona Sans metrics */
+        @font-face {
+            font-family: 'Mona Sans Fallback';
+            src: local('Segoe UI'), local('Arial'), local('Helvetica');
+            size-adjust: 100.5%;
+            ascent-override: 96%;
+            descent-override: 25%;
+            line-gap-override: 0%;
         }
     </style>
 
@@ -147,7 +159,7 @@
 
         /* Apply font immediately to use preloaded font */
         body {
-            font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .navbar {
@@ -439,7 +451,7 @@
         }
 
         body {
-            font-family: 'Mona Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Mona Sans', 'Mona Sans Fallback', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #fff8f2;
             margin: 0;
         }
