@@ -3,7 +3,7 @@
 .animated-gradient {
     background: linear-gradient(90deg, #FFF8F2 0%, #ffe5d0 100%);
     background-size: 200% 200%;
-    animation: animated-gradient-flow 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: animated-gradient-flow 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     position: relative;
 }
 
@@ -35,6 +35,13 @@
     }
     100% {
         background-position: 0% 50%;
+    }
+}
+
+@media (max-width: 767px) {
+    .animated-gradient {
+        animation: none !important;
+        background-position: 50% 50% !important;
     }
 }
 

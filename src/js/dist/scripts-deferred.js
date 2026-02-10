@@ -13,12 +13,24 @@
 class VideoLazyLoader {
   constructor() {
     this.videos = document.querySelectorAll('video[data-lazy-video]');
+    this.isMobile = window.innerWidth < 768 || !window.matchMedia('(hover: hover)').matches;
     if (this.videos.length > 0) {
       this.init();
     }
   }
 
   init() {
+    if (this.isMobile) {
+      // Mobile: remove source elements so only poster image is shown
+      this.videos.forEach(video => {
+        const sources = video.querySelectorAll('source');
+        sources.forEach(source => source.remove());
+        video.removeAttribute('data-lazy-video');
+      });
+      return;
+    }
+
+    // Desktop: lazy-load videos as before
     const options = { root: null, rootMargin: '200px', threshold: 0.1 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {

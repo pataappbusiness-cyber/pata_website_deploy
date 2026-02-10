@@ -242,7 +242,7 @@ h3 {
 }
 
 @media (max-width: 768px) {
-  h3 { font-size: 14px; }
+  h3 { font-size: 24px; }
 }
 
 
@@ -267,7 +267,7 @@ h4 {
 
 h5 {
   font-family: var(--font-family);
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
   line-height: 1.4;
   margin: 0;
@@ -421,10 +421,12 @@ blockquote {
   outline-offset: 2px;
 }
 
+/* Remove default focus outline when focus-visible is not triggered */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
+/* Specific focus styles for interactive elements */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -436,6 +438,8 @@ textarea:focus-visible,
   outline-offset: 2px;
   border-radius: 2px;
 }
+
+
 
 
 @keyframes liquid-gradient-animation {
@@ -549,21 +553,13 @@ footer a:hover,
    PERFORMANCE: will-change for animated elements
    ============================================ */
 
-/* Elements that animate transform/opacity */
+/* will-change only for above-the-fold hero elements (reduces GPU memory) */
 .header-content,
 .pill-left-top,
 .pill-left-bottom,
 .pill-right-top,
 .pill-right-bottom,
-.mockup-center,
-.problem2-animation,
-.solution1-card-left,
-.solution1-card-right,
-.testimonial-card,
-.price-card-grey,
-.price-card-orange,
-.faq-item,
-[data-parallax] {
+.mockup-center {
   will-change: transform, opacity;
 }
 
@@ -575,6 +571,15 @@ footer a:hover,
 .pill-right-bottom.visible,
 .mockup-center.visible {
   will-change: auto;
+}
+
+/* Optimize background videos for compositing */
+.background-video,
+.problem4-background-video,
+.card-background-video,
+.solution3-background-video {
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ============================================
@@ -611,11 +616,25 @@ footer {
   contain-intrinsic-size: auto 400px;
 }
 
+/* Mobile performance: simplified shadows and disabled hover animations */
+@media (max-width: 768px) {
+    .price-card-grey,
+    .price-card-orange,
+    .problem3-stat-card,
+    .testimonial-card,
+    .solution3-card,
+    .joinus1-card,
+    .bottom-plan-card,
+    .benefit-card {
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+}
+
 
 .animated-gradient {
     background: linear-gradient(90deg, #FFF8F2 0%, #ffe5d0 100%);
     background-size: 200% 200%;
-    animation: animated-gradient-flow 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: animated-gradient-flow 20s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     position: relative;
 }
 
@@ -650,6 +669,13 @@ footer {
     }
 }
 
+@media (max-width: 767px) {
+    .animated-gradient {
+        animation: none !important;
+        background-position: 50% 50% !important;
+    }
+}
+
 
 
 
@@ -667,12 +693,8 @@ footer {
   align-items: center;
   padding-top: 120px;
   padding-bottom: 60px;
-  /* Placeholder image as background instead of black */
-  background-color: #0A0A0A;
-  background-image: url('/src/img/shader-placeholder.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: var(--bg-black);
+  contain: layout;
 }
 
 
@@ -685,12 +707,70 @@ footer {
   z-index: 1;
   pointer-events: none;
   filter: blur(125px) contrast(1.80);
+  contain: strict;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.liquid-shader-canvas.shader-ready {
+  opacity: 1;
 }
 
 
 @media (prefers-reduced-motion: reduce) {
   .liquid-shader-canvas {
     display: none;
+  }
+
+  .header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        var(--gradient-color-1),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 20% 30%,
+        var(--gradient-color-2),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 60% at 80% 50%,
+        var(--gradient-color-3),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 70% 80% at 50% 100%,
+        var(--gradient-color-4),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 90% 70% at 10% 80%,
+        var(--gradient-color-5),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 40% 40% at 70% 20%,
+        var(--gradient-color-6),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 50% at 30% 70%,
+        var(--gradient-color-7),
+        transparent
+      ),
+      var(--gradient-color-8);
+    background-size: 200% 200%;
+    animation: liquid-gradient-animation 20s ease-in-out infinite;
+    filter: blur(80px);
+    opacity: 0.9;
   }
 }
 
@@ -710,52 +790,41 @@ footer {
 
 @media (max-width: 768px) {
   .liquid-shader-canvas {
-    opacity: 0.8;
+    display: none;
   }
 
-  /* Override for mobile when shader is loaded */
-  .header-section.shader-loaded .liquid-shader-canvas {
-    opacity: 0.8;
+  .header-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        var(--gradient-color-1),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 20% 30%,
+        var(--gradient-color-2),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 60% at 80% 50%,
+        var(--gradient-color-3),
+        transparent
+      ),
+      var(--gradient-color-8);
+    filter: blur(80px);
+    opacity: 0.9;
   }
 }
 
 
 
-.mouse-highlight {
-  
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; 
-  z-index: 2; 
-
-  
-  opacity: 0;
-  transition: opacity 0.4s ease;
-
-  
-  background: radial-gradient(
-    circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(255, 180, 119, 0.25) 0%,   
-    rgba(255, 148, 61, 0.15) 20%,   
-    rgba(255, 148, 61, 0.08) 40%,   
-    rgba(255, 148, 61, 0) 70%       
-  );
-
-  
-  will-change: transform;
-  transform: translateZ(0); 
-  backface-visibility: hidden;
-
-  
-  mix-blend-mode: screen; 
-}
-
-
-.header-section:hover .mouse-highlight {
-  opacity: 1;
-}
 
 
 .header-container {
@@ -861,7 +930,6 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  will-change: transform;
 }
 
 .image-pill picture {
@@ -1105,7 +1173,6 @@ footer {
   justify-content: center;
   align-items: center;
   position: relative;
-  will-change: transform;
 }
 
 .mockup-image {
@@ -1202,15 +1269,6 @@ footer {
     height: auto;
   }
 
-  
-  .mouse-highlight {
-    background: radial-gradient(
-      circle 200px at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-      rgba(255, 180, 119, 0.20) 0%,
-      rgba(255, 148, 61, 0.10) 20%,
-      rgba(255, 148, 61, 0) 70%
-    );
-  }
 }
 
 
@@ -1235,9 +1293,9 @@ footer {
   }
 
   .header-launch {
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
   }
 
   .header-title-white,
@@ -1280,17 +1338,6 @@ footer {
     filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
   }
 
-  
-  .mouse-highlight {
-    display: none;
-  }
-}
-
-
-@media (hover: none) {
-  .mouse-highlight {
-    display: none;
-  }
 }
 
 
@@ -1486,7 +1533,7 @@ footer {
 }
 
 
-.left-panel h3 {
+.left-panel h2 {
   
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
@@ -1685,7 +1732,7 @@ footer {
 }
 
 
-.right-panel h3 {
+.right-panel h2 {
   
   font-family: 'Mona Sans', sans-serif;
   font-size: 32px;
@@ -1763,12 +1810,12 @@ footer {
   flex-shrink: 0;
 }
 
-.info-box h4 {
+.info-box h3 {
   
   font-family: 'Mona Sans', sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600; 
-  line-height: 18px;
+  line-height: 28px;
   letter-spacing: 0;
 
   
@@ -1819,15 +1866,15 @@ footer {
 
 
 @media (max-width: 1024px) {
-  .left-panel h3,
-  .right-panel h3 {
+  .left-panel h2,
+  .right-panel h2 {
     font-size: 28px;
     line-height: 32px;
   }
 
   .left-panel .price,
   .right-panel .price {
-    font-size: 38px;
+    font-size: 48px;
     line-height: 36px;
   }
 
@@ -1864,10 +1911,10 @@ footer {
   }
 
   
-  .left-panel h3,
-  .right-panel h3 {
-    font-size: 14px;
-    line-height: 18px;
+  .left-panel h2,
+  .right-panel h2 {
+    font-size: 24px;
+    line-height: 28px;
   }
 
   .left-panel .price,
@@ -1886,7 +1933,7 @@ footer {
     min-width: unset; 
   }
 
-  .info-box h4 {
+  .info-box h3 {
     font-size: 20px;
     line-height: 24px;
   }
@@ -2053,7 +2100,7 @@ footer {
 .problem2-text-group {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
 }
 
 .problem2-story {
@@ -2092,10 +2139,10 @@ footer {
 .problem2-cost-label {
     color: var(--color-neutral-100, #3D3D3D);
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -2129,9 +2176,9 @@ footer {
 }
 
 .problem2-cost-value {
-    color: var(--color-neutral-200, #525252);
+    color: var(--color-neutral-100, #3D3D3D);
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-style: normal;
     font-weight: 700;
     line-height: 53px;
@@ -2233,7 +2280,7 @@ footer {
 
     .problem2-title {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
         text-align: center;
     }
 
@@ -2244,8 +2291,8 @@ footer {
     }
 
     .problem2-conclusion {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
         text-align: center;
     }
 
@@ -2256,7 +2303,7 @@ footer {
 
     .problem2-cost-value {
         font-size: 36px;
-        line-height: 32px;
+        line-height: 40px;
     }
 
     .problem2-animation {
@@ -2476,9 +2523,9 @@ footer {
 .problem3-subtitle {
     color: var(--color-neutral-200, #525252);
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     margin: 0;
     max-width: 478px;
     white-space: pre-wrap;
@@ -2731,7 +2778,7 @@ footer {
 
     .problem3-container {
         flex-direction: column;
-        gap: 16px;
+        gap: 24px;
         max-width: 100%;
         align-items: center;
     }
@@ -2800,7 +2847,7 @@ footer {
     }
 
     .problem3-title-main {
-        font-size: 38px;
+        font-size: 48px;
         line-height: 53px;
         text-align: center;
         width: 100%;
@@ -2812,8 +2859,8 @@ footer {
     }
 
     .problem3-title-regular {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
         display: block;
         font-weight: 600;
         text-align: center;
@@ -2966,7 +3013,7 @@ footer {
     }
 
     .problem3-title-main {
-        font-size: 38px;
+        font-size: 48px;
         line-height: 53px;
         text-align: center;
     }
@@ -2977,8 +3024,8 @@ footer {
     }
 
     .problem3-title-regular {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
         display: block;
         font-weight: 600;
         text-align: center;
@@ -3042,6 +3089,12 @@ footer {
         visibility: visible;
         z-index: unset;
         position: static;
+        border: none;
+        box-shadow: none;
+    }
+
+    .problem3-stat-card::after {
+        display: none;
     }
 
     .problem3-stat-icon {
@@ -3130,7 +3183,7 @@ footer {
 
     .problem3-title-main {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
     }
 
     .problem3-title-regular {
@@ -3275,7 +3328,7 @@ footer {
 
 .problem4-title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 700;
   line-height: 53px;
   color: #FF943D;
@@ -3404,7 +3457,7 @@ footer {
 
 .validation-number {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 700;
   line-height: 53px;
   color: #FF943D;
@@ -3414,9 +3467,9 @@ footer {
 
 .validation-label {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 18px;
+  line-height: 28px;
   color: #FEFEFF;
   margin: 0;
   white-space: pre-wrap;
@@ -3435,9 +3488,9 @@ footer {
 
 .survey-info {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 18px;
+  line-height: 28px;
   color: #FEFEFF;
   margin: 0;
 }
@@ -3461,7 +3514,7 @@ footer {
 
   .problem4-title {
     font-size: 40px;
-    line-height: 36px;
+    line-height: 44px;
   }
 
   .problem4-subtitle {
@@ -3470,7 +3523,7 @@ footer {
   }
 
   .validation-stats {
-    gap: 16px;
+    gap: 24px;
   }
 
   .validation-stat {
@@ -3479,7 +3532,7 @@ footer {
 
   .validation-number {
     font-size: 40px;
-    line-height: 36px;
+    line-height: 44px;
   }
 
   .validation-label {
@@ -3517,13 +3570,13 @@ footer {
   }
 
   .problem4-subtitle {
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 24px;
+    line-height: 28px;
   }
 
   .validation-stats {
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     align-items: stretch;
   }
 
@@ -3535,7 +3588,7 @@ footer {
 
   .validation-number {
     font-size: 36px;
-    line-height: 32px;
+    line-height: 40px;
   }
 
   .validation-label {
@@ -3580,7 +3633,7 @@ footer {
 
 .problem5-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -3596,7 +3649,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
 }
 
 
@@ -3794,7 +3847,7 @@ footer {
 .problem5-footer {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     align-items: center;
     width: 100%;
     text-align: center;
@@ -3820,9 +3873,9 @@ footer {
 
 .problem5-footer-subtext {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -3855,11 +3908,11 @@ footer {
 
     .problem5-title {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
     }
 
     .testimonials-grid {
-        gap: 16px;
+        gap: 24px;
     }
 
     .testimonial-item {
@@ -3889,7 +3942,7 @@ footer {
     .problem5-section {
         padding: 40px 24px;
         min-height: auto;
-        gap: 16px;
+        gap: 24px;
     }
 
     .problem5-title {
@@ -3939,8 +3992,8 @@ footer {
     }
 
     .problem5-footer-main {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
     }
 
     .problem5-footer-subtext {
@@ -3949,8 +4002,8 @@ footer {
     }
 
     .problem5-footer-question {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
     }
 }
 
@@ -4077,7 +4130,7 @@ footer {
     font-size: 52px;
     font-weight: 700;
     line-height: 38px;
-    color: #FF943D;
+    color: #C96920; /* Darkened from #FF943D for WCAG AA contrast (3.5:1 on #FFF8F2) */
     text-align: center;
     margin: 0 0 40px 0;
     z-index: 10;
@@ -4209,15 +4262,15 @@ footer {
 
 .solution1-card-label {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     margin: 0;
 }
 
 .solution1-card-price {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     margin: 0;
@@ -4387,18 +4440,18 @@ footer {
     justify-content: flex-start;
 }
 
-.solution1-card-column h4 {
+.solution1-card-column p:first-child {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     margin: 0;
     text-align: center;
 }
 
-.solution1-card-column h2 {
+.solution1-card-column p:nth-child(2) {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     margin: 0;
@@ -4480,12 +4533,12 @@ footer {
 
     .solution1-card-price {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
     }
 
-    .solution1-card-column h2 {
+    .solution1-card-column p:nth-child(2) {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
     }
 }
 
@@ -4493,7 +4546,7 @@ footer {
 @media (max-width: 768px) {
     .solution1-section {
         padding: 20px 0 0 0;
-        gap: 16px;
+        gap: 24px;
         height: auto;
     }
 
@@ -4597,13 +4650,13 @@ footer {
         gap: 8px;
     }
 
-    .solution1-card-column h4 {
+    .solution1-card-column p:first-child {
         font-size: 18px;
         line-height: 20px;
         width: 100%;
     }
 
-    .solution1-card-column h2 {
+    .solution1-card-column p:nth-child(2) {
         font-size: 32px;
         line-height: 36px;
         width: 100%;
@@ -4638,12 +4691,12 @@ footer {
         width: calc(100% - 24px);
     }
 
-    .solution1-card-column h4 {
+    .solution1-card-column p:first-child {
         font-size: 16px;
         line-height: 18px;
     }
 
-    .solution1-card-column h2 {
+    .solution1-card-column p:nth-child(2) {
         font-size: 28px;
         line-height: 32px;
     }
@@ -4782,7 +4835,7 @@ footer {
 
 .solution2-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -4794,9 +4847,9 @@ footer {
 
 .solution2-subtitle {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #525252;
     margin: 0;
     width: 100%;
@@ -5257,7 +5310,7 @@ footer {
 @media (max-width: 480px) {
     .solution2-section {
         padding: 24px 6px;
-        gap: 16px;
+        gap: 24px;
         box-sizing: border-box;
     }
 
@@ -5497,7 +5550,7 @@ footer {
 .solution3-cards-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 24px;
     width: 100%;
     align-items: stretch;
     justify-content: center;
@@ -5556,9 +5609,9 @@ footer {
 
 .solution3-card-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #272727;
     text-align: center;
     margin: 0;
@@ -5567,7 +5620,7 @@ footer {
 .solution3-card-body {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     width: 100%;
 }
 
@@ -5635,7 +5688,7 @@ footer {
 
 .solution3-credit-value {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -5647,9 +5700,9 @@ footer {
 
 .solution3-credit-outro {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     text-align: center;
     margin: 0;
@@ -5659,9 +5712,9 @@ footer {
 
 .solution3-card-title-alt {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #272727;
     text-align: center;
     margin: 0;
@@ -6005,7 +6058,7 @@ footer {
 .solution4-header {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     align-items: center;
     text-align: center;
     width: 100%;
@@ -6016,13 +6069,13 @@ footer {
     font-size: 20px;
     font-weight: 700;
     line-height: 24px;
-    color: #7D7D7D;
+    color: #5A5A5A; /* Darkened from #7D7D7D for WCAG AA contrast (5.1:1 on #FFF8F2) */
     margin: 0;
 }
 
 .solution4-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -6031,9 +6084,9 @@ footer {
 
 .solution4-subtitle {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #525252;
     max-width: 786px;
     margin: 0;
@@ -6044,7 +6097,7 @@ footer {
 .solution4-cards {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     width: 100%;
 }
 
@@ -6130,9 +6183,9 @@ footer {
 
 .clinica-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
     text-align: center;
@@ -6164,9 +6217,9 @@ footer {
 
 .clinica-plus {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
     text-align: center;
@@ -6266,7 +6319,7 @@ footer {
 
 .solution4-bottom-cards {
     display: flex;
-    gap: 16px;
+    gap: 24px;
     width: 100%;
     min-height: 400px;
 }
@@ -6351,9 +6404,9 @@ footer {
 
 .bottom-card-title {
     font-family: 'Mona Sans', sans-serif;
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -6406,7 +6459,7 @@ footer {
 
     .solution4-title {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
     }
 
     .solution4-subtitle {
@@ -6761,9 +6814,9 @@ footer {
 
 .joinus1-subtitle {
     font-family: var(--font-family);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -6991,9 +7044,9 @@ footer {
 
 .card-label {
     font-family: var(--font-family);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #FEFEFF;
     text-align: center;
     margin: 0;
@@ -7022,7 +7075,7 @@ footer {
 
 .price-value {
     font-family: var(--font-family);
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -7052,9 +7105,9 @@ footer {
 
 .price-suffix {
     font-family: var(--font-family);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
 }
@@ -7099,9 +7152,9 @@ footer {
 
 .joinus1-middle-title {
     font-family: var(--font-family);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #000000;
     margin: 0;
     text-align: center;
@@ -7307,9 +7360,9 @@ footer {
 
 .plan-badge-text {
     font-family: var(--font-family);
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 600;
-    line-height: 18px;
+    line-height: 28px;
     color: #3D3D3D;
     margin: 0;
     text-align: center;
@@ -7354,7 +7407,7 @@ footer {
 
 .plan-number {
     font-family: var(--font-family);
-    font-size: 38px;
+    font-size: 48px;
     font-weight: 700;
     line-height: 53px;
     color: #3D3D3D;
@@ -7403,8 +7456,8 @@ footer {
     }
 
     .joinus1-subtitle {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
     }
 
     
@@ -7457,8 +7510,8 @@ footer {
     }
 
     .joinus1-card-3 .card-section-title {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
         word-break: break-word;
     }
 
@@ -7483,7 +7536,7 @@ footer {
 
     .price-value {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
     }
 
     .price-subtitle {
@@ -7632,7 +7685,7 @@ footer {
 
     .joinus1-title {
         font-size: 32px;
-        line-height: 18px;
+        line-height: 28px;
     }
 
     .joinus1-subtitle {
@@ -7687,13 +7740,13 @@ footer {
     }
 
     .price-value {
-        font-size: 38px;
+        font-size: 48px;
         line-height: 53px;
     }
 
     .price-suffix {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
     }
 
     .card-section-title {
@@ -7714,7 +7767,7 @@ footer {
     
     .joinus1-bottom-cards {
         grid-template-columns: 1fr;
-        gap: 16px;
+        gap: 24px;
         justify-items: center;
     }
 
@@ -7818,8 +7871,8 @@ footer {
     }
 
     .plan-highlight {
-        font-size: 14px;
-        line-height: 18px;
+        font-size: 24px;
+        line-height: 28px;
         text-align: center;
         width: 100%;
         margin: 0 auto;
@@ -7828,7 +7881,7 @@ footer {
 
     .plan-number {
         font-size: 40px;
-        line-height: 36px;
+        line-height: 44px;
         text-align: center;
         width: 100%;
         margin: 0 auto;
@@ -7955,8 +8008,9 @@ footer {
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; 
+  pointer-events: none;
   filter: blur(125px) contrast(1.80);
+  contain: strict;
 }
 
 
@@ -8033,7 +8087,36 @@ footer {
 
 @media (max-width: 768px) {
   .joinus2-section .liquid-shader-canvas {
-    opacity: 0.8; 
+    display: none;
+  }
+
+  .joinus2-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        var(--gradient-color-1),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 20% 30%,
+        var(--gradient-color-2),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 60% at 80% 50%,
+        var(--gradient-color-3),
+        transparent
+      ),
+      var(--gradient-color-8);
+    filter: blur(80px);
+    opacity: 0.9;
   }
 }
 
@@ -8062,7 +8145,7 @@ footer {
 
 .joinus2-title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 700;
   line-height: 56px;
   color: #3D3D3D;
@@ -8074,7 +8157,7 @@ footer {
 .joinus2-cards-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 24px;
   width: 100%;
   max-width: 1280px;
 }
@@ -8429,7 +8512,7 @@ footer {
 
   .joinus2-title {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 40px;
   }
 
   .joinus2-cards-grid {
@@ -8646,8 +8729,9 @@ footer {
   width: 100%;
   height: 100%;
   z-index: 1;
-  pointer-events: none; 
+  pointer-events: none;
   filter: blur(125px) contrast(1.80);
+  contain: strict;
 }
 
 
@@ -8724,7 +8808,36 @@ footer {
 
 @media (max-width: 768px) {
   .joinus3-section .liquid-shader-canvas {
-    opacity: 0.8; 
+    display: none;
+  }
+
+  .joinus3-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background:
+      radial-gradient(
+        ellipse 80% 50% at 50% -20%,
+        var(--gradient-color-1),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 20% 30%,
+        var(--gradient-color-2),
+        transparent
+      ),
+      radial-gradient(
+        ellipse 50% 60% at 80% 50%,
+        var(--gradient-color-3),
+        transparent
+      ),
+      var(--gradient-color-8);
+    filter: blur(80px);
+    opacity: 0.9;
   }
 }
 
@@ -8782,7 +8895,7 @@ footer {
 
 .joinus3-title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 700;
   line-height: 53px;
   color: #FEFEFF;
@@ -8792,9 +8905,9 @@ footer {
 
 .joinus3-subtitle {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 18px;
+  line-height: 28px;
   color: #FEFEFF;
   margin: 0;
   white-space: pre-wrap;
@@ -9115,7 +9228,7 @@ footer {
   }
 
   .joinus3-container {
-    gap: 16px;
+    gap: 24px;
   }
 
   .joinus3-icon {
@@ -9147,8 +9260,8 @@ footer {
   }
 
   .joinus3-stat-badge-text {
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 24px;
+    line-height: 28px;
   }
 
   .joinus3-stat-label {
@@ -9265,7 +9378,7 @@ footer {
 
 .reservar-container {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   max-width: 1200px;
   width: 100%;
   align-items: flex-start;
@@ -9586,7 +9699,7 @@ footer {
 
 .reservar-info-cards {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   flex-wrap: wrap;
   width: 100%;
 }
@@ -9714,7 +9827,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
+  gap: 24px;
   text-align: center;
 }
 
@@ -9727,15 +9840,15 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 38px;
+  font-size: 48px;
   font-weight: bold;
 }
 
 .reservar-modal-title {
   font-family: 'Mona Sans', sans-serif;
   font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
+  font-size: 24px;
+  line-height: 28px;
   color: var(--color-neutral-50, #272727);
   margin: 0;
 }
@@ -9830,7 +9943,7 @@ footer {
   }
 
   .reservar-right-column {
-    gap: 16px;
+    gap: 24px;
     max-width: 100%;
     width: 100%;
   }
@@ -9982,7 +10095,7 @@ footer {
   max-width: 900px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 
@@ -10019,9 +10132,9 @@ footer {
 
 .faq-question-text {
   font-family: 'Mona Sans', sans-serif;
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 600;
-  line-height: 18px;
+  line-height: 28px;
   color: #3D3D3D;
   flex: 1;
   transition: color 0.3s ease;
@@ -10134,8 +10247,8 @@ footer {
   }
 
   .faq-title {
-    font-size: 14px;
-    line-height: 18px;
+    font-size: 24px;
+    line-height: 28px;
     margin-bottom: 32px;
   }
 
@@ -10456,7 +10569,7 @@ footer {
 @media (max-width: 768px) {
     .footer {
         padding: 40px 24px;
-        gap: 16px;
+        gap: 24px;
     }
 
     .footer-container {

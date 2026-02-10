@@ -81,11 +81,10 @@ class LiquidShader {
   }
 
   resizeCanvas() {
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     const displayWidth = this.canvas.clientWidth;
     const displayHeight = this.canvas.clientHeight;
 
-    // Use full device pixel ratio for crisp rendering
     this.canvas.width = displayWidth * dpr;
     this.canvas.height = displayHeight * dpr;
 
@@ -124,7 +123,7 @@ class LiquidShader {
         float a = 0.0;
 
         // Simplified liquid motion with mouse influence
-        for (float i = 0.0; i < 8.0; i += 1.0) {
+        for (float i = 0.0; i < 5.0; i += 1.0) {
           a += cos(i - d - a * uv.x + mouseInfluence);
           d += sin(uv.y * i + a);
         }

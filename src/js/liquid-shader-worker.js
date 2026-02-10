@@ -74,7 +74,7 @@ function createShaderProgram() {
       mouseInfluence = 1.0 - smoothstep(0.0, 0.5, mouseInfluence);
       float d = -u_time * 0.5 + mouseInfluence * 2.0;
       float a = 0.0;
-      for (float i = 0.0; i < 8.0; i += 1.0) {
+      for (float i = 0.0; i < 5.0; i += 1.0) {
         a += cos(i - d - a * uv.x + mouseInfluence);
         d += sin(uv.y * i + a);
       }

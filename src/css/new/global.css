@@ -559,8 +559,7 @@ footer a:hover,
 .pill-left-bottom,
 .pill-right-top,
 .pill-right-bottom,
-.mockup-center,
-[data-parallax] {
+.mockup-center {
   will-change: transform, opacity;
 }
 

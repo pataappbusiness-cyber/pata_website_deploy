@@ -25,11 +25,18 @@ function initShaderWorker(canvasId) {
     const offscreen = canvas.transferControlToOffscreen();
     const worker = new Worker('./src/js/liquid-shader-worker.min.js');
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     offscreen.width = canvas.clientWidth * dpr;
     offscreen.height = canvas.clientHeight * dpr;
 
     worker.postMessage({ type: 'init', canvas: offscreen }, [offscreen]);
+
+    // Add shader-ready class when worker signals ready
+    worker.addEventListener('message', (msg) => {
+      if (msg.data.type === 'ready') {
+        canvas.classList.add('shader-ready');
+      }
+    });
 
     // Forward mouse events
     canvas.addEventListener('mousemove', (e) => {
@@ -47,7 +54,7 @@ function initShaderWorker(canvasId) {
 
     // Forward resize
     const ro = new ResizeObserver(() => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 1);
       worker.postMessage({
         type: 'resize',
         width: canvas.clientWidth * dpr,
@@ -154,7 +161,7 @@ class LiquidShader {
   }
 
   resizeCanvas() {
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1);
     const displayWidth = this.canvas.clientWidth;
     const displayHeight = this.canvas.clientHeight;
     this.canvas.width = displayWidth * dpr;
@@ -187,7 +194,7 @@ class LiquidShader {
         mouseInfluence = 1.0 - smoothstep(0.0, 0.5, mouseInfluence);
         float d = -u_time * 0.5 + mouseInfluence * 2.0;
         float a = 0.0;
-        for (float i = 0.0; i < 8.0; i += 1.0) {
+        for (float i = 0.0; i < 5.0; i += 1.0) {
           a += cos(i - d - a * uv.x + mouseInfluence);
           d += sin(uv.y * i + a);
         }
@@ -275,6 +282,7 @@ class LiquidShader {
 
   signalReady() {
     this.isReady = true;
+    this.canvas.classList.add('shader-ready');
     const placeholder = document.querySelector('.shader-placeholder');
     if (placeholder) {
       placeholder.style.opacity = '0';
@@ -619,37 +627,9 @@ document.addEventListener('DOMContentLoaded', () => {
   new HeaderAnimations();
   new ContactButtons(smoothScroll);
 
-  // Only initialize parallax/highlight effects when motion is allowed
-  let headerParallax = null;
-  let mouseHighlight = null;
-  if (!prefersReducedMotion) {
-    headerParallax = new HeaderParallax();
-    mouseHighlight = new MouseHighlight();
-
-    // Pause HeaderParallax when hero section is not visible
-    const heroSection = document.querySelector('#hero');
-    if (heroSection) {
-      const heroObserver = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          if (headerParallax && !headerParallax.isActive) {
-            headerParallax.isActive = true;
-            headerParallax.animate();
-          }
-        } else {
-          if (headerParallax) {
-            headerParallax.isActive = false;
-          }
-        }
-      }, { threshold: 0.01 });
-      heroObserver.observe(heroSection);
-    }
-  }
-
   // Store for deferred script access
   window._pataInstances = {
-    smoothScroll,
-    headerParallax,
-    mouseHighlight
+    smoothScroll
   };
 
   console.log('🐾 PATA Critical JS loaded');
@@ -661,13 +641,5 @@ window.addEventListener('beforeunload', () => {
     Object.values(window.liquidShaders).forEach(shader => {
       if (shader) shader.destroy();
     });
-  }
-  if (window._pataInstances) {
-    if (window._pataInstances.mouseHighlight) {
-      window._pataInstances.mouseHighlight.destroy();
-    }
-    if (window._pataInstances.headerParallax) {
-      window._pataInstances.headerParallax.destroy();
-    }
   }
 });

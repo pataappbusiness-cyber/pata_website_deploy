@@ -15,9 +15,6 @@
     <link rel="dns-prefetch" href="https://www.google.com">
     <link rel="dns-prefetch" href="https://script.google.com">
 
-    <link rel="preload" href="./src/img/new_images/mockup_no_bg.webp" as="image" type="image/webp" media="(min-width: 769px)">
-    <link rel="preload" href="./src/img/new_images/mockup_no_bg_mobile.webp" as="image" type="image/webp" media="(max-width: 768px)">
-
     <!-- Preload critical script for faster LCP -->
     <link rel="preload" href="./src/js/dist/scripts-critical.min.js" as="script">
 
@@ -105,9 +102,6 @@
     }
     </script>
 
-    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="https://fonts.bunny.net/mona-sans/files/mona-sans-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
     <style>
         /* Mona Sans Regular (400) */
         @font-face {
@@ -625,9 +619,7 @@
 
         <section id="hero" class="header-section">
 
-            <canvas id="liquid-shader-canvas" class="liquid-shader-canvas" aria-hidden="true"></canvas>
-
-            <div class="mouse-highlight" aria-hidden="true"></div>
+            <canvas id="liquid-shader-canvas" class="liquid-shader-canvas" aria-hidden="true" width="1920" height="1080"></canvas>
 
             <div class="header-container">
 
@@ -646,7 +638,7 @@
 
                     <div class="visual-pills-left">
                         
-                        <div class="image-pill pill-left-top" data-parallax="0.3">
+                        <div class="image-pill pill-left-top">
                             <picture>
                                 <source srcset="./src/img/new_images/cao_medico.webp" type="image/webp">
                                 <img
@@ -661,7 +653,7 @@
                             <div class="pill-inner-shadow"></div>
                         </div>
 
-                        <div class="image-pill pill-left-bottom" data-parallax="0.5">
+                        <div class="image-pill pill-left-bottom">
                             <picture>
                                 <source srcset="./src/img/new_images/vet.webp" type="image/webp">
                                 <img
@@ -677,7 +669,7 @@
                         </div>
                     </div>
 
-                    <div class="mockup-center" data-parallax="0.2">
+                    <div class="mockup-center">
                         <picture>
                             <source srcset="./src/img/new_images/mockup_no_bg_mobile.webp" type="image/webp" media="(max-width: 768px)">
                             <source srcset="./src/img/new_images/mockup_no_bg.webp" type="image/webp">
@@ -695,7 +687,7 @@
 
                     <div class="visual-pills-right">
                         
-                        <div class="image-pill pill-right-top" data-parallax="0.4">
+                        <div class="image-pill pill-right-top">
                             <picture>
                                 <source srcset="./src/img/new_images/cao.webp" type="image/webp">
                                 <img
@@ -710,7 +702,7 @@
                             <div class="pill-inner-shadow"></div>
                         </div>
 
-                        <div class="image-pill pill-right-bottom" data-parallax="0.6">
+                        <div class="image-pill pill-right-bottom">
                             <picture>
                                 <source srcset="./src/img/new_images/gatinho.webp" type="image/webp">
                                 <img
@@ -842,13 +834,13 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
                         <source srcset="./src/img/images/PATA_APP_350w.webp 350w,
                                         ./src/img/images/PATA_APP_613w.webp 613w,
                                         ./src/img/images/PATA_APP.webp 1031w"
-                                sizes="(max-width: 768px) 350px, 613px"
+                                sizes="(max-width: 480px) 350px, (max-width: 768px) 474px, 570px"
                                 type="image/webp">
                         <img src="./src/img/images/PATA_APP.webp"
                              srcset="./src/img/images/PATA_APP_350w.webp 350w,
                                      ./src/img/images/PATA_APP_613w.webp 613w,
                                      ./src/img/images/PATA_APP.webp 1031w"
-                             sizes="(max-width: 768px) 350px, 613px"
+                             sizes="(max-width: 480px) 350px, (max-width: 768px) 474px, 570px"
                              alt="PATA App - Interface da aplicação de telemedicina veterinária"
                              width="613"
                              height="511"
@@ -1793,7 +1785,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         <section id="joinus2" class="joinus2-section animated-gradient">
 
-            <canvas id="liquid-shader-canvas-joinus2" class="liquid-shader-canvas" aria-hidden="true"></canvas>
+            <canvas id="liquid-shader-canvas-joinus2" class="liquid-shader-canvas" aria-hidden="true" width="1920" height="1080"></canvas>
 
             <div class="joinus2-container">
 
@@ -2300,7 +2292,7 @@ Em 47 segundos, está em videochamada com a Dra. Ana.  Ela vê o Max, faz pergun
 
         <section id="joinus3" class="joinus3-section animated-gradient" data-name="CTA" data-node-id="296:3057">
             
-            <canvas id="liquid-shader-canvas-joinus3" class="liquid-shader-canvas" aria-hidden="true"></canvas>
+            <canvas id="liquid-shader-canvas-joinus3" class="liquid-shader-canvas" aria-hidden="true" width="1920" height="1080"></canvas>
 
             <div class="joinus3-container" data-node-id="296:3058">
                 
