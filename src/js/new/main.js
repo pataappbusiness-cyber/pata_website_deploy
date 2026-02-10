@@ -1462,20 +1462,48 @@ class SmoothScroll {
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // Initialize Smooth Scroll
   const smoothScroll = new SmoothScroll();
 
   // Initialize Navbar
   new Navbar();
 
-  // Initialize Header Parallax
-  const headerParallax = new HeaderParallax();
+  // Initialize Header Parallax (skip if reduced motion)
+  let headerParallax = null;
+  if (!prefersReducedMotion) {
+    headerParallax = new HeaderParallax();
+  }
 
   // Initialize Header Reveal Animations
   new HeaderAnimations();
 
-  // Initialize Mouse Highlight
-  const mouseHighlight = new MouseHighlight();
+  // Initialize Mouse Highlight (skip if reduced motion)
+  let mouseHighlight = null;
+  if (!prefersReducedMotion) {
+    mouseHighlight = new MouseHighlight();
+  }
+
+  // Pause HeaderParallax and MouseHighlight when hero is out of view
+  if (!prefersReducedMotion) {
+    const heroSection = document.querySelector('#hero');
+    if (heroSection) {
+      const heroObserver = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) {
+          if (headerParallax && !headerParallax.isActive) {
+            headerParallax.isActive = true;
+            headerParallax.animate();
+          }
+        } else {
+          if (headerParallax) {
+            headerParallax.isActive = false;
+          }
+        }
+      }, { threshold: 0.01 });
+      heroObserver.observe(heroSection);
+    }
+  }
 
   // Initialize Draggable Element
   new DraggableElement();
@@ -1533,9 +1561,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Cleanup on page unload (boa prática)
   window.addEventListener('beforeunload', () => {
-    mouseHighlight.destroy();
+    if (mouseHighlight) mouseHighlight.destroy();
     smoothScroll.destroy();
-    headerParallax.destroy();
+    if (headerParallax) headerParallax.destroy();
     if (window.scrollToTopButton) {
       window.scrollToTopButton.destroy();
     }
