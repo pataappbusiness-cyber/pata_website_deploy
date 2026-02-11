@@ -141,6 +141,101 @@ class SmoothScroll {
 }
 
 /* ============================================
+   HEADER PARALLAX
+   ============================================ */
+
+class HeaderParallax {
+  constructor() {
+    this.header = document.querySelector('.header-section');
+    this.parallaxElements = document.querySelectorAll('[data-parallax]');
+
+    this.targetX = 0;
+    this.targetY = 0;
+    this.ease = 0.12;
+    this.rafId = null;
+
+    this.elementPositions = new Map();
+
+    if (this.header && this.parallaxElements.length > 0) {
+      this.init();
+    }
+  }
+
+  init() {
+    if (window.matchMedia('(pointer: fine)').matches) {
+      this.parallaxElements.forEach(element => {
+        this.elementPositions.set(element, { currentX: 0, currentY: 0 });
+      });
+
+      this.header.addEventListener('mousemove', (e) => this.handleMouseMove(e));
+      this.header.addEventListener('mouseleave', () => this.resetPositions());
+    }
+  }
+
+  handleMouseMove(e) {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    this.targetX = (clientX / innerWidth - 0.5) * 2;
+    this.targetY = (clientY / innerHeight - 0.5) * 2;
+
+    if (!this.rafId) {
+      this.rafId = requestAnimationFrame(() => this.animate());
+    }
+  }
+
+  animate() {
+    let allSettled = true;
+
+    this.parallaxElements.forEach(element => {
+      const speed = parseFloat(element.dataset.parallax) || 0.3;
+      const pos = this.elementPositions.get(element);
+
+      const goalX = this.targetX * 50 * speed;
+      const goalY = this.targetY * 50 * speed;
+
+      pos.currentX += (goalX - pos.currentX) * this.ease;
+      pos.currentY += (goalY - pos.currentY) * this.ease;
+
+      if (Math.abs(goalX - pos.currentX) > 0.1 || Math.abs(goalY - pos.currentY) > 0.1) {
+        allSettled = false;
+      }
+
+      element.style.transform = `translate3d(${pos.currentX}px, ${pos.currentY}px, 0)`;
+    });
+
+    if (allSettled) {
+      this.parallaxElements.forEach(element => {
+        const speed = parseFloat(element.dataset.parallax) || 0.3;
+        const pos = this.elementPositions.get(element);
+        pos.currentX = this.targetX * 50 * speed;
+        pos.currentY = this.targetY * 50 * speed;
+        element.style.transform = `translate3d(${pos.currentX}px, ${pos.currentY}px, 0)`;
+      });
+      this.rafId = null;
+    } else {
+      this.rafId = requestAnimationFrame(() => this.animate());
+    }
+  }
+
+  resetPositions() {
+    this.targetX = 0;
+    this.targetY = 0;
+
+    if (!this.rafId) {
+      this.rafId = requestAnimationFrame(() => this.animate());
+    }
+  }
+
+  destroy() {
+    if (this.rafId) {
+      cancelAnimationFrame(this.rafId);
+      this.rafId = null;
+    }
+  }
+}
+
+/* ============================================
    INITIALIZE CRITICAL MODULES
    ============================================ */
 
@@ -149,6 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const smoothScroll = new SmoothScroll();
   new Navbar();
   new ContactButtons(smoothScroll);
+
+  // Initialize Header Parallax (skip if reduced motion)
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!prefersReducedMotion) {
+    new HeaderParallax();
+  }
 
   // Store for deferred script access
   window._pataInstances = {

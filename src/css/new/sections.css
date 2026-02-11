@@ -168,6 +168,10 @@
   align-items: flex-start;
 }
 
+[data-parallax] {
+  will-change: transform;
+}
+
 .image-pill {
   width: 151px;
   position: relative;

@@ -86,14 +86,11 @@ class HeaderParallax {
     this.header = document.querySelector('.header-section');
     this.parallaxElements = document.querySelectorAll('[data-parallax]');
 
-    // Smooth animation properties
-    this.mouseX = 0;
-    this.mouseY = 0;
+    // Mouse target (normalized -1 to 1)
     this.targetX = 0;
     this.targetY = 0;
-    this.ease = 0.12; // Lower = smoother (0.05-0.15 range)
+    this.ease = 0.12;
     this.rafId = null;
-    this.isActive = false;
 
     // Store current positions for each element
     this.elementPositions = new Map();
@@ -106,19 +103,12 @@ class HeaderParallax {
   init() {
     // Only enable parallax on devices with pointer (not touch)
     if (window.matchMedia('(pointer: fine)').matches) {
-      // Initialize element positions
       this.parallaxElements.forEach(element => {
-        this.elementPositions.set(element, { currentX: 0, currentY: 0, targetX: 0, targetY: 0 });
+        this.elementPositions.set(element, { currentX: 0, currentY: 0 });
       });
 
       this.header.addEventListener('mousemove', (e) => this.handleMouseMove(e));
-
-      // Reset position when mouse leaves
       this.header.addEventListener('mouseleave', () => this.resetPositions());
-
-      // Start animation loop
-      this.isActive = true;
-      this.animate();
     }
   }
 
@@ -126,49 +116,66 @@ class HeaderParallax {
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
 
-    // Calculate mouse position relative to center (-1 to 1)
     this.targetX = (clientX / innerWidth - 0.5) * 2;
     this.targetY = (clientY / innerHeight - 0.5) * 2;
+
+    // Start animation loop if not already running
+    if (!this.rafId) {
+      this.rafId = requestAnimationFrame(() => this.animate());
+    }
   }
 
   animate() {
-    if (!this.isActive) return;
+    let allSettled = true;
 
-    // Smoothly interpolate mouse position
-    this.mouseX += (this.targetX - this.mouseX) * this.ease;
-    this.mouseY += (this.targetY - this.mouseY) * this.ease;
-
-    // Update each parallax element
     this.parallaxElements.forEach(element => {
       const speed = parseFloat(element.dataset.parallax) || 0.3;
-      const positions = this.elementPositions.get(element);
+      const pos = this.elementPositions.get(element);
 
-      // Calculate target positions
-      positions.targetX = this.mouseX * 50 * speed;
-      positions.targetY = this.mouseY * 50 * speed;
+      // Single interpolation toward mouse-derived target
+      const goalX = this.targetX * 50 * speed;
+      const goalY = this.targetY * 50 * speed;
 
-      // Smoothly interpolate element position
-      positions.currentX += (positions.targetX - positions.currentX) * this.ease;
-      positions.currentY += (positions.targetY - positions.currentY) * this.ease;
+      pos.currentX += (goalX - pos.currentX) * this.ease;
+      pos.currentY += (goalY - pos.currentY) * this.ease;
 
-      // Apply transformation
-      element.style.transform = `translate(${positions.currentX}px, ${positions.currentY}px)`;
+      // Check if still moving (within 0.1px = imperceptible)
+      if (Math.abs(goalX - pos.currentX) > 0.1 || Math.abs(goalY - pos.currentY) > 0.1) {
+        allSettled = false;
+      }
+
+      element.style.transform = `translate3d(${pos.currentX}px, ${pos.currentY}px, 0)`;
     });
 
-    // Continue animation loop
-    this.rafId = requestAnimationFrame(() => this.animate());
+    if (allSettled) {
+      // Snap to final position and stop loop
+      this.parallaxElements.forEach(element => {
+        const speed = parseFloat(element.dataset.parallax) || 0.3;
+        const pos = this.elementPositions.get(element);
+        pos.currentX = this.targetX * 50 * speed;
+        pos.currentY = this.targetY * 50 * speed;
+        element.style.transform = `translate3d(${pos.currentX}px, ${pos.currentY}px, 0)`;
+      });
+      this.rafId = null;
+    } else {
+      this.rafId = requestAnimationFrame(() => this.animate());
+    }
   }
 
   resetPositions() {
-    // Smoothly return to center
     this.targetX = 0;
     this.targetY = 0;
+
+    // Restart loop to animate back to center
+    if (!this.rafId) {
+      this.rafId = requestAnimationFrame(() => this.animate());
+    }
   }
 
   destroy() {
-    this.isActive = false;
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
+      this.rafId = null;
     }
   }
 }
