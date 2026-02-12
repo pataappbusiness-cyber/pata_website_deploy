@@ -245,7 +245,7 @@ class ReservarFormSubmitter {
       await new Promise((resolve) => grecaptcha.ready(resolve));
 
       const token = await grecaptcha.execute(
-        '6Le6-2EsAAAAAC35zcOC3-2jVhmztQL_yMNh5YEb',
+        '6LcySmksAAAAAGnOAblVwnaHGKJ_PXXewdbxeaJs',
         { action: 'waitlist_signup' }
       );
 
