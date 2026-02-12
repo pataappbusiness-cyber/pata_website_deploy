@@ -115,10 +115,9 @@
         </div>
 
         <div class="buttons">
-            <!-- ✅ FIXED: Link direto para o script (redirect server-side) -->
-            <a id="confirmLink" href="#" class="btn btn-cancel">
+            <button id="confirmBtn" class="btn btn-cancel" onclick="confirmUnsubscribe()">
                 Sim, cancelar subscrição
-            </a>
+            </button>
             <a href="https://pata.care" class="btn btn-back">
                 Não, manter-me na lista
             </a>
@@ -133,31 +132,48 @@
     </div>
 
     <script>
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxKnC4L28gsXZUdb2f8UtZ581uLHKTdPtfHRc7vgtprxvTkw973EFxvR3WVAueuq0VT/exec';
+
         // Ler parâmetros da URL
         const urlParams = new URLSearchParams(window.location.search);
         const nome = urlParams.get('nome') || 'Utilizador';
         const posicao = urlParams.get('posicao') || '?';
         const email = urlParams.get('email');
-        const confirmUrl = urlParams.get('confirmUrl');
 
         // Preencher dados
         document.getElementById('userName').textContent = nome;
         document.getElementById('userPosition').textContent = posicao;
 
-        // ✅ FIXED: Definir link direto para o script
-        // O script faz o redirect automaticamente (evita CORS)
-        if (confirmUrl) {
-            document.getElementById('confirmLink').href = confirmUrl;
-        } else if (email) {
-            // Fallback: construir URL manualmente
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbxKnC4L28gsXZUdb2f8UtZ581uLHKTdPtfHRc7vgtprxvTkw973EFxvR3WVAueuq0VT/exec';
-            document.getElementById('confirmLink').href = scriptUrl + '?action=confirmUnsubscribe&email=' + encodeURIComponent(email);
-        } else {
-            // Sem dados válidos
-            document.getElementById('confirmLink').onclick = function(e) {
-                e.preventDefault();
+        // JSONP callback - chamado pelo script do Google
+        function handleUnsubscribeResponse(data) {
+            if (data.success) {
+                var successName = data.nome || nome;
+                window.location.href = '/unsubscribe/sucess?nome=' + encodeURIComponent(successName);
+            } else {
+                window.location.href = '/unsubscribe/error?message=' + encodeURIComponent(data.message);
+            }
+        }
+
+        function confirmUnsubscribe() {
+            if (!email) {
                 alert('Erro: Dados de cancelamento inválidos. Por favor, use o link do email.');
+                return;
+            }
+
+            var btn = document.getElementById('confirmBtn');
+            btn.disabled = true;
+            btn.textContent = 'A processar...';
+
+            // Usar JSONP para evitar CORS e o iframe sandbox do Google
+            var script = document.createElement('script');
+            script.src = scriptUrl
+                + '?action=confirmUnsubscribe'
+                + '&email=' + encodeURIComponent(email)
+                + '&callback=handleUnsubscribeResponse';
+            script.onerror = function() {
+                window.location.href = '/unsubscribe/error?message=' + encodeURIComponent('Erro de rede. Tente novamente.');
             };
+            document.body.appendChild(script);
         }
     </script>
 </body>
