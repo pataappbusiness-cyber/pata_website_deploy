@@ -261,8 +261,6 @@ class ReservarFormSubmitter {
   }
 
   init() {
-    this.form.removeAttribute('onsubmit');
-    this.form.onsubmit = null;
     this.form.addEventListener('submit', (e) => this.handleSubmit(e));
     console.log('✅ Reservar form submission initialized');
   }

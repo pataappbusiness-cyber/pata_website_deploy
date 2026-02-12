@@ -668,9 +668,7 @@ class ReservarAnimations {
         if (entry.isIntersecting && !this.isVisible) {
           this.showElements();
           this.isVisible = true;
-        } else if (!entry.isIntersecting && this.isVisible) {
-          this.hideElements();
-          this.isVisible = false;
+          observer.disconnect();
         }
       });
     }, options);
@@ -681,12 +679,6 @@ class ReservarAnimations {
     if (this.formCard) this.formCard.classList.add('visible');
     if (this.carousel) this.carousel.classList.add('visible');
     this.infoCards.forEach(card => card.classList.add('visible'));
-  }
-
-  hideElements() {
-    if (this.formCard) this.formCard.classList.remove('visible');
-    if (this.carousel) this.carousel.classList.remove('visible');
-    this.infoCards.forEach(card => card.classList.remove('visible'));
   }
 }
 
