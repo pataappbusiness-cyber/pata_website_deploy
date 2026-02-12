@@ -2681,7 +2681,8 @@ Agora pode confiar em nós.</h2>
     <script defer src="./src/js/dist/scripts-deferred.min.js"></script>
 
     <!-- Lazy JS - only loads when reservar section approaches -->
-    <script>
+    <!-- data-cfasync="false" prevents Cloudflare Rocket Loader from breaking these scripts -->
+    <script data-cfasync="false">
       (function() {
         let lazyScriptLoaded = false;
         function loadLazyScript() {
@@ -2708,7 +2709,7 @@ Agora pode confiar em nós.</h2>
       })();
     </script>
 
-    <script>
+    <script data-cfasync="false">
       // Lazy load reCAPTCHA using IntersectionObserver (800px before visible)
       let recaptchaLoaded = false;
       function loadRecaptcha() {
