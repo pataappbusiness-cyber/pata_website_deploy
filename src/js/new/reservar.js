@@ -4,7 +4,7 @@
    Version: 15.0 - No-flicker counter
    
    CHANGES v15.0:
-   ✅ Counter hidden until real value arrives (no 500→499 flicker)
+   ✅ Counter hidden until real value arrives (no flicker)
    ✅ Smooth fade-in when real value loads
    ✅ fetch-based counter (JSONP removed — blocked by CSP)
    ✅ Post-submission updates from server response directly
@@ -20,7 +20,6 @@ const RESERVAR_CONFIG = {
   GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbxKnC4L28gsXZUdb2f8UtZ581uLHKTdPtfHRc7vgtprxvTkw973EFxvR3WVAueuq0VT/exec',
   COUNT_ACTION_URL: 'https://script.google.com/macros/s/AKfycbxKnC4L28gsXZUdb2f8UtZ581uLHKTdPtfHRc7vgtprxvTkw973EFxvR3WVAueuq0VT/exec',
 
-  MAX_SPOTS: 500,
   CAROUSEL_INTERVAL: 5000,
   DEBUG_MODE: false
 };
@@ -31,6 +30,7 @@ const RESERVAR_CONFIG = {
 
 let _pataCounterLoaded = false;
 let _pataCounterCache = null;
+let _pataMaxSpots = null; // from the server (maxSpots); never hardcoded here
 
 /* ============================================
    FETCH COUNTER FROM SERVER
@@ -57,9 +57,10 @@ function fetchCounterFromServer() {
       var data = JSON.parse(jsonStr);
 
       if (data && data.success) {
+        if (data.maxSpots !== undefined) _pataMaxSpots = data.maxSpots;
         var remaining = data.remaining !== undefined
           ? data.remaining
-          : (RESERVAR_CONFIG.MAX_SPOTS - data.count);
+          : (data.maxSpots - data.count);
         return remaining;
       }
       throw new Error('Server returned success:false');
@@ -98,10 +99,14 @@ function applyCounterToDOM(count) {
 
   el.textContent = count;
 
+  var totalEl = document.getElementById('totalSpots');
+  if (totalEl && _pataMaxSpots !== null) totalEl.textContent = _pataMaxSpots;
+
   // Reveal the parent <p> counter line
   var counterLine = el.closest('.reservar-counter');
   if (counterLine) {
     counterLine.style.opacity = '1';
+    counterLine.removeAttribute('aria-hidden');
   }
 }
 
@@ -317,7 +322,7 @@ class ReservarFormSubmitter {
       alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
     } finally {
       this.submitButton.disabled = false;
-      this.submitButton.textContent = 'Garantir Preço de Fundador (€7,99/mês)';
+      this.submitButton.textContent = 'Entrar na lista de espera';
     }
   }
 
@@ -363,11 +368,10 @@ class ReservarFormSubmitter {
     try {
       console.log('📨 Attempt 2: no-cors + fetch count verification...');
 
-      let countBefore = -1;
+      let remainingBefore = -1;
       try {
-        const remaining = await fetchCounterFromServer();
-        countBefore = RESERVAR_CONFIG.MAX_SPOTS - remaining;
-        console.log('📊 Count before:', countBefore);
+        remainingBefore = await fetchCounterFromServer();
+        console.log('📊 Remaining before:', remainingBefore);
       } catch (e) {
         console.warn('⚠️ Pre-count failed');
       }
@@ -383,17 +387,16 @@ class ReservarFormSubmitter {
 
       try {
         const remainingAfter = await fetchCounterFromServer();
-        const countAfter = RESERVAR_CONFIG.MAX_SPOTS - remainingAfter;
-        console.log('📊 Count after:', countAfter);
+        console.log('📊 Remaining after:', remainingAfter);
 
-        if (countBefore >= 0 && countAfter > countBefore) {
-          console.log('✅ Verified: count went from', countBefore, 'to', countAfter);
+        if (remainingBefore >= 0 && remainingAfter < remainingBefore) {
+          console.log('✅ Verified: remaining went from', remainingBefore, 'to', remainingAfter);
           return {
             success: true,
             message: 'Submissão bem-sucedida!',
             remaining: remainingAfter
           };
-        } else if (countBefore >= 0 && countAfter === countBefore) {
+        } else if (remainingBefore >= 0 && remainingAfter === remainingBefore) {
           return {
             success: false,
             message: 'O email já está na lista ou ocorreu um erro de validação. Tente com outro email.'
@@ -463,14 +466,8 @@ function loadRemainingSpots() {
       if (remaining <= 0 && !RESERVAR_CONFIG.DEBUG_MODE) showListaCheia();
     })
     .catch(function(err) {
+      // No fallback number: the counter stays hidden until the server answers
       console.warn('⚠️ Counter retry failed:', err.message);
-      // After 10s total, show 500 as final fallback
-      setTimeout(function() {
-        if (!_pataCounterLoaded) {
-          applyCounterToDOM(RESERVAR_CONFIG.MAX_SPOTS);
-          console.warn('⚠️ Using fallback: 500');
-        }
-      }, 7000);
     });
 }
 

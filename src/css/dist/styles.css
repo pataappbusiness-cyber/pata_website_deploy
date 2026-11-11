@@ -10736,3 +10736,19 @@ footer {
   }
 }
 
+.price-card-orange .price-note {
+  font-family: 'Mona Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  color: #525252;
+  text-align: center;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .price-card-orange .price-note {
+    font-size: 14px;
+    line-height: 18px;
+  }
+}
